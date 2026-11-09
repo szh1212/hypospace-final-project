@@ -1,0 +1,58 @@
+# HypoSpace Final Project — EEC 4300
+
+A four-person course project to design a novel machine learning method that helps LLMs generate multiple valid, distinct solutions on the HypoSpace benchmark.
+
+## Status and scope
+
+This repository currently establishes the project structure and collaboration workflow. No experiments have been run.
+
+| Decision | Status |
+| --- | --- |
+| Target domain / task family | TBD |
+| Model(s) | TBD |
+| Proposed method | TBD |
+| Experimental protocol and budget | TBD |
+| Results | TBD — no measurements yet |
+
+Candidate domains are causal graph inference, gravity-constrained 3D voxel reconstruction, and Boolean genetic interaction modeling. The team will choose the domain, models, and approach together before running experiments.
+
+## HypoSpace evaluation
+
+The benchmark evaluates sets of hypotheses using three complementary metrics:
+
+| Metric | Meaning |
+| --- | --- |
+| Validity (V) | The proportion of generated proposals consistent with the observations and task constraints. |
+| Uniqueness (U) | Non-redundancy among generated proposals: how well generation avoids repeated hypotheses. |
+| Recovery (R) | Coverage of the enumerated admissible solution set by the distinct valid hypotheses recovered. |
+
+We will follow the official evaluator's definitions, canonicalization, and aggregation for the selected domain. A good method should expand coverage and reduce repetition while maintaining validity; evaluation details and comparison budgets are TBD.
+
+## Repository layout
+
+```text
+README.md              Project overview and references
+CONTRIBUTING.md        Four-person branch and PR workflow
+src/                   Our own method code (placeholder)
+experiments/           Experiment configurations and run scripts (placeholder)
+docs/                  Project plan, task ownership, and experiment records
+.gitignore             Exclusions for secrets and generated / large artifacts
+```
+
+The official implementation is linked below only. We have not copied it, added a submodule, installed dependencies, downloaded data, or selected an integration strategy. Decide how to integrate it after agreeing on the experimental plan, and record the upstream revision used.
+
+## First steps for teammates
+
+1. Accept the repository owner's GitHub collaborator invitation.
+2. Read this README and [CONTRIBUTING.md](CONTRIBUTING.md), then clone the repository.
+3. Create your own branch from the latest `main` and claim one of the four tasks in [docs/project-plan.md](docs/project-plan.md) through a PR.
+4. Request review from another teammate. Agree on the domain, model, method, and budget before starting experiments.
+
+Keep credentials in local environment variables or an ignored `.env` file. Commit only small, reviewed summaries; keep weights, datasets, and raw outputs outside Git.
+
+## References
+
+- Chen et al. (2026). *HypoSpace: A Diagnostic Benchmark for Set-Valued Hypothesis Generation under Underdetermination and Sublinear Coverage Bounds*. ICML, PMLR 306:15451–15465. [Paper](https://proceedings.mlr.press/v306/chen26bz.html).
+- [Official HypoSpace code](https://github.com/CTT-Pavilion/_HypoSpace).
+
+This is an independent EEC 4300 student project, not the official benchmark repository.
