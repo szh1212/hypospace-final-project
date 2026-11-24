@@ -24,3 +24,5 @@ Core APIs: `src/ollama_client.py` (local inference), `src/experiment_api.py` (da
 Course requirement: a novel ML method improving LLM hypothesis generation, public repository, and 10-minute group video with all four members speaking. The paper already includes complexity-stratified decoding; merely adding that is not a novelty claim.
 
 References: [HypoSpace paper](https://proceedings.mlr.press/v306/chen26bz.html), [official code](https://github.com/CTT-Pavilion/_HypoSpace), [exact model tag](https://ollama.com/library/qwen2.5:3b-instruct-q4_K_M).
+
+A matched 9-call dev ablation removing the unrelated example also produced V=0 and R=0. See docs/figures/smoke-no-example/metrics.json and the experiment log. The quality gate remains unresolved; formal baseline has not run.

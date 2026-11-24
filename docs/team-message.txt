@@ -8,3 +8,5 @@
 复用 src/ollama_client.py 的模型接口、experiment_api.load_dataset与evaluate_outputs。src下定义transform(prompt,context)返回修改后的提示词，用runner的--method 模块:transform运行；context提供观测、query_index和历史输出，不能读取ground truth。保持原坐标Layer输出格式及官方parser/validator/hash不变。额外修正/规划调用必须计入预算，不允许偷偷多生成再筛选；主表所有方法相同总生成次数，保留失败、重复和舍弃的输出。当前候选参数为3×3、高度3、占用1/2/3格，15个test观测×3重复，seed17/42/2026，temperature0.7、top_p0.9、max_tokens512，每题3/9/27次，共585次，最终以smoke诊断后提交的配置为准。
 
 只在dev调参，方法冻结后再做test；每个方法使用独立输出目录。提交代码、配置、精确命令、dev消融、正式V/U/R分层和总体结果、覆盖曲线、失败分析、调用次数、input/output tokens、总耗时与局限；用compare_runs.py验证等预算、同模型、同划分。所有原始JSON保存在本机SSD供复查，并交raw SHA256清单；不上传模型权重、虚拟环境和大型临时文件。通过自己的分支提PR，另一位队友review后合并，不直接推main。
+
+补充：同模型、同seed的9次去示例dev对照也得到V=0、R=0，不能认为删示例就解决问题。两轮原始输出和评价均已保留，正式基线仍未启动。

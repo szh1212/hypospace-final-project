@@ -25,3 +25,8 @@ Three dev observations g3_h3_b1_009, g3_h3_b2_013, g3_h3_b3_084; seed17; three p
 Failure analysis: actual sent prompts contain the intended observation. For b1_009 the top view is 000/000/001, but the first response's bottom layer is111/100/111, which already violates projection. b2_013 responses repeatedly copy the four-corner example. All nine projection checks fail; b3_084 query1 also floats a center voxel above an empty center. Thus this is not an HTTP failure, parsing outage or output truncation. Example imitation and difficulty following a long prompt are hypotheses; proving them requires an ablation, not retrospective assertions.
 
 Quality gate failed. Formal test remains untouched. No model switch, prompt replacement, evaluator relaxation or simulated substitution has been made. Next proposed dev ablation: remove the unrelated example while preserving task constraints/output schema, comparing the same model/seeds/observations/budget. Report it separately; do not silently rename it the official baseline. Final formal protocol and the three methods' experiments remain pending this decision.
+
+
+## Dev ablation: remove unrelated example
+
+Same model, seeds, 3 dev observations and 9-call budget; method diagnostic_no_example:transform. Only remove the illustrative example and its following explanatory text. Real V=0, U=0.6666666666666666, R=0. Resource totals: {"calls": 9, "input_tokens": 4071, "output_tokens": 2700, "model_call_seconds": 359.9554256000047, "truncated_outputs": 3}. Deleting the example alone did not recover valid generation. Longer explanations and truncated responses appeared; this does not prove the example has no effect, and the small sample cannot characterize all model behavior. Both runs remain development-only.
