@@ -1,3 +1,10 @@
-大家后续统一从 szh/baseline-3d 分支接入，先看 docs/baseline-protocol.md。数据生成、官方评测和可视化流程已跑通；注意目前仓库图是明确标注的离线随机控制组，真实 LLM 基线还在等统一模型和预算，不能把它当成 LLM 结果。等模型锁定和真实基线完成后再跑正式对比。下面这段可以直接喂给各自 AI（把负责的方法替换掉）：
+大家统一用零成本本地方案：Qwen2.5-3B-Instruct + Ollama 0.40.18 + Q4_K_M，不用商业API、不用Key。基线代码已在 szh/baseline-3d 分支。注意真实smoke test已跑完但质量门槛没过：9次全部可解析，V=0、U=0.8889、R=0，约206.5秒；模型没有遵守俯视图，常照搬示例。正式585次基线尚未跑，不能把smoke或旧offline图当成正式结果。先接入环境和接口，等dev诊断及正式参数最终冻结后再跑test。
 
-请在 https://github.com/szh1212/hypospace-final-project 的基线分支基础上做我负责的【A 分层生成 / B 覆盖反馈自适应生成 / C 空间顺序或表示多样化】方法，先阅读 README.md、docs/baseline-protocol.md、experiments/protocol.json 和 manifest.json，然后创建自己的分支。统一 3×3 网格、最大高度3、占用格数1/2/3，每层5个测试观测、3次重复，单题3/9/27次调用，总计585次；temperature=0.7、max_tokens=512、无额外解析重试。模型必须与最终真实基线完全相同，未锁定前不要调用付费接口。保持官方 prompt/parser/validator/指标及数据划分不变，官方基线本身已有历史去重，不能把它当新贡献。在 src 下实现 transform(prompt, context) 提示词接口，使用统一 runner 的 --method 参数运行；不许读 ground truth、不许额外调用模型或隐性筛选修复。只在dev集调参并做消融，确定后再跑test。提交方法代码、固定参数、运行命令、V/U/R各层和总体结果、覆盖曲线、token/耗时、局限及创新性说明；保留原始输出供核查但不提交Git，不提交密钥。API/解析失败如实记录，不能编造结果。通过个人分支提PR，由其他队友review后合并。
+下面直接给各自AI（将【方法】替换为自己的方向）：
+请协助完成EEC4300 HypoSpace项目中我负责的【方法】。执行 git clone -b szh/baseline-3d https://github.com/szh1212/hypospace-final-project.git，进入仓库并创建自己的 feature/名字-方法 分支。先完整阅读 README.md、docs/local-setup.md、docs/baseline-protocol.md、docs/experiment-log.md、experiments/protocol.json、manifest.json、model-lock.json。模型和Python虚拟环境必须放本机SSD，不能放U盘；按local-setup安装Python3.12固定依赖及Ollama0.40.18，拉取qwen2.5:3b-instruct-q4_K_M。服务仅localhost:11434、无密钥，禁用云端；核对量化、模型digest和模板hash，不要修改锁文件掩盖差异。
+
+先跑tests和真实dev smoke test。当前官方prompt在3B上的有效率为0，先分析真实输出；不得编造结果，不擅自更换模型或把改过的prompt称为官方基线。正式配置尚未冻结，不要先跑test调参。基线包含历史去重，论文也已有复杂度分层，创新点须超出这些既有方法。可分工研究A分层策略的改进、B基于覆盖反馈的自适应选择、C空间/表示变换，但需要各自说明新增点和dev消融。
+
+复用 src/ollama_client.py 的模型接口、experiment_api.load_dataset与evaluate_outputs。src下定义transform(prompt,context)返回修改后的提示词，用runner的--method 模块:transform运行；context提供观测、query_index和历史输出，不能读取ground truth。保持原坐标Layer输出格式及官方parser/validator/hash不变。额外修正/规划调用必须计入预算，不允许偷偷多生成再筛选；主表所有方法相同总生成次数，保留失败、重复和舍弃的输出。当前候选参数为3×3、高度3、占用1/2/3格，15个test观测×3重复，seed17/42/2026，temperature0.7、top_p0.9、max_tokens512，每题3/9/27次，共585次，最终以smoke诊断后提交的配置为准。
+
+只在dev调参，方法冻结后再做test；每个方法使用独立输出目录。提交代码、配置、精确命令、dev消融、正式V/U/R分层和总体结果、覆盖曲线、失败分析、调用次数、input/output tokens、总耗时与局限；用compare_runs.py验证等预算、同模型、同划分。所有原始JSON保存在本机SSD供复查，并交raw SHA256清单；不上传模型权重、虚拟环境和大型临时文件。通过自己的分支提PR，另一位队友review后合并，不直接推main。

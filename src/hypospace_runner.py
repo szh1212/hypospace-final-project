@@ -1,6 +1,7 @@
 """Pinned official evaluator + auditable transport and method prompt hooks."""
 import argparse, hashlib, importlib, json, os, platform, random, subprocess, sys, time
 from pathlib import Path
+from ollama_client import OllamaClient
 import numpy as np
 import requests
 ROOT = Path(__file__).resolve().parents[1]
@@ -45,14 +46,14 @@ class RecordedClient:
     def __init__(self, cfg, mode, folder, obs, seed, method):
         self.cfg,self.mode,self.folder,self.obs=cfg,mode,folder,obs
         self.seed=seed; self.records=[]; self.method=method
+        self.local=OllamaClient(cfg) if mode=='llm' else None
     def query_with_usage(self,prompt):
         q=len(self.records)
         if self.method:
             # Hook receives observation and past responses only, never enumerated answers.
             prompt=self.method(prompt, {'observation':self.obs['observation'],'query_index':q,
                 'history':[r['response'] for r in self.records]})
-        request={'model':self.cfg['model'],'temperature':self.cfg['temperature'],'max_tokens':self.cfg['max_tokens'],
-                 'messages':[{'role':'user','content':prompt}]}
+        request=self.local.request(prompt,(self.seed+q)%2147483647) if self.local else {'prompt':prompt,'model':self.cfg['model']}
         path=self.folder/f'{q:04d}.json'; key=digest(request)
         if path.exists():
             record=json.loads(path.read_text(encoding='utf-8'))
@@ -70,20 +71,13 @@ class RecordedClient:
                     rows.extend(' '.join(str(int(h>z)) for h in heights[i:i+3]) for i in range(0,9,3))
                 response='Structure:\n'+'\n'.join(rows); usage={'prompt_tokens':0,'completion_tokens':0,'total_tokens':0}; resolved_model='uniform-height-control'
             else:
-                base=os.environ.get('ANTHROPIC_BASE_URL','https://api.anthropic.com').rstrip('/')
-                token=os.environ.get('ANTHROPIC_AUTH_TOKEN') or os.environ.get('ANTHROPIC_API_KEY')
-                if not token: raise RuntimeError('Missing Anthropic credential environment variable')
-                headers={'anthropic-version':'2023-06-01','content-type':'application/json'}
-                headers['authorization' if os.environ.get('ANTHROPIC_AUTH_TOKEN') else 'x-api-key']=('Bearer '+token if os.environ.get('ANTHROPIC_AUTH_TOKEN') else token)
                 try:
-                    resp=requests.post(base+'/v1/messages',headers=headers,json=request,timeout=120)
-                except requests.RequestException:
-                    raise TransportAbort('API transport failed; stopped immediately. Cached calls retained.') from None
-                if resp.status_code!=200: raise TransportAbort(f'API HTTP {resp.status_code}; stopped immediately. Cached calls retained.')
-                body=resp.json(); response='\n'.join(c['text'] for c in body['content'] if c['type']=='text')
-                u=body['usage']; usage={'prompt_tokens':u['input_tokens'],'completion_tokens':u['output_tokens'],'total_tokens':u['input_tokens']+u['output_tokens']}
-                resolved_model=body.get('model',self.cfg['model'])
-            record={'request_sha256':key,'prompt':prompt,'response':response,'usage':usage,'resolved_model':resolved_model,'elapsed_s':time.perf_counter()-start}
+                    generated=self.local.generate(request)
+                except Exception as exc:
+                    raise TransportAbort(f'Local model call failed ({type(exc).__name__}); resume saved run after fixing the service.') from None
+                response=generated['response']; usage=generated['usage']; resolved_model=generated['resolved_model']
+            record={'request_sha256':key,'request':request,'prompt':prompt,'response':response,'usage':usage,'resolved_model':resolved_model,'elapsed_s':time.perf_counter()-start}
+            if self.local: record.update(generated)
             save(path,record)
         self.records.append(record)
         return {'response':record['response'],'usage':record['usage'],'cost':0.0}
@@ -94,39 +88,40 @@ class Replay:
 
 def main():
     p=argparse.ArgumentParser(); p.add_argument('--prepare',action='store_true'); p.add_argument('--config',default='experiments/protocol.json')
-    p.add_argument('--mode',choices=['offline','llm'],default='offline'); p.add_argument('--split',choices=['dev','test'],default='test')
-    p.add_argument('--out',default='runs/offline'); p.add_argument('--method',help='Python module:function prompt hook')
-    p.add_argument('--allow-api-calls',type=int,default=0,help='Explicit call budget; total planned calls must fit')
-    args=p.parse_args(); cfg=json.loads((ROOT/args.config).read_text())
+    p.add_argument('--mode',choices=['offline','llm'],default='llm'); p.add_argument('--smoke',action='store_true'); p.add_argument('--split',choices=['dev','test'],default='test')
+    p.add_argument('--out',default='runs/baseline'); p.add_argument('--method',help='Python module:function prompt hook')
+    args=p.parse_args(); cfg=json.loads((ROOT/args.config).read_text(encoding='utf-8'))
     if args.prepare: prepare(cfg); return
-    off,_=upstream(); manifest=json.loads((ROOT/'experiments/manifest.json').read_text())
-    ds=json.loads((ROOT/'data/3d.json').read_text()); assert digest(ds)==manifest['dataset_sha256']
+    off,_=upstream(); manifest=json.loads((ROOT/'experiments/manifest.json').read_text(encoding='utf-8'))
+    ds=json.loads((ROOT/'data/3d.json').read_text(encoding='utf-8')); assert digest(ds)==manifest['dataset_sha256']
     assert digest(cfg)==manifest['protocol_sha256'], 'Run --prepare after intentional protocol changes'
-    model=cfg['model'] or os.environ.get('ANTHROPIC_MODEL')
-    if args.mode=='llm' and not (os.environ.get('ANTHROPIC_AUTH_TOKEN') or os.environ.get('ANTHROPIC_API_KEY')): raise ValueError('Missing API credential environment variable')
-    if args.mode=='llm' and not model: raise ValueError('Set explicit model in config or ANTHROPIC_MODEL')
-    cfg['model']=model if args.mode=='llm' else 'uniform-height-control'
+    fingerprint=OllamaClient(cfg).fingerprint() if args.mode=='llm' else None
+    cfg['model']=cfg['model'] if args.mode=='llm' else 'uniform-height-control'
     chosen=[x for x in ds['observation_sets'] if x['observation_id'] in manifest['splits'][args.split]]
-    calls=sum(max(1,int(x['n_compatible_structures']*cfg['query_multiplier'])) for x in chosen)*len(cfg['repeat_seeds'])
-    if args.mode=='llm' and args.allow_api_calls<calls: raise ValueError(f'Planned {calls} calls; pass --allow-api-calls {calls} after budget approval')
+    if args.smoke:
+        chosen=[next(x for x in ds['observation_sets'] if x['observation_id']==next(i for i in manifest['splits']['dev'] if f'_b{b}_' in i)) for b in cfg['blocks']]
+        cfg['repeat_seeds']=[cfg['repeat_seeds'][0]]
+    calls=sum((3 if args.smoke else max(1,int(x['n_compatible_structures']*cfg['query_multiplier']))) for x in chosen)*len(cfg['repeat_seeds'])
+    print('Planned local calls:',calls,flush=True)
     hook=None
     if args.method:
         mod,fn=args.method.split(':'); hook=getattr(importlib.import_module(mod),fn)
     out=ROOT/args.out; out.mkdir(parents=True,exist_ok=True)
-    identity={'config':cfg,'mode':args.mode,'split':args.split,'method':args.method or 'official-history', 'method_source_sha256':hashlib.sha256(Path(importlib.import_module(args.method.split(':')[0]).__file__).read_bytes()).hexdigest() if args.method else None, 'dataset_sha256':manifest['dataset_sha256']}
+    identity={'config':cfg,'mode':args.mode,'model_fingerprint':fingerprint,'smoke':args.smoke,'split':'dev-smoke' if args.smoke else args.split,'method':args.method or 'official-history', 'method_source_sha256':hashlib.sha256(Path(importlib.import_module(args.method.split(':')[0]).__file__).read_bytes()).hexdigest() if args.method else None, 'dataset_sha256':manifest['dataset_sha256']}
     if (out/'identity.json').exists():
-        assert json.loads((out/'identity.json').read_text())==identity,'Output identity mismatch'
+        assert json.loads((out/'identity.json').read_text(encoding='utf-8'))==identity,'Output identity mismatch'
     save(out/'identity.json',identity)
     bench=off.Benchmark3D(str(ROOT/'data/3d.json')); results=[]; curves=[]
     for seed in cfg['repeat_seeds']:
         for obs in chosen:
-            oid=obs['observation_id']; n=max(1,int(obs['n_compatible_structures']*cfg['query_multiplier']))
+            oid=obs['observation_id']; n=3 if args.smoke else max(1,int(obs['n_compatible_structures']*cfg['query_multiplier']))
             client=RecordedClient(cfg,args.mode,out/'raw'/str(seed)/oid,obs,seed+int(hashlib.sha256(oid.encode()).hexdigest()[:8],16),hook)
             # Official evaluator catches transport errors, so verify call count afterwards and fail instead of reporting a completed run.
             result=bench.evaluate_single_observation_set(client,obs,n_queries=n,verbose=False,max_retries=1)
             if len(client.records)!=n: raise RuntimeError('Incomplete API run; cached successful requests retained. Resume same command.')
             result.update(seed=seed,blocks=obs['observation'].count('1'))
             result.pop('cost',None) # upstream zero fallback is NOT a measured price
+            result['truncated_count']=sum(r.get('done_reason')=='length' for r in client.records)
             result['latency_s']=sum(r['elapsed_s'] for r in client.records)
             result['strict_valid_count']=sum(1 for r in client.records if (s:=bench.parse_llm_response(r['response'])) is not None and s.height<=cfg['max_height'] and bench.validate_structure_matches_observations(s,obs['observation']))
             results.append(result)
@@ -136,12 +131,13 @@ def main():
             save(out/'partial.json',results)
             print(args.mode,seed,oid,'V/U/R',*[round(result[m],3) for m in ['valid_rate','novelty_rate','recovery_rate']],flush=True)
     summary={'schema_version':1,'identity':identity,'planned_calls':calls,'completed_calls':sum(r['n_queries'] for r in results),
-             'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'python':platform.python_version(),'platform':platform.platform(),'cost_usd':None,
+             'source_sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (ROOT/'src').glob('*.py')},'runner_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'python':platform.python_version(),'platform':platform.platform(),'cost_usd':0.0,
              'aggregate':{},'by_blocks':{},'results':results,'curves':curves}
     for label,subset in [('aggregate',results)]+[(str(b),[r for r in results if r['blocks']==b]) for b in cfg['blocks']]:
-        stats={m:{'mean':float(np.mean([r[m] for r in subset])),'std':float(np.std([r[m] for r in subset],ddof=1))} for m in ['valid_rate','novelty_rate','recovery_rate']}
+        stats={m:{'mean':float(np.mean([r[m] for r in subset])),'std':float(np.std([r[m] for r in subset],ddof=1)) if len(subset)>1 else None} for m in ['valid_rate','novelty_rate','recovery_rate']}
         if label=='aggregate': summary['aggregate']=stats
         else: summary['by_blocks'][label]=stats
+    summary['resource_totals']={'calls':calls,'input_tokens':sum(r['token_usage']['prompt_tokens'] for r in results),'output_tokens':sum(r['token_usage']['completion_tokens'] for r in results),'model_call_seconds':sum(r['latency_s'] for r in results),'truncated_outputs':sum(r['truncated_count'] for r in results)}
     save(out/'summary.json',summary)
     print('Completed',calls,'calls;',out/'summary.json')
 if __name__=='__main__': main()

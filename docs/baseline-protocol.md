@@ -1,70 +1,74 @@
-# 3D baseline protocol v1
+# Qwen 3B 本地基线实验协议
 
-## Status
+## 研究任务与依据
 
-The official evaluator pipeline has completed 585 offline uniform-height control proposals. These are NOT LLM measurements. Real LLM baseline execution is pending the owner's model/provider and spending limit. Do not label the offline figures as LLM baseline results, and do not start final comparison runs until the model is frozen and the real baseline is complete.
+课程文档第二项要求：提出新 ML 方法改善 LLM 在 HypoSpace 上的表现，提交公开 GitHub 仓库和 10 分钟小组视频，每位成员都参与讲解，按 novelty、importance、quality 评分。
 
-The course Part 2 asks for a novel ML method improving LLM performance on HypoSpace, a public repository, and a 10-minute group video with every member speaking. This small 3D experiment is a course protocol, not a reproduction of the paper's full model/domain sweep.
+本项目研究固定小模型下的假设生成策略，模型不训练或换大。选取官方 3D gravity-constrained voxel reconstruction 子任务：给出 3×3 二值俯视图，生成最多3层且下方有支撑的体素结构。按占用格数1/2/3分层，合法解数分别为3/9/27。这与正式论文第5.2节、表2的任务方向一致（论文第6.1节称变化为top-down views，而官方生成器实际按俯视图占用格数max_blocks分层；本项目以固定代码为准），但我们是小模型课程实验，不是复现论文所有模型和实验规模。
 
-## Frozen shared settings
+参考正式论文 https://proceedings.mlr.press/v306/chen26bz.html ，PDF共15页。第3节定义V/U/R，第5.2节定义投影和支撑约束，第6.5节已包含复杂度分层解码。注意第3节的 independent samples 描述与第5.2节、官方实现的历史条件生成存在差别：本项目明确复现官方代码的 history-conditioned baseline，不称为独立同分布采样。
 
-Source of truth: `experiments/protocol.json` and `experiments/manifest.json`.
-Official revision: `c69e9318577b34b5b896996571aefd4ba6053f58` from https://github.com/CTT-Pavilion/_HypoSpace.
+官方代码固定 https://github.com/CTT-Pavilion/_HypoSpace 的 `c69e9318577b34b5b896996571aefd4ba6053f58`。不复制修改官方代码；通过 experiments/bootstrap.py 拉取到忽略目录 .cache/hypospace。
 
-- Domain: gravity-supported 3D reconstruction; 3x3 grid, maximum height 3.
-- Occupied top-view cells: 1, 2, 3. Exactly 3, 9, 27 admissible structures respectively.
-- Generate all 129 observations using the official generator; fixed disjoint split: 2 dev and 5 test observations per stratum. IDs and canonical JSON SHA256 committed in manifest. No solution sets are sent to a model or method hook.
-- Split seed 33550336; repeat labels 17, 42, 2026. API does not accept these seeds: repeats are independent calls, NOT guaranteed deterministic LLM sampling. Offline control seeds are reproducible.
-- Query count per task = |H| x 1.0; one proposal per call; no parser retry, no repair/replacement calls. 585 test calls per method; 234 dev calls per full dev run.
-- Temperature 0.7, max output tokens 512, sequential calls, timeout 120 seconds, no automatic HTTP retries. HTTP failures stop execution; successful requests are cached for resumption. Parse failures consume one call and remain in the denominator.
-- Provider adapter currently supports Anthropic-compatible Messages only. Model is unresolved, read from explicit config or ANTHROPIC_MODEL. Freeze an exact model ID in shared config before team experiments. Record returned model ID in each raw record; aliases may change.
-- API call budget is not a dollar budget. Cost is null because proxy pricing is unknown. Get model/prices/budget from the owner before the first API request. `--allow-api-calls` is an explicit upper count gate, not a money cap.
+## 模型与执行环境
 
-## Baseline and metrics
+- Qwen2.5-3B-Instruct，Ollama tag `qwen2.5:3b-instruct-q4_K_M`，量化 Q4_K_M。
+- Ollama 0.40.18；模型 digest 和模板 SHA256 保存到 experiments/model-lock.json，启动时核验。仅 tag 相同不够。
+- 本机 http://localhost:11434，无 API Key，无商业 API、云端回退；运行费用0元（不含硬件、电力）。模型来自官方 Ollama registry。
+- 基线硬件：Intel i5-1155G7，4核8线程，16GB RAM，Intel Iris Xe共享内存集显，无独立GPU；本次使用CPU推理。C/D/E属于同一512GB NVMe SSD；H是USB盘。
+- 本机模型、Ollama二进制、虚拟环境和正式raw outputs均在 C:/Users/宋知恒/HypoSpaceLocal；仓库在H盘。其他队友自行选择本机SSD目录，不要照搬用户名或使用U盘环境。
+- Python 3.12，requirements.txt固定核心依赖。Ollama服务只监听127.0.0.1，禁用云端，串行请求。
 
-Use the official `Benchmark3D.evaluate_single_observation_set` unmodified, its prompt, parser, normalization, hash and validator. The official baseline already includes ALL prior parsed distinct structures in the next prompt (the local last-10 variable is unused upstream). All methods inherit this unless an explicit ablation says otherwise.
+## 数据与采样配置
 
-V = valid proposals / requested proposals. U = distinct parsed proposals / requested proposals, including invalid distinct proposals. R = distinct valid recovered ground-truth hashes / enumerated ground-truth hashes. Parse failures contribute zero to the numerator. Trailing all-zero layers normalize away. Aggregate = macro average over 15 observations x 3 repeats, also reported separately by occupied-cell count. Standard deviation is descriptive across 45 task-repeat records, NOT a confidence interval over independent datasets. Use paired per-observation differences when analyzing future methods.
+唯一配置源 experiments/protocol.json；固定数据与划分 experiments/manifest.json。正式规模待真实smoke test后最终确认；不要在此之前开始队友test实验。
 
-Known official evaluator limitation: it does not enforce maximum height in validity, and its parser pads irregular rows. Keep official metrics for comparability; `strict_valid_count` adds a height-bound diagnostic on parsed structures (not a strict raw-output grammar check). Do not silently patch the official evaluator for one method. It is possible to have official V=1 with R<1 because out-of-space structures are counted valid. Ground truth membership controls R.
+官方生成器穷举全部129个俯视观测。每层2个dev观测、5个test观测，分层随机打乱后确定ID；split seed=33550336。三层合计6个dev、15个test。dev用于设计和调参；test仅在方法冻结后评估。官方合法解仅提供给评测器，不能输入生成方法。
 
-At Q=|H| and when every valid structure belongs to the ground truth, U and R can coincide. Curves over k=1..Q and per-stratum results are needed to understand coverage. This toy 3D setting also admits exact non-ML enumeration; beating an LLM here alone does not establish scientific novelty or generalization. Use it as a controlled initial experiment and discuss this limitation in the video.
+当前候选正式协议：repeat seeds=[17,42,2026]，temperature=0.7，top_p=0.9，top_k=40，repeat_penalty=1.0，max_tokens=512，num_ctx=8192，num_thread=4，num_gpu=0。固定system提示词见配置。逐次Ollama seed = (repeat_seed + SHA256(observation_id)前8位所表示的整数 + query_index) mod (2^31-1)，query_index从0开始。参数和随机数生成均明确锁定，但不同硬件/软件后端不保证逐字一致。
 
-## Files and commands
+每题Q=|H|×query_multiplier，当前multiplier=1，因此分别3/9/27次；15题×3重复=585次调用。每次产生一个候选。官方 max_retries=1：不对解析失败重试，不额外修复、不丢掉无效或重复输出。HTTP失败立即中止，保留成功请求缓存，修复服务后原命令恢复。
 
-From the repository root (Python 3.11 recommended):
+smoke test 使用各层第一个dev观测、seed17、每题3次，共9次真实调用，覆盖三个规模且不触碰test。根据真实输出检查格式、物理约束、截断、运行速度；若模型表现差，保留结果并分析，不自动换模型或用模拟结果替代。
 
-```sh
-python -m venv .venv
-# Activate .venv using your shell, then:
-python -m pip install -r requirements.txt
-python experiments/bootstrap.py
-python src/hypospace_runner.py --prepare
-python -m unittest discover -s tests -v
-python src/hypospace_runner.py --mode offline --out runs/offline
-python src/plot_results.py runs/offline/summary.json --out docs/figures/offline
-```
+## 基线与评价口径
 
-After freezing the model, regenerate the manifest with `--prepare` and commit both configuration and manifest. Set credentials only via environment variables. Supported names: ANTHROPIC_API_KEY or ANTHROPIC_AUTH_TOKEN; optional ANTHROPIC_BASE_URL (host root, without /v1/messages). Do not commit secrets or gateway URLs. With approved budget:
+基线直接使用官方 Benchmark3D.evaluate_single_observation_set 的提示词、parser、hash、normalization和validator。每次下一条prompt包含此前全部解析成功且不重复的结构（官方 last-10 局部变量并未实际被用于截断）。因此单纯“把历史答案加入提示词避免重复”不是我们的新方法。
 
-```sh
-python src/hypospace_runner.py --mode llm --out runs/baseline --allow-api-calls 585
-python src/plot_results.py runs/baseline/summary.json --out docs/figures/baseline
-```
+V=有效生成次数/请求次数；U=所有可解析结构的去重数量/请求次数，包含无效但不同的结构；R=去重后的有效且命中ground-truth集合的结构数/ground-truth集合大小。解析失败分母照计。末尾全零层在官方hash中归一化消除。主结果是各观测×重复的宏平均，并分占用格数报告均值/样本标准差。标准差不是独立样本置信区间；方法比较使用同观测同seed配对差值。
 
-For development use `--split dev --out runs/baseline-dev --allow-api-calls 234`. Do not tune on test observations. Resume the exact command/directory; identity and prompt hashes reject changed configurations or changed method source. To rerun independently choose a new directory. Do not delete caches to hide unsuccessful attempts.
+已确认的官方边界：validator不检查最大高度，parser会补齐不规则行。我们保留官方口径以便可比，额外报告 strict_valid_count（在解析后补充高度检查，不是严格的原始文本格式验证）。真正超出合法解空间的结构不会增加R。任何修改评测器都必须同时重跑所有方法，不得只为某个方法放宽条件。
 
-## Output contract
+在所有生成都落在合法解集、Q=|H|时，终点U和R可相等；因此同时报告k=1..Q的覆盖曲线。3D小任务可被精确非ML枚举解出，本项目只是受控的小模型策略实验，不能据此声称真实科学发现能力。
 
-`identity.json`: resolved model, complete configuration, upstream revision, method name/source hash, dataset hash and split.
-`raw/<seed>/<observation_id>/<query_index>.json`: prompt, response, request SHA256, usage, elapsed seconds, returned model. Ignored by Git; retain privately for audit.
-`partial.json`: completed observation records for failure recovery.
-`summary.json`: schema_version=1; identity, planned/completed calls, Python/platform, cost_usd=null, aggregate and by_blocks means/sample SD, official per-task results and prefix curves. Official names: valid_rate=V, novelty_rate=U, recovery_rate=R. Each task has IDs, seed, blocks, counts, parse_success_rate, token_usage, latency_s, strict_valid_count and structures. Curves are computed by replaying saved outputs: no extra API calls.
+## 统一接口
 
-Commit only sanitized small summaries and figures under docs, never raw responses, credentials, full datasets or .cache. Include exact run command and source commit in experiment log. Count input/output tokens as well as calls: methods with longer prompts can have greater monetary/compute costs even at equal call budget.
+- 模型：src/ollama_client.py 的 OllamaClient(config).request(prompt,seed)、generate(request)，返回原文、input/output token、耗时和停止原因。禁止绕开接口隐藏额外模型调用。
+- 数据：src/experiment_api.py 的 load_dataset(split)，仅返回 observation_id/observation，不暴露解集。
+- 评价：evaluate_outputs(observation_id, outputs)，将所有原始候选交给官方评测器。
+- 策略：在src创建模块，定义 transform(prompt: str, context: dict) -> str；context只含observation、query_index、history。runner用 --method your_method:transform 加载。保持最终Layer输出格式一致，hook内部不进行模型调用或读取ground truth。
+- 对比：src/compare_runs.py，检查两次run的完整配置、模型指纹、split、逐题调用次数，输出配对V/U/R差值和调用、token、时间。
 
-## Three teammate interfaces
+## 等预算规则
 
-Implement a Python module under src with function `transform(prompt: str, context: dict) -> str`. Context has only observation, query_index, history (prior response texts). Launch `--method my_method:transform` with a separate output directory. The hook only changes prompts; it must return one string and must not make extra model calls, read solutions/test results, or perform hidden search/repair. Methods needing additional calls or candidate selection require a new shared budget protocol and a rerun of ALL methods.
+主表使用相同总生成调用预算，所有生成出来的候选都进入评测，包括被方法内部认为不合格、重复或应舍弃的候选，不能通过多生成再筛选增加优势。需要自我修正时，第一轮和修正轮各消耗一次预算，两轮原始候选都记录；通过history在下一次prompt内发出修正指令即可，不在hook里偷偷多调一次。非候选的规划调用也必须记入总资源与调用预算，不把它伪装成免费预处理；如果这种调用导致无法使用现有统一接口，先扩展共享runner与计数测试，再运行所有对照。
 
-Suggested, unvalidated directions (not claims of novelty): A stratify by requested column-height patterns; B adapt next target to coverage descriptors extracted from prior responses; C diversify spatial traversal/order or representation while requiring the same final layer output. Plain history de-duplication is already baseline. Each person must explain their method, run a dev ablation, freeze settings, then run test once and report failures and resource usage. For a genuinely learned method, train/tune only on dev; do not present a prompt heuristic as a trained ML model.
+如展示更大调用预算的辅助实验，所有方法和baseline使用相同新预算重新运行，单列结果，不与585次版本混成主表。额外报告Token和总时间，因为相同调用次数不意味着相同算力。可再加等Token/等时间分析，但必须保存完整轨迹。所有测试设置在看test结果前锁定。
+
+## 输出与恢复
+
+identity.json记录完整配置、模型指纹、dataset SHA、split、方法源码SHA；raw/<seed>/<observation_id>/<query>.json记录请求、seed、prompt、response、usage、timing_ns、elapsed_s、done_reason、请求SHA。partial.json保存完成的观测；summary.json为schema_version=1，保存aggregate、by_blocks、results、curves、resource_totals、runner SHA和平台信息。
+
+字段映射：valid_rate=V，novelty_rate=U，recovery_rate=R。逐题包含n_queries/n_valid/n_unique/n_recovered_gts、parse_success_rate、strict_valid_count、truncated_count、token_usage、latency_s。curves通过重放已保存的真实输出计算，不增加任何模型调用。resource_totals给出calls、input_tokens、output_tokens、model_call_seconds、truncated_outputs。
+
+相同命令与输出目录可断点恢复；identity或prompt SHA不一致会拒绝混用缓存。新实验必须换目录。累计时间包括首次生成缓存记录的耗时，不能把恢复时的缓存读取时间报告为推理速度。
+
+小型汇总和PNG/PDF图放docs；完整原始输出保存在本机SSD，不推送权重、虚拟环境或大型文件。正式基线完成后在README和experiment-log.md记录结果与精确命令。
+
+## 队友方法方向
+
+A：复杂度/高度分层策略可作为论文已有方法的对照，在此之上提出与本文不同且可验证的改进。
+B：根据已生成候选的覆盖描述自适应选择下一次提示策略；若使用学习器或bandit，只在dev学习，明确状态、奖励与训练数据。
+C：空间顺序/等价表示变换与一致性约束，输出必须变回原坐标的Layer格式；记录变换选择和消融，不能在评价时改变等价关系。
+
+这些是待研究的方向，不是已验证的新算法。每人交方法动机、实现、dev消融、冻结参数、test结果、资源开销与局限；简单prompt启发式不能写成训练过的ML模型。正式论文已包含分层解码，必须明确相对已有工作的新增点。

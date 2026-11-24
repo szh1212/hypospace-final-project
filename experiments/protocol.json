@@ -1,5 +1,5 @@
 {
-  "protocol": "3d-v1",
+  "protocol": "3d-ollama-v2",
   "upstream_commit": "c69e9318577b34b5b896996571aefd4ba6053f58",
   "grid_size": 3,
   "max_height": 3,
@@ -20,6 +20,16 @@
   "temperature": 0.7,
   "max_tokens": 512,
   "max_retries": 1,
-  "provider": "anthropic",
-  "model": null
+  "provider": "ollama",
+  "model": "qwen2.5:3b-instruct-q4_K_M",
+  "quantization": "Q4_K_M",
+  "top_p": 0.9,
+  "top_k": 40,
+  "repeat_penalty": 1.0,
+  "num_ctx": 8192,
+  "num_thread": 4,
+  "num_gpu": 0,
+  "model_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+  "ollama_version": "0.40.18",
+  "system": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant."
 }
