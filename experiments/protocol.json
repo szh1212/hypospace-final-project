@@ -1,0 +1,25 @@
+{
+  "protocol": "3d-v1",
+  "upstream_commit": "c69e9318577b34b5b896996571aefd4ba6053f58",
+  "grid_size": 3,
+  "max_height": 3,
+  "blocks": [
+    1,
+    2,
+    3
+  ],
+  "test_per_stratum": 5,
+  "dev_per_stratum": 2,
+  "split_seed": 33550336,
+  "repeat_seeds": [
+    17,
+    42,
+    2026
+  ],
+  "query_multiplier": 1.0,
+  "temperature": 0.7,
+  "max_tokens": 512,
+  "max_retries": 1,
+  "provider": "anthropic",
+  "model": null
+}

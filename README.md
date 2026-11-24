@@ -1,58 +1,37 @@
 # HypoSpace Final Project — EEC 4300
 
-A four-person course project to design a novel machine learning method that helps LLMs generate multiple valid, distinct solutions on the HypoSpace benchmark.
+3D reconstruction experiment infrastructure for a four-person course project.
 
-## Status and scope
+**Status:** official data generation, evaluation, recording and plotting have run successfully on a 585-proposal **offline uniform-height control**. A real LLM baseline has **not** run: model selection and API spending authorization remain pending. Offline control scores must not be presented as LLM results.
 
-This repository currently establishes the project structure and collaboration workflow. No experiments have been run.
+## Start here
 
-| Decision | Status |
-| --- | --- |
-| Target domain / task family | TBD |
-| Model(s) | TBD |
-| Proposed method | TBD |
-| Experimental protocol and budget | TBD |
-| Results | TBD — no measurements yet |
+- [Shared protocol and exact commands](docs/baseline-protocol.md)
+- [Configuration](experiments/protocol.json) and [fixed split manifest](experiments/manifest.json)
+- [Experiment log](docs/experiment-log.md)
+- [Copyable Chinese teammate prompt](docs/team-message.txt)
+- [Contribution workflow](CONTRIBUTING.md)
 
-Candidate domains are causal graph inference, gravity-constrained 3D voxel reconstruction, and Boolean genetic interaction modeling. The team will choose the domain, models, and approach together before running experiments.
+The official benchmark is fetched at a pinned revision into ignored `.cache/`; datasets and raw outputs stay local. Our runner uses the original official prompt/parser/evaluator and adds recording, resumption, method hooks and prefix curves. No secrets are needed for offline verification.
 
-## HypoSpace evaluation
-
-The benchmark evaluates sets of hypotheses using three complementary metrics:
-
-| Metric | Meaning |
-| --- | --- |
-| Validity (V) | The proportion of generated proposals consistent with the observations and task constraints. |
-| Uniqueness (U) | Non-redundancy among generated proposals: how well generation avoids repeated hypotheses. |
-| Recovery (R) | Coverage of the enumerated admissible solution set by the distinct valid hypotheses recovered. |
-
-We will follow the official evaluator's definitions, canonicalization, and aggregation for the selected domain. A good method should expand coverage and reduce repetition while maintaining validity; evaluation details and comparison budgets are TBD.
-
-## Repository layout
-
-```text
-README.md              Project overview and references
-CONTRIBUTING.md        Four-person branch and PR workflow
-src/                   Our own method code (placeholder)
-experiments/           Experiment configurations and run scripts (placeholder)
-docs/                  Project plan, task ownership, and experiment records
-.gitignore             Exclusions for secrets and generated / large artifacts
+```sh
+python -m pip install -r requirements.txt
+python experiments/bootstrap.py
+python src/hypospace_runner.py --prepare
+python -m unittest discover -s tests -v
+python src/hypospace_runner.py --mode offline --out runs/offline
+python src/plot_results.py runs/offline/summary.json --out docs/figures/offline
 ```
 
-The official implementation is linked below only. We have not copied it, added a submodule, installed dependencies, downloaded data, or selected an integration strategy. Decide how to integrate it after agreeing on the experimental plan, and record the upstream revision used.
+![Offline verification only, not LLM results](docs/figures/offline/curves.png)
 
-## First steps for teammates
+## Project requirement
 
-1. Accept the repository owner's GitHub collaborator invitation.
-2. Read this README and [CONTRIBUTING.md](CONTRIBUTING.md), then clone the repository.
-3. Create your own branch from the latest `main` and claim one of the four tasks in [docs/project-plan.md](docs/project-plan.md) through a PR.
-4. Request review from another teammate. Agree on the domain, model, method, and budget before starting experiments.
-
-Keep credentials in local environment variables or an ignored `.env` file. Commit only small, reviewed summaries; keep weights, datasets, and raw outputs outside Git.
+Develop a novel ML method improving LLM performance on HypoSpace. Deliver a public GitHub repository and a 10-minute group video with all four members presenting. Shared parameters: grid 3x3, height 3, 1/2/3 occupied cells, 15 test observations x 3 repeats, Q=|H|. Model still needs to be locked before final comparison.
 
 ## References
 
-- Chen et al. (2026). *HypoSpace: A Diagnostic Benchmark for Set-Valued Hypothesis Generation under Underdetermination and Sublinear Coverage Bounds*. ICML, PMLR 306:15451–15465. [Paper](https://proceedings.mlr.press/v306/chen26bz.html).
-- [Official HypoSpace code](https://github.com/CTT-Pavilion/_HypoSpace).
+- [Chen et al. (2026), HypoSpace, PMLR 306](https://proceedings.mlr.press/v306/chen26bz.html)
+- [Official implementation](https://github.com/CTT-Pavilion/_HypoSpace), revision `c69e9318577b34b5b896996571aefd4ba6053f58`.
 
-This is an independent EEC 4300 student project, not the official benchmark repository.
+Independent student project, not the official benchmark repository.

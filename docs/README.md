@@ -1,6 +1,3 @@
-# Project documentation
+# Documentation
 
-- [Project plan](project-plan.md): four claimable starting tasks, ownership, and open decisions.
-- [Experiment log](experiment-log.md): template for future reproducibility records and reviewed result summaries.
-
-Keep planning, decisions, and presentation notes here. Do not store credentials, personal files, datasets, or raw experiment outputs.
+Read baseline-protocol.md for reproducibility and teammate integration, experiment-log.md for measured status, and team-message.txt for the Chinese handoff prompt. Figures under figures/offline are a non-LLM control.

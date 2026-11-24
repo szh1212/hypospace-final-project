@@ -1,5 +1,5 @@
 # Experiments
 
-Store small, credential-free experiment configurations and run scripts here after the protocol is agreed. Domain, models, method, dependencies, and budget: TBD. No experiments have been run.
+`bootstrap.py` fetches the pinned official implementation. `protocol.json` controls shared settings; `manifest.json` freezes disjoint observation IDs and the canonical dataset digest.
 
-Keep datasets, weights, checkpoints, and raw outputs out of Git. Record the exact command, configuration, seeds, code revisions, and artifact location in `docs/experiment-log.md` when experiments begin.
+Run commands and output schema: ../docs/baseline-protocol.md. Real LLM measurements pending model and budget; offline figures are verification only.

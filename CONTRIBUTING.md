@@ -39,7 +39,7 @@ If a branch conflicts with `main`, merge the latest `origin/main` into the task 
 - Claim one starting task in [docs/project-plan.md](docs/project-plan.md) by adding your GitHub username in a PR. Coordinate claims to avoid duplicate ownership.
 - Each member owns a task and reviews another member's work. Discuss interfaces and shared files before editing them concurrently.
 - Record decisions and short experiment summaries in `docs/`. Keep configurations and launch scripts in `experiments/`, and our method implementation in `src/`.
-- Domain, models, method, compute/API budget, and upstream integration are TBD. This setup phase does not authorize experiment runs or API spending.
+- The owner has authorized baseline implementation and offline verification. Shared protocol is in docs/baseline-protocol.md; real API execution still awaits model/provider and spending limit.
 - Never commit API keys, personal files, model weights, datasets, or raw experiment outputs. `.gitignore` is a convenience, not a substitute for reviewing the staged diff.
 
 ## Repository owner setup
