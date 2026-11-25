@@ -30,10 +30,10 @@ powershell -ExecutionPolicy Bypass -File experiments/start_ollama.ps1 -LocalRoot
 正式基线/方法的命令：
 
 ```powershell
-& "$LocalRoot\.venv\Scripts\python.exe" src/hypospace_runner.py --out "$LocalRoot\runs\baseline"
+& "$LocalRoot\.venv\Scripts\python.exe" src/hypospace_runner.py --method adapted_baseline:transform --out "$LocalRoot\runs\baseline"
 & "$LocalRoot\.venv\Scripts\python.exe" src/hypospace_runner.py --method my_method:transform --out "$LocalRoot\runs\my-method"
-& "$LocalRoot\.venv\Scripts\python.exe" src/plot_results.py "$LocalRoot\runs\baseline\summary.json" --out docs/figures/baseline
-& "$LocalRoot\.venv\Scripts\python.exe" src/compare_runs.py "$LocalRoot\runs\baseline\summary.json" "$LocalRoot\runs\my-method\summary.json" --out docs/my-method-comparison.json
+& "$LocalRoot\.venv\Scripts\python.exe" src/plot_results.py "$LocalRoot\runs\my-method\summary.json" --out docs/figures/my-method
+& "$LocalRoot\.venv\Scripts\python.exe" src/compare_runs.py docs/figures/baseline/metrics.json "$LocalRoot\runs\my-method\summary.json" --out docs/my-method-comparison.json
 ```
 
 原始输出会保存在各自SSD的runs下。恢复中断运行用相同命令；不同设置用新目录。dev调参加 --split dev，test前冻结代码和超参数。Linux/macOS可用同样Python命令和本机Ollama，环境路径改为.venv/bin/python，并保持版本和配置一致；跨后端逐字复现没有保证。

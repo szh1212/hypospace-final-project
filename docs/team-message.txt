@@ -8,4 +8,6 @@ src/ollama_client.py提供模型接口，experiment_api.load_dataset/evaluate_ou
 
 正式配置不可改：3×3、高度3、占用格数1/2/3，每层5个test观测，seed17/42/2026，temperature0.7、top_p0.9、top_k40、max_tokens512、context8192、repeat_penalty1，每题3/9/27次，总585次。用 python src/hypospace_runner.py --method 我的模块:transform --out 本机SSD/runs/我的方法；dev加--split dev。模型调用都算预算，修复/规划调用也不能隐藏；不得多生成筛选后只统计成功结果。额外预算实验必须让baseline用同样预算重新跑，单列结果。
 
-用compare_runs.py比较相同配置和逐题预算，交代码、固定参数、精确命令、dev消融、总体与分层V/U/R、覆盖曲线、失败原因、调用数、输入输出tokens、总时间和局限。保留所有失败重复raw JSON在SSD供核查，提交小型指标和raw SHA256清单；不要提交权重、环境或大文件。论文已有历史去重及复杂度分层，创新必须说明新增点。每人通过独立分支提PR，另一人review，不直接推main。四人最后均参与10分钟视频讲解。
+直接运行 python src/compare_runs.py docs/figures/baseline/metrics.json 本机SSD/runs/我的方法/summary.json --out docs/我的方法-comparison.json。用它比较相同配置和逐题预算，交代码、固定参数、精确命令、dev消融、总体与分层V/U/R、覆盖曲线、失败原因、调用数、输入输出tokens、总时间和局限。保留所有失败重复raw JSON在SSD供核查，提交小型指标和raw SHA256清单；不要提交权重、环境或大文件。论文已有历史去重及复杂度分层，创新必须说明新增点。每人通过独立分支提PR，另一人review，不直接推main。四人最后均参与10分钟视频讲解。
+
+配对对照与可复核的原始记录见 docs/baseline-audit.md；docs/figures/baseline 始终指冻结的 Adapted，docs/figures/original 对应官方提示词。每人复用 Adapted 已发布的分数即可，无需再生成 585 次。三个分支先分别写清自己的创新假设、dev 消融和调用预算，再比较最终 test。
