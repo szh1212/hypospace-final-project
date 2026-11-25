@@ -18,6 +18,8 @@
 
 论文 §3 与 §6.1 通常取 N=|H|，分难度对实例取均值并报告离散程度。文字提到独立采样，3D 官方实现逐轮带历史，本项目遵循后者。论文表 2 没有给出本项目固定的 15 个测试 ID 或三个种子。论文 §6.6 的温度、top-p 与预算扫描属于 Boolean Genetic Interaction。此处固定 temperature=0.7、top_p=0.9、top_k=40、max_tokens=512、num_ctx=8192、repeat_penalty=1，三组 repeat_seed 为 17/42/2026；完整运行身份以配置与模型锁为准。[冻结参数](../experiments/protocol.json) · [划分](../experiments/manifest.json) · [模型锁](../experiments/model-lock.json)
 
+固定上游 3D CLI 的默认值是 n_samples=10、seed=None、query_multiplier=1、max_retries=3，温度配置缺省时取 0.7。课程实验保留预算倍率和温度缺省值，改用 manifest 指定观测、显式种子、max_retries=1。这里 1 表示每个提案仅尝试一次，解析失败占用原预算。CLI 默认值不能当作论文表 2 的实测参数。
+
 两个版本共用同一个全零结构归一化兼容修复，避免 NumPy 数组导致异常，并保留该输出。V 采用上游 parser / validator 的实际宽容规则；独立记录的 strict_valid_count 增加高度检查，不用于正式 V。Adapted 在之前一次中止的测试运行中发现了历史处理缺陷，修复后重新在开发集验证，再完成冻结的 585 次实验；该修复接触过部分测试输出。[冻结记录](baseline-freeze.json)
 
 ## 复现与核查
