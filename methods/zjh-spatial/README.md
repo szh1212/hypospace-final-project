@@ -45,6 +45,14 @@ The development comparison uses the full frozen development split with the Adapt
 
 Select the spatial variant on matched development instances. Prefer a variant that meets or exceeds Adapted Validity, then maximize macro Recovery and break ties on Validity. Keep fixed row-major order on an exact tie. A formal improvement requires higher macro Recovery with at least the Adapted point estimate for Validity. Report paired Recovery changes by seed and a 95% bootstrap interval resampling observations within each difficulty, with all seeds kept together for each sampled observation. This plan uses the development failure pattern and was recorded before reading the first formal results.
 
+| Full development method | Calls | Validity | Uniqueness | Recovery |
+| --- | ---: | ---: | ---: | ---: |
+| Adapted | 234 | 100.00% | 19.96% | 19.96% |
+| Height codec with fixed row-major order | 234 | 100.00% | 55.56% | 55.56% |
+| Height codec with cyclic coordinate order | 234 | 100.00% | 64.20% | 64.20% |
+
+All three arms used six development observations, three seeds and the same per-observation budgets. Cycling the coordinate order gained 8.64 Recovery points over the fixed-order codec on development. The selected `spatial_codec:cyclic` was frozen before the second formal test. [Full development comparison](reports/codec-dev-comparison.json) · [Test freeze](reports/codec-test-freeze.json)
+
 ## Reproduction
 
 Follow the [shared local setup](../../docs/local-setup.md) with the frozen model and upstream revision. The method uses CPU inference with the existing Qwen weights. Run from the repository root with the Python 3.12 environment active. The [protocol](../../experiments/protocol.json), [split](../../experiments/manifest.json), [model lock](../../experiments/model-lock.json) and Adapted prompt at starting revision `b8036b4` match the frozen Adapted Baseline revision `ddd0807`.
@@ -81,4 +89,17 @@ python $entry --split dev --method adapted_baseline:transform --out "$dev/adapte
 python $entry --split dev --method spatial_codec:row_major --out "$dev/row-major"
 python $entry --split dev --method spatial_codec:cyclic --out "$dev/cyclic"
 python "$method/experiments/compare.py" "$dev/adapted/summary.json" "$dev/row-major/summary.json" "$dev/cyclic/summary.json" --select --out "$reports/codec-dev-comparison.json"
+```
+
+Run and audit the frozen second iteration.
+
+```powershell
+$test = "$runs/codec-test"
+$report = "$reports/codec-test"
+$selected = (Get-Content "$reports/codec-test-freeze.json" -Raw | ConvertFrom-Json).method
+python $entry --method $selected --out $test
+python src/export_run.py $test --out $report
+python src/plot_results.py "$test/summary.json" --out $report
+python "$method/experiments/compare.py" docs/figures/baseline/metrics.json "$report/metrics.json" --out "$report/comparison.json"
+python "$method/experiments/audit.py" $test $report
 ```

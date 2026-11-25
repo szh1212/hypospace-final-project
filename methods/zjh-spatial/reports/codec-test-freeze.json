@@ -1,0 +1,10 @@
+{
+  "method": "spatial_codec:cyclic",
+  "source_commit": "758119d39ea6ac727856e72373985780075c965d",
+  "model_code_sha256": "44bf9344081e868fd15212cc960492fa8010b5709719cec7e401edb143ed21cb",
+  "entrypoint_sha256": "1e95f469d3b55066eabe5ab90b34e3ca0d49c4ad6cb01065704b54d8e23dbcd8",
+  "development_evidence_sha256": "8dd15183daea9d0cd38b5aca30dc27d32c1f29321a01ecb8828debf68cd67bcf",
+  "frozen_baseline": "b8036b4",
+  "official_test_calls": 585,
+  "rule": "Prefer meeting Adapted Validity on dev, then maximize Recovery and break ties on Validity and fixed order."
+}
