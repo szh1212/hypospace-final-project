@@ -14,7 +14,7 @@ sys.path[:0] = [str(METHOD / 'src'), str(PROJECT / 'src')]
 
 from experiment_api import evaluate_outputs, load_dataset
 from hypospace_runner import digest, upstream
-from spatial_codec import decode_cyclic, decode_row_major
+from spatial_codec import decode_cyclic, decode_row_major, output_schema
 
 
 DECODERS = {'spatial_codec:row_major': decode_row_major, 'spatial_codec:cyclic': decode_cyclic}
@@ -56,6 +56,8 @@ def audit(raw_root, export):
             if decoder:
                 model_text = record['raw_response']
                 context = {'observation': observation, 'query_index': index}
+                if record['request']['format'] != output_schema(observation.count('1')):
+                    raise ValueError(f'Unexpected output schema: {name}')
                 if decoder(model_text, context) != response or record['code_decoded'] != (model_text != response):
                     raise ValueError(f'Decoder mismatch: {name}')
                 encodings['decoded' if record['code_decoded'] else 'forwarded unchanged'] += 1

@@ -1,0 +1,48 @@
+{
+  "verified_calls": 585,
+  "outcomes": {
+    "new valid": 53,
+    "valid duplicate": 228,
+    "projection mismatch": 292,
+    "parse failure": 8,
+    "unsupported": 4
+  },
+  "codec": {},
+  "examples": {
+    "new valid": {
+      "file": "raw/17/g3_h3_b1_001/0000.json",
+      "observed_projection": "100000000",
+      "returned_projection": "100000000",
+      "model_response_excerpt": "Structure:\nLayer 1:\n1 0 0\n0 0 0\n0 0 0\nLayer 2:\n1 0 0\n0 0 0\n0 0 0",
+      "scored_response_excerpt": "Structure:\nLayer 1:\n1 0 0\n0 0 0\n0 0 0\nLayer 2:\n1 0 0\n0 0 0\n0 0 0"
+    },
+    "valid duplicate": {
+      "file": "raw/17/g3_h3_b1_001/0001.json",
+      "observed_projection": "100000000",
+      "returned_projection": "100000000",
+      "model_response_excerpt": "Layer 1:\n1 0 0\n0 0 0\n0 0 0\nLayer 2:\n1 0 0\n0 0 0\n0 0 0\n\nTo avoid repeating the provided solution, let's create a different valid structure with a different tuple. \n\nHere is a different valid structure:\n\nLayer 1:\n1 0 0\n0 0 0\n0 0 0\n\nLayer 2:\n1 0 0\n0 0 0\n0 0 0\n\nStructure and Layer grids as requested:\nLayer 1:\n1 0 0\n0 0 0\n0 0 0\n\nLayer 2:\n1 0 0\n0 0 0\n0 0 0",
+      "scored_response_excerpt": "Layer 1:\n1 0 0\n0 0 0\n0 0 0\nLayer 2:\n1 0 0\n0 0 0\n0 0 0\n\nTo avoid repeating the provided solution, let's create a different valid structure with a different tuple. \n\nHere is a different valid structure:\n\nLayer 1:\n1 0 0\n0 0 0\n0 0 0\n\nLayer 2:\n1 0 0\n0 0 0\n0 0 0\n\nStructure and Layer grids as requested:\nLayer 1:\n1 0 0\n0 0 0\n0 0 0\n\nLayer 2:\n1 0 0\n0 0 0\n0 0 0"
+    },
+    "projection mismatch": {
+      "file": "raw/17/g3_h3_b1_005/0000.json",
+      "observed_projection": "000010000",
+      "returned_projection": "010110000",
+      "model_response_excerpt": "Structure:\nLayer 1:\n0 0 0\n0 1 0\n0 0 0\nLayer 2:\n0 1 0\n1 1 0\n0 0 0",
+      "scored_response_excerpt": "Structure:\nLayer 1:\n0 0 0\n0 1 0\n0 0 0\nLayer 2:\n0 1 0\n1 1 0\n0 0 0"
+    },
+    "parse failure": {
+      "file": "raw/17/g3_h3_b2_025/0006.json",
+      "observed_projection": "000100010",
+      "returned_projection": null,
+      "model_response_excerpt": "Layer 1:\n0 0 0\n0 0 0\n0 0 0\nLayer 2:\n0 0 0\n0 1 0\n0 0 0\n\nStructure:\nLayer 1: (C1, C2)\nLayer 2: (0, 1)",
+      "scored_response_excerpt": "Layer 1:\n0 0 0\n0 0 0\n0 0 0\nLayer 2:\n0 0 0\n0 1 0\n0 0 0\n\nStructure:\nLayer 1: (C1, C2)\nLayer 2: (0, 1)"
+    },
+    "unsupported": {
+      "file": "raw/17/g3_h3_b3_030/0001.json",
+      "observed_projection": "011010000",
+      "returned_projection": "011010000",
+      "model_response_excerpt": "Layer 1:\n0 1 1\n0 1 0\n0 0 0\n\nLayer 2:\n0 0 0\n0 0 0\n0 0 0\n\nLayer 3:\n0 1 0\n0 0 0\n0 0 0",
+      "scored_response_excerpt": "Layer 1:\n0 1 1\n0 1 0\n0 0 0\n\nLayer 2:\n0 0 0\n0 0 0\n0 0 0\n\nLayer 3:\n0 1 0\n0 0 0\n0 0 0"
+    }
+  }
+}

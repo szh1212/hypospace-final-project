@@ -3,7 +3,8 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+METHOD = Path(__file__).resolve().parents[1]
+sys.path[:0] = [str(METHOD / 'src'), str(METHOD.parents[1] / 'src')]
 from hypospace_runner import upstream
 from spatial_columns import HISTORY_HEADER, grid_history, transform
 

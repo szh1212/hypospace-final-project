@@ -1,0 +1,87 @@
+{
+  "baseline": "adapted_baseline:transform",
+  "baseline_resources": {
+    "calls": 585,
+    "input_tokens": 178307,
+    "output_tokens": 28776,
+    "model_call_seconds": 3275.128669500038,
+    "truncated_outputs": 0
+  },
+  "split": "test",
+  "comparisons": {
+    "spatial_columns:grid_history": {
+      "observations": 15,
+      "observation_seed_pairs": 45,
+      "overall": {
+        "valid_rate": {
+          "baseline": 0.7851851851851852,
+          "method": 0.4469135802469136,
+          "delta": -0.33827160493827163,
+          "observation_bootstrap_95": [
+            -0.5111111111111112,
+            -0.16049382716049382
+          ]
+        },
+        "novelty_rate": {
+          "baseline": 0.21646090534979423,
+          "method": 0.32839506172839505,
+          "delta": 0.11193415637860082,
+          "observation_bootstrap_95": [
+            0.07160493827160494,
+            0.14979423868312758
+          ]
+        },
+        "recovery_rate": {
+          "baseline": 0.1744855967078189,
+          "method": 0.17695473251028807,
+          "delta": 0.0024691358024691358,
+          "observation_bootstrap_95": [
+            -0.05514403292181069,
+            0.055967078189300405
+          ]
+        }
+      },
+      "delta_by_seed": {
+        "valid_rate": {
+          "17": -0.362962962962963,
+          "42": -0.3654320987654321,
+          "2026": -0.28641975308641976
+        },
+        "novelty_rate": {
+          "17": 0.10123456790123456,
+          "42": 0.11604938271604938,
+          "2026": 0.11851851851851851
+        },
+        "recovery_rate": {
+          "17": -0.009876543209876543,
+          "42": -0.012345679012345678,
+          "2026": 0.029629629629629627
+        }
+      },
+      "delta_by_level": {
+        "valid_rate": {
+          "1": -0.24444444444444444,
+          "2": -0.5777777777777778,
+          "3": -0.1925925925925926
+        },
+        "novelty_rate": {
+          "1": 0.17777777777777778,
+          "2": 0.029629629629629627,
+          "3": 0.12839506172839504
+        },
+        "recovery_rate": {
+          "1": 0.06666666666666667,
+          "2": -0.0962962962962963,
+          "3": 0.037037037037037035
+        }
+      },
+      "resources": {
+        "calls": 585,
+        "input_tokens": 290067,
+        "output_tokens": 61193,
+        "model_call_seconds": 6267.752563399859,
+        "truncated_outputs": 13
+      }
+    }
+  }
+}

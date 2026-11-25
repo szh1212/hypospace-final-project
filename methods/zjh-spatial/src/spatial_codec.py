@@ -1,13 +1,27 @@
 """Generate a compact column-height code and decode it into voxel layers."""
 
-import re
+import json
 
 import hypospace_runner
 from adapted_baseline import transform as adapted_transform
 from spatial_columns import _column_heights
 
 
-HEIGHT_LINE = re.compile(r'Heights:[ \t]*([123](?:[ \t]+[123])*)', re.IGNORECASE)
+ALLOWED_HEIGHTS = (1, 2, 3)
+
+
+def output_schema(size):
+    return {
+        'type': 'object',
+        'properties': {
+            'heights': {
+                'type': 'array', 'minItems': size, 'maxItems': size,
+                'items': {'type': 'integer', 'enum': list(ALLOWED_HEIGHTS)},
+            },
+        },
+        'required': ['heights'],
+        'additionalProperties': False,
+    }
 
 
 def _positions(context, cyclic):
@@ -33,8 +47,7 @@ def _prompt(prompt, context, *, cyclic):
             prior.add(heights)
 
     cells = ', '.join(f'(row {row + 1}, column {col + 1})' for row, col in positions)
-    history = '\n'.join(' '.join(map(str, heights)) for heights in sorted(prior)) or '(none yet)'
-    code = ' '.join(['<height>'] * len(positions))
+    history = '\n'.join(json.dumps(heights) for heights in sorted(prior)) or '(none yet)'
     return (
         top_view
         + f'Encode your reconstruction in this occupied-cell order: {cells}.\n'
@@ -42,17 +55,21 @@ def _prompt(prompt, context, *, cyclic):
         + 'A height counts the blocks from the ground up.\n'
         + f'Previously found height codes in this same order:\n{history}\n'
         + 'Choose a height code that is different from all those listed.\n'
-        + f'Return one line in this format, replacing each placeholder with a digit: Heights: {code}\n'
+        + 'Return a JSON object with one field named "heights" and put your height array in it.\n'
     )
 
 
 def _decode(response, context, *, cyclic):
-    match = HEIGHT_LINE.fullmatch(response.strip())
-    if match is None:
+    try:
+        code = json.loads(response)
+    except json.JSONDecodeError:
         return response
     positions = _positions(context, cyclic)
-    heights = tuple(map(int, match[1].split()))
-    if len(heights) != len(positions):
+    if not isinstance(code, dict) or code.keys() != {'heights'}:
+        return response
+    heights = code['heights']
+    if (not isinstance(heights, list) or len(heights) != len(positions)
+            or any(type(height) is not int or height not in ALLOWED_HEIGHTS for height in heights)):
         return response
 
     grid = [0] * 9
