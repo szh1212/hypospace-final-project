@@ -8,7 +8,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from causal_benchmark import Dataset
-from parent_strata import assemble, parent_plan, skeleton_plan
+from parent_strata import assemble, enforce_limit, forced_edges, parent_plan, skeleton_plan
 
 
 class ParentStrataTests(unittest.TestCase):
@@ -89,3 +89,44 @@ class ParentStrataTests(unittest.TestCase):
                     assembled = assemble(row, graph["edges"])
                     self.assertEqual(graph_edges - assembled, set())
                     self.assertEqual(assembled, graph_edges)
+
+    def test_forced_edges_appear_in_every_official_solution(self):
+        upstream = Path(os.environ.get("HYPOSPACE_UPSTREAM", ROOT / ".cache/hypospace"))
+        if not upstream.is_dir():
+            self.skipTest("Pinned causal checkout unavailable")
+        for case in Dataset(upstream).cases.values():
+            public = {key: case[key] for key in ("nodes", "observations", "max_edges")}
+            forced = forced_edges(public)
+            for graph in case["ground_truth_graphs"]:
+                edges = {tuple(edge) for edge in graph["edges"]}
+                self.assertTrue(forced <= edges, (case["observation_set_id"], forced - edges))
+                self.assertLessEqual(len(edges), case["max_edges"])
+
+    def test_complete_forced_fixes_the_whole_backbone(self):
+        public = {"nodes": ["A", "B", "C", "D"], "max_edges": 4, "observations": [
+            {"perturbed_node": "B", "effects": {"A": 1, "B": 0, "C": 0, "D": 0}},
+            {"perturbed_node": "C", "effects": {"A": 1, "B": 0, "C": 0, "D": 1}},
+        ]}
+        forced = forced_edges(public)
+        self.assertIn(("C", "D"), forced)
+        for seed in (17, 42):
+            plan = skeleton_plan(public, seed, 16, "complete_forced")
+            anchor = plan[0]["node"]
+            for row in plan:
+                fixed = {tuple(edge) for edge in row["fixed_edges"]}
+                self.assertTrue(forced <= fixed, (seed, forced - fixed))
+                self.assertEqual(row["node"], anchor)
+                self.assertIn(f"at most {max(4 - len(fixed), 0)} more", row["prompt"])
+                assembled = assemble(row, [])
+                self.assertTrue(forced <= assembled)
+
+    def test_enforce_limit_drops_later_additions_only(self):
+        condition = dict(node="D", parents=["A", "B"],
+                         fixed_edges=[("A", "D"), ("B", "D"), ("C", "D")])
+        final = enforce_limit(condition, [("C", "D"), ("B", "A"), ("D", "A")], 3)
+        self.assertEqual(final, frozenset({("A", "D"), ("B", "D"), ("C", "D")}))
+        final = enforce_limit(condition, [("B", "A"), ("D", "A")], 4)
+        self.assertEqual(final, frozenset({("A", "D"), ("B", "D"), ("C", "D"), ("B", "A")}))
+        self.assertEqual(enforce_limit(condition, [], 3), frozenset({("A", "D"), ("B", "D"), ("C", "D")}))
+        self.assertEqual(enforce_limit(condition, [("B", "A")], 5), frozenset(
+            {("A", "D"), ("B", "D"), ("C", "D"), ("B", "A")}))

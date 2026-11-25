@@ -16,7 +16,7 @@ from pathlib import Path
 from run_causal import ROOT, digest, obtain, save, score_prefix
 from causal_benchmark import Dataset, LocalModel
 from causal_prompts import _reachability
-from parent_strata import assemble, skeleton_plan
+from parent_strata import assemble, enforce_limit, skeleton_plan
 
 PROTOCOL = ROOT / "experiments/parent-skeleton.json"
 
@@ -42,7 +42,11 @@ def run_skeleton_cell(dataset, model, row, method, seed, budget, out, replay):
         data = obtain(path, model, prompt, step_seed, method, 0, replay, prep)
         records.append(data)
         graph = dataset.bench.parse_llm_response(data["response"])
-        final = assemble(condition, graph.edges if graph is not None else [])
+        parsed_edges = graph.edges if graph is not None else []
+        if variant in ("complete_forced", "complete_limit"):
+            final = enforce_limit(condition, parsed_edges, public["max_edges"])
+        else:
+            final = assemble(condition, parsed_edges)
         outputs.append(canonical(final))
         assembled.append(sorted(final))
     scores = {str(k): score_prefix(dataset, row, outputs[:k]) for k in (4, 8, budget) if k <= budget}

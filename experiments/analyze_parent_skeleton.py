@@ -9,7 +9,7 @@ import networkx as nx
 import numpy as np
 
 from run_causal import Dataset, ROOT, digest, save
-from parent_strata import assemble, skeleton_plan
+from parent_strata import assemble, enforce_limit, skeleton_plan
 
 sys.path.insert(0, str(ROOT / "experiments"))
 from causal_prompts import _reachability  # noqa: E402
@@ -41,7 +41,11 @@ def audit_skeleton_cell(dataset, folder, cell, budget, variant):
         check(plan[i]["prompt"] in prompt, (path, "scheduled stratum in actual prompt"))
         check(prompt.startswith(base.rsplit("\n", 1)[0] + "\n"), (path, "shared reachability base"))
         graph = dataset.bench.parse_llm_response(data["response"])
-        final = assemble(plan[i], graph.edges if graph is not None else [])
+        parsed_edges = graph.edges if graph is not None else []
+        if variant in ("complete_forced", "complete_limit"):
+            final = enforce_limit(plan[i], parsed_edges, public["max_edges"])
+        else:
+            final = assemble(plan[i], parsed_edges)
         check(sorted(map(tuple, cell["assembled"][i])) == sorted(final), (path, "recorded assembly"))
         canonical = "Graph: " + ", ".join(f"{s}->{t}" for s, t in sorted(final)) or "Graph: No edges"
         evaluated = dataset.bench.parse_llm_response(canonical)
@@ -51,7 +55,7 @@ def audit_skeleton_cell(dataset, folder, cell, budget, variant):
         dag = nx.DiGraph()
         dag.add_nodes_from(case["nodes"])
         dag.add_edges_from(final)
-        compatible = all(
+        compatible = len(final) <= case["max_edges"] and all(
             nx.descendants(dag, obs["perturbed_node"]) == {v for v, effect in obs["effects"].items() if effect}
             for obs in case["observations"]
         )
@@ -79,7 +83,7 @@ def audit_skeleton_cell(dataset, folder, cell, budget, variant):
                                            for q in cell["prefixes"]})
 
 
-def summarize(folder, controls_folder, upstream, split, protocol_path):
+def summarize(folder, controls_folder, upstream, split, protocol_path, extra=None):
     source = json.loads((folder / "summary.json").read_text())
     cfg = json.loads(protocol_path.read_text())
     check(source["protocol"] == cfg, "frozen skeleton protocol")
@@ -91,6 +95,15 @@ def summarize(folder, controls_folder, upstream, split, protocol_path):
     check(cfg[split] == v1_cfg[split], "split alignment")
     check(cfg[f"{split}_seeds"] == v1_cfg[f"{split}_seeds"], "seed alignment")
     check(cfg["budget"] == v1_cfg["budget"], "budget alignment")
+    extra_methods, extra_protocol = [], None
+    if extra:
+        extra_folder, extra_protocol_path = extra
+        extra_source = json.loads((extra_folder / "summary.json").read_text())
+        extra_protocol = json.loads(extra_protocol_path.read_text())
+        check(extra_source["protocol"] == extra_protocol, "frozen extra control protocol")
+        check(extra_source["split"] == split, "extra controls split")
+        check(extra_protocol[split] == cfg[split], "extra controls split alignment")
+        extra_methods = extra_protocol["methods"]
     cases, seeds = cfg[split], cfg[f"{split}_seeds"]
     methods = cfg["methods"]
     rows = {}
@@ -108,8 +121,14 @@ def summarize(folder, controls_folder, upstream, split, protocol_path):
                            for key, cell in all_rows[method].items()}
     for method in ("official", "unstratified", "edge_count", "parent_set"):
         all_rows[method] = {(r["case_id"], r["seed"]): r for r in v1["rows"] if r["method"] == method}
+    if extra:
+        extra_folder = extra[0]
+        extra_source = json.loads((extra_folder / "summary.json").read_text())
+        for method in extra_methods:
+            all_rows[method] = {(r["case_id"], r["seed"]): r for r in extra_source["rows"] if r["method"] == method}
     methods_report, case_r = {}, {}
-    for method in ("official", "unstratified", "edge_count", "parent_set", *methods):
+    all_methods = ("official", "unstratified", "edge_count", "parent_set", *extra_methods, *methods)
+    for method in all_methods:
         group = list(all_rows[method].values())
         case_r[method] = {oid: mean(all_rows[method][oid, s]["R"] for s in seeds) for oid in cases}
         counts = {field: sum(r[field] for r in group)
@@ -127,7 +146,7 @@ def summarize(folder, controls_folder, upstream, split, protocol_path):
     weights = np.random.default_rng(bootstrap_seed).integers(0, len(cases), (replicates, len(cases)))
     comparisons = {}
     for method in methods:
-        for control in ("official", "unstratified", "edge_count", "parent_set"):
+        for control in ("official", "unstratified", "edge_count", "parent_set", *extra_methods):
             deltas = {oid: r - case_r[control][oid] for oid, r in case_r[method].items()}
             values = np.array(list(deltas.values()))
             comparisons[f"{method}_minus_{control}"] = dict(
@@ -135,19 +154,26 @@ def summarize(folder, controls_folder, upstream, split, protocol_path):
                 ci95=np.quantile(values[weights].mean(axis=1), [.025, .975]).tolist(),
                 wins=sum(int(v > 1e-12) for v in values), ties=sum(int(abs(v) <= 1e-12) for v in values),
                 losses=sum(int(v < -1e-12) for v in values), per_case_delta=deltas)
-    token_cap_rows = []
-    matched = ("unstratified", "edge_count", "parent_set", *methods)
+    token_cap_rows, capped = [], {}
+    matched = ("unstratified", "edge_count", "parent_set", *extra_methods, *methods)
     for oid, seed in {(c, s) for c in cases for s in seeds}:
         cap = min(sum(all_rows[m][oid, seed][f] for f in ("input_tokens", "output_tokens")) for m in matched)
         for method in matched:
             row = all_rows[method][oid, seed]
             token_cap_rows.append(dict(case_id=oid, seed=seed, method=method, token_cap=cap,
                                        attempts=budget, R=row["R"]))
+    for method in matched:
+        subset = [r for r in token_cap_rows if r["method"] == method]
+        capped[method] = dict(R=mean(r["R"] for r in subset), mean_attempts=budget)
     return dict(split=split, n_cases=len(cases), seeds=seeds, budget=budget,
                 n_skeleton_calls=len(source["rows"]) * budget,
                 skeleton_protocol_sha256=digest(cfg), v1_protocol_sha256=digest(v1_cfg),
                 generation_commit=source["identity"]["commit"],
                 methods=methods_report, comparisons=comparisons,
+                posthoc_token_cap=dict(rule="Smallest full-run input + output tokens among the "
+                                            "matched-prompt methods on each case and seed; terminal R "
+                                            "reported because per-call token prefixes are not replayed here.",
+                                       methods=capped, rows=token_cap_rows),
                 bootstrap=dict(replicates=replicates, seed=bootstrap_seed,
                                unit="paired case after averaging its seeds; percentile interval"))
 
@@ -158,10 +184,17 @@ if __name__ == "__main__":
     parser.add_argument("--upstream", type=Path, default=ROOT / ".cache/hypospace")
     parser.add_argument("--protocol", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--folder", type=Path)
+    parser.add_argument("--extra-folder", type=Path)
+    parser.add_argument("--extra-protocol", type=Path)
     args = parser.parse_args()
     methods = json.loads(args.protocol.read_text())["methods"]
-    report = summarize(ROOT / "runs" / f"skeleton-{args.split}",
-                       ROOT / "runs" / f"parent-{args.split}",
-                       args.upstream, args.split, args.protocol)
+    folder = args.folder or (ROOT / "runs" / f"skeleton-{args.split}")
+    controls = ROOT / "runs" / f"parent-{args.split}"
+    extra = None
+    if args.extra_folder and args.extra_protocol:
+        extra = (args.extra_folder, args.extra_protocol)
+    report = summarize(folder, controls, args.upstream, args.split, args.protocol, extra)
     save(args.out, report)
-    print(f"{args.split}: compared {len(methods)} skeleton method(s) against 4 frozen controls")
+    n_controls = 4 + len(json.loads(args.extra_protocol.read_text())["methods"]) if extra else 4
+    print(f"{args.split}: compared {len(methods)} skeleton method(s) against {n_controls} frozen controls")

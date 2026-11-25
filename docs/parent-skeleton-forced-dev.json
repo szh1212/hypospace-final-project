@@ -1,0 +1,676 @@
+{
+  "split": "dev",
+  "n_cases": 4,
+  "seeds": [
+    17
+  ],
+  "budget": 16,
+  "n_skeleton_calls": 128,
+  "skeleton_protocol_sha256": "ff84a9f4f2fcc590ce3dc67d441bb73735ab38d1fd57879870ce8475b8e64fa9",
+  "v1_protocol_sha256": "a6a172d16d7ae145e7b130d11a8689af7ea5a182be602d501d72afed50b43c69",
+  "generation_commit": "8786caa12ded8a8bcd917a313e0edbeb95756c45",
+  "methods": {
+    "official": {
+      "macro": {
+        "V": 0.25,
+        "U": 0.0625,
+        "R": 0.006756756756756757
+      },
+      "R_at": {
+        "4": 0.006756756756756757,
+        "8": 0.006756756756756757,
+        "16": 0.006756756756756757
+      },
+      "totals": {
+        "calls": 64,
+        "input_tokens": 22136,
+        "output_tokens": 448,
+        "seconds": 16.676416129805148,
+        "total_tokens": 22584
+      },
+      "per_case_R": {
+        "n1_003": 0.02702702702702703,
+        "n2_116": 0.0,
+        "n2_169": 0.0,
+        "n2_178": 0.0
+      }
+    },
+    "unstratified": {
+      "macro": {
+        "V": 0.390625,
+        "U": 0.109375,
+        "R": 0.04247104247104247
+      },
+      "R_at": {
+        "4": 0.04247104247104247,
+        "8": 0.04247104247104247,
+        "16": 0.04247104247104247
+      },
+      "totals": {
+        "calls": 64,
+        "input_tokens": 9728,
+        "output_tokens": 850,
+        "seconds": 10.948835167102516,
+        "total_tokens": 10578
+      },
+      "per_case_R": {
+        "n1_003": 0.02702702702702703,
+        "n2_116": 0.0,
+        "n2_169": 0.14285714285714285,
+        "n2_178": 0.0
+      }
+    },
+    "edge_count": {
+      "macro": {
+        "V": 0.359375,
+        "U": 0.109375,
+        "R": 0.04247104247104247
+      },
+      "R_at": {
+        "4": 0.04247104247104247,
+        "8": 0.04247104247104247,
+        "16": 0.04247104247104247
+      },
+      "totals": {
+        "calls": 64,
+        "input_tokens": 10176,
+        "output_tokens": 889,
+        "seconds": 15.652449123561382,
+        "total_tokens": 11065
+      },
+      "per_case_R": {
+        "n1_003": 0.02702702702702703,
+        "n2_116": 0.0,
+        "n2_169": 0.14285714285714285,
+        "n2_178": 0.0
+      },
+      "assignment_hit_rate": 0.296875
+    },
+    "parent_set": {
+      "macro": {
+        "V": 0.5,
+        "U": 0.25,
+        "R": 0.1335746460746461
+      },
+      "R_at": {
+        "4": 0.1335746460746461,
+        "8": 0.1335746460746461,
+        "16": 0.1335746460746461
+      },
+      "totals": {
+        "calls": 64,
+        "input_tokens": 11656,
+        "output_tokens": 880,
+        "seconds": 16.146577331237495,
+        "total_tokens": 12536
+      },
+      "per_case_R": {
+        "n1_003": 0.10810810810810811,
+        "n2_116": 0.2,
+        "n2_169": 0.14285714285714285,
+        "n2_178": 0.08333333333333333
+      },
+      "assignment_hit_rate": 0.609375
+    },
+    "skeleton_enforce": {
+      "macro": {
+        "V": 0.4375,
+        "U": 0.328125,
+        "R": 0.09786036036036036
+      },
+      "R_at": {
+        "4": 0.09786036036036036,
+        "8": 0.09786036036036036,
+        "16": 0.09786036036036036
+      },
+      "totals": {
+        "calls": 64,
+        "input_tokens": 11784,
+        "output_tokens": 846,
+        "seconds": 17.131822422146797,
+        "total_tokens": 12630
+      },
+      "per_case_R": {
+        "n1_003": 0.10810810810810811,
+        "n2_116": 0.2,
+        "n2_169": 0.0,
+        "n2_178": 0.08333333333333333
+      }
+    },
+    "skeleton_complete": {
+      "macro": {
+        "V": 0.359375,
+        "U": 0.515625,
+        "R": 0.18336550836550836
+      },
+      "R_at": {
+        "4": 0.12006113256113256,
+        "8": 0.16253217503217504,
+        "16": 0.18336550836550836
+      },
+      "totals": {
+        "calls": 64,
+        "input_tokens": 12104,
+        "output_tokens": 923,
+        "seconds": 19.90701657673344,
+        "total_tokens": 13027
+      },
+      "per_case_R": {
+        "n1_003": 0.08108108108108109,
+        "n2_116": 0.2,
+        "n2_169": 0.2857142857142857,
+        "n2_178": 0.16666666666666666
+      }
+    },
+    "skeleton_complete_forced": {
+      "macro": {
+        "V": 0.53125,
+        "U": 0.453125,
+        "R": 0.21907979407979408
+      },
+      "R_at": {
+        "4": 0.191489703989704,
+        "8": 0.19824646074646074,
+        "16": 0.21907979407979408
+      },
+      "totals": {
+        "calls": 64,
+        "input_tokens": 12232,
+        "output_tokens": 843,
+        "seconds": 14.769651661161333,
+        "total_tokens": 13075
+      },
+      "per_case_R": {
+        "n1_003": 0.08108108108108109,
+        "n2_116": 0.2,
+        "n2_169": 0.42857142857142855,
+        "n2_178": 0.16666666666666666
+      },
+      "valid_rate": 0.53125
+    },
+    "skeleton_complete_limit": {
+      "macro": {
+        "V": 0.359375,
+        "U": 0.515625,
+        "R": 0.18336550836550836
+      },
+      "R_at": {
+        "4": 0.12006113256113256,
+        "8": 0.16253217503217504,
+        "16": 0.18336550836550836
+      },
+      "totals": {
+        "calls": 64,
+        "input_tokens": 12104,
+        "output_tokens": 923,
+        "seconds": 16.018579167779535,
+        "total_tokens": 13027
+      },
+      "per_case_R": {
+        "n1_003": 0.08108108108108109,
+        "n2_116": 0.2,
+        "n2_169": 0.2857142857142857,
+        "n2_178": 0.16666666666666666
+      },
+      "valid_rate": 0.359375
+    }
+  },
+  "comparisons": {
+    "skeleton_complete_forced_minus_official": {
+      "mean_delta": 0.2123230373230373,
+      "ci95": [
+        0.09054054054054055,
+        0.3630952380952381
+      ],
+      "wins": 4,
+      "ties": 0,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_003": 0.05405405405405406,
+        "n2_116": 0.2,
+        "n2_169": 0.42857142857142855,
+        "n2_178": 0.16666666666666666
+      }
+    },
+    "skeleton_complete_forced_minus_unstratified": {
+      "mean_delta": 0.1766087516087516,
+      "ci95": [
+        0.09054054054054055,
+        0.25595238095238093
+      ],
+      "wins": 4,
+      "ties": 0,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_003": 0.05405405405405406,
+        "n2_116": 0.2,
+        "n2_169": 0.2857142857142857,
+        "n2_178": 0.16666666666666666
+      }
+    },
+    "skeleton_complete_forced_minus_edge_count": {
+      "mean_delta": 0.1766087516087516,
+      "ci95": [
+        0.09054054054054055,
+        0.25595238095238093
+      ],
+      "wins": 4,
+      "ties": 0,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_003": 0.05405405405405406,
+        "n2_116": 0.2,
+        "n2_169": 0.2857142857142857,
+        "n2_178": 0.16666666666666666
+      }
+    },
+    "skeleton_complete_forced_minus_parent_set": {
+      "mean_delta": 0.085505148005148,
+      "ci95": [
+        -0.013513513513513514,
+        0.21428571428571427
+      ],
+      "wins": 2,
+      "ties": 1,
+      "losses": 1,
+      "per_case_delta": {
+        "n1_003": -0.02702702702702703,
+        "n2_116": 0.0,
+        "n2_169": 0.2857142857142857,
+        "n2_178": 0.08333333333333333
+      }
+    },
+    "skeleton_complete_forced_minus_skeleton_enforce": {
+      "mean_delta": 0.12121943371943371,
+      "ci95": [
+        -0.013513513513513514,
+        0.3214285714285714
+      ],
+      "wins": 2,
+      "ties": 1,
+      "losses": 1,
+      "per_case_delta": {
+        "n1_003": -0.02702702702702703,
+        "n2_116": 0.0,
+        "n2_169": 0.42857142857142855,
+        "n2_178": 0.08333333333333333
+      }
+    },
+    "skeleton_complete_forced_minus_skeleton_complete": {
+      "mean_delta": 0.03571428571428571,
+      "ci95": [
+        0.0,
+        0.10714285714285714
+      ],
+      "wins": 1,
+      "ties": 3,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_003": 0.0,
+        "n2_116": 0.0,
+        "n2_169": 0.14285714285714285,
+        "n2_178": 0.0
+      }
+    },
+    "skeleton_complete_limit_minus_official": {
+      "mean_delta": 0.1766087516087516,
+      "ci95": [
+        0.09054054054054055,
+        0.25595238095238093
+      ],
+      "wins": 4,
+      "ties": 0,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_003": 0.05405405405405406,
+        "n2_116": 0.2,
+        "n2_169": 0.2857142857142857,
+        "n2_178": 0.16666666666666666
+      }
+    },
+    "skeleton_complete_limit_minus_unstratified": {
+      "mean_delta": 0.1408944658944659,
+      "ci95": [
+        0.0822072072072072,
+        0.18571428571428572
+      ],
+      "wins": 4,
+      "ties": 0,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_003": 0.05405405405405406,
+        "n2_116": 0.2,
+        "n2_169": 0.14285714285714285,
+        "n2_178": 0.16666666666666666
+      }
+    },
+    "skeleton_complete_limit_minus_edge_count": {
+      "mean_delta": 0.1408944658944659,
+      "ci95": [
+        0.0822072072072072,
+        0.18571428571428572
+      ],
+      "wins": 4,
+      "ties": 0,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_003": 0.05405405405405406,
+        "n2_116": 0.2,
+        "n2_169": 0.14285714285714285,
+        "n2_178": 0.16666666666666666
+      }
+    },
+    "skeleton_complete_limit_minus_parent_set": {
+      "mean_delta": 0.049790862290862284,
+      "ci95": [
+        -0.013513513513513514,
+        0.11309523809523808
+      ],
+      "wins": 2,
+      "ties": 1,
+      "losses": 1,
+      "per_case_delta": {
+        "n1_003": -0.02702702702702703,
+        "n2_116": 0.0,
+        "n2_169": 0.14285714285714285,
+        "n2_178": 0.08333333333333333
+      }
+    },
+    "skeleton_complete_limit_minus_skeleton_enforce": {
+      "mean_delta": 0.085505148005148,
+      "ci95": [
+        -0.013513513513513514,
+        0.21428571428571427
+      ],
+      "wins": 2,
+      "ties": 1,
+      "losses": 1,
+      "per_case_delta": {
+        "n1_003": -0.02702702702702703,
+        "n2_116": 0.0,
+        "n2_169": 0.2857142857142857,
+        "n2_178": 0.08333333333333333
+      }
+    },
+    "skeleton_complete_limit_minus_skeleton_complete": {
+      "mean_delta": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "wins": 0,
+      "ties": 4,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_003": 0.0,
+        "n2_116": 0.0,
+        "n2_169": 0.0,
+        "n2_178": 0.0
+      }
+    }
+  },
+  "posthoc_token_cap": {
+    "rule": "Smallest full-run input + output tokens among the matched-prompt methods on each case and seed; terminal R reported because per-call token prefixes are not replayed here.",
+    "methods": {
+      "unstratified": {
+        "R": 0.04247104247104247,
+        "mean_attempts": 16
+      },
+      "edge_count": {
+        "R": 0.04247104247104247,
+        "mean_attempts": 16
+      },
+      "parent_set": {
+        "R": 0.1335746460746461,
+        "mean_attempts": 16
+      },
+      "skeleton_enforce": {
+        "R": 0.09786036036036036,
+        "mean_attempts": 16
+      },
+      "skeleton_complete": {
+        "R": 0.18336550836550836,
+        "mean_attempts": 16
+      },
+      "skeleton_complete_forced": {
+        "R": 0.21907979407979408,
+        "mean_attempts": 16
+      },
+      "skeleton_complete_limit": {
+        "R": 0.18336550836550836,
+        "mean_attempts": 16
+      }
+    },
+    "rows": [
+      {
+        "case_id": "n1_003",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2304,
+        "attempts": 16,
+        "R": 0.02702702702702703
+      },
+      {
+        "case_id": "n1_003",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2304,
+        "attempts": 16,
+        "R": 0.02702702702702703
+      },
+      {
+        "case_id": "n1_003",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2304,
+        "attempts": 16,
+        "R": 0.10810810810810811
+      },
+      {
+        "case_id": "n1_003",
+        "seed": 17,
+        "method": "skeleton_enforce",
+        "token_cap": 2304,
+        "attempts": 16,
+        "R": 0.10810810810810811
+      },
+      {
+        "case_id": "n1_003",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2304,
+        "attempts": 16,
+        "R": 0.08108108108108109
+      },
+      {
+        "case_id": "n1_003",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2304,
+        "attempts": 16,
+        "R": 0.08108108108108109
+      },
+      {
+        "case_id": "n1_003",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2304,
+        "attempts": 16,
+        "R": 0.08108108108108109
+      },
+      {
+        "case_id": "n2_169",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2784,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_169",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2784,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_169",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2784,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_169",
+        "seed": 17,
+        "method": "skeleton_enforce",
+        "token_cap": 2784,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_169",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2784,
+        "attempts": 16,
+        "R": 0.2857142857142857
+      },
+      {
+        "case_id": "n2_169",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2784,
+        "attempts": 16,
+        "R": 0.42857142857142855
+      },
+      {
+        "case_id": "n2_169",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2784,
+        "attempts": 16,
+        "R": 0.2857142857142857
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.2
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "skeleton_enforce",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.2
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.2
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.2
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.2
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.08333333333333333
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "skeleton_enforce",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.08333333333333333
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.16666666666666666
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.16666666666666666
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.16666666666666666
+      }
+    ]
+  },
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 33550336,
+    "unit": "paired case after averaging its seeds; percentile interval"
+  }
+}
