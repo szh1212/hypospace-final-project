@@ -71,12 +71,50 @@ def compare(baseline, method):
     }
 
 
+def plot_coverage(baseline, method, output):
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    from matplotlib.ticker import PercentFormatter
+
+    levels = sorted({row['blocks'] for row in baseline['curves']})
+    fig, axes = plt.subplots(1, len(levels), figsize=(10, 3.5), sharey=True, layout='constrained')
+    labels = {'adapted_baseline:transform': 'Adapted Baseline',
+              'spatial_codec:cyclic': 'Cyclic height codec',
+              'spatial_codec:row_major': 'Fixed-order height codec',
+              'spatial_columns:grid_history': 'Column planning'}
+    for level, axis in zip(levels, np.atleast_1d(axes)):
+        for run, color, style in ((baseline, '#606b73', '--'), (method, '#006b83', '-')):
+            by_prefix = defaultdict(list)
+            for row in run['curves']:
+                if row['blocks'] == level:
+                    by_prefix[row['k']].append(row['recovery_rate'])
+            budgets = sorted(by_prefix)
+            name = run['identity']['method']
+            axis.plot(budgets, [mean(by_prefix[k]) for k in budgets], style,
+                      color=color, linewidth=2.2, label=labels.get(name, name))
+        axis.set_title(f'Level {level}', loc='left', fontsize=11, fontweight='bold')
+        axis.set_xlabel('Proposals per observation')
+        axis.set_ylim(0, 1.02)
+        ticks = np.linspace(0, len(budgets) - 1, min(len(budgets), 5)).round().astype(int)
+        axis.set_xticks([budgets[i] for i in ticks])
+        axis.yaxis.set_major_formatter(PercentFormatter(xmax=1, decimals=0))
+        axis.grid(axis='y', alpha=0.25)
+        axis.spines[['top', 'right']].set_visible(False)
+    np.atleast_1d(axes)[0].set_ylabel('Macro Recovery')
+    np.atleast_1d(axes)[0].legend(loc='upper left', frameon=False, fontsize=8)
+    fig.suptitle('Recovery by proposal budget', fontsize=13, fontweight='bold')
+    fig.savefig(output, dpi=180)
+    plt.close(fig)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('baseline', type=Path)
     parser.add_argument('methods', nargs='+', type=Path)
     parser.add_argument('--select', action='store_true', help='Select among methods on the development split')
     parser.add_argument('--out', required=True, type=Path)
+    parser.add_argument('--coverage-plot', type=Path)
     args = parser.parse_args()
     baseline = json.loads(args.baseline.read_text(encoding='utf-8'))
     candidates = [json.loads(path.read_text(encoding='utf-8')) for path in args.methods]
@@ -95,6 +133,10 @@ def main():
         report['selected'] = max(comparisons, key=priority)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8')
+    if args.coverage_plot:
+        if len(candidates) != 1:
+            raise ValueError('A coverage plot requires exactly one candidate')
+        plot_coverage(baseline, candidates[0], args.coverage_plot)
     print(json.dumps(report, indent=2))
 
 

@@ -1,0 +1,87 @@
+{
+  "baseline": "adapted_baseline:transform",
+  "baseline_resources": {
+    "calls": 585,
+    "input_tokens": 178307,
+    "output_tokens": 28776,
+    "model_call_seconds": 3275.128669500038,
+    "truncated_outputs": 0
+  },
+  "split": "test",
+  "comparisons": {
+    "spatial_codec:cyclic": {
+      "observations": 15,
+      "observation_seed_pairs": 45,
+      "overall": {
+        "valid_rate": {
+          "baseline": 0.7851851851851852,
+          "method": 1.0,
+          "delta": 0.21481481481481482,
+          "observation_bootstrap_95": [
+            0.06666666666666667,
+            0.4148148148148148
+          ]
+        },
+        "novelty_rate": {
+          "baseline": 0.21646090534979423,
+          "method": 0.6172839506172839,
+          "delta": 0.40082304526748974,
+          "observation_bootstrap_95": [
+            0.30123456790123454,
+            0.47407407407407404
+          ]
+        },
+        "recovery_rate": {
+          "baseline": 0.1744855967078189,
+          "method": 0.6172839506172839,
+          "delta": 0.44279835390946504,
+          "observation_bootstrap_95": [
+            0.3687242798353909,
+            0.5061728395061729
+          ]
+        }
+      },
+      "delta_by_seed": {
+        "valid_rate": {
+          "17": 0.22222222222222224,
+          "42": 0.22222222222222224,
+          "2026": 0.2
+        },
+        "novelty_rate": {
+          "17": 0.3777777777777778,
+          "42": 0.3925925925925926,
+          "2026": 0.4320987654320988
+        },
+        "recovery_rate": {
+          "17": 0.4271604938271605,
+          "42": 0.4419753086419753,
+          "2026": 0.45925925925925926
+        }
+      },
+      "delta_by_level": {
+        "valid_rate": {
+          "1": 0.044444444444444446,
+          "2": 0.4,
+          "3": 0.2
+        },
+        "novelty_rate": {
+          "1": 0.35555555555555557,
+          "2": 0.45185185185185184,
+          "3": 0.3950617283950617
+        },
+        "recovery_rate": {
+          "1": 0.4,
+          "2": 0.5185185185185185,
+          "3": 0.40987654320987654
+        }
+      },
+      "resources": {
+        "calls": 585,
+        "input_tokens": 145257,
+        "output_tokens": 9270,
+        "model_call_seconds": 1187.5314674999245,
+        "truncated_outputs": 0
+      }
+    }
+  }
+}

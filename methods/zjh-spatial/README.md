@@ -12,12 +12,33 @@ All formal rows use the same 15 top views, three seeds, fixed Qwen2.5-3B-Instruc
 | --- | ---: | ---: | ---: |
 | Adapted Baseline | 78.52% | 21.65% | 17.45% |
 | Column planning with model-rendered layers | 44.69% | 32.84% | 17.70% |
+| **Cyclic height codec** | **100.00%** | **61.73%** | **61.73%** |
 
-The first method failed the acceptance criterion. Recovery changed by +0.25 percentage points with a 95% paired bootstrap interval of [−5.51, +5.60] points. Validity fell by 33.83 points. The raw audit found 292 projection errors and four unsupported stacks, making the rendering step a concrete target for the next version. [First formal comparison](reports/layer-test/comparison.json) · [First formal audit and examples](reports/layer-test/audit.json)
+The cyclic height codec increased Recovery by **44.28 percentage points**, with a paired 95% bootstrap interval of **[36.87, 50.62] points**. Recovery improved at all three difficulty levels and for each seed, by 42.72, 44.20 and 45.93 points for seeds 17, 42 and 2026, respectively. Validity increased by 21.48 points. This meets the predeclared criterion. [Paired statistics](reports/codec-test/comparison.json) · [Recovery curves against Adapted](reports/codec-test/coverage-vs-adapted.png)
+
+| Occupied cells | Adapted Recovery | Cyclic-codec Recovery | Change |
+| ---: | ---: | ---: | ---: |
+| 1 | 37.78% | 77.78% | +40.00 pp |
+| 2 | 10.37% | 62.22% | +51.85 pp |
+| 3 | 4.20% | 45.19% | +40.99 pp |
+
+An offline replay verified the SHA-256 of all 585 raw records, reconstructed each scored response from the original JSON, and matched the official scores for every observation and seed. All 585 outputs decoded and passed validation. There were 302 first discoveries and 283 valid repeats within their respective observation–seed sequences. On `g3_h3_b1_001`, `{"heights":[3]}` produced a supported 3-layer column. On `g3_h3_b1_006`, Qwen repeated the same height, so the second proposal consumed budget without adding coverage. [Audit and examples](reports/codec-test/audit.json) · [Raw record checksums](reports/codec-test/raw-manifest.json)
+
+| Resources | Adapted Baseline | Cyclic height codec |
+| --- | ---: | ---: |
+| Calls | 585 | 585 |
+| Input tokens | 178,307 | 145,257 |
+| Output tokens | 28,776 | 9,270 |
+| Summed request seconds on the respective local CPU setups | 3,275.13 | 1,187.53 |
+| Truncated outputs | 0 | 0 |
+
+This result measures the combination of a constrained height representation, its inverse decoder and cyclic coordinate order on the frozen 3 × 3 task and model. The contribution of cycling alone was measured on development. The same formal split was used for the first and second iterations. The second iteration was designed from development failures before the first test results were read, and its only test configuration was fixed from development. Timing comes from two local CPU setups.
 
 ## First iteration
 
 A valid stack is uniquely represented by the heights of the occupied cells, listed in row-major order. We labeled those cells, asked Qwen to choose one height per cell, and asked it to render layer `k` by marking the cells with heights at least `k`. An ablation showed prior valid stacks as compact ordered tuples. It retained prior grids when a tuple would lose information. The scorer received the model's ordinary `Layer` text directly.
+
+The first method failed the acceptance criterion. Recovery changed by +0.25 percentage points with a 95% paired bootstrap interval of [−5.51, +5.60] points. Validity fell by 33.83 points. The raw audit found 292 projection errors and four unsupported stacks, making the rendering step a target for revision. [First formal comparison](reports/layer-test/comparison.json) · [First formal audit and examples](reports/layer-test/audit.json)
 
 Use both development smoke groups for a matched screen: three proposals per observation on the six development observations, with seed 17. This gives 18 proposals per arm. Record macro Recovery first, with Validity, Uniqueness and token use alongside it. The first difference estimates the effect of the column representation in the prompt. The second estimates the additional effect of encoding the history. Select between the two spatial variants on development macro Recovery, breaking ties on Validity, then preferring the simpler grid-history variant. Freeze the choice and code before running the 585-call test against the published Adapted Baseline. The shortened development runs can miss repetition that emerges with longer histories.
 
@@ -100,6 +121,6 @@ $selected = (Get-Content "$reports/codec-test-freeze.json" -Raw | ConvertFrom-Js
 python $entry --method $selected --out $test
 python src/export_run.py $test --out $report
 python src/plot_results.py "$test/summary.json" --out $report
-python "$method/experiments/compare.py" docs/figures/baseline/metrics.json "$report/metrics.json" --out "$report/comparison.json"
+python "$method/experiments/compare.py" docs/figures/baseline/metrics.json "$report/metrics.json" --out "$report/comparison.json" --coverage-plot "$report/coverage-vs-adapted.png"
 python "$method/experiments/audit.py" $test $report
 ```
