@@ -1,0 +1,364 @@
+{
+  "split": "dev",
+  "protocol_sha256": "a6a172d16d7ae145e7b130d11a8689af7ea5a182be602d501d72afed50b43c69",
+  "generation_commit": "372fa6664364e7d88daa6aa62b0a46b86758246d",
+  "n_cases": 4,
+  "seeds": [
+    17
+  ],
+  "budget": 16,
+  "n_raw_calls": 256,
+  "methods": {
+    "official": {
+      "macro": {
+        "V": 0.25,
+        "U": 0.0625,
+        "R": 0.006756756756756757
+      },
+      "R_at": {
+        "4": 0.006756756756756757,
+        "8": 0.006756756756756757,
+        "16": 0.006756756756756757
+      },
+      "totals": {
+        "calls": 64,
+        "input_tokens": 22136,
+        "output_tokens": 448,
+        "seconds": 16.676416129805148,
+        "total_tokens": 22584
+      },
+      "per_case_R": {
+        "n1_003": 0.02702702702702703,
+        "n2_116": 0.0,
+        "n2_169": 0.0,
+        "n2_178": 0.0
+      },
+      "by_observations": {
+        "1": {
+          "n_cases": 1,
+          "R": 0.02702702702702703
+        },
+        "2": {
+          "n_cases": 3,
+          "R": 0.0
+        }
+      },
+      "mean_distinct_valid_parent_sets": 0.25,
+      "mean_valid_parent_set_coverage": 0.0625
+    },
+    "unstratified": {
+      "macro": {
+        "V": 0.390625,
+        "U": 0.109375,
+        "R": 0.04247104247104247
+      },
+      "R_at": {
+        "4": 0.04247104247104247,
+        "8": 0.04247104247104247,
+        "16": 0.04247104247104247
+      },
+      "totals": {
+        "calls": 64,
+        "input_tokens": 9728,
+        "output_tokens": 850,
+        "seconds": 10.948835167102516,
+        "total_tokens": 10578
+      },
+      "per_case_R": {
+        "n1_003": 0.02702702702702703,
+        "n2_116": 0.0,
+        "n2_169": 0.14285714285714285,
+        "n2_178": 0.0
+      },
+      "by_observations": {
+        "1": {
+          "n_cases": 1,
+          "R": 0.02702702702702703
+        },
+        "2": {
+          "n_cases": 3,
+          "R": 0.047619047619047616
+        }
+      },
+      "mean_distinct_valid_parent_sets": 0.5,
+      "mean_valid_parent_set_coverage": 0.14583333333333331
+    },
+    "edge_count": {
+      "macro": {
+        "V": 0.359375,
+        "U": 0.109375,
+        "R": 0.04247104247104247
+      },
+      "R_at": {
+        "4": 0.04247104247104247,
+        "8": 0.04247104247104247,
+        "16": 0.04247104247104247
+      },
+      "totals": {
+        "calls": 64,
+        "input_tokens": 10176,
+        "output_tokens": 889,
+        "seconds": 15.652449123561382,
+        "total_tokens": 11065
+      },
+      "per_case_R": {
+        "n1_003": 0.02702702702702703,
+        "n2_116": 0.0,
+        "n2_169": 0.14285714285714285,
+        "n2_178": 0.0
+      },
+      "by_observations": {
+        "1": {
+          "n_cases": 1,
+          "R": 0.02702702702702703
+        },
+        "2": {
+          "n_cases": 3,
+          "R": 0.047619047619047616
+        }
+      },
+      "mean_distinct_valid_parent_sets": 0.5,
+      "mean_valid_parent_set_coverage": 0.14583333333333331,
+      "assignment_hit_rate": 0.296875
+    },
+    "parent_set": {
+      "macro": {
+        "V": 0.5,
+        "U": 0.25,
+        "R": 0.1335746460746461
+      },
+      "R_at": {
+        "4": 0.1335746460746461,
+        "8": 0.1335746460746461,
+        "16": 0.1335746460746461
+      },
+      "totals": {
+        "calls": 64,
+        "input_tokens": 11656,
+        "output_tokens": 880,
+        "seconds": 16.146577331237495,
+        "total_tokens": 12536
+      },
+      "per_case_R": {
+        "n1_003": 0.10810810810810811,
+        "n2_116": 0.2,
+        "n2_169": 0.14285714285714285,
+        "n2_178": 0.08333333333333333
+      },
+      "by_observations": {
+        "1": {
+          "n_cases": 1,
+          "R": 0.10810810810810811
+        },
+        "2": {
+          "n_cases": 3,
+          "R": 0.14206349206349206
+        }
+      },
+      "mean_distinct_valid_parent_sets": 2,
+      "mean_valid_parent_set_coverage": 0.5,
+      "assignment_hit_rate": 0.609375,
+      "valid_and_assigned_rate": 0.3125
+    }
+  },
+  "parent_set_minus": {
+    "official": {
+      "mean_delta": 0.12681788931788932,
+      "ci95": [
+        0.0822072072072072,
+        0.17142857142857143
+      ],
+      "wins": 4,
+      "ties": 0,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_003": 0.08108108108108109,
+        "n2_116": 0.2,
+        "n2_169": 0.14285714285714285,
+        "n2_178": 0.08333333333333333
+      }
+    },
+    "unstratified": {
+      "mean_delta": 0.0911036036036036,
+      "ci95": [
+        0.020833333333333332,
+        0.17027027027027028
+      ],
+      "wins": 3,
+      "ties": 1,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_003": 0.08108108108108109,
+        "n2_116": 0.2,
+        "n2_169": 0.0,
+        "n2_178": 0.08333333333333333
+      }
+    },
+    "edge_count": {
+      "mean_delta": 0.0911036036036036,
+      "ci95": [
+        0.020833333333333332,
+        0.17027027027027028
+      ],
+      "wins": 3,
+      "ties": 1,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_003": 0.08108108108108109,
+        "n2_116": 0.2,
+        "n2_169": 0.0,
+        "n2_178": 0.08333333333333333
+      }
+    }
+  },
+  "order_sensitivity": {
+    "rule": "Post-hoc reordering of the same complete parent-set records. Group strata by first scheduled appearance, preserving within-stratum order. Each response and its RNG seed move together. Identical per-stratum quota and terminal R. Only the prefix order of these observed draws is evaluated.",
+    "round_robin_R_at": {
+      "4": 0.1335746460746461,
+      "8": 0.1335746460746461,
+      "16": 0.1335746460746461
+    },
+    "grouped_R_at": {
+      "4": 0.10288770913770914,
+      "8": 0.12006113256113256,
+      "16": 0.1335746460746461
+    },
+    "round_robin_minus_grouped": {
+      "4": 0.030686936936936943,
+      "8": 0.013513513513513528,
+      "16": 0.0
+    }
+  },
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 33550336,
+    "unit": "paired case after averaging its seeds; percentile interval"
+  },
+  "posthoc_token_cap": {
+    "rule": "Smallest full-run input + output tokens of the three matched-prompt methods on each case and seed. Keep the longest consecutive prefix.",
+    "methods": {
+      "unstratified": {
+        "R": 0.04247104247104247,
+        "mean_attempts": 16
+      },
+      "edge_count": {
+        "R": 0.04247104247104247,
+        "mean_attempts": 15
+      },
+      "parent_set": {
+        "R": 0.1335746460746461,
+        "mean_attempts": 12.75
+      }
+    },
+    "rows": [
+      {
+        "case_id": "n1_003",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2304,
+        "attempts": 16,
+        "R": 0.02702702702702703,
+        "tokens": 2304
+      },
+      {
+        "case_id": "n1_003",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2304,
+        "attempts": 15,
+        "R": 0.02702702702702703,
+        "tokens": 2265
+      },
+      {
+        "case_id": "n1_003",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2304,
+        "attempts": 12,
+        "R": 0.10810810810810811,
+        "tokens": 2160
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.0,
+        "tokens": 2716
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2716,
+        "attempts": 15,
+        "R": 0.0,
+        "tokens": 2665
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2716,
+        "attempts": 13,
+        "R": 0.2,
+        "tokens": 2542
+      },
+      {
+        "case_id": "n2_169",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2784,
+        "attempts": 16,
+        "R": 0.14285714285714285,
+        "tokens": 2784
+      },
+      {
+        "case_id": "n2_169",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2784,
+        "attempts": 15,
+        "R": 0.14285714285714285,
+        "tokens": 2697
+      },
+      {
+        "case_id": "n2_169",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2784,
+        "attempts": 13,
+        "R": 0.14285714285714285,
+        "tokens": 2646
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.0,
+        "tokens": 2774
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2774,
+        "attempts": 15,
+        "R": 0.0,
+        "tokens": 2746
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2774,
+        "attempts": 13,
+        "R": 0.08333333333333333,
+        "tokens": 2664
+      }
+    ]
+  }
+}
