@@ -2,9 +2,13 @@
 
 A four-person course project to design a novel machine learning method that helps LLMs generate multiple valid, distinct solutions on the HypoSpace benchmark.
 
-## Status and scope
+## Causal experiment on this branch
 
-This repository currently establishes the project structure and collaboration workflow. No experiments have been run.
+Branch `kevin/causal-main` starts at main commit `2c24720`. A matched Qwen2.5-3B test on eight causal intervention cases raised recovery from 0.13% with the official prompt to 21.51% with fixed structural rotation and 21.52% with adaptive scheduling. [Results](docs/causal-results.md) · [Protocol and reproduction](docs/causal-methods.md)
+
+## Original main-branch scope
+
+At the main-branch fork point the repository established the project structure and collaboration workflow. The table records its decisions at that time.
 
 | Decision | Status |
 | --- | --- |

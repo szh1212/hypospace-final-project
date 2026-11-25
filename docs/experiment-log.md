@@ -1,6 +1,8 @@
 # Experiment log
 
-No experiments have been run. Results are TBD.
+2026-11-25 — Completed the matched causal study on `kevin/causal-main`.
+The 7 Qwen methods used 2,016 real local calls. The uniform graph-edit control used 288 symbolic selections.
+See [results](causal-results.md), [protocol](causal-methods.md), and [test evidence](causal-test.json).
 
 For each future run, add a small summary using this template. Store raw artifacts outside Git and link their agreed shared location without exposing credentials.
 
