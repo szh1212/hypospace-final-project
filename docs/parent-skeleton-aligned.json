@@ -1,0 +1,409 @@
+{
+  "protocol": {
+    "dev": [
+      "n1_003",
+      "n2_116",
+      "n2_169",
+      "n2_178"
+    ],
+    "test": [
+      "n1_017",
+      "n1_024",
+      "n1_030",
+      "n2_017",
+      "n2_033",
+      "n2_049",
+      "n2_054",
+      "n2_069",
+      "n2_098",
+      "n2_112",
+      "n2_126",
+      "n2_140",
+      "n2_186"
+    ],
+    "dev_seeds": [
+      17
+    ],
+    "test_seeds": [
+      17,
+      42,
+      2026
+    ],
+    "budget": 13,
+    "methods": [
+      "skeleton_complete_forced"
+    ],
+    "primary_metric": "Macro mean recovery@13 over cases after averaging the three repeat seeds, mirroring the SZH 3d baseline protocol (13 queries per task, repeat seeds 17/42/2026).",
+    "primary_control": "skeleton_complete_forced at the parent-strata v1 budget of 16 calls",
+    "secondary_controls": [
+      "official",
+      "unstratified",
+      "edge_count",
+      "parent_set"
+    ],
+    "split_rule": "The frozen 13-case causal split is kept so pairing with the audited v1 controls is preserved. For seeds 17 and 42 the first 13 raw calls of the frozen skeleton-forced v1 test run are reused verbatim (identical prompts and per-attempt seeds, verified by request digest); only seed 2026 uses fresh inference (13 cases x 13 calls). Controls are compared at their first 13 calls, replayed from runs/parent-test raw.",
+    "hash_salt": "parent-skeleton-aligned-v1",
+    "disclosure": "The test split has been used by the parent-strata v1, skeleton v1 and skeleton-forced v1 studies. This aligned-budget study reuses the same cases and seeds 17/42 responses without regeneration; no method or sampling hyperparameter was changed or tuned on these results, only the budget prefix and an additional repeat seed were applied post-freeze.",
+    "method_definition": "Identical to the frozen skeleton_complete_forced method of experiments/parent-skeleton-forced.json: forced-backbone hierarchical skeleton completion with budget-enforced assembly. Only the per-case budget (13 instead of 16) and the repeat-seed set (17/42/2026 instead of 17/42) are aligned to the SZH 3d baseline protocol.",
+    "excluded_ids": [
+      "n1_005",
+      "n1_008",
+      "n1_010",
+      "n1_016",
+      "n1_022",
+      "n1_026",
+      "n1_031",
+      "n2_024",
+      "n2_073",
+      "n2_075",
+      "n2_128",
+      "n2_139",
+      "n2_158",
+      "n2_185"
+    ],
+    "case_types": {
+      "n1_003": {
+        "signature": "0>1",
+        "seen_in_previous_study": true,
+        "n_observations": 1,
+        "split": "dev"
+      },
+      "n1_017": {
+        "signature": "0>",
+        "seen_in_previous_study": false,
+        "n_observations": 1,
+        "split": "test"
+      },
+      "n1_024": {
+        "signature": "0>123",
+        "seen_in_previous_study": true,
+        "n_observations": 1,
+        "split": "test"
+      },
+      "n1_030": {
+        "signature": "0>12",
+        "seen_in_previous_study": true,
+        "n_observations": 1,
+        "split": "test"
+      },
+      "n2_017": {
+        "signature": "0>,1>",
+        "seen_in_previous_study": false,
+        "n_observations": 2,
+        "split": "test"
+      },
+      "n2_033": {
+        "signature": "0>1,2>3",
+        "seen_in_previous_study": false,
+        "n_observations": 2,
+        "split": "test"
+      },
+      "n2_049": {
+        "signature": "0>1,2>01",
+        "seen_in_previous_study": false,
+        "n_observations": 2,
+        "split": "test"
+      },
+      "n2_054": {
+        "signature": "0>12,3>12",
+        "seen_in_previous_study": false,
+        "n_observations": 2,
+        "split": "test"
+      },
+      "n2_069": {
+        "signature": "0>1,2>1",
+        "seen_in_previous_study": true,
+        "n_observations": 2,
+        "split": "test"
+      },
+      "n2_098": {
+        "signature": "0>12,3>012",
+        "seen_in_previous_study": false,
+        "n_observations": 2,
+        "split": "test"
+      },
+      "n2_112": {
+        "signature": "0>,1>2",
+        "seen_in_previous_study": false,
+        "n_observations": 2,
+        "split": "test"
+      },
+      "n2_116": {
+        "signature": "0>,1>23",
+        "seen_in_previous_study": true,
+        "n_observations": 2,
+        "split": "dev"
+      },
+      "n2_126": {
+        "signature": "0>,1>0",
+        "seen_in_previous_study": false,
+        "n_observations": 2,
+        "split": "test"
+      },
+      "n2_140": {
+        "signature": "0>1,2>13",
+        "seen_in_previous_study": false,
+        "n_observations": 2,
+        "split": "test"
+      },
+      "n2_169": {
+        "signature": "0>1,2>013",
+        "seen_in_previous_study": true,
+        "n_observations": 2,
+        "split": "dev"
+      },
+      "n2_178": {
+        "signature": "0>,1>023",
+        "seen_in_previous_study": true,
+        "n_observations": 2,
+        "split": "dev"
+      },
+      "n2_186": {
+        "signature": "0>,1>02",
+        "seen_in_previous_study": true,
+        "n_observations": 2,
+        "split": "test"
+      }
+    }
+  },
+  "n_cases": 13,
+  "budget": 13,
+  "seeds": [
+    17,
+    42,
+    2026
+  ],
+  "methods": {
+    "official": {
+      "macro_R_2seeds": 0.01114807713239769,
+      "per_case_R": {
+        "n1_017": 0.003048780487804878,
+        "n1_024": 0.02040816326530612,
+        "n1_030": 0.0,
+        "n2_017": 0.0,
+        "n2_033": 0.0,
+        "n2_049": 0.0,
+        "n2_054": 0.0,
+        "n2_069": 0.0,
+        "n2_098": 0.045454545454545456,
+        "n2_112": 0.0625,
+        "n2_126": 0.013513513513513514,
+        "n2_140": 0.0,
+        "n2_186": 0.0
+      },
+      "V": 0.23076923076923078,
+      "U": 0.07988165680473373
+    },
+    "unstratified": {
+      "macro_R_2seeds": 0.14738675195391523,
+      "per_case_R": {
+        "n1_017": 0.006097560975609756,
+        "n1_024": 0.02040816326530612,
+        "n1_030": 0.034482758620689655,
+        "n2_017": 0.0,
+        "n2_033": 1.0,
+        "n2_049": 0.09090909090909091,
+        "n2_054": 0.14285714285714285,
+        "n2_069": 0.14285714285714285,
+        "n2_098": 0.0,
+        "n2_112": 0.0625,
+        "n2_126": 0.02702702702702703,
+        "n2_140": 0.3333333333333333,
+        "n2_186": 0.05555555555555555
+      },
+      "V": 0.621301775147929,
+      "U": 0.121301775147929
+    },
+    "edge_count": {
+      "macro_R_2seeds": 0.12312622923671929,
+      "per_case_R": {
+        "n1_017": 0.009146341463414635,
+        "n1_024": 0.030612244897959183,
+        "n1_030": 0.034482758620689655,
+        "n2_017": 0.021739130434782608,
+        "n2_033": 1.0,
+        "n2_049": 0.09090909090909091,
+        "n2_054": 0.14285714285714285,
+        "n2_069": 0.14285714285714285,
+        "n2_098": 0.045454545454545456,
+        "n2_112": 0.0,
+        "n2_126": 0.02702702702702703,
+        "n2_140": 0.0,
+        "n2_186": 0.05555555555555555
+      },
+      "V": 0.3994082840236686,
+      "U": 0.18934911242603553
+    },
+    "parent_set": {
+      "macro_R_2seeds": 0.1904576068567679,
+      "per_case_R": {
+        "n1_017": 0.04878048780487805,
+        "n1_024": 0.08163265306122448,
+        "n1_030": 0.08620689655172414,
+        "n2_017": 0.043478260869565216,
+        "n2_033": 1.0,
+        "n2_049": 0.18181818181818182,
+        "n2_054": 0.0,
+        "n2_069": 0.14285714285714285,
+        "n2_098": 0.045454545454545456,
+        "n2_112": 0.125,
+        "n2_126": 0.05405405405405406,
+        "n2_140": 0.5,
+        "n2_186": 0.16666666666666666
+      },
+      "V": 0.5029585798816568,
+      "U": 0.32248520710059175
+    },
+    "skeleton_complete_forced": {
+      "macro_R_2seeds": 0.3153431453251491,
+      "per_case_R": {
+        "n1_017": 0.05182926829268293,
+        "n1_024": 0.08163265306122448,
+        "n1_030": 0.1206896551724138,
+        "n2_017": 0.043478260869565216,
+        "n2_033": 1.0,
+        "n2_049": 0.36363636363636365,
+        "n2_054": 0.14285714285714285,
+        "n2_069": 0.2857142857142857,
+        "n2_098": 0.3181818181818182,
+        "n2_112": 0.25,
+        "n2_126": 0.10810810810810811,
+        "n2_140": 1.0,
+        "n2_186": 0.3333333333333333
+      },
+      "V": 0.7071005917159763,
+      "U": 0.3994082840236687,
+      "macro_R_3seeds": 0.3207751726556349,
+      "per_case_R_3seeds": {
+        "n1_017": 0.0508130081300813,
+        "n1_024": 0.09523809523809523,
+        "n1_030": 0.12643678160919541,
+        "n2_017": 0.05072463768115942,
+        "n2_033": 1.0,
+        "n2_049": 0.36363636363636365,
+        "n2_054": 0.14285714285714285,
+        "n2_069": 0.2857142857142857,
+        "n2_098": 0.30303030303030304,
+        "n2_112": 0.2916666666666667,
+        "n2_126": 0.10810810810810811,
+        "n2_140": 1.0,
+        "n2_186": 0.35185185185185186
+      },
+      "V_3seeds": 0.717948717948718,
+      "U_3seeds": 0.4102564102564103
+    }
+  },
+  "comparisons": {
+    "forced@13_minus_official@13": {
+      "mean_delta": 0.3041950681927514,
+      "ci95": [
+        0.15346952011372142,
+        0.4851447407814258
+      ],
+      "wins": 13,
+      "ties": 0,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_017": 0.04878048780487805,
+        "n1_024": 0.061224489795918366,
+        "n1_030": 0.1206896551724138,
+        "n2_017": 0.043478260869565216,
+        "n2_033": 1.0,
+        "n2_049": 0.36363636363636365,
+        "n2_054": 0.14285714285714285,
+        "n2_069": 0.2857142857142857,
+        "n2_098": 0.2727272727272727,
+        "n2_112": 0.1875,
+        "n2_126": 0.0945945945945946,
+        "n2_140": 1.0,
+        "n2_186": 0.3333333333333333
+      }
+    },
+    "forced@13_minus_unstratified@13": {
+      "mean_delta": 0.16795639337123386,
+      "ci95": [
+        0.08327561346289897,
+        0.27007732044397076
+      ],
+      "wins": 11,
+      "ties": 2,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_017": 0.04573170731707318,
+        "n1_024": 0.061224489795918366,
+        "n1_030": 0.08620689655172414,
+        "n2_017": 0.043478260869565216,
+        "n2_033": 0.0,
+        "n2_049": 0.2727272727272727,
+        "n2_054": 0.0,
+        "n2_069": 0.14285714285714285,
+        "n2_098": 0.3181818181818182,
+        "n2_112": 0.1875,
+        "n2_126": 0.08108108108108109,
+        "n2_140": 0.6666666666666667,
+        "n2_186": 0.2777777777777778
+      }
+    },
+    "forced@13_minus_edge_count@13": {
+      "mean_delta": 0.1922169160884298,
+      "ci95": [
+        0.08061718772785278,
+        0.3456508412414714
+      ],
+      "wins": 11,
+      "ties": 2,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_017": 0.042682926829268296,
+        "n1_024": 0.0510204081632653,
+        "n1_030": 0.08620689655172414,
+        "n2_017": 0.021739130434782608,
+        "n2_033": 0.0,
+        "n2_049": 0.2727272727272727,
+        "n2_054": 0.0,
+        "n2_069": 0.14285714285714285,
+        "n2_098": 0.2727272727272727,
+        "n2_112": 0.25,
+        "n2_126": 0.08108108108108109,
+        "n2_140": 1.0,
+        "n2_186": 0.2777777777777778
+      }
+    },
+    "forced@13_minus_parent_set@13": {
+      "mean_delta": 0.12488553846838119,
+      "ci95": [
+        0.059190066538678816,
+        0.20272557901868235
+      ],
+      "wins": 10,
+      "ties": 3,
+      "losses": 0,
+      "per_case_delta": {
+        "n1_017": 0.0030487804878048808,
+        "n1_024": 0.0,
+        "n1_030": 0.034482758620689655,
+        "n2_017": 0.0,
+        "n2_033": 0.0,
+        "n2_049": 0.18181818181818182,
+        "n2_054": 0.14285714285714285,
+        "n2_069": 0.14285714285714285,
+        "n2_098": 0.2727272727272727,
+        "n2_112": 0.125,
+        "n2_126": 0.05405405405405406,
+        "n2_140": 0.5,
+        "n2_186": 0.16666666666666666
+      }
+    }
+  },
+  "szh_baseline": {
+    "R": 0.17448559670781896,
+    "domain": "3d gravity, 585 calls, 45 tasks, 13 queries per task, seeds 17/42/2026",
+    "forced_minus_szh_2seeds": 0.14085754861733016,
+    "forced_minus_szh_3seeds": 0.14628957594781591
+  },
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 33550336,
+    "unit": "paired case after averaging its seeds; percentile interval"
+  }
+}

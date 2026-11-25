@@ -41,6 +41,11 @@ python3 experiments/analyze_parent_skeleton.py --split test \
   --folder runs/skeleton-forced-test \
   --extra-folder runs/skeleton-test --extra-protocol experiments/parent-skeleton.json \
   --out docs/parent-skeleton-forced-test.json
+
+# SZH 预算对齐（每题 13 次、种子 17/42/2026；对照重放到第 13 次调用）
+python3 experiments/run_parent_skeleton.py --split test \
+  --protocol experiments/parent-skeleton-aligned.json --out runs/skeleton-aligned-test --replay
+python3 experiments/analyze_aligned_budget.py
 ```
 
 每条审计都从 `runs/*/raw/` 重放：请求摘要（prompt+seed+method）、分层轮转是否出现在

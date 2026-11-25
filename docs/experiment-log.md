@@ -21,6 +21,12 @@ budget-only ablation tied to skeleton_complete on all 13 cases.
 See [results](parent-skeleton-results.md), [route summary](hierarchical-route.md),
 [test report](parent-skeleton-forced-test.json), [verification](verification.md).
 
+2026-11-25 — SZH-aligned budget comparison at 13 calls per case and repeat seeds 17/42/2026.
+169 new calls for seed 2026; seeds 17/42 reuse the frozen forced-v1 raw verbatim (507 cells total).
+Macro R@13 32.08% (3 seeds) vs SZH 3d baseline 17.45% at the same per-task budget and seeds;
+within-domain paired deltas vs all four controls keep CIs above zero.
+See [budget-aligned results](budget-aligned-results.md), [report](parent-skeleton-aligned.json).
+
 For each future run, add a small summary using this template. Store raw artifacts outside Git and link their agreed shared location without exposing credentials.
 
 ```text
