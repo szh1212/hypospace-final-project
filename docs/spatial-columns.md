@@ -26,6 +26,14 @@ The hypothesis is that the column representation reduces accidental changes to t
 
 Column planning with grid history had the highest development Recovery, up 6.79 percentage points from Adapted, with a 27.78-point loss in Validity. Compressing history saved tokens relative to column planning with grid history and lowered Recovery by 3.70 points. We froze `spatial_columns:grid_history` for test, using the implementation at `c1894a7`. These development results cover six observations with one seed and three calls each. [Development metrics](figures/spatial-columns/dev-comparison.json)
 
+## Second iteration plan
+
+The first development screen improved Recovery but lost Validity. Its prompts asked Qwen to plan heights and then reconstruct the full layer grids. The next iteration moves the coordinate inverse into a deterministic decoder. Qwen supplies one height per occupied cell. Each well-formed height code maps to exactly one stack in the original coordinates. The evaluator receives the decoded `Layer` grids. Unrecognized responses are forwarded unchanged and remain in the call budget. The audit retains the original response and the exact response scored.
+
+The development comparison uses the full frozen development split with the Adapted prompt, the new fixed row-major order, and the new order that cycles the same occupied cells by one position per call. Both new variants present the same previously found stacks in the coordinate order of the current query. They leave the height values and coordinate-to-structure mapping intact. Cyclic order uses the query index alone and spends no extra calls.
+
+Select the spatial variant on matched development instances. Prefer a variant that meets or exceeds Adapted Validity, then maximize macro Recovery and break ties on Validity. Keep fixed row-major order on an exact tie. A formal improvement requires higher macro Recovery with at least the Adapted point estimate for Validity. Report paired Recovery changes by seed and a 95% bootstrap interval resampling observations within each difficulty, with all seeds kept together for each sampled observation. This plan uses the development failure pattern and was recorded before reading the first formal results.
+
 ## Reproduction
 
 Follow the [local setup](local-setup.md) with the frozen model and upstream benchmark. The script uses local CPU inference with the existing Qwen weights. Keep the virtual environment, model and raw responses on the local SSD, outside this repository. Run from the repository root with the Python 3.12 environment active.
@@ -53,5 +61,5 @@ $report = 'docs/figures/spatial-columns/test'
 python src/hypospace_runner.py --method spatial_columns:grid_history --out $test
 python src/export_run.py $test --out $report
 python src/plot_results.py "$test/summary.json" --out $report
-python src/compare_runs.py docs/figures/baseline/metrics.json "$test/summary.json" --out "$report/comparison.json"
+python src/compare_runs.py docs/figures/baseline/metrics.json "$report/metrics.json" --out "$report/comparison.json"
 ```
