@@ -1,6 +1,3 @@
-# Project documentation
+# Documentation
 
-- [Project plan](project-plan.md): four claimable starting tasks, ownership, and open decisions.
-- [Experiment log](experiment-log.md): template for future reproducibility records and reviewed result summaries.
-
-Keep planning, decisions, and presentation notes here. Do not store credentials, personal files, datasets, or raw experiment outputs.
+formal-baseline.md: final real results. baseline-protocol.md: shared settings and budget. local-setup.md: SSD setup. dev-analysis.md: failure diagnosis and development selection. team-message.txt: Chinese handoff prompt. Earlier smoke/offline files are historical diagnostic records.

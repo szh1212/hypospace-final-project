@@ -1,58 +1,22 @@
-# HypoSpace Final Project — EEC 4300
+# HypoSpace Qwen 3B Final Project
 
-A four-person course project to design a novel machine learning method that helps LLMs generate multiple valid, distinct solutions on the HypoSpace benchmark.
+**正式配对实验已完成。** 同一 Qwen、15 个观测和 3 个种子，Original 与 Adapted 各 585 次。三个队友共同使用冻结的 Adapted。
 
-## Status and scope
+[分难度成绩、对比图和覆盖曲线](docs/paired-results.md) · [协议核查与复现](docs/baseline-audit.md) · [队友协作说明](docs/team-message.txt)
 
-This repository currently establishes the project structure and collaboration workflow. No experiments have been run.
+585/585 real local Qwen calls completed. Model, sampling and data IDs were frozen using development data. A history implementation defect discovered in an aborted partial test run was repaired, rechecked on dev, and the complete 585-call run was restarted. No sampling hyperparameters were tuned on test, but test was not strictly unseen for this repair. Original official prompt remains available without --method. Adapted Baseline uses adapted_baseline:transform; teammate methods start from this same prompt.
 
-| Decision | Status |
-| --- | --- |
-| Target domain / task family | TBD |
-| Model(s) | TBD |
-| Proposed method | TBD |
-| Experimental protocol and budget | TBD |
-| Results | TBD — no measurements yet |
+Macro V=0.785185, U=0.216461, R=0.174486.
+Calls=585; input tokens=178307; output tokens=28776; summed inference wall time=3275.129 seconds; truncated outputs=0. Cost=0 commercial API fees.
 
-Candidate domains are causal graph inference, gravity-constrained 3D voxel reconstruction, and Boolean genetic interaction modeling. The team will choose the domain, models, and approach together before running experiments.
+Full aggregate/sample SD, per-stratum results, task records and curves: figures/baseline/metrics.json. Raw output checksums: figures/baseline/raw-manifest.json. Full prompts, model responses and timings remain on SSD at HypoSpaceLocal/runs/adapted-formal-v4/raw. No outputs were replaced by simulated answers. Figures show all official scoring outcomes, including invalid and duplicate outputs.
 
-## HypoSpace evaluation
+Reproduce: python src/hypospace_runner.py --method adapted_baseline:transform --out <SSD>/runs/adapted-formal-v4
+Export: python experiments/finalize_baseline.py (owner's default local path; otherwise use export_run.py and plot_results.py directly).
 
-The benchmark evaluates sets of hypotheses using three complementary metrics:
+The adapted prompt improves task readability but is not a claimed novel algorithm. Small dev/test samples and prompt-based generation limit generalization. Development Original Baseline metrics and formal Adapted metrics use different observation/budget settings and must not be interpreted as a controlled test-set improvement estimate. The matched dev comparisons are in dev-study.json.
 
-| Metric | Meaning |
-| --- | --- |
-| Validity (V) | The proportion of generated proposals consistent with the observations and task constraints. |
-| Uniqueness (U) | Non-redundancy among generated proposals: how well generation avoids repeated hypotheses. |
-| Recovery (R) | Coverage of the enumerated admissible solution set by the distinct valid hypotheses recovered. |
 
-We will follow the official evaluator's definitions, canonicalization, and aggregation for the selected domain. A good method should expand coverage and reduce repetition while maintaining validity; evaluation details and comparison budgets are TBD.
+![Formal coverage](docs/figures/baseline/curves.png)
 
-## Repository layout
-
-```text
-README.md              Project overview and references
-CONTRIBUTING.md        Four-person branch and PR workflow
-src/                   Our own method code (placeholder)
-experiments/           Experiment configurations and run scripts (placeholder)
-docs/                  Project plan, task ownership, and experiment records
-.gitignore             Exclusions for secrets and generated / large artifacts
-```
-
-The official implementation is linked below only. We have not copied it, added a submodule, installed dependencies, downloaded data, or selected an integration strategy. Decide how to integrate it after agreeing on the experimental plan, and record the upstream revision used.
-
-## First steps for teammates
-
-1. Accept the repository owner's GitHub collaborator invitation.
-2. Read this README and [CONTRIBUTING.md](CONTRIBUTING.md), then clone the repository.
-3. Create your own branch from the latest `main` and claim one of the four tasks in [docs/project-plan.md](docs/project-plan.md) through a PR.
-4. Request review from another teammate. Agree on the domain, model, method, and budget before starting experiments.
-
-Keep credentials in local environment variables or an ignored `.env` file. Commit only small, reviewed summaries; keep weights, datasets, and raw outputs outside Git.
-
-## References
-
-- Chen et al. (2026). *HypoSpace: A Diagnostic Benchmark for Set-Valued Hypothesis Generation under Underdetermination and Sublinear Coverage Bounds*. ICML, PMLR 306:15451–15465. [Paper](https://proceedings.mlr.press/v306/chen26bz.html).
-- [Official HypoSpace code](https://github.com/CTT-Pavilion/_HypoSpace).
-
-This is an independent EEC 4300 student project, not the official benchmark repository.
+[Local setup](docs/local-setup.md) · [Protocol](docs/baseline-protocol.md) · [Development diagnosis](docs/dev-analysis.md) · [Team handoff](docs/team-message.txt)

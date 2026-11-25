@@ -1,0 +1,9 @@
+{
+  "observations": 129,
+  "legal_structures_checked": 2619,
+  "all_passed": true,
+  "checks": [
+    "legal structure -> text -> parser hash roundtrip",
+    "projection and support validity"
+  ]
+}

@@ -1,3 +1,6 @@
-# Method source
+# Source
 
-Place our own method implementation here after the team selects an approach. Model and method: TBD. No official benchmark code is vendored here.
+`hypospace_runner.py`: pinned official 3D evaluator, recorded API transport, resumable outputs and prompt-method hook.
+`plot_results.py`: prefix metric curves and actual voxel hypotheses from saved outputs.
+
+See ../docs/baseline-protocol.md for the hook contract and limitations.
