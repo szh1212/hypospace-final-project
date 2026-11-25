@@ -2,6 +2,16 @@
 
 A four-person course project to design a novel machine learning method that helps LLMs generate multiple valid, distinct solutions on the HypoSpace benchmark.
 
+## Hierarchical generation route (分层生成策略) on this branch
+
+Branch `kevin/causal-main` develops the hierarchical route only: a-priori partitions of the admissible graph space with no coverage feedback and no representation change.
+
+1. **Parent-set strata** (`parent_set`): cycle over the exact incoming edges of the most ambiguous anchor. Test R@16 19.07% vs official 1.11%, edge_count 12.66%, unstratified 14.74%. [Results](docs/parent-strata-results.md) · [Test report](docs/parent-strata-test.json)
+2. **Skeleton completion** (`skeleton_complete`): the stratum parents are fixed structurally and the model completes only the remaining edges. Test R@16 19.78%; beats edge_count +7.12pp with 10 wins 0 losses (CI [+3.5, +11.6]). [Results](docs/parent-skeleton-results.md) · [Test report](docs/parent-skeleton-test.json)
+3. **Forced-backbone skeleton** (`skeleton_complete_forced`): additionally fixes every necessary-condition forced edge and enforces the edge budget in assembly. Test R@16 **31.53%** — vs official +30.41pp with 13/13 wins (CI [+15.4, +48.5]), vs parent_set +12.46pp (CI [+5.9, +20.2]), vs skeleton_complete +11.75pp (CI [+1.7, +27.7]); the budget-only ablation ties skeleton_complete on all 13 cases, so the gain is entirely attributable to the forced backbone. [Results](docs/parent-skeleton-results.md) · [Test report](docs/parent-skeleton-forced-test.json) · [Route summary](docs/hierarchical-route.md)
+
+All comparisons are paired on identical cases, seeds, sampling and budget; every raw call is replayed and audited offline (see [verification](docs/verification.md)). The other two routes — coverage-feedback adaptive generation and spatial/action representation transformation — are out of scope for this branch and only appear as context in the earlier study below.
+
 ## Causal experiment on this branch
 
 Branch `kevin/causal-main` starts at main commit `2c24720`. A matched Qwen2.5-3B test on eight causal intervention cases raised recovery from 0.13% with the official prompt to 21.51% with fixed structural rotation and 21.52% with adaptive scheduling. [Results](docs/causal-results.md) · [Protocol and reproduction](docs/causal-methods.md)

@@ -14,6 +14,13 @@ Dev pilot (128 real calls): skeleton_complete R 18.34% vs parent_set 13.36% and 
 the complete variant was frozen before any test inference.
 See [design and dev decision](parent-skeleton-results.md), [dev report](parent-skeleton-dev.json).
 
+2026-11-25 — Forced-backbone skeleton with budget enforcement frozen for test.
+Dev pilot (128 real calls): skeleton_complete_forced R 21.91% vs skeleton_complete 18.34% and
+parent_set 13.36%; test (832 real calls) R@16 31.53% with every paired CI above zero and the
+budget-only ablation tied to skeleton_complete on all 13 cases.
+See [results](parent-skeleton-results.md), [route summary](hierarchical-route.md),
+[test report](parent-skeleton-forced-test.json), [verification](verification.md).
+
 For each future run, add a small summary using this template. Store raw artifacts outside Git and link their agreed shared location without exposing credentials.
 
 ```text

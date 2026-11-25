@@ -48,7 +48,7 @@ def run_skeleton_cell(dataset, model, row, method, seed, budget, out, replay):
         else:
             final = assemble(condition, parsed_edges)
         outputs.append(canonical(final))
-        assembled.append(sorted(final))
+        assembled.append([[source, target] for source, target in sorted(final)])
     scores = {str(k): score_prefix(dataset, row, outputs[:k]) for k in (4, 8, budget) if k <= budget}
     return dict(case_id=oid, seed=seed, method=method, calls=budget,
                 solution_count=row["n_compatible_graphs"], assembled=assembled,
