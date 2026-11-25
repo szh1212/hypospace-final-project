@@ -18,6 +18,14 @@ Use both development smoke groups for a matched screen: three proposals per obse
 
 The hypothesis is that the column representation reduces accidental changes to the footprint and makes previously explored structures easier to compare. Rendering the tuple back into grids adds a step for a small model, which can introduce projection or support errors. The measurements will show how these effects trade off.
 
+| Development arm | Calls | Validity | Uniqueness | Recovery | Input / output tokens | Request seconds |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Adapted | 18 | 100.00% | 38.89% | 17.90% | 5,068 / 930 | 116.18 |
+| Column planning | 18 | 72.22% | 55.56% | 24.69% | 7,214 / 1,483 | 164.19 |
+| Column planning and history | 18 | 66.67% | 55.56% | 20.99% | 6,875 / 1,265 | 133.06 |
+
+Column planning with grid history had the highest development Recovery, up 6.79 percentage points from Adapted, with a 27.78-point loss in Validity. Compressing history saved tokens relative to column planning with grid history and lowered Recovery by 3.70 points. We froze `spatial_columns:grid_history` for test, using the implementation at `c1894a7`. These development results cover six observations with one seed and three calls each. [Development metrics](figures/spatial-columns/dev-comparison.json)
+
 ## Reproduction
 
 Follow the [local setup](local-setup.md) with the frozen model and upstream benchmark. The script uses local CPU inference with the existing Qwen weights. Keep the virtual environment, model and raw responses on the local SSD, outside this repository. Run from the repository root with the Python 3.12 environment active.
@@ -36,3 +44,14 @@ foreach ($hook in $hooks) {
 ```
 
 The [experiment protocol](../experiments/protocol.json), [split manifest](../experiments/manifest.json), [model lock](../experiments/model-lock.json), and Adapted prompt on the starting revision `b8036b4` match the frozen Adapted Baseline revision `ddd0807`.
+
+Run the selected method with all 15 frozen test observations, their three seeds and the original 585-call budget. Keep raw responses on the SSD and export only the compact metrics, checksum list and figures to the repository.
+
+```powershell
+$test = Join-Path $runs 'test'
+$report = 'docs/figures/spatial-columns/test'
+python src/hypospace_runner.py --method spatial_columns:grid_history --out $test
+python src/export_run.py $test --out $report
+python src/plot_results.py "$test/summary.json" --out $report
+python src/compare_runs.py docs/figures/baseline/metrics.json "$test/summary.json" --out "$report/comparison.json"
+```

@@ -1,0 +1,99 @@
+{
+  "observations": [
+    [
+      "g3_h3_b1_008",
+      17,
+      3
+    ],
+    [
+      "g3_h3_b1_009",
+      17,
+      3
+    ],
+    [
+      "g3_h3_b2_010",
+      17,
+      3
+    ],
+    [
+      "g3_h3_b2_013",
+      17,
+      3
+    ],
+    [
+      "g3_h3_b3_053",
+      17,
+      3
+    ],
+    [
+      "g3_h3_b3_084",
+      17,
+      3
+    ]
+  ],
+  "model_fingerprint": {
+    "model": "qwen2.5:3b-instruct-q4_K_M",
+    "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen2",
+      "families": [
+        "qwen2"
+      ],
+      "parameter_size": "3.1B",
+      "quantization_level": "Q4_K_M"
+    },
+    "ollama_version": "0.40.18",
+    "template_sha256": "eb4402837c7829a690fa845de4d7f3fd842c2adee476d5341da8a46ea9255175"
+  },
+  "decision": "maximize dev macro Recovery, then Validity, then prefer grid history",
+  "selected": "spatial_columns:grid_history",
+  "arms": {
+    "adapted_baseline:transform": {
+      "macro": {
+        "valid_rate": 1.0,
+        "novelty_rate": 0.38888888888888884,
+        "recovery_rate": 0.17901234567901234
+      },
+      "resources": {
+        "calls": 18,
+        "input_tokens": 5068,
+        "output_tokens": 930,
+        "model_call_seconds": 116.18496790001518,
+        "truncated_outputs": 0
+      },
+      "source_sha256": "62bbfe2b0fb90fa573b3bf24336442d871038609db9f36796c68461bdacce356"
+    },
+    "spatial_columns:grid_history": {
+      "macro": {
+        "valid_rate": 0.7222222222222222,
+        "novelty_rate": 0.5555555555555556,
+        "recovery_rate": 0.24691358024691357
+      },
+      "resources": {
+        "calls": 18,
+        "input_tokens": 7214,
+        "output_tokens": 1483,
+        "model_call_seconds": 164.18648979996215,
+        "truncated_outputs": 0
+      },
+      "source_sha256": "c285234d03ea2355cff07499a85b25e32219b364e62d0c2b0295c37ba50e9239"
+    },
+    "spatial_columns:transform": {
+      "macro": {
+        "valid_rate": 0.6666666666666666,
+        "novelty_rate": 0.5555555555555556,
+        "recovery_rate": 0.20987654320987653
+      },
+      "resources": {
+        "calls": 18,
+        "input_tokens": 6875,
+        "output_tokens": 1265,
+        "model_call_seconds": 133.05715660001442,
+        "truncated_outputs": 0
+      },
+      "source_sha256": "c285234d03ea2355cff07499a85b25e32219b364e62d0c2b0295c37ba50e9239"
+    }
+  }
+}
