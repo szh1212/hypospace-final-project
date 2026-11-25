@@ -1,3 +1,3 @@
 # Documentation
 
-Read baseline-protocol.md for reproducibility and teammate integration, experiment-log.md for measured status, and team-message.txt for the Chinese handoff prompt. Figures under figures/offline are a non-LLM control.
+formal-baseline.md: final real results. baseline-protocol.md: shared settings and budget. local-setup.md: SSD setup. dev-analysis.md: failure diagnosis and development selection. team-message.txt: Chinese handoff prompt. Earlier smoke/offline files are historical diagnostic records.

@@ -1,28 +1,20 @@
-# HypoSpace local Qwen baseline — EEC 4300
+# HypoSpace Qwen 3B Final Project
 
-**Real smoke test completed; quality gate failed. Formal baseline is NOT complete.**
+**Formal Adapted Baseline complete: 585 real local calls, zero paid API usage.**
 
-Model: Qwen2.5-3B-Instruct, Q4_K_M, Ollama 0.40.18, local CPU only, no commercial API or API key. Exact digest and template hash: [model-lock](experiments/model-lock.json).
+585/585 real local Qwen calls completed. Model, sampling and data IDs were frozen using development data. A history implementation defect discovered in an aborted partial test run was repaired, rechecked on dev, and the complete 585-call run was restarted. No sampling hyperparameters were tuned on test, but test was not strictly unseen for this repair. Original official prompt remains available without --method. Adapted Baseline uses adapted_baseline:transform; teammate methods start from this same prompt.
 
-Nine real calls on three development observations: V=0, U=0.888889, R=0; parse success 9/9, truncations 0; 6,888 input tokens, 903 output tokens, 206.53 seconds of model calls. These are smoke measurements, not estimates or simulated data. They do not establish performance on the formal test set.
+Macro V=0.785185, U=0.216461, R=0.174486.
+Calls=585; input tokens=178307; output tokens=28776; summed inference wall time=3275.129 seconds; truncated outputs=0. Cost=0 commercial API fees.
 
-![Real smoke outcomes](docs/figures/smoke/outcomes.png)
+Full aggregate/sample SD, per-stratum results, task records and curves: figures/baseline/metrics.json. Raw output checksums: figures/baseline/raw-manifest.json. Full prompts, model responses and timings remain on SSD at HypoSpaceLocal/runs/adapted-formal-v4/raw. No outputs were replaced by simulated answers. Figures show all official scoring outcomes, including invalid and duplicate outputs.
 
-Inspection confirms the correct observations were sent. All nine outputs violate the top-view constraint; one also violates support. Several copy the prompt's four-corner example. Example imitation is a plausible cause, not a proven causal finding. No model was substituted and no evaluator was relaxed. Per the owner's requirement to report poor 3B performance first, the 585-call formal run has not started. Proposed formal settings remain provisional until this gate is resolved; a controlled dev-only prompt ablation is the next experiment.
+Reproduce: python src/hypospace_runner.py --method adapted_baseline:transform --out <SSD>/runs/adapted-formal-v4
+Export: python experiments/finalize_baseline.py (owner's default local path; otherwise use export_run.py and plot_results.py directly).
 
-- [Local SSD setup and commands](docs/local-setup.md)
-- [Protocol, interfaces and equal-budget rules](docs/baseline-protocol.md)
-- [Exact configuration](experiments/protocol.json) / [data split](experiments/manifest.json)
-- [Real smoke metrics](docs/figures/smoke/metrics.json) / [raw output hashes](docs/figures/smoke/raw-manifest.json)
-- [Run log and failure analysis](docs/experiment-log.md)
-- [Chinese teammate prompt](docs/team-message.txt)
+The adapted prompt improves task readability but is not a claimed novel algorithm. Small dev/test samples and prompt-based generation limit generalization. Development Original Baseline metrics and formal Adapted metrics use different observation/budget settings and must not be interpreted as a controlled test-set improvement estimate. The matched dev comparisons are in dev-study.json.
 
-Full real requests/responses remain on the owner's SSD under `HypoSpaceLocal/runs/smoke/raw`; model weights and environments are not in Git. The older docs/figures/offline directory is explicitly a historical non-LLM plumbing test and must not be used as an LLM result.
 
-Core APIs: `src/ollama_client.py` (local inference), `src/experiment_api.py` (data/evaluation), `src/hypospace_runner.py` (recorded experiments), `src/compare_runs.py` (matched-budget comparisons). Six tests pass. Official evaluator pinned to c69e9318577b34b5b896996571aefd4ba6053f58.
+![Formal coverage](docs/figures/baseline/curves.png)
 
-Course requirement: a novel ML method improving LLM hypothesis generation, public repository, and 10-minute group video with all four members speaking. The paper already includes complexity-stratified decoding; merely adding that is not a novelty claim.
-
-References: [HypoSpace paper](https://proceedings.mlr.press/v306/chen26bz.html), [official code](https://github.com/CTT-Pavilion/_HypoSpace), [exact model tag](https://ollama.com/library/qwen2.5:3b-instruct-q4_K_M).
-
-A matched 9-call dev ablation removing the unrelated example also produced V=0 and R=0. See docs/figures/smoke-no-example/metrics.json and the experiment log. The quality gate remains unresolved; formal baseline has not run.
+[Local setup](docs/local-setup.md) · [Protocol](docs/baseline-protocol.md) · [Development diagnosis](docs/dev-analysis.md) · [Team handoff](docs/team-message.txt)

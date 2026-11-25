@@ -21,7 +21,7 @@
 
 ## 数据与采样配置
 
-唯一配置源 experiments/protocol.json；固定数据与划分 experiments/manifest.json。正式规模待真实smoke test后最终确认；不要在此之前开始队友test实验。
+唯一配置源 experiments/protocol.json；固定数据与划分 experiments/manifest.json。正式协议已依据开发集冻结：Adapted Baseline为 adapted_baseline:transform，正式规模585次。冻结依据见baseline-freeze.json。
 
 官方生成器穷举全部129个俯视观测。每层2个dev观测、5个test观测，分层随机打乱后确定ID；split seed=33550336。三层合计6个dev、15个test。dev用于设计和调参；test仅在方法冻结后评估。官方合法解仅提供给评测器，不能输入生成方法。
 
@@ -72,3 +72,14 @@ B：根据已生成候选的覆盖描述自适应选择下一次提示策略；�
 C：空间顺序/等价表示变换与一致性约束，输出必须变回原坐标的Layer格式；记录变换选择和消融，不能在评价时改变等价关系。
 
 这些是待研究的方向，不是已验证的新算法。每人交方法动机、实现、dev消融、冻结参数、test结果、资源开销与局限；简单prompt启发式不能写成训练过的ML模型。正式论文已包含分层解码，必须明确相对已有工作的新增点。
+
+
+## v3正式冻结与原始对照
+
+Original Baseline：不传--method，完整保留官方prompt。既有真实9次dev结果见figures/smoke。Adapted Baseline：传--method adapted_baseline:transform；仅将任务说明改为清楚的行列/支撑关系、要求底层复制观测和简洁Layer输出，保留历史。初版在全部6个dev观测的18次生成V=1，U=1/3；历史语义修复后重新核验为15/18有效，以修复版作为最终共同基线；开发选择目标为有效率优先，再考察覆盖。该适配属于共同基线，不作为队友创新方法。
+
+正式比较目标是改进方法相对Adapted Baseline的增益。原始dev成绩不能与正式test成绩直接作因果比较。dev研究中清晰说明、去除无关示例和简洁输出是组合变化，不能声称某一个词句独立造成全部改善；坐标附加、分步推理与固定底层方案也已实测，不一定优于组合提示。所有dev结果见dev-study.json，确切源码见dev_prompts.py。
+
+队友应从冻结的适配提示开始实现transform：先调用 adapted_baseline.transform(prompt,context) 再增加自己的策略。runner会传入官方prompt，故必须主动复用该函数，不要误用原始prompt作共同基线。
+
+正式运行发现官方normalize对全零结构传NumPy数组会崩溃。公共适配层仅在该分支转为tolist，保留全零结构的hash与无效判定；此修复统一用于所有方法。已有真实请求通过缓存重放恢复，不重新抽样丢弃失败。

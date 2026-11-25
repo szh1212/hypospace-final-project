@@ -23,7 +23,16 @@ def upstream():
     if revision != PIN:
         raise ValueError('Wrong upstream revision')
     sys.path.insert(0,str(UP/'3d'))
-    return importlib.import_module('run_3d_benchmark'), importlib.import_module('generate_3d_dataset_complete')
+    official=importlib.import_module('run_3d_benchmark')
+    if not getattr(official.Structure3D,'_zero_array_fix',False):
+        original=official.Structure3D.normalize
+        def normalize(self):
+            if self.layers and all(not np.any(layer) for layer in self.layers):
+                return official.Structure3D([(self.layers[0]*0).tolist()])
+            return original(self)
+        official.Structure3D.normalize=normalize
+        official.Structure3D._zero_array_fix=True
+    return official, importlib.import_module('generate_3d_dataset_complete')
 
 def prepare(cfg):
     official, gen = upstream()
@@ -88,7 +97,7 @@ class Replay:
 
 def main():
     p=argparse.ArgumentParser(); p.add_argument('--prepare',action='store_true'); p.add_argument('--config',default='experiments/protocol.json')
-    p.add_argument('--mode',choices=['offline','llm'],default='llm'); p.add_argument('--smoke',action='store_true'); p.add_argument('--split',choices=['dev','test'],default='test')
+    p.add_argument('--mode',choices=['offline','llm'],default='llm'); p.add_argument('--smoke',action='store_true'); p.add_argument('--smoke-index',type=int,default=0); p.add_argument('--split',choices=['dev','test'],default='test')
     p.add_argument('--out',default='runs/baseline'); p.add_argument('--method',help='Python module:function prompt hook')
     args=p.parse_args(); cfg=json.loads((ROOT/args.config).read_text(encoding='utf-8'))
     if args.prepare: prepare(cfg); return
@@ -99,7 +108,7 @@ def main():
     cfg['model']=cfg['model'] if args.mode=='llm' else 'uniform-height-control'
     chosen=[x for x in ds['observation_sets'] if x['observation_id'] in manifest['splits'][args.split]]
     if args.smoke:
-        chosen=[next(x for x in ds['observation_sets'] if x['observation_id']==next(i for i in manifest['splits']['dev'] if f'_b{b}_' in i)) for b in cfg['blocks']]
+        chosen=[next(x for x in ds['observation_sets'] if x['observation_id']==[i for i in manifest['splits']['dev'] if f'_b{b}_' in i][args.smoke_index]) for b in cfg['blocks']]
         cfg['repeat_seeds']=[cfg['repeat_seeds'][0]]
     calls=sum((3 if args.smoke else max(1,int(x['n_compatible_structures']*cfg['query_multiplier']))) for x in chosen)*len(cfg['repeat_seeds'])
     print('Planned local calls:',calls,flush=True)

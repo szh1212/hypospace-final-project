@@ -1,0 +1,11 @@
+{
+  "selected": "adapted_baseline:transform",
+  "selection": "structured prompt has V=1 on both dev groups (18 calls across all 6 dev observations); select for validity, then study coverage with teammate methods",
+  "test_inspected": true,
+  "formal_calls": 585,
+  "original_prompt_preserved": true,
+  "sampling_parameters_changed": false,
+  "history_fix": "Canonical parsed unique structures; aborted v3 raw preserved; validated on dev again, 15/18 valid",
+  "protocol": "v4",
+  "selection_limitation": "Implementation bug diagnosed using partial test outputs; test is no longer strictly unseen for protocol repair. No sampling/model hyperparameters tuned using test."
+}

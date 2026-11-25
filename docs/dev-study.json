@@ -1,0 +1,218 @@
+[
+  {
+    "run": "smoke",
+    "aggregate": {
+      "valid_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "novelty_rate": {
+        "mean": 0.8888888888888888,
+        "std": 0.1924500897298753
+      },
+      "recovery_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "resources": {
+      "calls": 9,
+      "input_tokens": 6888,
+      "output_tokens": 903,
+      "model_call_seconds": 206.5262489999991,
+      "truncated_outputs": 0
+    }
+  },
+  {
+    "run": "smoke-no-example",
+    "aggregate": {
+      "valid_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      },
+      "novelty_rate": {
+        "mean": 0.6666666666666666,
+        "std": 0.33333333333333337
+      },
+      "recovery_rate": {
+        "mean": 0.0,
+        "std": 0.0
+      }
+    },
+    "resources": {
+      "calls": 9,
+      "input_tokens": 4071,
+      "output_tokens": 2700,
+      "model_call_seconds": 359.9554256000047,
+      "truncated_outputs": 3
+    }
+  },
+  {
+    "run": "dev-structured",
+    "aggregate": {
+      "valid_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "novelty_rate": {
+        "mean": 0.3333333333333333,
+        "std": 0.0
+      },
+      "recovery_rate": {
+        "mean": 0.16049382716049382,
+        "std": 0.15419748144193576
+      }
+    },
+    "resources": {
+      "calls": 9,
+      "input_tokens": 2721,
+      "output_tokens": 484,
+      "model_call_seconds": 86.6246644999992,
+      "truncated_outputs": 0
+    }
+  },
+  {
+    "run": "dev-coordinates",
+    "aggregate": {
+      "valid_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "novelty_rate": {
+        "mean": 0.4444444444444444,
+        "std": 0.19245008972987526
+      },
+      "recovery_rate": {
+        "mean": 0.27160493827160487,
+        "std": 0.34413234233990997
+      }
+    },
+    "resources": {
+      "calls": 9,
+      "input_tokens": 3076,
+      "output_tokens": 560,
+      "model_call_seconds": 80.08011089998763,
+      "truncated_outputs": 0
+    }
+  },
+  {
+    "run": "dev-reasoning",
+    "aggregate": {
+      "valid_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "novelty_rate": {
+        "mean": 0.3333333333333333,
+        "std": 0.0
+      },
+      "recovery_rate": {
+        "mean": 0.16049382716049382,
+        "std": 0.15419748144193576
+      }
+    },
+    "resources": {
+      "calls": 9,
+      "input_tokens": 3492,
+      "output_tokens": 733,
+      "model_call_seconds": 106.40180409999448,
+      "truncated_outputs": 0
+    }
+  },
+  {
+    "run": "dev-coordinates-confirm",
+    "aggregate": {
+      "valid_rate": {
+        "mean": 0.3333333333333333,
+        "std": 0.5773502691896258
+      },
+      "novelty_rate": {
+        "mean": 0.4444444444444444,
+        "std": 0.19245008972987526
+      },
+      "recovery_rate": {
+        "mean": 0.037037037037037035,
+        "std": 0.06415002990995841
+      }
+    },
+    "resources": {
+      "calls": 9,
+      "input_tokens": 2988,
+      "output_tokens": 414,
+      "model_call_seconds": 75.8351590000093,
+      "truncated_outputs": 0
+    }
+  },
+  {
+    "run": "dev-grounded",
+    "aggregate": {
+      "valid_rate": {
+        "mean": 0.5555555555555555,
+        "std": 0.5091750772173156
+      },
+      "novelty_rate": {
+        "mean": 0.4444444444444444,
+        "std": 0.19245008972987526
+      },
+      "recovery_rate": {
+        "mean": 0.12345679012345678,
+        "std": 0.1826993652709721
+      }
+    },
+    "resources": {
+      "calls": 9,
+      "input_tokens": 2700,
+      "output_tokens": 612,
+      "model_call_seconds": 94.16436220000469,
+      "truncated_outputs": 0
+    }
+  },
+  {
+    "run": "dev-grounded-confirm",
+    "aggregate": {
+      "valid_rate": {
+        "mean": 0.6666666666666666,
+        "std": 0.5773502691896258
+      },
+      "novelty_rate": {
+        "mean": 0.3333333333333333,
+        "std": 0.0
+      },
+      "recovery_rate": {
+        "mean": 0.14814814814814814,
+        "std": 0.16972502573910517
+      }
+    },
+    "resources": {
+      "calls": 9,
+      "input_tokens": 2704,
+      "output_tokens": 617,
+      "model_call_seconds": 116.19792389998474,
+      "truncated_outputs": 0
+    }
+  },
+  {
+    "run": "dev-structured-confirm",
+    "aggregate": {
+      "valid_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "novelty_rate": {
+        "mean": 0.3333333333333333,
+        "std": 0.0
+      },
+      "recovery_rate": {
+        "mean": 0.16049382716049382,
+        "std": 0.15419748144193576
+      }
+    },
+    "resources": {
+      "calls": 9,
+      "input_tokens": 2667,
+      "output_tokens": 408,
+      "model_call_seconds": 94.41049340001337,
+      "truncated_outputs": 0
+    }
+  }
+]

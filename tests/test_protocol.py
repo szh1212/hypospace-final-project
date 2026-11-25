@@ -11,6 +11,9 @@ class ProtocolTests(unittest.TestCase):
         texts=['Structure:\nLayer 1:\n1 0 0\n0 0 0\n0 0 0']*2+['bad output','Structure:\nLayer 1:\n0 1 0\n0 0 0\n0 0 0']
         result=self.b.evaluate_single_observation_set(Replay([{'response':t} for t in texts]),self.obs,n_queries=4,max_retries=1,verbose=False)
         self.assertEqual(result['valid_rate'],.5); self.assertEqual(result['novelty_rate'],.5); self.assertEqual(result['recovery_rate'],1/3)
+    def test_all_zero_normalization_no_crash(self):
+        s=m.Structure3D([[[0]*3]*3]); self.assertEqual(s.get_hash(),s.normalize().get_hash())
+        self.assertFalse(self.b.validate_structure_matches_observations(s,self.obs['observation']))
     def test_trailing_zero_layers_are_equivalent(self):
         a=m.Structure3D([[[1,0,0],[0,0,0],[0,0,0]]]); b=m.Structure3D([a.layers[0].tolist(),[[0]*3]*3])
         self.assertEqual(a.get_hash(),b.get_hash())

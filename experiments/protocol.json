@@ -1,5 +1,5 @@
 {
-  "protocol": "3d-ollama-v2",
+  "protocol": "3d-ollama-v4-history-fixed",
   "upstream_commit": "c69e9318577b34b5b896996571aefd4ba6053f58",
   "grid_size": 3,
   "max_height": 3,
@@ -31,5 +31,7 @@
   "num_gpu": 0,
   "model_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
   "ollama_version": "0.40.18",
-  "system": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant."
+  "system": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant.",
+  "baseline_method": "adapted_baseline:transform",
+  "baseline_source_sha256": "62bbfe2b0fb90fa573b3bf24336442d871038609db9f36796c68461bdacce356"
 }
