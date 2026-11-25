@@ -85,7 +85,7 @@ def main():
     for name,run in zip(NAMES,runs):
         res = run["resource_totals"]
         lines.append(f"- {name}: {res['calls']} calls, {res['input_tokens']:,} input and {res['output_tokens']:,} output tokens, {res['model_call_seconds']:.1f} summed request seconds, {res['truncated_outputs']} length-limited responses. Outcomes: {run['failure_categories']}.")
-    lines += ["", "[Protocol audit and reproduction](baseline-audit.md) · [Team instructions](team-message.txt)"]
+    lines += ["", "[Formal failure analysis](formal-failures.md) · [Protocol audit and reproduction](baseline-audit.md) · [Team instructions](team-message.txt)"]
     (ROOT / "docs/paired-results.md").write_text("\n".join(lines)+"\n", encoding="utf-8")
 
 
