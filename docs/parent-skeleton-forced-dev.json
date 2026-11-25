@@ -8,7 +8,7 @@
   "n_skeleton_calls": 128,
   "skeleton_protocol_sha256": "ff84a9f4f2fcc590ce3dc67d441bb73735ab38d1fd57879870ce8475b8e64fa9",
   "v1_protocol_sha256": "a6a172d16d7ae145e7b130d11a8689af7ea5a182be602d501d72afed50b43c69",
-  "generation_commit": "8786caa12ded8a8bcd917a313e0edbeb95756c45",
+  "generation_commit": "fc0cf7d188ed58565a74d6c4a1d0e672b8bfb857",
   "methods": {
     "official": {
       "macro": {
@@ -499,6 +499,118 @@
         "R": 0.08108108108108109
       },
       {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.08333333333333333
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "skeleton_enforce",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.08333333333333333
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.16666666666666666
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.16666666666666666
+      },
+      {
+        "case_id": "n2_178",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2774,
+        "attempts": 16,
+        "R": 0.16666666666666666
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.2
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "skeleton_enforce",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.2
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.2
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.2
+      },
+      {
+        "case_id": "n2_116",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2716,
+        "attempts": 16,
+        "R": 0.2
+      },
+      {
         "case_id": "n2_169",
         "seed": 17,
         "method": "unstratified",
@@ -553,118 +665,6 @@
         "token_cap": 2784,
         "attempts": 16,
         "R": 0.2857142857142857
-      },
-      {
-        "case_id": "n2_116",
-        "seed": 17,
-        "method": "unstratified",
-        "token_cap": 2716,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_116",
-        "seed": 17,
-        "method": "edge_count",
-        "token_cap": 2716,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_116",
-        "seed": 17,
-        "method": "parent_set",
-        "token_cap": 2716,
-        "attempts": 16,
-        "R": 0.2
-      },
-      {
-        "case_id": "n2_116",
-        "seed": 17,
-        "method": "skeleton_enforce",
-        "token_cap": 2716,
-        "attempts": 16,
-        "R": 0.2
-      },
-      {
-        "case_id": "n2_116",
-        "seed": 17,
-        "method": "skeleton_complete",
-        "token_cap": 2716,
-        "attempts": 16,
-        "R": 0.2
-      },
-      {
-        "case_id": "n2_116",
-        "seed": 17,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2716,
-        "attempts": 16,
-        "R": 0.2
-      },
-      {
-        "case_id": "n2_116",
-        "seed": 17,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2716,
-        "attempts": 16,
-        "R": 0.2
-      },
-      {
-        "case_id": "n2_178",
-        "seed": 17,
-        "method": "unstratified",
-        "token_cap": 2774,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_178",
-        "seed": 17,
-        "method": "edge_count",
-        "token_cap": 2774,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_178",
-        "seed": 17,
-        "method": "parent_set",
-        "token_cap": 2774,
-        "attempts": 16,
-        "R": 0.08333333333333333
-      },
-      {
-        "case_id": "n2_178",
-        "seed": 17,
-        "method": "skeleton_enforce",
-        "token_cap": 2774,
-        "attempts": 16,
-        "R": 0.08333333333333333
-      },
-      {
-        "case_id": "n2_178",
-        "seed": 17,
-        "method": "skeleton_complete",
-        "token_cap": 2774,
-        "attempts": 16,
-        "R": 0.16666666666666666
-      },
-      {
-        "case_id": "n2_178",
-        "seed": 17,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2774,
-        "attempts": 16,
-        "R": 0.16666666666666666
-      },
-      {
-        "case_id": "n2_178",
-        "seed": 17,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2774,
-        "attempts": 16,
-        "R": 0.16666666666666666
       }
     ]
   },
