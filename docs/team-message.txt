@@ -11,3 +11,4 @@ src/ollama_client.py提供模型接口，experiment_api.load_dataset/evaluate_ou
 直接运行 python src/compare_runs.py docs/figures/baseline/metrics.json 本机SSD/runs/我的方法/summary.json --out docs/我的方法-comparison.json。用它比较相同配置和逐题预算，交代码、固定参数、精确命令、dev消融、总体与分层V/U/R、覆盖曲线、失败原因、调用数、输入输出tokens、总时间和局限。保留所有失败重复raw JSON在SSD供核查，提交小型指标和raw SHA256清单；不要提交权重、环境或大文件。论文已有历史去重及复杂度分层，创新必须说明新增点。每人通过独立分支提PR，另一人review，不直接推main。四人最后均参与10分钟视频讲解。
 
 配对对照与可复核的原始记录见 docs/baseline-audit.md；docs/figures/baseline 始终指冻结的 Adapted，docs/figures/original 对应官方提示词。每人复用 Adapted 已发布的分数即可，无需再生成 585 次。三个分支先分别写清自己的创新假设、dev 消融和调用预算，再比较最终 test。
+两个正式实验各 585 次，Level 1/2/3、总体 V/U/R 和 R@k 曲线在 docs/paired-results.md。请以冻结的 Adapted 作为共同基线，Original 仅作官方提示词对照。

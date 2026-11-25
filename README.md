@@ -1,6 +1,8 @@
 # HypoSpace Qwen 3B Final Project
 
-**Formal Adapted Baseline complete: 585 real local calls, zero paid API usage.**
+**正式配对实验已完成。** 同一 Qwen、15 个观测和 3 个种子，Original 与 Adapted 各 585 次。三个队友共同使用冻结的 Adapted。
+
+[分难度成绩、对比图和覆盖曲线](docs/paired-results.md) · [协议核查与复现](docs/baseline-audit.md) · [队友协作说明](docs/team-message.txt)
 
 585/585 real local Qwen calls completed. Model, sampling and data IDs were frozen using development data. A history implementation defect discovered in an aborted partial test run was repaired, rechecked on dev, and the complete 585-call run was restarted. No sampling hyperparameters were tuned on test, but test was not strictly unseen for this repair. Original official prompt remains available without --method. Adapted Baseline uses adapted_baseline:transform; teammate methods start from this same prompt.
 
