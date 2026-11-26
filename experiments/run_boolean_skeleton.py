@@ -34,7 +34,7 @@ def output_line(text):
 def score_prefix(dataset, case, outputs):
     scored = dataset.score(case, outputs)
     return dict(V=scored["valid_rate"], U=scored["novelty_rate"], R=scored["recovery_rate"],
-                valid=scored["n_valid"], parsed=scored["parse_success_count"],
+                valid=scored["n_valid"], parsed=scored["parse_success_rate"],
                 recovered=scored["n_recovered_gts"])
 
 
