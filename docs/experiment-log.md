@@ -45,3 +45,7 @@ Reproduce: python src/hypospace_runner.py --method adapted_baseline:transform --
 Export: python experiments/finalize_baseline.py (owner's default local path; otherwise use export_run.py and plot_results.py directly).
 
 The adapted prompt improves task readability but is not a claimed novel algorithm. Small dev/test samples and prompt-based generation limit generalization. Development Original Baseline metrics and formal Adapted metrics use different observation/budget settings and must not be interpreted as a controlled test-set improvement estimate. The matched dev comparisons are in dev-study.json.
+
+## 2026-11-26 causal hierarchical route (kevin/causal-main)
+
+Parent-set strata, skeleton completion, forced-backbone skeleton and the two-level joint skeleton with validity filter, on the pinned causal domain (13 test cases, paired controls, Qwen2.5-3B Q4_K_M). Final method: V 91.35%, U 59.38%, R 56.66% at 16 calls per case. All results, paired three-metric data, four-generation history, disclosure and verification commands live in one document: docs/experiment-results.md. Raw calls and responses remain local under runs/ (ignored).

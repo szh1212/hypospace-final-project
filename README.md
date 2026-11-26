@@ -108,3 +108,11 @@ The study covers one quantized model, one reconstruction task and 15 test observ
 | Jianghan Zhao | Spatial Representation Transformation |
 
 [Team handoff and submission instructions](docs/team-message.txt)
+
+## Hierarchical Generation Route (causal domain) — branch `kevin/causal-main`
+
+On the causal-graph domain of HypoSpace, the hierarchical route partitions the admissible graph space a priori (no coverage feedback, no representation change) and evolved through four generations: parent-set strata → skeleton completion → forced-backbone skeleton → **two-level joint skeleton with validity filter**.
+
+Final test result (13 cases × 2 seeds × 16 calls): **V 91.35%, U 59.38%, R 56.66%** — paired bootstrap CIs above zero for all three metrics versus every control, and all three metrics above the 3D Adapted Baseline at its own budget (13 calls per task, seeds 17/42/2026): V 91.12% vs 78.52%, U 65.09% vs 21.65%, R 53.43% vs 17.45% (cross-domain reference).
+
+All results, paired data, the four-generation history and the verification record are consolidated in one document: [docs/experiment-results.md](docs/experiment-results.md). Every raw call is replayed and audited offline by the scripts in `experiments/`.

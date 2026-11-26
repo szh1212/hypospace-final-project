@@ -1,0 +1,165 @@
+{
+  "dev": [
+    "n1_003",
+    "n2_116",
+    "n2_169",
+    "n2_178"
+  ],
+  "test": [
+    "n1_017",
+    "n1_024",
+    "n1_030",
+    "n2_017",
+    "n2_033",
+    "n2_049",
+    "n2_054",
+    "n2_069",
+    "n2_098",
+    "n2_112",
+    "n2_126",
+    "n2_140",
+    "n2_186"
+  ],
+  "dev_seeds": [
+    17
+  ],
+  "test_seeds": [
+    17,
+    42
+  ],
+  "budget": 16,
+  "methods": [
+    "official",
+    "unstratified",
+    "edge_count",
+    "parent_set"
+  ],
+  "primary_metric": "Macro mean official recovery@16 over cases after averaging seeds.",
+  "primary_control": "edge_count",
+  "secondary_controls": [
+    "unstratified",
+    "official"
+  ],
+  "split_rule": "Group public intervention reachability patterns under every node permutation. Exclude all prior IDs. Assign one previously seen single-intervention type and three previously seen double-intervention types to development by increasing salted SHA-256. Assign every other type to test. Within each type choose the unused case ID with lowest salted SHA-256. Each test type gets equal weight, irrespective of case frequency.",
+  "hash_salt": "parent-strata-v1",
+  "excluded_ids": [
+    "n1_005",
+    "n1_008",
+    "n1_010",
+    "n1_016",
+    "n1_022",
+    "n1_026",
+    "n1_031",
+    "n2_024",
+    "n2_073",
+    "n2_075",
+    "n2_128",
+    "n2_139",
+    "n2_158",
+    "n2_185"
+  ],
+  "case_types": {
+    "n1_003": {
+      "signature": "0>1",
+      "seen_in_previous_study": true,
+      "n_observations": 1,
+      "split": "dev"
+    },
+    "n1_017": {
+      "signature": "0>",
+      "seen_in_previous_study": false,
+      "n_observations": 1,
+      "split": "test"
+    },
+    "n1_024": {
+      "signature": "0>123",
+      "seen_in_previous_study": true,
+      "n_observations": 1,
+      "split": "test"
+    },
+    "n1_030": {
+      "signature": "0>12",
+      "seen_in_previous_study": true,
+      "n_observations": 1,
+      "split": "test"
+    },
+    "n2_017": {
+      "signature": "0>,1>",
+      "seen_in_previous_study": false,
+      "n_observations": 2,
+      "split": "test"
+    },
+    "n2_033": {
+      "signature": "0>1,2>3",
+      "seen_in_previous_study": false,
+      "n_observations": 2,
+      "split": "test"
+    },
+    "n2_049": {
+      "signature": "0>1,2>01",
+      "seen_in_previous_study": false,
+      "n_observations": 2,
+      "split": "test"
+    },
+    "n2_054": {
+      "signature": "0>12,3>12",
+      "seen_in_previous_study": false,
+      "n_observations": 2,
+      "split": "test"
+    },
+    "n2_069": {
+      "signature": "0>1,2>1",
+      "seen_in_previous_study": true,
+      "n_observations": 2,
+      "split": "test"
+    },
+    "n2_098": {
+      "signature": "0>12,3>012",
+      "seen_in_previous_study": false,
+      "n_observations": 2,
+      "split": "test"
+    },
+    "n2_112": {
+      "signature": "0>,1>2",
+      "seen_in_previous_study": false,
+      "n_observations": 2,
+      "split": "test"
+    },
+    "n2_116": {
+      "signature": "0>,1>23",
+      "seen_in_previous_study": true,
+      "n_observations": 2,
+      "split": "dev"
+    },
+    "n2_126": {
+      "signature": "0>,1>0",
+      "seen_in_previous_study": false,
+      "n_observations": 2,
+      "split": "test"
+    },
+    "n2_140": {
+      "signature": "0>1,2>13",
+      "seen_in_previous_study": false,
+      "n_observations": 2,
+      "split": "test"
+    },
+    "n2_169": {
+      "signature": "0>1,2>013",
+      "seen_in_previous_study": true,
+      "n_observations": 2,
+      "split": "dev"
+    },
+    "n2_178": {
+      "signature": "0>,1>023",
+      "seen_in_previous_study": true,
+      "n_observations": 2,
+      "split": "dev"
+    },
+    "n2_186": {
+      "signature": "0>,1>02",
+      "seen_in_previous_study": true,
+      "n_observations": 2,
+      "split": "test"
+    }
+  }
+}

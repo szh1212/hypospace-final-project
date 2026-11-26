@@ -1,0 +1,25 @@
+{
+  "dev": [
+    "n1_003",
+    "n2_116",
+    "n2_169",
+    "n2_178"
+  ],
+  "test": [],
+  "dev_seeds": [
+    17
+  ],
+  "test_seeds": [
+    17,
+    42
+  ],
+  "budget": 16,
+  "methods": [
+    "skeleton_enforce",
+    "skeleton_complete"
+  ],
+  "primary_metric": "Macro mean recovery@16 over cases after averaging seeds; skeleton cells are compared against the frozen parent-strata v1 cells (official, unstratified, edge_count, parent_set) stored under runs/parent-dev.",
+  "primary_control": "parent_set",
+  "split_rule": "Identical case IDs and seed schedule as the frozen parent-strata v1 protocol. This file is a development pilot: both skeleton variants run on the dev split only, and exactly one variant is frozen for the test split before any test inference.",
+  "hash_salt": "parent-skeleton-dev-v1"
+}
