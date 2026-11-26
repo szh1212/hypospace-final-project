@@ -4,10 +4,10 @@
 
 Completed 585 uniform-height random proposals through the pinned official 3D evaluator. No LLM calls and no API spending. This validates plumbing, not LLM performance or the proposed methods.
 
-Command: `python methods/szh-baseline-3d-task-b/src/hypospace_runner.py --mode offline --out runs/offline-v1`
-Plot command: `python methods/szh-baseline-3d-task-b/src/plot_results.py runs/offline-v1/summary.json --out docs/figures/offline`
+Command: `python methods/task-b/szh-baseline-3d/src/hypospace_runner.py --mode offline --out runs/offline-v1`
+Plot command: `python methods/task-b/szh-baseline-3d/src/plot_results.py runs/offline-v1/summary.json --out docs/figures/offline`
 Upstream: c69e9318577b34b5b896996571aefd4ba6053f58.
-Dataset SHA256 and fixed dev/test IDs: methods/szh-baseline-3d-task-b/experiments/manifest.json.
+Dataset SHA256 and fixed dev/test IDs: methods/task-b/szh-baseline-3d/experiments/manifest.json.
 Python, host, runner source SHA256, resolved control model and settings: offline-control-summary.json. Dependency pins: requirements.txt. Full raw responses and results: ignored runs/offline-v1/ (local only).
 
 Overall macro V=1.000000, U=0.651029, R=0.651029. Results are from a uniform random height sampler, not an LLM. Each occupied column is independently sampled uniformly from heights 1..3. As every sampled structure is valid and Q=|H|, final U equals R. A second complete run reproduced the same aggregate values after adding cache-resumption handling.
@@ -18,7 +18,7 @@ Validation: four unit tests pass for duplicate/invalid/parse-failure metric deno
 
 Model locked to Qwen2.5-3B-Instruct Q4_K_M, digest 357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b, Ollama 0.40.18. CPU i5-1155G7, four inference threads, Python 3.12, SSD environment. Zero commercial API usage.
 
-Command: `python methods/szh-baseline-3d-task-b/src/hypospace_runner.py --smoke --out C:/Users/宋知恒/HypoSpaceLocal/runs/smoke`
+Command: `python methods/task-b/szh-baseline-3d/src/hypospace_runner.py --smoke --out C:/Users/宋知恒/HypoSpaceLocal/runs/smoke`
 
 Three dev observations g3_h3_b1_009, g3_h3_b2_013, g3_h3_b3_084; seed17; three proposals each; temperature0.7, top_p0.9, top_k40, max_tokens512, context8192, repeat_penalty1.0. Nine outputs, all parseable, zero valid and zero recovered. U across tasks = 1, 2/3, 1 (macro0.888889). Input/output tokens=6888/903. Sum of call wall times=206.526249 seconds, mean22.947 seconds. No output hit the token cap. All raw JSON is retained on SSD; committed SHA256 manifest supports later audit.
 
@@ -41,8 +41,8 @@ Calls=585; input tokens=178307; output tokens=28776; summed inference wall time=
 
 Full aggregate/sample SD, per-stratum results, task records and curves: figures/baseline/metrics.json. Raw output checksums: figures/baseline/raw-manifest.json. Full prompts, model responses and timings remain on SSD at HypoSpaceLocal/runs/adapted-formal-v4/raw. No outputs were replaced by simulated answers. Figures show all official scoring outcomes, including invalid and duplicate outputs.
 
-Reproduce: python methods/szh-baseline-3d-task-b/src/hypospace_runner.py --method adapted_baseline:transform --out <SSD>/runs/adapted-formal-v4
-Export: python methods/szh-baseline-3d-task-b/experiments/finalize_baseline.py (owner's default local path; otherwise use export_run.py and plot_results.py directly).
+Reproduce: python methods/task-b/szh-baseline-3d/src/hypospace_runner.py --method adapted_baseline:transform --out <SSD>/runs/adapted-formal-v4
+Export: python methods/task-b/szh-baseline-3d/experiments/finalize_baseline.py (owner's default local path; otherwise use export_run.py and plot_results.py directly).
 
 The adapted prompt improves task readability but is not a claimed novel algorithm. Small dev/test samples and prompt-based generation limit generalization. Development Original Baseline metrics and formal Adapted metrics use different observation/budget settings and must not be interpreted as a controlled test-set improvement estimate. The matched dev comparisons are in dev-study.json.
 
@@ -58,10 +58,10 @@ By stratum: L1 R 37.78 -> 48.89, L2 10.37 -> 11.85, L3 4.20 -> 4.94. L2 Validity
 
 Calls=585; input tokens=223990; output tokens=26383; summed inference wall time=1959.782 seconds; truncated outputs=0. Cost=0 commercial API fees.
 
-Full aggregate/sample SD, per-stratum results, task records and curves: figures/cg/metrics.json. Raw output checksums: figures/cg/raw-manifest.json. Full prompts, responses and timings remain on SSD at HypoSpaceLocal/runs/cg-test-v1/raw. methods/jcj-coverage-guided-task-b/experiments/validate_coverage.py replays every raw response through the pinned official parser and reproduces each per-task score exactly.
+Full aggregate/sample SD, per-stratum results, task records and curves: figures/cg/metrics.json. Raw output checksums: figures/cg/raw-manifest.json. Full prompts, responses and timings remain on SSD at HypoSpaceLocal/runs/cg-test-v1/raw. methods/task-b/jcj-coverage-guided/experiments/validate_coverage.py replays every raw response through the pinned official parser and reproduces each per-task score exactly.
 
-Reproduce: python methods/szh-baseline-3d-task-b/src/hypospace_runner.py --method coverage_guided:transform --out <SSD>/runs/cg-test-v1
-Audit: python methods/jcj-coverage-guided-task-b/experiments/validate_coverage.py <SSD>/runs/cg-test-v1
-Compare: python methods/szh-baseline-3d-task-b/src/compare_runs.py methods/szh-baseline-3d-task-b/adapted/reports/metrics.json <SSD>/runs/cg-test-v1/summary.json --out methods/jcj-coverage-guided-task-b/docs/cg-comparison.json
+Reproduce: python methods/task-b/szh-baseline-3d/src/hypospace_runner.py --method coverage_guided:transform --out <SSD>/runs/cg-test-v1
+Audit: python methods/task-b/jcj-coverage-guided/experiments/validate_coverage.py <SSD>/runs/cg-test-v1
+Compare: python methods/task-b/szh-baseline-3d/src/compare_runs.py methods/task-b/szh-baseline-3d/adapted/reports/metrics.json <SSD>/runs/cg-test-v1/summary.json --out methods/task-b/jcj-coverage-guided/docs/cg-comparison.json
 
 Not done: dev ablation of the two components (`transform_stats_only` / `transform_cells_only`) and cross-machine calibration of the baseline. The frozen baseline was produced on a different host (Python 3.12.4) while this run used Python 3.12.10; compare_runs matches config, model fingerprint, split and dataset digest but not hardware.

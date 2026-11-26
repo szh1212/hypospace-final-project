@@ -10,7 +10,7 @@ These are within-domain diagnostic measurements, not a fair comparison of algori
 
 The causal alignment protocol reuses a single batch on LWT's 13 final test cases at budgets 4/8/13/16. Total new causal calls including alignment are 2019. Macro means weight instances equally; micro pooling and across-seed sample standard deviations are reported separately. Different official budgets and solution-space sizes make cross-domain Recovery incomparable as an algorithm ranking.
 
-See [shared reproduction commands](../../methods/szh-baseline-common/README.md), and task-specific tracked reports and raw SHA256 manifests.
+See [shared reproduction commands](../../methods/common/szh-baseline-common/README.md), and task-specific tracked reports and raw SHA256 manifests.
 
 ## Measured resources
 

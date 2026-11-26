@@ -5,7 +5,8 @@ No metrics, requests, sources, configurations or raw responses are modified.
 import argparse,json,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'methods/szh-baseline-common'))
+sys.path.insert(0,str(ROOT/'methods/common/szh-baseline-common'))
+sys.path.insert(0,str(ROOT/"src"))
 import run
 from integration_paths import configure,RelocatedRoot
 configure(run)
@@ -21,6 +22,6 @@ def main():
         value=original(path)
         return JsonSummary(value) if Path(path).resolve()==target else value
     run.read=read
-    sys.argv=[str(ROOT/'methods/szh-baseline-common/run.py'),'--domain',a.domain,'--stage','audit']
+    sys.argv=[str(ROOT/'methods/common/szh-baseline-common/run.py'),'--domain',a.domain,'--stage','audit']
     run.main()
 if __name__=='__main__':main()

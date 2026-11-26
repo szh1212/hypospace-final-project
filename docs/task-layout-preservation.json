@@ -1,0 +1,447 @@
+[
+  {
+    "old": "methods/jcj-coverage-guided-task-b/docs/cg-comparison.json",
+    "sha256": "969f3b34db3cb3c7bcb579ef4cb34698689d31bef204792581dc3abe241eff56",
+    "new": "methods/task-b/jcj-coverage-guided/docs/cg-comparison.json"
+  },
+  {
+    "old": "methods/jcj-coverage-guided-task-b/reports/curves.pdf",
+    "sha256": "584cae27e3703209594e381c4e7413a1cb6d6ae7d2055fb45dbb47655522cb48",
+    "new": "methods/task-b/jcj-coverage-guided/reports/curves.pdf"
+  },
+  {
+    "old": "methods/jcj-coverage-guided-task-b/reports/curves.png",
+    "sha256": "78ca1ebd876accc7b62b9d7fef47689111a13a9c86970a247a10eb3a3fa502b5",
+    "new": "methods/task-b/jcj-coverage-guided/reports/curves.png"
+  },
+  {
+    "old": "methods/jcj-coverage-guided-task-b/reports/metrics.json",
+    "sha256": "b4090ce7f9200e83f511ac9759b474c0f66872ecf19bd96a03414483aa298e72",
+    "new": "methods/task-b/jcj-coverage-guided/reports/metrics.json"
+  },
+  {
+    "old": "methods/jcj-coverage-guided-task-b/reports/outcomes.png",
+    "sha256": "98d67de6d5c2877a25487a50e480a4bf2754c0cc169bad2a5ee55edbf41373a2",
+    "new": "methods/task-b/jcj-coverage-guided/reports/outcomes.png"
+  },
+  {
+    "old": "methods/jcj-coverage-guided-task-b/reports/raw-manifest.json",
+    "sha256": "b6e748d91b7b62e15aa8c070cd28762db0b0c4f368e46549a74789a43c7f378a",
+    "new": "methods/task-b/jcj-coverage-guided/reports/raw-manifest.json"
+  },
+  {
+    "old": "methods/jcj-coverage-guided-task-b/reports/structures.png",
+    "sha256": "1ad0198bcbe5b24d12cc7c4e21c28a4c0603131a942c2765938eff9792ef34ad",
+    "new": "methods/task-b/jcj-coverage-guided/reports/structures.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/adapted/reports/curves.pdf",
+    "sha256": "15460e478b41b87aed27ba1d162dcb65ba6ccb6358d8500c5fa8a36f3b1a3b73",
+    "new": "methods/task-b/szh-baseline-3d/adapted/reports/curves.pdf"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/adapted/reports/curves.png",
+    "sha256": "c41ca499faf6566e2fbc2f111573e2af60df61e1e7241069f49ecf1e58bb86e2",
+    "new": "methods/task-b/szh-baseline-3d/adapted/reports/curves.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/adapted/reports/metrics.json",
+    "sha256": "f50523ce688eeb134f67f5048400afe658b74fef5a6ed860a95d81a71eb6e8fb",
+    "new": "methods/task-b/szh-baseline-3d/adapted/reports/metrics.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/adapted/reports/outcomes.png",
+    "sha256": "34f2cc7624f16f83d78c6a4fb941e3f9b6753ed199dc3fd54b6dd2b840b9d311",
+    "new": "methods/task-b/szh-baseline-3d/adapted/reports/outcomes.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/adapted/reports/raw-manifest.json",
+    "sha256": "cf949c2e1bb5fc14f3a9e26040a0c7182c34aa60b7ef5d78e8033fb0c1dc4bda",
+    "new": "methods/task-b/szh-baseline-3d/adapted/reports/raw-manifest.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/adapted/reports/raw.jsonl.gz",
+    "sha256": "5c436c3b534b2fe16c49f61fd903c8d0c0262c7ed91a626584b5b55544867961",
+    "new": "methods/task-b/szh-baseline-3d/adapted/reports/raw.jsonl.gz"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/adapted/reports/structures.png",
+    "sha256": "0877b5deb853590afb482902ec5c13ecbc8452c626270dd68af665346b0bcdc1",
+    "new": "methods/task-b/szh-baseline-3d/adapted/reports/structures.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/dev-structured-confirm/metrics.json",
+    "sha256": "d83e4e1a02ed649764a1de6f797b8cdc6b5d89a1758f45e4948be23cb513afbf",
+    "new": "methods/task-b/szh-baseline-3d/development/dev-structured-confirm/metrics.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/dev-structured-confirm/outcomes.png",
+    "sha256": "124d8e459a4d13cccbfa446778cd22c2e871b0597e8d0ef9c38be5c112c08759",
+    "new": "methods/task-b/szh-baseline-3d/development/dev-structured-confirm/outcomes.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/dev-structured-confirm/raw-manifest.json",
+    "sha256": "c7dd404819439d46f3cd903f701cffdfb84023aa8ae46e39218fc56d9ad843d5",
+    "new": "methods/task-b/szh-baseline-3d/development/dev-structured-confirm/raw-manifest.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/dev-structured/metrics.json",
+    "sha256": "383ea31f0dec1c2d8b5f596934c29a26dcbe48ae68ff5eeb468fdd1e9dd09127",
+    "new": "methods/task-b/szh-baseline-3d/development/dev-structured/metrics.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/dev-structured/outcomes.png",
+    "sha256": "124d8e459a4d13cccbfa446778cd22c2e871b0597e8d0ef9c38be5c112c08759",
+    "new": "methods/task-b/szh-baseline-3d/development/dev-structured/outcomes.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/dev-structured/raw-manifest.json",
+    "sha256": "ce60d2f4432b8cfac0b1b99dab3ac1f77f9e3c52c82da42aba695750cad399bb",
+    "new": "methods/task-b/szh-baseline-3d/development/dev-structured/raw-manifest.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/dev-study/comparison.png",
+    "sha256": "916ab8b09cc9a52928672ddfc704f30f66cfa2b6aca091212961de08e860d4af",
+    "new": "methods/task-b/szh-baseline-3d/development/dev-study/comparison.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/offline/curves.pdf",
+    "sha256": "7088b0eb51683f5c8f6723c549ab4c7a21daad8a1255e05c5efb8913a9445327",
+    "new": "methods/task-b/szh-baseline-3d/development/offline/curves.pdf"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/offline/curves.png",
+    "sha256": "ec709b6a843554548643e2a1353f0871ec6349cc2dd885ddab760b5790dffae5",
+    "new": "methods/task-b/szh-baseline-3d/development/offline/curves.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/offline/structures.png",
+    "sha256": "476829bb4140660caaaaf9d43585612810082c62e452a052dfcfbcd5731af3d4",
+    "new": "methods/task-b/szh-baseline-3d/development/offline/structures.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/smoke-no-example/metrics.json",
+    "sha256": "131a7b9115631cb11e0ae5119759febb521e8f5a8389be6e3b777b2194cb4a43",
+    "new": "methods/task-b/szh-baseline-3d/development/smoke-no-example/metrics.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/smoke-no-example/outcomes.png",
+    "sha256": "0c11d32f74874cb2d109703926ea92b1e67cb1503b557d378c2896318115a31f",
+    "new": "methods/task-b/szh-baseline-3d/development/smoke-no-example/outcomes.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/smoke-no-example/raw-manifest.json",
+    "sha256": "f57126c21529cf13a23ce84d72ab764eecbbffb3e61df46e067380088c4990d4",
+    "new": "methods/task-b/szh-baseline-3d/development/smoke-no-example/raw-manifest.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/smoke/curves.pdf",
+    "sha256": "b4ade7ca10f67d358299ca7dd2832694878fed3bbe7dbb0bf467caf566f8f760",
+    "new": "methods/task-b/szh-baseline-3d/development/smoke/curves.pdf"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/smoke/curves.png",
+    "sha256": "8ad2c9078871607ccdf82b6d81c4ddc7b8e43debc2256cce26f52f5337054d9e",
+    "new": "methods/task-b/szh-baseline-3d/development/smoke/curves.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/smoke/metrics.json",
+    "sha256": "a94197ffde72aaf4fa36c9102523e782c4dcd47901accd7453e0333685ae946b",
+    "new": "methods/task-b/szh-baseline-3d/development/smoke/metrics.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/smoke/outcomes.png",
+    "sha256": "6e71c44e256db4a0fa73a7d2619b8064922f02f9a4480facf52d2ce48c6e39da",
+    "new": "methods/task-b/szh-baseline-3d/development/smoke/outcomes.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/smoke/raw-manifest.json",
+    "sha256": "b24b2680fb8b2ef9dfe8ca99233d16439d4e29ca4818e154c4f76fbf84d3100d",
+    "new": "methods/task-b/szh-baseline-3d/development/smoke/raw-manifest.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/development/smoke/structures.png",
+    "sha256": "e63aa050ea9a149f5dc24cb9db89a8b022310691292375b154ccb8bf5475b88e",
+    "new": "methods/task-b/szh-baseline-3d/development/smoke/structures.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/docs/baseline-failure-examples.json",
+    "sha256": "c256ca574097fb15827adeeff7abf1c5ea445b8df7c9408f1ee202874fe70f1a",
+    "new": "methods/task-b/szh-baseline-3d/docs/baseline-failure-examples.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/docs/baseline-freeze.json",
+    "sha256": "d396c5f69555f5e64e2c7a08881fae535469f1e3a2a769e8e35238e7b3a52257",
+    "new": "methods/task-b/szh-baseline-3d/docs/baseline-freeze.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/docs/dev-adapted-fixed-confirm.json",
+    "sha256": "5bef2dd9c5d83f9c3fbab5e37165d2fe55cbda9a211e739bbbc4f4eb3104c2c7",
+    "new": "methods/task-b/szh-baseline-3d/docs/dev-adapted-fixed-confirm.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/docs/dev-adapted-fixed.json",
+    "sha256": "f265a8e42e96c7f2e45734fea8172fd5245afac5b128fbaaf550e42c378c2eb4",
+    "new": "methods/task-b/szh-baseline-3d/docs/dev-adapted-fixed.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/docs/dev-study.json",
+    "sha256": "f9ad7f16cc00b25f56c92598af9cf8f594b2e8e8eb24e7705f2dcaee791bd6ba",
+    "new": "methods/task-b/szh-baseline-3d/docs/dev-study.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/docs/evaluator-check.json",
+    "sha256": "8034c620a7fef92f1517adcd640a01ad5cebd787c6e715e6b3663711f73f52ff",
+    "new": "methods/task-b/szh-baseline-3d/docs/evaluator-check.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/docs/final-verification.json",
+    "sha256": "f83b89a5ebd4fde9665d73434aaf5c05b07893b3eb4259c541bb6807a8131a91",
+    "new": "methods/task-b/szh-baseline-3d/docs/final-verification.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/docs/offline-control-summary.json",
+    "sha256": "d1619abc7d06e81f8f9fbb5a3c09cc481fbffae8f57d88ca905ac728e549128a",
+    "new": "methods/task-b/szh-baseline-3d/docs/offline-control-summary.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/experiments/manifest.json",
+    "sha256": "c094764e4dfca7b74353da5e126f0db4a4187f420b1a80504d97f3298893198c",
+    "new": "methods/task-b/szh-baseline-3d/experiments/manifest.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/experiments/model-lock.json",
+    "sha256": "55b77182db3c1d3b68b1a23481125dfe5adf944d5b33e1c6c21a5a5e5b8a40c2",
+    "new": "methods/task-b/szh-baseline-3d/experiments/model-lock.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/experiments/protocol.json",
+    "sha256": "f13ecd9830fa84962aa1ad84b01a23d672190590eeb1ea7ea927e44d212ad355",
+    "new": "methods/task-b/szh-baseline-3d/experiments/protocol.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/original/reports/curves.png",
+    "sha256": "c5a525e09fef2ae46d7134c26f1523d4eab5ec0268b2fc664dc8c1eb887f0ad6",
+    "new": "methods/task-b/szh-baseline-3d/original/reports/curves.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/original/reports/metrics.json",
+    "sha256": "62d373ad98bf817d1064c2bd864fd448f54340cf0bebc82a477a268b7b4e9773",
+    "new": "methods/task-b/szh-baseline-3d/original/reports/metrics.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/original/reports/outcomes.png",
+    "sha256": "640d05c81ab1e84ad885d02244f4dbc5ca46b0aec7646197af70354c762848d5",
+    "new": "methods/task-b/szh-baseline-3d/original/reports/outcomes.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/original/reports/raw-manifest.json",
+    "sha256": "7c9da78c2d95b391da3e5a4813f32a3fa63e477f7d4397b6e34f638f9541367f",
+    "new": "methods/task-b/szh-baseline-3d/original/reports/raw-manifest.json"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/original/reports/raw.jsonl.gz",
+    "sha256": "fe77c5b7f6cd58addf928c9ed4637020dc6037041838a80acffebec400dbe698",
+    "new": "methods/task-b/szh-baseline-3d/original/reports/raw.jsonl.gz"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/reports/comparison/coverage.png",
+    "sha256": "e7c0faf64f69549710d18a59169ab95f35faabb7c4e71ff2218c93b0c162f630",
+    "new": "methods/task-b/szh-baseline-3d/reports/comparison/coverage.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/reports/comparison/metrics.png",
+    "sha256": "0b9017bc3b695bb165c5e59dc414ad2c070d22aed6bdc441f882da6ef8c48fda",
+    "new": "methods/task-b/szh-baseline-3d/reports/comparison/metrics.png"
+  },
+  {
+    "old": "methods/szh-baseline-3d-task-b/reports/comparison/outcome-distribution.png",
+    "sha256": "bccd401a212c3e50c1adced532048679f5a4c4be7704f451959e815aae0903c0",
+    "new": "methods/task-b/szh-baseline-3d/reports/comparison/outcome-distribution.png"
+  },
+  {
+    "old": "methods/szh-baseline-causal-task-a/reports/audit.json",
+    "sha256": "85ef11184a0b23cfe4b60a7fb99c99bc2b2236a666425de949e75532c76454eb",
+    "new": "methods/task-a/szh-baseline-causal/reports/audit.json"
+  },
+  {
+    "old": "methods/szh-baseline-causal-task-a/reports/identity.json",
+    "sha256": "3c51f9384fb6ea4e9423f92fa27f305c33cd96b737c076e3046812409c1ad6a1",
+    "new": "methods/task-a/szh-baseline-causal/reports/identity.json"
+  },
+  {
+    "old": "methods/szh-baseline-causal-task-a/reports/raw.jsonl.gz",
+    "sha256": "896cf434b95235d23e0fb2f5213da8f19eddf81d19ce636f0749f9d01709be78",
+    "new": "methods/task-a/szh-baseline-causal/reports/raw.jsonl.gz"
+  },
+  {
+    "old": "methods/szh-baseline-causal-task-a/reports/smoke-manifest.json",
+    "sha256": "38f4f66fae3b53c5752aac3a5b629fb912dc2cea4cbe994aa6ec8e71dbf97fb6",
+    "new": "methods/task-a/szh-baseline-causal/reports/smoke-manifest.json"
+  },
+  {
+    "old": "methods/szh-baseline-causal-task-a/reports/smoke.json",
+    "sha256": "377c6b6d517c5dffddb59d607450f3a97806f909037c75bc06f7c5a33ec3f89d",
+    "new": "methods/task-a/szh-baseline-causal/reports/smoke.json"
+  },
+  {
+    "old": "methods/szh-baseline-causal-task-a/reports/test-manifest.json",
+    "sha256": "0ab2826a9a35d233334a64cd85daec1b33021c67ee9f8e14922ddc834af45138",
+    "new": "methods/task-a/szh-baseline-causal/reports/test-manifest.json"
+  },
+  {
+    "old": "methods/szh-baseline-causal-task-a/reports/test.json",
+    "sha256": "37187983dd3fe481303ed45169f8a66489d597961384a15151565fc31dabfc6e",
+    "new": "methods/task-a/szh-baseline-causal/reports/test.json"
+  },
+  {
+    "old": "methods/szh-baseline-common/freeze.json",
+    "sha256": "8acfae3d25f38f3de0db97cf885c355b3ba5cdf0f082cd91c087d9d2c6619a6f",
+    "new": "methods/common/szh-baseline-common/freeze.json"
+  },
+  {
+    "old": "methods/szh-baseline-common/protocol.json",
+    "sha256": "1fbc2d9c3d021653659412d076c16d9000dad60a78d9e14b48f9c45013c2ec16",
+    "new": "methods/common/szh-baseline-common/protocol.json"
+  },
+  {
+    "old": "methods/szh-baseline-genetic-task-c/reports/audit.json",
+    "sha256": "1a851620aacc5610de6b3a378fe227a5c3a1478f12a6813ae5e33f1d3debbabd",
+    "new": "methods/task-c/szh-baseline-genetic/reports/audit.json"
+  },
+  {
+    "old": "methods/szh-baseline-genetic-task-c/reports/identity.json",
+    "sha256": "3c51f9384fb6ea4e9423f92fa27f305c33cd96b737c076e3046812409c1ad6a1",
+    "new": "methods/task-c/szh-baseline-genetic/reports/identity.json"
+  },
+  {
+    "old": "methods/szh-baseline-genetic-task-c/reports/raw.jsonl.gz",
+    "sha256": "8a40f0325f3a56f0d3647ee9021c0a82effbb68cfd8f1911699a94c52aef2644",
+    "new": "methods/task-c/szh-baseline-genetic/reports/raw.jsonl.gz"
+  },
+  {
+    "old": "methods/szh-baseline-genetic-task-c/reports/smoke-manifest.json",
+    "sha256": "ed7ed7de6a50cad47d028b4de7775c21d1aaa5f84a04a7ebb86f9f41694d80b3",
+    "new": "methods/task-c/szh-baseline-genetic/reports/smoke-manifest.json"
+  },
+  {
+    "old": "methods/szh-baseline-genetic-task-c/reports/smoke.json",
+    "sha256": "0c13c582b09ff487c3752051eed9a088471be2407526adce6671fa9322ea722f",
+    "new": "methods/task-c/szh-baseline-genetic/reports/smoke.json"
+  },
+  {
+    "old": "methods/szh-baseline-genetic-task-c/reports/test-manifest.json",
+    "sha256": "1f26ce582e73ebd5259c3b4b59d59cb92000e822de6dc8ad20fa3adcabb5ccef",
+    "new": "methods/task-c/szh-baseline-genetic/reports/test-manifest.json"
+  },
+  {
+    "old": "methods/szh-baseline-genetic-task-c/reports/test.json",
+    "sha256": "025119ed1dab1690090b7ebebe5e57d1dc6ba4c0465fc151acd3acf1e2a2b80d",
+    "new": "methods/task-c/szh-baseline-genetic/reports/test.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/codec-dev-comparison.json",
+    "sha256": "fbd4dacd68c02aa56709854dc3d9b7fde3ba71915b4bed709ca536f5d7ab71c2",
+    "new": "methods/task-b/zjh-spatial/reports/codec-dev-comparison.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/codec-smoke-comparison.json",
+    "sha256": "811dacbae771098e7f6f6c65a8b17ba5071f660e7092fa87b4e70eac4594bf79",
+    "new": "methods/task-b/zjh-spatial/reports/codec-smoke-comparison.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/codec-test-freeze.json",
+    "sha256": "c54111df4904eb786c1c437e5957f417d62c08f3a2374399bea90570b332e78d",
+    "new": "methods/task-b/zjh-spatial/reports/codec-test-freeze.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/codec-test/audit.json",
+    "sha256": "b0a7be7f6011592392f3ad5967e72a6993c8bbcdda901db8dbfb07204cee9f8f",
+    "new": "methods/task-b/zjh-spatial/reports/codec-test/audit.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/codec-test/comparison.json",
+    "sha256": "51b965f762e62b4997af8ec88183412f7fbf88255c32c43d6c3d6a018d2ec3be",
+    "new": "methods/task-b/zjh-spatial/reports/codec-test/comparison.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/codec-test/coverage-vs-adapted.png",
+    "sha256": "095b426a5822412ed71e89fab11707e31340cf05fbfbda60a83063240246381b",
+    "new": "methods/task-b/zjh-spatial/reports/codec-test/coverage-vs-adapted.png"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/codec-test/curves.pdf",
+    "sha256": "0a76f44ef29a406900c88a68f02b9ef69802fe3b4ee1d9919ab6ee283f33830c",
+    "new": "methods/task-b/zjh-spatial/reports/codec-test/curves.pdf"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/codec-test/curves.png",
+    "sha256": "eb4c303cecc3defd2ebf477f9dcfbd043d3f33e770ff273a903cf60f06e36b62",
+    "new": "methods/task-b/zjh-spatial/reports/codec-test/curves.png"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/codec-test/metrics.json",
+    "sha256": "7334da157cf889cbf1b828ea96a21be84a327266e9b7f2a7354b5646184c0a65",
+    "new": "methods/task-b/zjh-spatial/reports/codec-test/metrics.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/codec-test/outcomes.png",
+    "sha256": "87ba70b62a9111fe36744ff4ff39c2ad7fe66e57922ea20cc1556b99cbcdf2de",
+    "new": "methods/task-b/zjh-spatial/reports/codec-test/outcomes.png"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/codec-test/raw-manifest.json",
+    "sha256": "9ccbd99b308d9d20d0ed8476015f819d88cd574fcf8c844ba2db0977fd6422d4",
+    "new": "methods/task-b/zjh-spatial/reports/codec-test/raw-manifest.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/codec-test/structures.png",
+    "sha256": "d3c0e70a5b7b108949bbfdd9a99fc29545c84d88269c78e80e6cb2e5a259c78d",
+    "new": "methods/task-b/zjh-spatial/reports/codec-test/structures.png"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/layer-dev-comparison.json",
+    "sha256": "584abfbcf40a8f279a2835e49c3728bdd9e268055f31dc02237fa6b21915caf9",
+    "new": "methods/task-b/zjh-spatial/reports/layer-dev-comparison.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/layer-test/audit.json",
+    "sha256": "93e36753069727ebc08977d43c551497f8e62a8d0f477ad8086b6bed6459b559",
+    "new": "methods/task-b/zjh-spatial/reports/layer-test/audit.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/layer-test/comparison.json",
+    "sha256": "638f52a0b3fa243c510518dc756e9f669990dc9720450fb68dd03de94706c2d9",
+    "new": "methods/task-b/zjh-spatial/reports/layer-test/comparison.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/layer-test/curves.pdf",
+    "sha256": "314cd62d5f2fb17844c17e34a710dde522f0fdcef280992ded7978086f3217e7",
+    "new": "methods/task-b/zjh-spatial/reports/layer-test/curves.pdf"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/layer-test/curves.png",
+    "sha256": "21c41e708a73898a27a97aeac495f359a977a72b905ce14116aca76b71baeab1",
+    "new": "methods/task-b/zjh-spatial/reports/layer-test/curves.png"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/layer-test/metrics.json",
+    "sha256": "f46bc571917ca86e1e31061d55647f20555f0434991a3816c73f135c2e4e1243",
+    "new": "methods/task-b/zjh-spatial/reports/layer-test/metrics.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/layer-test/outcomes.png",
+    "sha256": "039ef41cb330ca12515867823a6547082516db67f6658cb2fa0f94cb15349eeb",
+    "new": "methods/task-b/zjh-spatial/reports/layer-test/outcomes.png"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/layer-test/raw-manifest.json",
+    "sha256": "df377049ec565b99278973427dfce9b5343a8bc92bef243c39abe219bd364e5c",
+    "new": "methods/task-b/zjh-spatial/reports/layer-test/raw-manifest.json"
+  },
+  {
+    "old": "methods/zjh-spatial-task-b/reports/layer-test/structures.png",
+    "sha256": "175ede02a5669fdfd2ab2db0b4750174eb9cb83f64255ba55a47ab6c370725c0",
+    "new": "methods/task-b/zjh-spatial/reports/layer-test/structures.png"
+  }
+]

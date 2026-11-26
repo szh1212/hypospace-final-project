@@ -6,7 +6,7 @@ from verify_archive import VerifiedReplay
 from hypospace_runner import upstream
 bench=upstream()[0].Benchmark3D(str(ROOT/'data/3d.json'));obs={r['observation_id']:r for r in bench.all_observation_sets};results={}
 for name in ['original','adapted']:
- folder=ROOT/f'methods/szh-baseline-3d-task-b/{name}/reports';m=json.loads((folder/'metrics.json').read_text());hashes={r['file']:r['sha256'] for r in json.loads((folder/'raw-manifest.json').read_text())};records={}
+ folder=ROOT/f'methods/task-b/szh-baseline-3d/{name}/reports';m=json.loads((folder/'metrics.json').read_text());hashes={r['file']:r['sha256'] for r in json.loads((folder/'raw-manifest.json').read_text())};records={}
  with gzip.open(folder/'raw.jsonl.gz','rt',encoding='utf-8') as z:
   for line in z:
    e=json.loads(line);assert hashlib.sha256(e['utf8'].encode()).hexdigest()==hashes[e['path']];records[e['path']]=json.loads(e['utf8'])

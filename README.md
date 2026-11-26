@@ -16,7 +16,7 @@ Finding one valid stack and exploring the full set of compatible stacks are diff
 | Uniqueness (U) | 55.56% | 21.65% | −33.91 |
 | Recovery (R) | 0.00% | 17.45% | +17.45 |
 
-**Validity** is the fraction of all proposals accepted by the official validator. **Uniqueness** is the number of distinct parsed structures divided by all proposals, including failed attempts in the denominator. **Recovery** is the fraction of enumerated ground-truth structures found at least once. Each score is computed separately for one observation and seed. Overall scores give all 45 observation–seed pairs equal weight. Changes use the unrounded means. [Paired results](methods/szh-baseline-3d-task-b/docs/paired-results.md) · [Scoring audit](methods/szh-baseline-3d-task-b/docs/baseline-audit.md)
+**Validity** is the fraction of all proposals accepted by the official validator. **Uniqueness** is the number of distinct parsed structures divided by all proposals, including failed attempts in the denominator. **Recovery** is the fraction of enumerated ground-truth structures found at least once. Each score is computed separately for one observation and seed. Overall scores give all 45 observation–seed pairs equal weight. Changes use the unrounded means. [Paired results](methods/task-b/szh-baseline-3d/docs/paired-results.md) · [Scoring audit](methods/task-b/szh-baseline-3d/docs/baseline-audit.md)
 
 ## Results by Difficulty
 
@@ -28,21 +28,21 @@ Level counts occupied cells in the observed 3 × 3 grid. Each occupied cell can 
 | 2 | 9 | 135 | 0.00% | 51.11% | 0.00% | 60.00% | 17.04% | 10.37% |
 | 3 | 27 | 405 | 0.00% | 37.78% | 0.00% | 80.00% | 5.68% | 4.20% |
 
-![Validity, Uniqueness and Recovery for both baselines at each level and overall](methods/szh-baseline-3d-task-b/reports/comparison/metrics.png)
+![Validity, Uniqueness and Recovery for both baselines at each level and overall](methods/task-b/szh-baseline-3d/reports/comparison/metrics.png)
 
 ### Coverage over successive proposals
 
 Recovery@k measures the fraction of each observation's ground-truth set found in its first *k* proposals. Each line averages the 15 observation–seed pairs at that level. Histories reset between seeds.
 
-![Mean Recovery at each proposal budget for Original and Adapted across three difficulty levels](methods/szh-baseline-3d-task-b/reports/comparison/coverage.png)
+![Mean Recovery at each proposal budget for Original and Adapted across three difficulty levels](methods/task-b/szh-baseline-3d/reports/comparison/coverage.png)
 
 **Original Baseline.** The official prompt produced distinct parseable structures at every level, while Validity and Recovery stayed at zero throughout.
 
-![Original Baseline curves for Validity, Uniqueness and Recovery against the number of proposals](methods/szh-baseline-3d-task-b/original/reports/curves.png)
+![Original Baseline curves for Validity, Uniqueness and Recovery against the number of proposals](methods/task-b/szh-baseline-3d/original/reports/curves.png)
 
 **Adapted Baseline.** The gap between Validity and Recovery shows how often valid proposals revisit previously found structures.
 
-![Adapted Baseline curves for Validity, Uniqueness and Recovery against the number of proposals](methods/szh-baseline-3d-task-b/adapted/reports/curves.png)
+![Adapted Baseline curves for Validity, Uniqueness and Recovery against the number of proposals](methods/task-b/szh-baseline-3d/adapted/reports/curves.png)
 
 ## Computational Cost
 
@@ -51,17 +51,17 @@ Recovery@k measures the fraction of each observation's ground-truth set found in
 | Original | 585 | 561,221 | 64,641 | 11,028.3 | 8 | $0 |
 | Adapted | 585 | 178,307 | 28,776 | 3,275.1 | 0 | $0 |
 
-Time is the sum of recorded local model-request durations on the baseline CPU machine. Truncated outputs remain in the evaluation. Commercial fees exclude hardware and electricity. [Original measurements](methods/szh-baseline-3d-task-b/original/reports/metrics.json) · [Adapted measurements](methods/szh-baseline-3d-task-b/adapted/reports/metrics.json)
+Time is the sum of recorded local model-request durations on the baseline CPU machine. Truncated outputs remain in the evaluation. Commercial fees exclude hardware and electricity. [Original measurements](methods/task-b/szh-baseline-3d/original/reports/metrics.json) · [Adapted measurements](methods/task-b/szh-baseline-3d/adapted/reports/metrics.json)
 
 ## Failure Analysis
 
 **Original.** All 585 responses parsed, but every structure projected to a different top view from the input. In 313 cases the projection matched the four-corner pattern in the official prompt's example. That pattern occupies four cells, whereas the test inputs occupy one to three. The pattern is consistent with copying the example, although the paired experiment cannot isolate its causal effect. Original's higher U measures diversity among incorrect structures. None contributed to Recovery.
 
-**Adapted.** Of 585 proposals, 448 passed validation, 136 had an incorrect projection and one failed to parse. Among the valid proposals, **400 repeated a structure already seen within the same observation and seed**. The remaining 48 were first discoveries within their respective runs. These are pooled counts; the percentages above are macro averages. [Failure analysis and counting rules](methods/szh-baseline-3d-task-b/docs/formal-failures.md)
+**Adapted.** Of 585 proposals, 448 passed validation, 136 had an incorrect projection and one failed to parse. Among the valid proposals, **400 repeated a structure already seen within the same observation and seed**. The remaining 48 were first discoveries within their respective runs. These are pooled counts; the percentages above are macro averages. [Failure analysis and counting rules](methods/task-b/szh-baseline-3d/docs/formal-failures.md)
 
 ### Generation Outcome Distribution
 
-![Stacked counts of invalid structures, valid duplicates, newly found valid structures and parse failures for each baseline](methods/szh-baseline-3d-task-b/reports/comparison/outcome-distribution.png)
+![Stacked counts of invalid structures, valid duplicates, newly found valid structures and parse failures for each baseline](methods/task-b/szh-baseline-3d/reports/comparison/outcome-distribution.png)
 
 ## Experimental Protocol
 
@@ -69,7 +69,7 @@ Time is the sum of recorded local model-request durations on the baseline CPU ma
 - **Model and decoding.** Qwen2.5-3B-Instruct, Q4_K_M, served by Ollama 0.40.18 on localhost. Temperature 0.7, top-p 0.9, top-k 40, output limit 512 tokens, context length 8,192 and repeat penalty 1.0. Both methods use repeat seeds 17, 42 and 2026.
 - **Data and budget.** The pinned generator enumerates 129 top views. A fixed stratified split selects two development and five test observations per level. Each observation–seed pair receives as many calls as it has compatible structures. Both methods use one attempt per proposal and share the parser, normalization, validator and hash-based scoring.
 
-[Protocol](methods/szh-baseline-3d-task-b/docs/baseline-protocol.md) · [Prompt and evaluator audit](methods/szh-baseline-3d-task-b/docs/baseline-audit.md) · [Frozen configuration](methods/szh-baseline-3d-task-b/experiments/protocol.json) · [Split manifest](methods/szh-baseline-3d-task-b/experiments/manifest.json) · [Model lock](methods/szh-baseline-3d-task-b/experiments/model-lock.json)
+[Protocol](methods/task-b/szh-baseline-3d/docs/baseline-protocol.md) · [Prompt and evaluator audit](methods/task-b/szh-baseline-3d/docs/baseline-audit.md) · [Frozen configuration](methods/task-b/szh-baseline-3d/experiments/protocol.json) · [Split manifest](methods/task-b/szh-baseline-3d/experiments/manifest.json) · [Model lock](methods/task-b/szh-baseline-3d/experiments/model-lock.json)
 
 ## Reproducibility and Data
 
@@ -77,26 +77,26 @@ The published measurements can be inspected without running inference. Each comp
 
 | Baseline | Measurements and per-call curves | Raw records | Checksums |
 | --- | --- | --- | --- |
-| Original | [Metrics](methods/szh-baseline-3d-task-b/original/reports/metrics.json) | [JSONL archive](methods/szh-baseline-3d-task-b/original/reports/raw.jsonl.gz) | [SHA-256 manifest](methods/szh-baseline-3d-task-b/original/reports/raw-manifest.json) |
-| Adapted | [Metrics](methods/szh-baseline-3d-task-b/adapted/reports/metrics.json) | [JSONL archive](methods/szh-baseline-3d-task-b/adapted/reports/raw.jsonl.gz) | [SHA-256 manifest](methods/szh-baseline-3d-task-b/adapted/reports/raw-manifest.json) |
+| Original | [Metrics](methods/task-b/szh-baseline-3d/original/reports/metrics.json) | [JSONL archive](methods/task-b/szh-baseline-3d/original/reports/raw.jsonl.gz) | [SHA-256 manifest](methods/task-b/szh-baseline-3d/original/reports/raw-manifest.json) |
+| Adapted | [Metrics](methods/task-b/szh-baseline-3d/adapted/reports/metrics.json) | [JSONL archive](methods/task-b/szh-baseline-3d/adapted/reports/raw.jsonl.gz) | [SHA-256 manifest](methods/task-b/szh-baseline-3d/adapted/reports/raw-manifest.json) |
 
-For an independent reproduction, install Git, Python 3.12 and the pinned Ollama version. Keep the Python environment and model on a local SSD. Run the following from the repository root using the activated environment and a running local Ollama service. The PowerShell example stores new runs under the user profile. [Local setup and model verification](methods/szh-baseline-3d-task-b/docs/local-setup.md)
+For an independent reproduction, install Git, Python 3.12 and the pinned Ollama version. Keep the Python environment and model on a local SSD. Run the following from the repository root using the activated environment and a running local Ollama service. The PowerShell example stores new runs under the user profile. [Local setup and model verification](methods/task-b/szh-baseline-3d/docs/local-setup.md)
 
 ```powershell
 python -m pip install -r requirements.txt
 ollama pull qwen2.5:3b-instruct-q4_K_M
-python methods/szh-baseline-3d-task-b/experiments/bootstrap.py
-python methods/szh-baseline-3d-task-b/src/hypospace_runner.py --prepare
+python methods/task-b/szh-baseline-3d/experiments/bootstrap.py
+python methods/task-b/szh-baseline-3d/src/hypospace_runner.py --prepare
 $runs = Join-Path $env:USERPROFILE 'HypoSpaceLocal/runs'
-python methods/szh-baseline-3d-task-b/src/hypospace_runner.py --out "$runs/original-formal-v4"
-python methods/szh-baseline-3d-task-b/src/hypospace_runner.py --method adapted_baseline:transform --out "$runs/adapted-formal-v4"
+python methods/task-b/szh-baseline-3d/src/hypospace_runner.py --out "$runs/original-formal-v4"
+python methods/task-b/szh-baseline-3d/src/hypospace_runner.py --method adapted_baseline:transform --out "$runs/adapted-formal-v4"
 ```
 
-To regenerate the paired score and coverage figures from the published metrics alone, run `python methods/szh-baseline-3d-task-b/experiments/paired_baselines.py`. After preparing the dataset, run `python methods/szh-baseline-3d-task-b/experiments/diagnose_archives.py` to reproduce the failure counts from the archives.
+To regenerate the paired score and coverage figures from the published metrics alone, run `python methods/task-b/szh-baseline-3d/experiments/paired_baselines.py`. After preparing the dataset, run `python methods/task-b/szh-baseline-3d/experiments/diagnose_archives.py` to reproduce the failure counts from the archives.
 
 ## Limitations
 
-The study covers one quantized model, one reconstruction task and 15 test observations. The three seed repeats share those observations. History-conditioned proposals also depend on earlier outputs. A history-handling defect was diagnosed using partial test outputs from an aborted run. The fix was checked again on development data before the complete 585-call Adapted run. Sampling parameters were frozen, but the test set had been partially inspected during the repair. [Development analysis](methods/szh-baseline-3d-task-b/docs/dev-analysis.md) · [Freeze record](methods/szh-baseline-3d-task-b/docs/baseline-freeze.json)
+The study covers one quantized model, one reconstruction task and 15 test observations. The three seed repeats share those observations. History-conditioned proposals also depend on earlier outputs. A history-handling defect was diagnosed using partial test outputs from an aborted run. The fix was checked again on development data before the complete 585-call Adapted run. Sampling parameters were frozen, but the test set had been partially inspected during the repair. [Development analysis](methods/task-b/szh-baseline-3d/docs/dev-analysis.md) · [Freeze record](methods/task-b/szh-baseline-3d/docs/baseline-freeze.json)
 
 ## Team Contributions
 
@@ -121,7 +121,7 @@ These are within-domain diagnostic measurements, not a fair comparison of algori
 
 The causal alignment protocol reuses a single batch on LWT's 13 final test cases at budgets 4/8/13/16. Total new causal calls including alignment are 2019. Macro means weight instances equally; micro pooling and across-seed sample standard deviations are reported separately. Different official budgets and solution-space sizes make cross-domain Recovery incomparable as an algorithm ranking.
 
-See [all-domain report](docs/baseline-all-domains/results.md), [shared reproduction commands](methods/szh-baseline-common/README.md), and task-specific tracked reports and raw SHA256 manifests.
+See [all-domain report](docs/baseline-all-domains/results.md), [shared reproduction commands](methods/common/szh-baseline-common/README.md), and task-specific tracked reports and raw SHA256 manifests.
 
 Causal table metrics and 654 calls describe the unified subset; 1,365 additional calls support the separate alignment cohort (2,019 new causal calls total). New formal inference and full replay are complete. The official Boolean reference/validator inconsistency and historical LWT replay limitation are disclosed in the all-domain audit.
 
@@ -129,18 +129,22 @@ Causal table metrics and 654 calls describe the unified subset; 1,365 additional
 
 ```text
 methods/
-  szh-baseline-causal-task-a/
-  szh-baseline-3d-task-b/
-    original/
-    adapted/
-  szh-baseline-genetic-task-c/
-  szh-baseline-common/
-  jcj-coverage-guided-task-b/
-  zjh-spatial-task-b/
+├── task-a/
+│   └── szh-baseline-causal/
+├── task-b/
+│   ├── szh-baseline-3d/
+│   │   ├── original/
+│   │   └── adapted/
+│   ├── jcj-coverage-guided/
+│   └── zjh-spatial/
+├── task-c/
+│   └── szh-baseline-genetic/
+└── common/
+    └── szh-baseline-common/
 ```
 
 Task A: Causal Graph Inference; Task B: 3D Voxel Reconstruction; Task C: Boolean Genetic Interaction; Common: Shared Utilities.
 
-[3D baselines](methods/szh-baseline-3d-task-b/README.md) · [JCJ method](methods/jcj-coverage-guided-task-b/README.md) · [ZJH method](methods/zjh-spatial-task-b/README.md) · [Task A](methods/szh-baseline-causal-task-a/README.md) · [Task C](methods/szh-baseline-genetic-task-c/README.md)
+[3D baselines](methods/task-b/szh-baseline-3d/README.md) · [JCJ method](methods/task-b/jcj-coverage-guided/README.md) · [ZJH method](methods/task-b/zjh-spatial/README.md) · [Task A](methods/task-a/szh-baseline-causal/README.md) · [Task C](methods/task-c/szh-baseline-genetic/README.md)
 
 JCJ submitted formal results (585 calls): valid_rate=77.86%, novelty_rate=25.27%, recovery_rate=21.89%. Its raw responses are not included; the submitted SHA256 inventory and reports are preserved. Historical per-call replay was not independently verified.

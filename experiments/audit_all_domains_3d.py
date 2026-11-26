@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path[:0]=[str(ROOT/'experiments'),str(ROOT/'src')]
 from verify_archive import VerifiedReplay
 from hypospace_runner import upstream
-folder=ROOT/'methods/szh-baseline-3d-task-b/adapted/reports'
+folder=ROOT/'methods/task-b/szh-baseline-3d/adapted/reports'
 read=lambda p:json.loads(p.read_text(encoding='utf-8-sig'))
 metrics=read(folder/'metrics.json');manifest={r['file']:r['sha256'] for r in read(folder/'raw-manifest.json')}
 raw={}

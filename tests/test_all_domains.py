@@ -2,8 +2,12 @@
 import importlib.util,sys,unittest
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'methods/szh-baseline-common'))
+sys.path.insert(0,str(ROOT/'methods/common/szh-baseline-common'))
+sys.path.insert(0,str(ROOT/"src"))
 import run
+sys.path.insert(0,str(ROOT/"experiments"))
+from integration_paths import configure
+configure(run)
 class DomainTests(unittest.TestCase):
     def test_causal_official_denominators_and_empty_graph(self):
         mod=run.official(ROOT.parent/'upstream-hypospace','causal')
@@ -26,7 +30,7 @@ class DomainTests(unittest.TestCase):
         self.assertEqual(out['n_queries'],3);self.assertEqual(out['n_unique_all'],1)
         self.assertEqual(len(run.history(bench,[rec('Expression: x'),rec('Expression: x')],'genetic')),1)
     def test_development_and_test_are_disjoint(self):
-        cfg=run.read(ROOT/'methods/szh-baseline-common/protocol.json')
+        cfg=run.read(ROOT/'methods/common/szh-baseline-common/protocol.json')
         for d in ['causal','genetic']:
             self.assertFalse(set(cfg[d]['splits']['dev']) & set(cfg[d]['splits']['test']))
         self.assertFalse(set(cfg['causal']['splits']['dev']) & set(cfg['causal']['aligned_test']))

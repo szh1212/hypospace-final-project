@@ -3,7 +3,7 @@ import argparse,gzip,hashlib,json
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 p=argparse.ArgumentParser();p.add_argument('--domain',choices=['causal','genetic'],required=True);a=p.parse_args()
-folder=ROOT/f'methods/szh-baseline-{a.domain}-task-{"a" if a.domain=="causal" else "c"}/reports';out=(ROOT/f'runs/all-domains/{a.domain}/test').resolve();out.mkdir(parents=True,exist_ok=True)
+folder=ROOT/f'methods/task-{"a" if a.domain=="causal" else "c"}/szh-baseline-{a.domain}/reports';out=(ROOT/f'runs/all-domains/{a.domain}/test').resolve();out.mkdir(parents=True,exist_ok=True)
 read=lambda p:json.loads(p.read_text(encoding='utf-8-sig'))
 hashes={x['file'].replace('\\','/'):x['sha256'] for x in read(folder/'test-manifest.json')};visited=set()
 with gzip.open(folder/'raw.jsonl.gz','rt',encoding='utf-8') as z:

@@ -1,6 +1,8 @@
 # Preserve byte-exact source hashes recorded before formal inference.
-methods/szh-baseline-common/*.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+methods/common/szh-baseline-common/*.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 # Machine-generated experiment records are reviewed through replay scripts and reports.
-methods/szh-baseline-causal/reports/*.json linguist-generated=true
-methods/szh-baseline-genetic/reports/*.json linguist-generated=true
-methods/szh-baseline-3d-task-b/src/*.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+methods/task-a/szh-baseline-causal/reports/*.json linguist-generated=true
+methods/task-c/szh-baseline-genetic/reports/*.json linguist-generated=true
+methods/task-b/szh-baseline-3d/src/*.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+methods/common/szh-baseline-common/compat/*.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+methods/common/szh-baseline-common/three_d/*.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

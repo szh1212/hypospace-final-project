@@ -7,9 +7,9 @@ Status: COMPLETE for both new formal LLM experiments and offline replay. A: 2,01
 - Team base: aaf9438cbbbf46ba1875a9e4d2b11ca629fb581f.
 - Official source: c69e9318577b34b5b896996571aefd4ba6053f58 (local sibling upstream-hypospace).
 - LWT source inspected: 47c9500c22e4c35a931a76544677fb31baef74a3.
-- Existing 3D configuration: methods/szh-baseline-3d-task-b/experiments/protocol.json; model lock: methods/szh-baseline-3d-task-b/experiments/model-lock.json.
+- Existing 3D configuration: methods/task-b/szh-baseline-3d/experiments/protocol.json; model lock: methods/task-b/szh-baseline-3d/experiments/model-lock.json.
 - Sampling matches the requested settings, plus repeat_penalty=1, num_thread=4, num_gpu=0 and Ollama 0.40.18. No sampling changes have been authorized or made.
-- Existing 3D results remain unchanged. The available runs/offline* identity files describe uniform-height-control, not LLM runs. The published methods/szh-baseline-3d-task-b/adapted/reports/raw.jsonl.gz archive was located using commit 101a6c3; all 585 requests, hashes and official scores now replay successfully (historical-3d-replay.json).
+- Existing 3D results remain unchanged. The available runs/offline* identity files describe uniform-height-control, not LLM runs. The published methods/task-b/szh-baseline-3d/adapted/reports/raw.jsonl.gz archive was located using commit 101a6c3; all 585 requests, hashes and official scores now replay successfully (historical-3d-replay.json).
 
 ## Official dataset preparation
 
@@ -42,7 +42,7 @@ Prompt adaptation, smoke tests, frozen formal inference, complete raw replay, co
 
 Both tasks completed two independent-development smoke passes before formal testing. First pass: causal 1/12 valid, Boolean 0/18 valid. The Boolean prompt was revised only on development observations: replace dictionary-style observations with an explicit binary input/output table and describe only allowed operators. No candidate examples, enumeration, repair, filtering or oracle feedback was added. The unchanged causal prompt was rerun alongside the second Boolean pass to validate the final runner. Second pass: causal 1/12 valid, Boolean 12/18 valid. All 60 development calls and accounting are preserved in development-study.json and development-raw.jsonl.gz.
 
-The final protocol and source hashes were frozen before the first formal call. Frozen source is under methods/szh-baseline-common/freeze.json. No formal-output-driven prompt tuning is permitted. Low validity is an experimental outcome, not a reason to discard a proposal.
+The final protocol and source hashes were frozen before the first formal call. Frozen source is under methods/common/szh-baseline-common/freeze.json. No formal-output-driven prompt tuning is permitted. Low validity is an experimental outcome, not a reason to discard a proposal.
 
 The official Boolean evaluator delegates expression parsing to SymPy; some lowercase Python Boolean expressions can be interpreted in unexpected ways. Official V/U/R are preserved exactly; raw output strings remain available for diagnosis. No parser normalization or validity repair was added to generation.
 

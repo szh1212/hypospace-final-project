@@ -2,7 +2,7 @@
 import collections,importlib.util,json,sys
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
-sys.path.insert(0,str(ROOT/'methods/szh-baseline-common'))
+sys.path.insert(0,str(ROOT/'methods/common/szh-baseline-common'))
 import run
 out={}
 for domain in ['causal','genetic']:
@@ -25,7 +25,7 @@ for domain in ['causal','genetic']:
                 key=h.get_hash() if domain=='causal' else str(bench.get_expression_mechanistic_key(h))
                 cat['valid_duplicate' if key in seen else 'new_valid']+=1;seen.add(key)
         by_level[level]=dict(cat);counts.update(cat)
-    report=run.read(ROOT/f'methods/szh-baseline-{domain}-task-{"a" if domain=="causal" else "c"}/reports/test.json')
+    report=run.read(ROOT/f'methods/task-{"a" if domain=="causal" else "c"}/szh-baseline-{domain}/reports/test.json')
     assert counts['calls']==report['completed_calls']
     assert counts['valid_duplicate']+counts['new_valid']==sum(r['n_valid'] for r in report['results'])
     out[domain]={'counts':dict(counts),'by_level':by_level}
