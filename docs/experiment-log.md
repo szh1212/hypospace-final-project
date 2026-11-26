@@ -45,3 +45,23 @@ Reproduce: python src/hypospace_runner.py --method adapted_baseline:transform --
 Export: python experiments/finalize_baseline.py (owner's default local path; otherwise use export_run.py and plot_results.py directly).
 
 The adapted prompt improves task readability but is not a claimed novel algorithm. Small dev/test samples and prompt-based generation limit generalization. Development Original Baseline metrics and formal Adapted metrics use different observation/budget settings and must not be interpreted as a controlled test-set improvement estimate. The matched dev comparisons are in dev-study.json.
+
+## 2026-11-26 Formal coverage-guided result
+
+585/585 real local Qwen calls on `jcj129321/coverage-guided`, same model, seeds, observations and per-task budget as the frozen Adapted Baseline. The method appends a dimension-level search report after the baseline prompt: coverage k/n plus the heights actually used at each occupied cell. It never states an undiscovered structure, so the generator still has to construct the proposal itself.
+
+Macro V=0.7786, U=0.2527, R=0.2189 vs frozen baseline V=0.7852, U=0.2165, R=0.1745.
+
+Paired per (seed, observation), 45 pairs: Validity -0.66pp (95% CI [-4.64, +3.33], p=0.741), Uniqueness +3.62pp ([-0.29, +7.53], p=0.069), Recovery +4.44pp ([+0.14, +8.74], p=0.043). The preregistered threshold was Recovery >= +5pp, so this is reported as not met rather than re-framed after the fact.
+
+By stratum: L1 R 37.78 -> 48.89, L2 10.37 -> 11.85, L3 4.20 -> 4.94. L2 Validity fell 60.00 -> 50.37 and that drop is not yet attributed by an ablation. At the end of every L3 task 89% of occupied cells had still never changed height (L2 80%, L1 53%), so the directive is largely ignored once the history is long.
+
+Calls=585; input tokens=223990; output tokens=26383; summed inference wall time=1959.782 seconds; truncated outputs=0. Cost=0 commercial API fees.
+
+Full aggregate/sample SD, per-stratum results, task records and curves: figures/cg/metrics.json. Raw output checksums: figures/cg/raw-manifest.json. Full prompts, responses and timings remain on SSD at HypoSpaceLocal/runs/cg-test-v1/raw. experiments/validate_coverage.py replays every raw response through the pinned official parser and reproduces each per-task score exactly.
+
+Reproduce: python src/hypospace_runner.py --method coverage_guided:transform --out <SSD>/runs/cg-test-v1
+Audit: python experiments/validate_coverage.py <SSD>/runs/cg-test-v1
+Compare: python src/compare_runs.py docs/figures/baseline/metrics.json <SSD>/runs/cg-test-v1/summary.json --out docs/cg-comparison.json
+
+Not done: dev ablation of the two components (`transform_stats_only` / `transform_cells_only`) and cross-machine calibration of the baseline. The frozen baseline was produced on a different host (Python 3.12.4) while this run used Python 3.12.10; compare_runs matches config, model fingerprint, split and dataset digest but not hardware.
