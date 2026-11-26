@@ -16,7 +16,8 @@ from pathlib import Path
 from run_causal import ROOT, digest, obtain, save, score_prefix
 from causal_benchmark import Dataset, LocalModel
 from causal_prompts import _reachability
-from parent_strata import assemble, enforce_limit, skeleton_plan
+from parent_strata import (assemble, enforce_limit, filtered_completion, joint_skeleton_plan,
+                           skeleton_plan)
 
 PROTOCOL = ROOT / "experiments/parent-skeleton.json"
 
@@ -30,7 +31,10 @@ def run_skeleton_cell(dataset, model, row, method, seed, budget, out, replay):
     oid = row["observation_set_id"]
     public = {key: row[key] for key in ("nodes", "max_edges", "observations")}
     start = time.perf_counter()
-    conditions = skeleton_plan(public, seed, budget, variant)
+    if variant == "complete_forced_valid_joint":
+        conditions = joint_skeleton_plan(public, seed, budget)
+    else:
+        conditions = skeleton_plan(public, seed, budget, variant)
     base, format_line = _reachability(public, []).rsplit("\n", 1)
     prompts = ["\n".join(filter(None, [base, c.get("prompt"), format_line])) for c in conditions]
     prep = (time.perf_counter() - start) / budget
@@ -43,7 +47,9 @@ def run_skeleton_cell(dataset, model, row, method, seed, budget, out, replay):
         records.append(data)
         graph = dataset.bench.parse_llm_response(data["response"])
         parsed_edges = graph.edges if graph is not None else []
-        if variant in ("complete_forced", "complete_limit"):
+        if variant in ("complete_forced_valid", "complete_forced_valid_joint"):
+            final = filtered_completion(condition, parsed_edges, public)
+        elif variant in ("complete_forced", "complete_limit"):
             final = enforce_limit(condition, parsed_edges, public["max_edges"])
         else:
             final = assemble(condition, parsed_edges)

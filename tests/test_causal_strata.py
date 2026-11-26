@@ -8,7 +8,8 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from causal_benchmark import Dataset
-from parent_strata import assemble, enforce_limit, forced_edges, parent_plan, skeleton_plan
+from parent_strata import (assemble, enforce_limit, filtered_completion, forced_edges,
+                           joint_skeleton_plan, parent_plan, skeleton_plan)
 
 
 class ParentStrataTests(unittest.TestCase):
@@ -130,3 +131,93 @@ class ParentStrataTests(unittest.TestCase):
         self.assertEqual(enforce_limit(condition, [], 3), frozenset({("A", "D"), ("B", "D"), ("C", "D")}))
         self.assertEqual(enforce_limit(condition, [("B", "A")], 5), frozenset(
             {("A", "D"), ("B", "D"), ("C", "D"), ("B", "A")}))
+
+    def test_filtered_completion_keeps_valid_unions_untouched(self):
+        public = {"nodes": ["A", "B", "C", "D"], "max_edges": 4, "observations": [
+            {"perturbed_node": "A", "effects": {"A": 0, "B": 1, "C": 0, "D": 0}},
+        ]}
+        condition = dict(node="D", parents=[], fixed_edges=[])
+        for edges in ([("A", "B")], [("D", "B"), ("A", "B")]):
+            self.assertEqual(filtered_completion(condition, edges, public),
+                             frozenset(map(tuple, edges)))
+
+    def test_filtered_completion_drops_unwanted_edges_and_cycles(self):
+        public = {"nodes": ["A", "B", "C", "D"], "max_edges": 4, "observations": [
+            {"perturbed_node": "A", "effects": {"A": 0, "B": 1, "C": 0, "D": 0}},
+        ]}
+        condition = dict(node="D", parents=[], fixed_edges=[])
+        # A->C makes A reach C (forbidden); D->B is fine afterwards.
+        final = filtered_completion(condition, [("A", "C"), ("D", "B")], public)
+        self.assertEqual(final, frozenset({("D", "B")}))
+        # A 2-cycle in the additions is rejected while the acyclic part survives.
+        final = filtered_completion(condition, [("A", "B"), ("B", "A")], public)
+        self.assertEqual(final, frozenset({("A", "B")}))
+        # An addition into the anchor that is not in the stratum is dropped.
+        final = filtered_completion(condition, [("A", "B"), ("A", "D")], public)
+        self.assertEqual(final, frozenset({("A", "B")}))
+
+    def test_filtered_completion_reproduces_every_truth(self):
+        upstream = Path(os.environ.get("HYPOSPACE_UPSTREAM", ROOT / ".cache/hypospace"))
+        if not upstream.is_dir():
+            self.skipTest("Pinned causal checkout unavailable")
+        for case in Dataset(upstream).cases.values():
+            public = {key: case[key] for key in ("nodes", "observations", "max_edges")}
+            for seed in (17, 42):
+                plan = skeleton_plan(public, seed, 8, "complete_forced_valid")
+                for graph in case["ground_truth_graphs"]:
+                    row = next(row for row in plan
+                               if tuple(row["parents"]) == tuple(sorted(
+                                   tail for tail, head in graph["edges"] if head == row["node"])))
+                    graph_edges = frozenset(map(tuple, graph["edges"]))
+                    self.assertEqual(filtered_completion(row, graph["edges"], public), graph_edges)
+
+    def test_joint_plan_covers_every_official_solution(self):
+        upstream = Path(os.environ.get("HYPOSPACE_UPSTREAM", ROOT / ".cache/hypospace"))
+        if not upstream.is_dir():
+            self.skipTest("Pinned causal checkout unavailable")
+        for case in Dataset(upstream).cases.values():
+            public = {key: case[key] for key in ("nodes", "observations", "max_edges")}
+            forced = forced_edges(public)
+            for seed in (17, 42):
+                # 64 calls schedule the full joint product (<= 8 x 8 strata).
+                plan = joint_skeleton_plan(public, seed, 64)
+                anchor = plan[0]["node"]
+                strata = {(tuple(row["parents"]),
+                           row["node2"],
+                           tuple(row.get("parents2", ()))) for row in plan}
+                for graph in case["ground_truth_graphs"]:
+                    edges = {tuple(edge) for edge in graph["edges"]}
+                    parents1 = tuple(sorted(tail for tail, head in edges if head == anchor))
+                    found = False
+                    for row in plan:
+                        if tuple(row["parents"]) != parents1:
+                            continue
+                        if row["node2"] is None:
+                            found = True
+                            continue
+                        parents2 = tuple(sorted(tail for tail, head in edges if head == row["node2"]))
+                        if (parents1, row["node2"], parents2) in strata:
+                            found = True
+                    self.assertTrue(found, (case["observation_set_id"], parents1))
+                    for row in plan:
+                        fixed = {tuple(edge) for edge in row["fixed_edges"]}
+                        self.assertTrue(forced <= fixed)
+
+    def test_joint_plan_guards_both_anchors(self):
+        public = {"nodes": ["A", "B", "C", "D"], "max_edges": 4, "observations": [
+            {"perturbed_node": "B", "effects": {"A": 1, "B": 0, "C": 0, "D": 0}},
+            {"perturbed_node": "C", "effects": {"A": 1, "B": 0, "C": 0, "D": 1}},
+        ]}
+        for seed in (17, 42):
+            plan = joint_skeleton_plan(public, seed, 16)
+            anchor = plan[0]["node"]
+            self.assertEqual(len({row["node"] for row in plan}), 1)
+            for row in plan:
+                self.assertEqual(row["node"], anchor)
+                self.assertIn(f"No other edge may end at {anchor}.", row["prompt"])
+                self.assertEqual(row["guarded"][0], anchor)
+                if row["node2"] is not None:
+                    self.assertIn(f"No other edge may end at {row['node2']}.", row["prompt"])
+                    self.assertEqual(row["guarded"], [anchor, row["node2"]])
+                remaining = 4 - len(row["fixed_edges"])
+                self.assertIn(f"at most {max(remaining, 0)} more", row["prompt"])

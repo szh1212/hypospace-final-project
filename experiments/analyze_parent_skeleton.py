@@ -9,7 +9,8 @@ import networkx as nx
 import numpy as np
 
 from run_causal import Dataset, ROOT, digest, save
-from parent_strata import assemble, enforce_limit, skeleton_plan
+from parent_strata import (assemble, enforce_limit, filtered_completion, joint_skeleton_plan,
+                           skeleton_plan)
 
 sys.path.insert(0, str(ROOT / "experiments"))
 from causal_prompts import _reachability  # noqa: E402
@@ -26,7 +27,10 @@ def audit_skeleton_cell(dataset, folder, cell, budget, variant):
     truths = {frozenset(map(tuple, graph["edges"])) for graph in case["ground_truth_graphs"]}
     check(len(truths) == cell["solution_count"], (oid, "reference count"))
     public = {key: case[key] for key in ("nodes", "observations", "max_edges")}
-    plan = skeleton_plan(public, seed, budget, variant)
+    if variant == "complete_forced_valid_joint":
+        plan = joint_skeleton_plan(public, seed, budget)
+    else:
+        plan = skeleton_plan(public, seed, budget, variant)
     base = _reachability(public, [])
     unique, recovered = set(), set()
     parsed = valid = 0
@@ -42,7 +46,9 @@ def audit_skeleton_cell(dataset, folder, cell, budget, variant):
         check(prompt.startswith(base.rsplit("\n", 1)[0] + "\n"), (path, "shared reachability base"))
         graph = dataset.bench.parse_llm_response(data["response"])
         parsed_edges = graph.edges if graph is not None else []
-        if variant in ("complete_forced", "complete_limit"):
+        if variant in ("complete_forced_valid", "complete_forced_valid_joint"):
+            final = filtered_completion(plan[i], parsed_edges, public)
+        elif variant in ("complete_forced", "complete_limit"):
             final = enforce_limit(plan[i], parsed_edges, public["max_edges"])
         else:
             final = assemble(plan[i], parsed_edges)
