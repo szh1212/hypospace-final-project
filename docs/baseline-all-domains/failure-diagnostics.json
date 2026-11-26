@@ -1,0 +1,50 @@
+{
+  "causal": {
+    "counts": {
+      "calls": 2019,
+      "observation_mismatch": 1597,
+      "new_valid": 21,
+      "valid_duplicate": 359,
+      "parser_rejection": 42
+    },
+    "by_level": {
+      "causal": {
+        "calls": 2019,
+        "observation_mismatch": 1597,
+        "new_valid": 21,
+        "valid_duplicate": 359,
+        "parser_rejection": 42
+      }
+    }
+  },
+  "genetic": {
+    "counts": {
+      "calls": 270,
+      "parsed_outside_space": 135,
+      "observation_mismatch": 84,
+      "new_valid": 8,
+      "valid_duplicate": 43
+    },
+    "by_level": {
+      "basic": {
+        "calls": 54,
+        "parsed_outside_space": 39,
+        "observation_mismatch": 11,
+        "new_valid": 2,
+        "valid_duplicate": 2
+      },
+      "extended": {
+        "calls": 90,
+        "parsed_outside_space": 66,
+        "observation_mismatch": 24
+      },
+      "full": {
+        "calls": 126,
+        "new_valid": 6,
+        "valid_duplicate": 41,
+        "observation_mismatch": 49,
+        "parsed_outside_space": 30
+      }
+    }
+  }
+}
