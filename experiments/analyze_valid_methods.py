@@ -174,7 +174,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
     report = summarize(args.upstream)
     from run_causal import save
-    save(ROOT / "docs/parent-skeleton-valid.json", report)
+    save(ROOT / ".cache/parent-skeleton-valid.json", report)
     for method, values in report["methods"].items():
         print(method, {k: round(v, 4) for k, v in values.items() if "2seeds" in k})
     for method in NEW_METHODS:

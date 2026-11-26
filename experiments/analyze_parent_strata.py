@@ -196,5 +196,5 @@ if __name__ == "__main__":
     parser.add_argument("--upstream", type=Path, default=ROOT / ".cache/hypospace")
     args = parser.parse_args()
     report = summarize(ROOT / "runs" / f"parent-{args.split}", args.upstream, args.split)
-    save(ROOT / "docs" / f"parent-strata-{args.split}.json", report)
+    save(ROOT / ".cache" / f"parent-strata-{args.split}.json", report)
     print(f"{args.split}: verified {report['n_raw_calls']} calls on {report['n_cases']} cases")

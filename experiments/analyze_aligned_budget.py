@@ -139,7 +139,7 @@ if __name__ == "__main__":
     parser.add_argument("--upstream", type=Path, default=ROOT / ".cache/hypospace")
     args = parser.parse_args()
     report = summarize(args.upstream)
-    save(ROOT / "docs/parent-skeleton-aligned.json", report)
+    save(ROOT / ".cache/parent-skeleton-aligned.json", report)
     f3 = report["methods"]["skeleton_complete_forced"]
     print(f"forced@13 macro R (3 seeds): {f3['macro_R_3seeds']:.4f}")
     print(f"forced@13 macro R (2 seeds): {f3['macro_R_2seeds']:.4f}")
