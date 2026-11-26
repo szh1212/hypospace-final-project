@@ -6,8 +6,8 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 ROOT=Path(__file__).resolve().parents[1]
 read=lambda p:json.loads(p.read_text(encoding='utf-8-sig'))
-data={d:read(ROOT/f'methods/szh-baseline-{d}/reports/test.json') for d in ['causal','genetic']}
-b=read(ROOT/'docs/figures/baseline/metrics.json')
+data={d:read(ROOT/f'methods/szh-baseline-{d}-task-{"a" if d=="causal" else "c"}/reports/test.json') for d in ['causal','genetic']}
+b=read(ROOT/'methods/szh-baseline-3d-task-b/adapted/reports/metrics.json')
 fig,axs=plt.subplots(1,2,figsize=(12,4),layout='constrained')
 for domain,label in [('causal','Causal'),('genetic','Boolean')]:
  rows=[r for r in data[domain]['results'] if r['unified_protocol']];cap=max(r['official_budget'] for r in rows)

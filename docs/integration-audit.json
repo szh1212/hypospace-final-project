@@ -1,0 +1,10 @@
+{
+  "original": {
+    "calls_replayed": 585,
+    "requests_hashes_scores_match": true
+  },
+  "adapted": {
+    "calls_replayed": 585,
+    "requests_hashes_scores_match": true
+  }
+}

@@ -76,11 +76,11 @@ All three arms used six development observations, three seeds and the same per-o
 
 ## Reproduction
 
-Follow the [shared local setup](../../docs/local-setup.md) with the frozen model and upstream revision. The method uses CPU inference with the existing Qwen weights. Run from the repository root with the Python 3.12 environment active. The [protocol](../../experiments/protocol.json), [split](../../experiments/manifest.json), [model lock](../../experiments/model-lock.json) and Adapted prompt at starting revision `b8036b4` match the frozen Adapted Baseline revision `ddd0807`.
+Follow the [shared local setup](../szh-baseline-3d-task-b/docs/local-setup.md) with the frozen model and upstream revision. The method uses CPU inference with the existing Qwen weights. Run from the repository root with the Python 3.12 environment active. The [protocol](../szh-baseline-3d-task-b/experiments/protocol.json), [split](../szh-baseline-3d-task-b/experiments/manifest.json), [model lock](../szh-baseline-3d-task-b/experiments/model-lock.json) and Adapted prompt at starting revision `b8036b4` match the frozen Adapted Baseline revision `ddd0807`.
 
 ```powershell
 $runs = Join-Path $env:USERPROFILE 'HypoSpaceLocal/runs/spatial-columns'
-$method = 'methods/zjh-spatial'
+$method = 'methods/zjh-spatial-task-b'
 $entry = "$method/experiments/run.py"
 $reports = "$method/reports"
 python -m unittest discover -s "$method/tests" -v
@@ -100,9 +100,9 @@ Commands for the initial 585-call test and the full development comparison of th
 $test = Join-Path $runs 'test'
 $report = "$reports/layer-test"
 python $entry --method spatial_columns:grid_history --out $test
-python src/export_run.py $test --out $report
-python src/plot_results.py "$test/summary.json" --out $report
-python "$method/experiments/compare.py" docs/figures/baseline/metrics.json "$report/metrics.json" --out "$report/comparison.json"
+python methods/szh-baseline-3d-task-b/src/export_run.py $test --out $report
+python methods/szh-baseline-3d-task-b/src/plot_results.py "$test/summary.json" --out $report
+python "$method/experiments/compare.py" methods/szh-baseline-3d-task-b/adapted/reports/metrics.json "$report/metrics.json" --out "$report/comparison.json"
 python "$method/experiments/audit.py" $test $report
 
 $dev = "$runs/codec-dev"
@@ -119,8 +119,8 @@ $test = "$runs/codec-test"
 $report = "$reports/codec-test"
 $selected = (Get-Content "$reports/codec-test-freeze.json" -Raw | ConvertFrom-Json).method
 python $entry --method $selected --out $test
-python src/export_run.py $test --out $report
-python src/plot_results.py "$test/summary.json" --out $report
-python "$method/experiments/compare.py" docs/figures/baseline/metrics.json "$report/metrics.json" --out "$report/comparison.json" --coverage-plot "$report/coverage-vs-adapted.png"
+python methods/szh-baseline-3d-task-b/src/export_run.py $test --out $report
+python methods/szh-baseline-3d-task-b/src/plot_results.py "$test/summary.json" --out $report
+python "$method/experiments/compare.py" methods/szh-baseline-3d-task-b/adapted/reports/metrics.json "$report/metrics.json" --out "$report/comparison.json" --coverage-plot "$report/coverage-vs-adapted.png"
 python "$method/experiments/audit.py" $test $report
 ```

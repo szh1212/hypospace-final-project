@@ -1,6 +1,6 @@
 # 两条正式基线的协议核查
 
-**Original** 复用固定上游版本的 `Benchmark3D.create_prompt` 和历史迭代逻辑。**Adapted** 固定为 `src/adapted_baseline.py:transform`，是三个改进方法的共同比较对象。两者共用本地 Ollama 传输、系统消息、采样参数、逐次种子、数据、评价及失败处理。Original 对照的是同一 Qwen 模型上的官方用户提示词。论文表 2 使用另外七个模型及不同推理服务，没有该 Qwen 量化模型的参考成绩。[论文 §§3、5.2、6.1 与表 2](https://proceedings.mlr.press/v306/chen26bz.html) · [固定上游代码](https://github.com/CTT-Pavilion/_HypoSpace/blob/c69e9318577b34b5b896996571aefd4ba6053f58/3d/run_3d_benchmark.py)
+**Original** 复用固定上游版本的 `Benchmark3D.create_prompt` 和历史迭代逻辑。**Adapted** 固定为 `methods/szh-baseline-3d-task-b/src/adapted_baseline.py:transform`，是三个改进方法的共同比较对象。两者共用本地 Ollama 传输、系统消息、采样参数、逐次种子、数据、评价及失败处理。Original 对照的是同一 Qwen 模型上的官方用户提示词。论文表 2 使用另外七个模型及不同推理服务，没有该 Qwen 量化模型的参考成绩。[论文 §§3、5.2、6.1 与表 2](https://proceedings.mlr.press/v306/chen26bz.html) · [固定上游代码](https://github.com/CTT-Pavilion/_HypoSpace/blob/c69e9318577b34b5b896996571aefd4ba6053f58/3d/run_3d_benchmark.py)
 
 ## Adapted 改了什么
 
@@ -28,12 +28,12 @@
 
 ```powershell
 $runs = Join-Path $env:USERPROFILE 'HypoSpaceLocal/runs'
-python src/hypospace_runner.py --out "$runs/original-formal-v4"
-python src/hypospace_runner.py --method adapted_baseline:transform --out "$runs/adapted-formal-v4"
-python src/export_run.py "$runs/original-formal-v4" --out docs/figures/original
-python experiments/verify_archive.py "$runs/original-formal-v4" docs/figures/original
-python experiments/verify_archive.py "$runs/adapted-formal-v4" docs/figures/baseline
-python experiments/paired_baselines.py
+python methods/szh-baseline-3d-task-b/src/hypospace_runner.py --out "$runs/original-formal-v4"
+python methods/szh-baseline-3d-task-b/src/hypospace_runner.py --method adapted_baseline:transform --out "$runs/adapted-formal-v4"
+python methods/szh-baseline-3d-task-b/src/export_run.py "$runs/original-formal-v4" --out methods/szh-baseline-3d-task-b/original/reports
+python methods/szh-baseline-3d-task-b/experiments/verify_archive.py "$runs/original-formal-v4" methods/szh-baseline-3d-task-b/original/reports
+python methods/szh-baseline-3d-task-b/experiments/verify_archive.py "$runs/adapted-formal-v4" methods/szh-baseline-3d-task-b/adapted/reports
+python methods/szh-baseline-3d-task-b/experiments/paired_baselines.py
 ```
 
 每组 `raw.jsonl.gz` 的每一行包含相对路径 path 和原始文件全文 utf8。按 UTF-8 编码该字符串即得到 raw-manifest.json 所列 SHA256 对应的确切字节，包括请求、响应、用量与耗时。核查脚本从官方提示词或冻结的适配函数重建每次请求，用历史输出离线回放并核对每题 V/U/R，无额外推理调用。

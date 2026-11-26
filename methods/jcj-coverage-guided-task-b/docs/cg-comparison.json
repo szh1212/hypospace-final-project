@@ -1,0 +1,35 @@
+{
+  "baseline": "docs/figures/baseline/metrics.json",
+  "method": "D:\\HypoSpaceLocal\\runs\\cg-test-v1\\summary.json",
+  "paired_task_repeats": 45,
+  "resource_totals": {
+    "baseline": {
+      "calls": 585,
+      "input_tokens": 178307,
+      "output_tokens": 28776,
+      "model_call_seconds": 3275.128669500038,
+      "truncated_outputs": 0
+    },
+    "method": {
+      "calls": 585,
+      "input_tokens": 223990,
+      "output_tokens": 26383,
+      "model_call_seconds": 1959.7815142000372,
+      "truncated_outputs": 0
+    }
+  },
+  "differences": {
+    "valid_rate": {
+      "mean_delta": -0.006584362139917695,
+      "sample_sd_delta": 0.13266971237127353
+    },
+    "novelty_rate": {
+      "mean_delta": 0.03621399176954732,
+      "sample_sd_delta": 0.13010707862094117
+    },
+    "recovery_rate": {
+      "mean_delta": 0.04444444444444443,
+      "sample_sd_delta": 0.14313922944936347
+    }
+  }
+}

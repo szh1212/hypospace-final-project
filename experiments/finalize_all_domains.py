@@ -3,8 +3,8 @@ import json,statistics
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 read=lambda p:json.loads(p.read_text(encoding='utf-8-sig'))
-d=read(ROOT/'methods/szh-baseline-causal/reports/test.json')
-assert read(ROOT/'methods/szh-baseline-causal/reports/audit.json')['all_requests_and_metrics_match']
+d=read(ROOT/'methods/szh-baseline-causal-task-a/reports/test.json')
+assert read(ROOT/'methods/szh-baseline-causal-task-a/reports/audit.json')['all_requests_and_metrics_match']
 lines=['','## Same-case, same-call-budget comparison with the reported LWT final method','','| Test cases | Seeds | Calls per case | Adapted baseline R | LWT final R (reported) |','| --- | --- | ---: | ---: | ---: |']
 for budget,seeds,reported in [(4,['17','42'],.3634),(8,['17','42'],.4734),(13,['17','42','2026'],.5343),(16,['17','42'],.5666)]:
  value=statistics.mean(d['aligned'][str(budget)][seed]['recovery_rate'] for seed in seeds)
@@ -21,7 +21,7 @@ for title,key in [('Causal','causal'),('3D','3d'),('Boolean','genetic')]:
  if key=='3d':
   x=read(ROOT/'docs/baseline-all-domains/published-3d-statistics.json');stats=x['across_seeds'];micro=x['micro']
  else:
-  x=read(ROOT/f'methods/szh-baseline-{key}/reports/test.json');stats=x['unified_across_seeds'];micro=x['unified_micro']
+  x=read(ROOT/f'methods/szh-baseline-{key}-task-{"a" if key=="causal" else "c"}/reports/test.json');stats=x['unified_across_seeds'];micro=x['unified_micro']
  summaries[key]={'across_seeds':stats,'micro':micro}
  s+='| '+title+' | '+' | '.join(f"{stats[m]['mean']:.2%} +/- {stats[m]['std']:.2%}" for m in metrics)+' | '+' | '.join(f'{micro[m]:.2%}' for m in metrics)+' |\n'
 p.write_text(s,encoding='utf-8')
