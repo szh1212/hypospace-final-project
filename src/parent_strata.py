@@ -97,6 +97,8 @@ def joint_skeleton_plan(public, seed, budget):
                     parents2 = sorted([*necessary, *extra])
                     selected2 = {(tail, node) for tail in parents2}
                     mandatory = forced | selected1 | selected2
+                    if not _acyclic(mandatory):
+                        continue
                     missing_heads = needs_incoming - {head for _, head in mandatory}
                     if len(mandatory) + len(missing_heads) > public["max_edges"]:
                         continue

@@ -97,7 +97,7 @@ def replay_control(dataset, case, oid, seed, method, budget):
 
 
 def bootstrap_contrast(method_case, control_case, cases, metric):
-    deltas = {oid: method_case[oid][metric] - control_case[oid][metric] for oid in cases}
+    deltas = {oid: method_case[oid] - control_case[oid] for oid in cases}
     values = np.array(list(deltas.values()))
     rng = np.random.default_rng(33550336)
     weights = rng.integers(0, len(cases), (10000, len(cases)))
@@ -141,21 +141,10 @@ def summarize(upstream):
                     report[method][f"{metric}{k}_3seeds"] = mean(
                         mean(by_case[oid][s][k][metric] for s in seeds) for oid in cases)
     comparisons = {}
-    for method in NEW_METHODS:
-        for control in CONTROLS:
-            for k in ("13", "16"):
-                for metric in ("V", "U", "R"):
-                    m = {oid: mean(rows_row(rows, method, oid, s)[k][metric] for s in (17, 42))
-                         for oid in cases}
-                    c = {oid: mean(rows_row(rows, control, oid, s)[k][metric] for s in (17, 42))
-                         for oid in cases}
-                    comparisons[f"{method}_minus_{control}_{metric}{k}"] = bootstrap_contrast(m, c, cases, "x")
-    # per-case curves indexed for bootstrap contrast
     method_curves, control_curves = {}, {}
     for method in (*NEW_METHODS, *CONTROLS):
         method_curves[method] = {oid: {s: curve for (o, s, curve) in rows[method] if o == oid}
                                  for oid in cases}
-    comparisons = {}
     for method in NEW_METHODS:
         for control in CONTROLS:
             for k in ("13", "16"):
@@ -187,7 +176,7 @@ if __name__ == "__main__":
     from run_causal import save
     save(ROOT / "docs/parent-skeleton-valid.json", report)
     for method, values in report["methods"].items():
-        print(method, {k: round(v, 4) for k, v in values.items() if "2seeds" in k and k.startswith(("V", "U", "R")) and k[1] in "134"})
+        print(method, {k: round(v, 4) for k, v in values.items() if "2seeds" in k})
     for method in NEW_METHODS:
-        print(method, "vs SZH:", {k: round(v, 4) for k, v in report["szh_baseline"].get(
-            "joint_minus" if "joint" in method else "forced_valid_minus", {}).items()})
+        key = "joint_minus" if "joint" in method else "forced_valid_minus"
+        print(method, "vs SZH:", {k: round(v, 4) for k, v in report["szh_baseline"][key].items()})

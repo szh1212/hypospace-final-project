@@ -14,7 +14,7 @@
 ## 单元测试
 
 ```bash
-python3 -m unittest discover -s tests          # 34 项，含分层划分、强制边、并集与预算强制
+python3 -m unittest discover -s tests          # 43 项，含分层划分、强制边、两级分层、并集、预算强制与有效性过滤
 ```
 
 覆盖性质：每个真解恰好属于一个先验分层；强制边出现在每个真解中；预算强制只丢弃
@@ -46,6 +46,13 @@ python3 experiments/analyze_parent_skeleton.py --split test \
 python3 experiments/run_parent_skeleton.py --split test \
   --protocol experiments/parent-skeleton-aligned.json --out runs/skeleton-aligned-test --replay
 python3 experiments/analyze_aligned_budget.py
+
+# 第四代：两级分层 + 有效性过滤（V/U/R 三指标配对）
+python3 experiments/run_parent_skeleton.py --split dev \
+  --protocol experiments/parent-skeleton-valid-dev.json --out runs/skeleton-valid-dev --replay
+python3 experiments/run_parent_skeleton.py --split test \
+  --protocol experiments/parent-skeleton-valid.json --out runs/skeleton-valid-test --replay
+python3 experiments/analyze_valid_methods.py
 ```
 
 每条审计都从 `runs/*/raw/` 重放：请求摘要（prompt+seed+method）、分层轮转是否出现在

@@ -27,6 +27,13 @@ Macro R@13 32.08% (3 seeds) vs SZH 3d baseline 17.45% at the same per-task budge
 within-domain paired deltas vs all four controls keep CIs above zero.
 See [budget-aligned results](budget-aligned-results.md), [report](parent-skeleton-aligned.json).
 
+2026-11-26 — Two-level joint skeleton with validity filter (fourth generation).
+Dev pilot (joint V 71.88% U 65.62% R 59.30%); test (663 fresh calls after the
+acyclicity fix, 78 cells replay-verified): V 91.35%, U 59.38%, R 56.66% with
+paired CIs above zero on all three metrics versus every control, and all three
+metrics above the SZH baseline at the aligned budget.
+See [three-metric results](three-metric-results.md), [report](parent-skeleton-valid.json).
+
 For each future run, add a small summary using this template. Store raw artifacts outside Git and link their agreed shared location without exposing credentials.
 
 ```text

@@ -203,6 +203,19 @@ class ParentStrataTests(unittest.TestCase):
                         fixed = {tuple(edge) for edge in row["fixed_edges"]}
                         self.assertTrue(forced <= fixed)
 
+    def test_joint_plan_never_fixes_a_cycle(self):
+        upstream = Path(os.environ.get("HYPOSPACE_UPSTREAM", ROOT / ".cache/hypospace"))
+        if not upstream.is_dir():
+            self.skipTest("Pinned causal checkout unavailable")
+        from parent_strata import _acyclic
+        for case in Dataset(upstream).cases.values():
+            public = {key: case[key] for key in ("nodes", "observations", "max_edges")}
+            for seed in (17, 42):
+                plan = joint_skeleton_plan(public, seed, 64)
+                for row in plan:
+                    self.assertTrue(_acyclic({tuple(edge) for edge in row["fixed_edges"]}),
+                                    (case["observation_set_id"], row["fixed_edges"]))
+
     def test_joint_plan_guards_both_anchors(self):
         public = {"nodes": ["A", "B", "C", "D"], "max_edges": 4, "observations": [
             {"perturbed_node": "B", "effects": {"A": 1, "B": 0, "C": 0, "D": 0}},

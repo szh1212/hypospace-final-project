@@ -584,196 +584,148 @@
         "R": 0.125
       },
       {
-        "case_id": "n2_126",
-        "seed": 42,
+        "case_id": "n2_017",
+        "seed": 17,
         "method": "unstratified",
-        "token_cap": 2606,
-        "attempts": 16,
-        "R": 0.02702702702702703
-      },
-      {
-        "case_id": "n2_126",
-        "seed": 42,
-        "method": "edge_count",
-        "token_cap": 2606,
-        "attempts": 16,
-        "R": 0.02702702702702703
-      },
-      {
-        "case_id": "n2_126",
-        "seed": 42,
-        "method": "parent_set",
-        "token_cap": 2606,
-        "attempts": 16,
-        "R": 0.02702702702702703
-      },
-      {
-        "case_id": "n2_126",
-        "seed": 42,
-        "method": "skeleton_complete",
-        "token_cap": 2606,
+        "token_cap": 2641,
         "attempts": 16,
         "R": 0.0
       },
       {
-        "case_id": "n2_126",
-        "seed": 42,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2606,
-        "attempts": 16,
-        "R": 0.10810810810810811
-      },
-      {
-        "case_id": "n2_126",
-        "seed": 42,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2606,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_098",
-        "seed": 17,
-        "method": "unstratified",
-        "token_cap": 2844,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_098",
+        "case_id": "n2_017",
         "seed": 17,
         "method": "edge_count",
-        "token_cap": 2844,
+        "token_cap": 2641,
         "attempts": 16,
-        "R": 0.09090909090909091
+        "R": 0.021739130434782608
       },
       {
-        "case_id": "n2_098",
+        "case_id": "n2_017",
         "seed": 17,
         "method": "parent_set",
-        "token_cap": 2844,
+        "token_cap": 2641,
         "attempts": 16,
-        "R": 0.0
+        "R": 0.021739130434782608
       },
       {
-        "case_id": "n2_098",
+        "case_id": "n2_017",
         "seed": 17,
         "method": "skeleton_complete",
-        "token_cap": 2844,
+        "token_cap": 2641,
         "attempts": 16,
-        "R": 0.09090909090909091
+        "R": 0.021739130434782608
       },
       {
-        "case_id": "n2_098",
+        "case_id": "n2_017",
         "seed": 17,
         "method": "skeleton_complete_forced",
-        "token_cap": 2844,
+        "token_cap": 2641,
         "attempts": 16,
-        "R": 0.36363636363636365
+        "R": 0.021739130434782608
       },
       {
-        "case_id": "n2_098",
+        "case_id": "n2_017",
         "seed": 17,
         "method": "skeleton_complete_limit",
-        "token_cap": 2844,
+        "token_cap": 2641,
         "attempts": 16,
-        "R": 0.09090909090909091
+        "R": 0.021739130434782608
       },
       {
-        "case_id": "n2_186",
-        "seed": 42,
-        "method": "unstratified",
-        "token_cap": 2672,
-        "attempts": 16,
-        "R": 0.05555555555555555
-      },
-      {
-        "case_id": "n2_186",
-        "seed": 42,
-        "method": "edge_count",
-        "token_cap": 2672,
-        "attempts": 16,
-        "R": 0.05555555555555555
-      },
-      {
-        "case_id": "n2_186",
-        "seed": 42,
-        "method": "parent_set",
-        "token_cap": 2672,
-        "attempts": 16,
-        "R": 0.16666666666666666
-      },
-      {
-        "case_id": "n2_186",
-        "seed": 42,
-        "method": "skeleton_complete",
-        "token_cap": 2672,
-        "attempts": 16,
-        "R": 0.16666666666666666
-      },
-      {
-        "case_id": "n2_186",
-        "seed": 42,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2672,
-        "attempts": 16,
-        "R": 0.3333333333333333
-      },
-      {
-        "case_id": "n2_186",
-        "seed": 42,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2672,
-        "attempts": 16,
-        "R": 0.16666666666666666
-      },
-      {
-        "case_id": "n2_069",
+        "case_id": "n1_017",
         "seed": 17,
         "method": "unstratified",
-        "token_cap": 2624,
+        "token_cap": 2426,
         "attempts": 16,
-        "R": 0.14285714285714285
+        "R": 0.006097560975609756
       },
       {
-        "case_id": "n2_069",
+        "case_id": "n1_017",
         "seed": 17,
         "method": "edge_count",
-        "token_cap": 2624,
+        "token_cap": 2426,
         "attempts": 16,
-        "R": 0.14285714285714285
+        "R": 0.006097560975609756
       },
       {
-        "case_id": "n2_069",
+        "case_id": "n1_017",
         "seed": 17,
         "method": "parent_set",
-        "token_cap": 2624,
+        "token_cap": 2426,
         "attempts": 16,
-        "R": 0.14285714285714285
+        "R": 0.054878048780487805
       },
       {
-        "case_id": "n2_069",
+        "case_id": "n1_017",
         "seed": 17,
         "method": "skeleton_complete",
-        "token_cap": 2624,
+        "token_cap": 2426,
         "attempts": 16,
-        "R": 0.2857142857142857
+        "R": 0.04878048780487805
       },
       {
-        "case_id": "n2_069",
+        "case_id": "n1_017",
         "seed": 17,
         "method": "skeleton_complete_forced",
-        "token_cap": 2624,
+        "token_cap": 2426,
         "attempts": 16,
-        "R": 0.2857142857142857
+        "R": 0.04878048780487805
       },
       {
-        "case_id": "n2_069",
+        "case_id": "n1_017",
         "seed": 17,
         "method": "skeleton_complete_limit",
-        "token_cap": 2624,
+        "token_cap": 2426,
         "attempts": 16,
-        "R": 0.2857142857142857
+        "R": 0.04878048780487805
+      },
+      {
+        "case_id": "n1_030",
+        "seed": 42,
+        "method": "unstratified",
+        "token_cap": 2368,
+        "attempts": 16,
+        "R": 0.034482758620689655
+      },
+      {
+        "case_id": "n1_030",
+        "seed": 42,
+        "method": "edge_count",
+        "token_cap": 2368,
+        "attempts": 16,
+        "R": 0.034482758620689655
+      },
+      {
+        "case_id": "n1_030",
+        "seed": 42,
+        "method": "parent_set",
+        "token_cap": 2368,
+        "attempts": 16,
+        "R": 0.10344827586206896
+      },
+      {
+        "case_id": "n1_030",
+        "seed": 42,
+        "method": "skeleton_complete",
+        "token_cap": 2368,
+        "attempts": 16,
+        "R": 0.1724137931034483
+      },
+      {
+        "case_id": "n1_030",
+        "seed": 42,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2368,
+        "attempts": 16,
+        "R": 0.1724137931034483
+      },
+      {
+        "case_id": "n1_030",
+        "seed": 42,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2368,
+        "attempts": 16,
+        "R": 0.1724137931034483
       },
       {
         "case_id": "n1_030",
@@ -824,820 +776,148 @@
         "R": 0.06896551724137931
       },
       {
-        "case_id": "n2_049",
+        "case_id": "n2_140",
         "seed": 42,
         "method": "unstratified",
-        "token_cap": 2688,
-        "attempts": 16,
-        "R": 0.09090909090909091
-      },
-      {
-        "case_id": "n2_049",
-        "seed": 42,
-        "method": "edge_count",
-        "token_cap": 2688,
-        "attempts": 16,
-        "R": 0.09090909090909091
-      },
-      {
-        "case_id": "n2_049",
-        "seed": 42,
-        "method": "parent_set",
-        "token_cap": 2688,
-        "attempts": 16,
-        "R": 0.18181818181818182
-      },
-      {
-        "case_id": "n2_049",
-        "seed": 42,
-        "method": "skeleton_complete",
-        "token_cap": 2688,
-        "attempts": 16,
-        "R": 0.36363636363636365
-      },
-      {
-        "case_id": "n2_049",
-        "seed": 42,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2688,
-        "attempts": 16,
-        "R": 0.36363636363636365
-      },
-      {
-        "case_id": "n2_049",
-        "seed": 42,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2688,
-        "attempts": 16,
-        "R": 0.36363636363636365
-      },
-      {
-        "case_id": "n2_033",
-        "seed": 17,
-        "method": "unstratified",
-        "token_cap": 2565,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_033",
-        "seed": 17,
-        "method": "edge_count",
-        "token_cap": 2565,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_033",
-        "seed": 17,
-        "method": "parent_set",
-        "token_cap": 2565,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_033",
-        "seed": 17,
-        "method": "skeleton_complete",
-        "token_cap": 2565,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_033",
-        "seed": 17,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2565,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_033",
-        "seed": 17,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2565,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_186",
-        "seed": 17,
-        "method": "unstratified",
-        "token_cap": 2671,
-        "attempts": 16,
-        "R": 0.05555555555555555
-      },
-      {
-        "case_id": "n2_186",
-        "seed": 17,
-        "method": "edge_count",
-        "token_cap": 2671,
-        "attempts": 16,
-        "R": 0.05555555555555555
-      },
-      {
-        "case_id": "n2_186",
-        "seed": 17,
-        "method": "parent_set",
-        "token_cap": 2671,
-        "attempts": 16,
-        "R": 0.16666666666666666
-      },
-      {
-        "case_id": "n2_186",
-        "seed": 17,
-        "method": "skeleton_complete",
-        "token_cap": 2671,
-        "attempts": 16,
-        "R": 0.16666666666666666
-      },
-      {
-        "case_id": "n2_186",
-        "seed": 17,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2671,
+        "token_cap": 2698,
         "attempts": 16,
         "R": 0.3333333333333333
       },
       {
-        "case_id": "n2_186",
-        "seed": 17,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2671,
+        "case_id": "n2_140",
+        "seed": 42,
+        "method": "edge_count",
+        "token_cap": 2698,
         "attempts": 16,
-        "R": 0.16666666666666666
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_140",
+        "seed": 42,
+        "method": "parent_set",
+        "token_cap": 2698,
+        "attempts": 16,
+        "R": 0.3333333333333333
+      },
+      {
+        "case_id": "n2_140",
+        "seed": 42,
+        "method": "skeleton_complete",
+        "token_cap": 2698,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_140",
+        "seed": 42,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2698,
+        "attempts": 16,
+        "R": 1.0
+      },
+      {
+        "case_id": "n2_140",
+        "seed": 42,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2698,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_033",
+        "seed": 42,
+        "method": "unstratified",
+        "token_cap": 2580,
+        "attempts": 16,
+        "R": 1.0
+      },
+      {
+        "case_id": "n2_033",
+        "seed": 42,
+        "method": "edge_count",
+        "token_cap": 2580,
+        "attempts": 16,
+        "R": 1.0
+      },
+      {
+        "case_id": "n2_033",
+        "seed": 42,
+        "method": "parent_set",
+        "token_cap": 2580,
+        "attempts": 16,
+        "R": 1.0
+      },
+      {
+        "case_id": "n2_033",
+        "seed": 42,
+        "method": "skeleton_complete",
+        "token_cap": 2580,
+        "attempts": 16,
+        "R": 1.0
+      },
+      {
+        "case_id": "n2_033",
+        "seed": 42,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2580,
+        "attempts": 16,
+        "R": 1.0
+      },
+      {
+        "case_id": "n2_033",
+        "seed": 42,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2580,
+        "attempts": 16,
+        "R": 1.0
       },
       {
         "case_id": "n2_126",
-        "seed": 17,
+        "seed": 42,
         "method": "unstratified",
-        "token_cap": 2618,
+        "token_cap": 2606,
         "attempts": 16,
         "R": 0.02702702702702703
       },
       {
         "case_id": "n2_126",
-        "seed": 17,
+        "seed": 42,
         "method": "edge_count",
-        "token_cap": 2618,
+        "token_cap": 2606,
         "attempts": 16,
         "R": 0.02702702702702703
       },
       {
         "case_id": "n2_126",
-        "seed": 17,
+        "seed": 42,
         "method": "parent_set",
-        "token_cap": 2618,
+        "token_cap": 2606,
         "attempts": 16,
-        "R": 0.08108108108108109
+        "R": 0.02702702702702703
       },
       {
         "case_id": "n2_126",
-        "seed": 17,
+        "seed": 42,
         "method": "skeleton_complete",
-        "token_cap": 2618,
+        "token_cap": 2606,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_126",
+        "seed": 42,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2606,
         "attempts": 16,
         "R": 0.10810810810810811
       },
       {
         "case_id": "n2_126",
-        "seed": 17,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2618,
-        "attempts": 16,
-        "R": 0.10810810810810811
-      },
-      {
-        "case_id": "n2_126",
-        "seed": 17,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2618,
-        "attempts": 16,
-        "R": 0.10810810810810811
-      },
-      {
-        "case_id": "n1_017",
-        "seed": 42,
-        "method": "unstratified",
-        "token_cap": 2430,
-        "attempts": 16,
-        "R": 0.006097560975609756
-      },
-      {
-        "case_id": "n1_017",
-        "seed": 42,
-        "method": "edge_count",
-        "token_cap": 2430,
-        "attempts": 16,
-        "R": 0.012195121951219513
-      },
-      {
-        "case_id": "n1_017",
-        "seed": 42,
-        "method": "parent_set",
-        "token_cap": 2430,
-        "attempts": 16,
-        "R": 0.04878048780487805
-      },
-      {
-        "case_id": "n1_017",
-        "seed": 42,
-        "method": "skeleton_complete",
-        "token_cap": 2430,
-        "attempts": 16,
-        "R": 0.054878048780487805
-      },
-      {
-        "case_id": "n1_017",
-        "seed": 42,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2430,
-        "attempts": 16,
-        "R": 0.054878048780487805
-      },
-      {
-        "case_id": "n1_017",
         "seed": 42,
         "method": "skeleton_complete_limit",
-        "token_cap": 2430,
-        "attempts": 16,
-        "R": 0.054878048780487805
-      },
-      {
-        "case_id": "n1_024",
-        "seed": 42,
-        "method": "unstratified",
-        "token_cap": 2464,
-        "attempts": 16,
-        "R": 0.02040816326530612
-      },
-      {
-        "case_id": "n1_024",
-        "seed": 42,
-        "method": "edge_count",
-        "token_cap": 2464,
-        "attempts": 16,
-        "R": 0.04081632653061224
-      },
-      {
-        "case_id": "n1_024",
-        "seed": 42,
-        "method": "parent_set",
-        "token_cap": 2464,
-        "attempts": 16,
-        "R": 0.08163265306122448
-      },
-      {
-        "case_id": "n1_024",
-        "seed": 42,
-        "method": "skeleton_complete",
-        "token_cap": 2464,
-        "attempts": 16,
-        "R": 0.10204081632653061
-      },
-      {
-        "case_id": "n1_024",
-        "seed": 42,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2464,
-        "attempts": 16,
-        "R": 0.10204081632653061
-      },
-      {
-        "case_id": "n1_024",
-        "seed": 42,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2464,
-        "attempts": 16,
-        "R": 0.10204081632653061
-      },
-      {
-        "case_id": "n2_049",
-        "seed": 17,
-        "method": "unstratified",
-        "token_cap": 2688,
-        "attempts": 16,
-        "R": 0.09090909090909091
-      },
-      {
-        "case_id": "n2_049",
-        "seed": 17,
-        "method": "edge_count",
-        "token_cap": 2688,
-        "attempts": 16,
-        "R": 0.09090909090909091
-      },
-      {
-        "case_id": "n2_049",
-        "seed": 17,
-        "method": "parent_set",
-        "token_cap": 2688,
-        "attempts": 16,
-        "R": 0.18181818181818182
-      },
-      {
-        "case_id": "n2_049",
-        "seed": 17,
-        "method": "skeleton_complete",
-        "token_cap": 2688,
-        "attempts": 16,
-        "R": 0.36363636363636365
-      },
-      {
-        "case_id": "n2_049",
-        "seed": 17,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2688,
-        "attempts": 16,
-        "R": 0.36363636363636365
-      },
-      {
-        "case_id": "n2_049",
-        "seed": 17,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2688,
-        "attempts": 16,
-        "R": 0.36363636363636365
-      },
-      {
-        "case_id": "n1_024",
-        "seed": 17,
-        "method": "unstratified",
-        "token_cap": 2464,
-        "attempts": 16,
-        "R": 0.02040816326530612
-      },
-      {
-        "case_id": "n1_024",
-        "seed": 17,
-        "method": "edge_count",
-        "token_cap": 2464,
-        "attempts": 16,
-        "R": 0.02040816326530612
-      },
-      {
-        "case_id": "n1_024",
-        "seed": 17,
-        "method": "parent_set",
-        "token_cap": 2464,
-        "attempts": 16,
-        "R": 0.08163265306122448
-      },
-      {
-        "case_id": "n1_024",
-        "seed": 17,
-        "method": "skeleton_complete",
-        "token_cap": 2464,
-        "attempts": 16,
-        "R": 0.08163265306122448
-      },
-      {
-        "case_id": "n1_024",
-        "seed": 17,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2464,
-        "attempts": 16,
-        "R": 0.08163265306122448
-      },
-      {
-        "case_id": "n1_024",
-        "seed": 17,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2464,
-        "attempts": 16,
-        "R": 0.08163265306122448
-      },
-      {
-        "case_id": "n1_017",
-        "seed": 17,
-        "method": "unstratified",
-        "token_cap": 2426,
-        "attempts": 16,
-        "R": 0.006097560975609756
-      },
-      {
-        "case_id": "n1_017",
-        "seed": 17,
-        "method": "edge_count",
-        "token_cap": 2426,
-        "attempts": 16,
-        "R": 0.006097560975609756
-      },
-      {
-        "case_id": "n1_017",
-        "seed": 17,
-        "method": "parent_set",
-        "token_cap": 2426,
-        "attempts": 16,
-        "R": 0.054878048780487805
-      },
-      {
-        "case_id": "n1_017",
-        "seed": 17,
-        "method": "skeleton_complete",
-        "token_cap": 2426,
-        "attempts": 16,
-        "R": 0.04878048780487805
-      },
-      {
-        "case_id": "n1_017",
-        "seed": 17,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2426,
-        "attempts": 16,
-        "R": 0.04878048780487805
-      },
-      {
-        "case_id": "n1_017",
-        "seed": 17,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2426,
-        "attempts": 16,
-        "R": 0.04878048780487805
-      },
-      {
-        "case_id": "n2_017",
-        "seed": 42,
-        "method": "unstratified",
-        "token_cap": 2624,
+        "token_cap": 2606,
         "attempts": 16,
         "R": 0.0
-      },
-      {
-        "case_id": "n2_017",
-        "seed": 42,
-        "method": "edge_count",
-        "token_cap": 2624,
-        "attempts": 16,
-        "R": 0.021739130434782608
-      },
-      {
-        "case_id": "n2_017",
-        "seed": 42,
-        "method": "parent_set",
-        "token_cap": 2624,
-        "attempts": 16,
-        "R": 0.06521739130434782
-      },
-      {
-        "case_id": "n2_017",
-        "seed": 42,
-        "method": "skeleton_complete",
-        "token_cap": 2624,
-        "attempts": 16,
-        "R": 0.043478260869565216
-      },
-      {
-        "case_id": "n2_017",
-        "seed": 42,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2624,
-        "attempts": 16,
-        "R": 0.043478260869565216
-      },
-      {
-        "case_id": "n2_017",
-        "seed": 42,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2624,
-        "attempts": 16,
-        "R": 0.043478260869565216
-      },
-      {
-        "case_id": "n2_140",
-        "seed": 42,
-        "method": "unstratified",
-        "token_cap": 2698,
-        "attempts": 16,
-        "R": 0.3333333333333333
-      },
-      {
-        "case_id": "n2_140",
-        "seed": 42,
-        "method": "edge_count",
-        "token_cap": 2698,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_140",
-        "seed": 42,
-        "method": "parent_set",
-        "token_cap": 2698,
-        "attempts": 16,
-        "R": 0.3333333333333333
-      },
-      {
-        "case_id": "n2_140",
-        "seed": 42,
-        "method": "skeleton_complete",
-        "token_cap": 2698,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_140",
-        "seed": 42,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2698,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_140",
-        "seed": 42,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2698,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_054",
-        "seed": 42,
-        "method": "unstratified",
-        "token_cap": 2747,
-        "attempts": 16,
-        "R": 0.14285714285714285
-      },
-      {
-        "case_id": "n2_054",
-        "seed": 42,
-        "method": "edge_count",
-        "token_cap": 2747,
-        "attempts": 16,
-        "R": 0.14285714285714285
-      },
-      {
-        "case_id": "n2_054",
-        "seed": 42,
-        "method": "parent_set",
-        "token_cap": 2747,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_054",
-        "seed": 42,
-        "method": "skeleton_complete",
-        "token_cap": 2747,
-        "attempts": 16,
-        "R": 0.14285714285714285
-      },
-      {
-        "case_id": "n2_054",
-        "seed": 42,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2747,
-        "attempts": 16,
-        "R": 0.14285714285714285
-      },
-      {
-        "case_id": "n2_054",
-        "seed": 42,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2747,
-        "attempts": 16,
-        "R": 0.14285714285714285
-      },
-      {
-        "case_id": "n2_098",
-        "seed": 42,
-        "method": "unstratified",
-        "token_cap": 2840,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_098",
-        "seed": 42,
-        "method": "edge_count",
-        "token_cap": 2840,
-        "attempts": 16,
-        "R": 0.09090909090909091
-      },
-      {
-        "case_id": "n2_098",
-        "seed": 42,
-        "method": "parent_set",
-        "token_cap": 2840,
-        "attempts": 16,
-        "R": 0.09090909090909091
-      },
-      {
-        "case_id": "n2_098",
-        "seed": 42,
-        "method": "skeleton_complete",
-        "token_cap": 2840,
-        "attempts": 16,
-        "R": 0.18181818181818182
-      },
-      {
-        "case_id": "n2_098",
-        "seed": 42,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2840,
-        "attempts": 16,
-        "R": 0.2727272727272727
-      },
-      {
-        "case_id": "n2_098",
-        "seed": 42,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2840,
-        "attempts": 16,
-        "R": 0.18181818181818182
-      },
-      {
-        "case_id": "n2_033",
-        "seed": 42,
-        "method": "unstratified",
-        "token_cap": 2580,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_033",
-        "seed": 42,
-        "method": "edge_count",
-        "token_cap": 2580,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_033",
-        "seed": 42,
-        "method": "parent_set",
-        "token_cap": 2580,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_033",
-        "seed": 42,
-        "method": "skeleton_complete",
-        "token_cap": 2580,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_033",
-        "seed": 42,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2580,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_033",
-        "seed": 42,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2580,
-        "attempts": 16,
-        "R": 1.0
-      },
-      {
-        "case_id": "n2_112",
-        "seed": 42,
-        "method": "unstratified",
-        "token_cap": 2665,
-        "attempts": 16,
-        "R": 0.125
-      },
-      {
-        "case_id": "n2_112",
-        "seed": 42,
-        "method": "edge_count",
-        "token_cap": 2665,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_112",
-        "seed": 42,
-        "method": "parent_set",
-        "token_cap": 2665,
-        "attempts": 16,
-        "R": 0.125
-      },
-      {
-        "case_id": "n2_112",
-        "seed": 42,
-        "method": "skeleton_complete",
-        "token_cap": 2665,
-        "attempts": 16,
-        "R": 0.125
-      },
-      {
-        "case_id": "n2_112",
-        "seed": 42,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2665,
-        "attempts": 16,
-        "R": 0.25
-      },
-      {
-        "case_id": "n2_112",
-        "seed": 42,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2665,
-        "attempts": 16,
-        "R": 0.125
-      },
-      {
-        "case_id": "n2_017",
-        "seed": 17,
-        "method": "unstratified",
-        "token_cap": 2641,
-        "attempts": 16,
-        "R": 0.0
-      },
-      {
-        "case_id": "n2_017",
-        "seed": 17,
-        "method": "edge_count",
-        "token_cap": 2641,
-        "attempts": 16,
-        "R": 0.021739130434782608
-      },
-      {
-        "case_id": "n2_017",
-        "seed": 17,
-        "method": "parent_set",
-        "token_cap": 2641,
-        "attempts": 16,
-        "R": 0.021739130434782608
-      },
-      {
-        "case_id": "n2_017",
-        "seed": 17,
-        "method": "skeleton_complete",
-        "token_cap": 2641,
-        "attempts": 16,
-        "R": 0.021739130434782608
-      },
-      {
-        "case_id": "n2_017",
-        "seed": 17,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2641,
-        "attempts": 16,
-        "R": 0.021739130434782608
-      },
-      {
-        "case_id": "n2_017",
-        "seed": 17,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2641,
-        "attempts": 16,
-        "R": 0.021739130434782608
-      },
-      {
-        "case_id": "n2_069",
-        "seed": 42,
-        "method": "unstratified",
-        "token_cap": 2624,
-        "attempts": 16,
-        "R": 0.14285714285714285
-      },
-      {
-        "case_id": "n2_069",
-        "seed": 42,
-        "method": "edge_count",
-        "token_cap": 2624,
-        "attempts": 16,
-        "R": 0.14285714285714285
-      },
-      {
-        "case_id": "n2_069",
-        "seed": 42,
-        "method": "parent_set",
-        "token_cap": 2624,
-        "attempts": 16,
-        "R": 0.14285714285714285
-      },
-      {
-        "case_id": "n2_069",
-        "seed": 42,
-        "method": "skeleton_complete",
-        "token_cap": 2624,
-        "attempts": 16,
-        "R": 0.2857142857142857
-      },
-      {
-        "case_id": "n2_069",
-        "seed": 42,
-        "method": "skeleton_complete_forced",
-        "token_cap": 2624,
-        "attempts": 16,
-        "R": 0.2857142857142857
-      },
-      {
-        "case_id": "n2_069",
-        "seed": 42,
-        "method": "skeleton_complete_limit",
-        "token_cap": 2624,
-        "attempts": 16,
-        "R": 0.2857142857142857
       },
       {
         "case_id": "n2_140",
@@ -1688,52 +968,772 @@
         "R": 0.0
       },
       {
-        "case_id": "n1_030",
+        "case_id": "n2_186",
         "seed": 42,
         "method": "unstratified",
-        "token_cap": 2368,
+        "token_cap": 2672,
         "attempts": 16,
-        "R": 0.034482758620689655
+        "R": 0.05555555555555555
       },
       {
-        "case_id": "n1_030",
+        "case_id": "n2_186",
         "seed": 42,
         "method": "edge_count",
-        "token_cap": 2368,
+        "token_cap": 2672,
         "attempts": 16,
-        "R": 0.034482758620689655
+        "R": 0.05555555555555555
       },
       {
-        "case_id": "n1_030",
+        "case_id": "n2_186",
         "seed": 42,
         "method": "parent_set",
-        "token_cap": 2368,
+        "token_cap": 2672,
         "attempts": 16,
-        "R": 0.10344827586206896
+        "R": 0.16666666666666666
       },
       {
-        "case_id": "n1_030",
+        "case_id": "n2_186",
         "seed": 42,
         "method": "skeleton_complete",
-        "token_cap": 2368,
+        "token_cap": 2672,
         "attempts": 16,
-        "R": 0.1724137931034483
+        "R": 0.16666666666666666
       },
       {
-        "case_id": "n1_030",
+        "case_id": "n2_186",
         "seed": 42,
         "method": "skeleton_complete_forced",
-        "token_cap": 2368,
+        "token_cap": 2672,
         "attempts": 16,
-        "R": 0.1724137931034483
+        "R": 0.3333333333333333
       },
       {
-        "case_id": "n1_030",
+        "case_id": "n2_186",
         "seed": 42,
         "method": "skeleton_complete_limit",
-        "token_cap": 2368,
+        "token_cap": 2672,
         "attempts": 16,
-        "R": 0.1724137931034483
+        "R": 0.16666666666666666
+      },
+      {
+        "case_id": "n1_024",
+        "seed": 42,
+        "method": "unstratified",
+        "token_cap": 2464,
+        "attempts": 16,
+        "R": 0.02040816326530612
+      },
+      {
+        "case_id": "n1_024",
+        "seed": 42,
+        "method": "edge_count",
+        "token_cap": 2464,
+        "attempts": 16,
+        "R": 0.04081632653061224
+      },
+      {
+        "case_id": "n1_024",
+        "seed": 42,
+        "method": "parent_set",
+        "token_cap": 2464,
+        "attempts": 16,
+        "R": 0.08163265306122448
+      },
+      {
+        "case_id": "n1_024",
+        "seed": 42,
+        "method": "skeleton_complete",
+        "token_cap": 2464,
+        "attempts": 16,
+        "R": 0.10204081632653061
+      },
+      {
+        "case_id": "n1_024",
+        "seed": 42,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2464,
+        "attempts": 16,
+        "R": 0.10204081632653061
+      },
+      {
+        "case_id": "n1_024",
+        "seed": 42,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2464,
+        "attempts": 16,
+        "R": 0.10204081632653061
+      },
+      {
+        "case_id": "n2_069",
+        "seed": 42,
+        "method": "unstratified",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_069",
+        "seed": 42,
+        "method": "edge_count",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_069",
+        "seed": 42,
+        "method": "parent_set",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_069",
+        "seed": 42,
+        "method": "skeleton_complete",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.2857142857142857
+      },
+      {
+        "case_id": "n2_069",
+        "seed": 42,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.2857142857142857
+      },
+      {
+        "case_id": "n2_069",
+        "seed": 42,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.2857142857142857
+      },
+      {
+        "case_id": "n2_049",
+        "seed": 42,
+        "method": "unstratified",
+        "token_cap": 2688,
+        "attempts": 16,
+        "R": 0.09090909090909091
+      },
+      {
+        "case_id": "n2_049",
+        "seed": 42,
+        "method": "edge_count",
+        "token_cap": 2688,
+        "attempts": 16,
+        "R": 0.09090909090909091
+      },
+      {
+        "case_id": "n2_049",
+        "seed": 42,
+        "method": "parent_set",
+        "token_cap": 2688,
+        "attempts": 16,
+        "R": 0.18181818181818182
+      },
+      {
+        "case_id": "n2_049",
+        "seed": 42,
+        "method": "skeleton_complete",
+        "token_cap": 2688,
+        "attempts": 16,
+        "R": 0.36363636363636365
+      },
+      {
+        "case_id": "n2_049",
+        "seed": 42,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2688,
+        "attempts": 16,
+        "R": 0.36363636363636365
+      },
+      {
+        "case_id": "n2_049",
+        "seed": 42,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2688,
+        "attempts": 16,
+        "R": 0.36363636363636365
+      },
+      {
+        "case_id": "n2_033",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2565,
+        "attempts": 16,
+        "R": 1.0
+      },
+      {
+        "case_id": "n2_033",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2565,
+        "attempts": 16,
+        "R": 1.0
+      },
+      {
+        "case_id": "n2_033",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2565,
+        "attempts": 16,
+        "R": 1.0
+      },
+      {
+        "case_id": "n2_033",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2565,
+        "attempts": 16,
+        "R": 1.0
+      },
+      {
+        "case_id": "n2_033",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2565,
+        "attempts": 16,
+        "R": 1.0
+      },
+      {
+        "case_id": "n2_033",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2565,
+        "attempts": 16,
+        "R": 1.0
+      },
+      {
+        "case_id": "n2_098",
+        "seed": 42,
+        "method": "unstratified",
+        "token_cap": 2840,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_098",
+        "seed": 42,
+        "method": "edge_count",
+        "token_cap": 2840,
+        "attempts": 16,
+        "R": 0.09090909090909091
+      },
+      {
+        "case_id": "n2_098",
+        "seed": 42,
+        "method": "parent_set",
+        "token_cap": 2840,
+        "attempts": 16,
+        "R": 0.09090909090909091
+      },
+      {
+        "case_id": "n2_098",
+        "seed": 42,
+        "method": "skeleton_complete",
+        "token_cap": 2840,
+        "attempts": 16,
+        "R": 0.18181818181818182
+      },
+      {
+        "case_id": "n2_098",
+        "seed": 42,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2840,
+        "attempts": 16,
+        "R": 0.2727272727272727
+      },
+      {
+        "case_id": "n2_098",
+        "seed": 42,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2840,
+        "attempts": 16,
+        "R": 0.18181818181818182
+      },
+      {
+        "case_id": "n2_126",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2618,
+        "attempts": 16,
+        "R": 0.02702702702702703
+      },
+      {
+        "case_id": "n2_126",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2618,
+        "attempts": 16,
+        "R": 0.02702702702702703
+      },
+      {
+        "case_id": "n2_126",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2618,
+        "attempts": 16,
+        "R": 0.08108108108108109
+      },
+      {
+        "case_id": "n2_126",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2618,
+        "attempts": 16,
+        "R": 0.10810810810810811
+      },
+      {
+        "case_id": "n2_126",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2618,
+        "attempts": 16,
+        "R": 0.10810810810810811
+      },
+      {
+        "case_id": "n2_126",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2618,
+        "attempts": 16,
+        "R": 0.10810810810810811
+      },
+      {
+        "case_id": "n2_054",
+        "seed": 42,
+        "method": "unstratified",
+        "token_cap": 2747,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_054",
+        "seed": 42,
+        "method": "edge_count",
+        "token_cap": 2747,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_054",
+        "seed": 42,
+        "method": "parent_set",
+        "token_cap": 2747,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_054",
+        "seed": 42,
+        "method": "skeleton_complete",
+        "token_cap": 2747,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_054",
+        "seed": 42,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2747,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_054",
+        "seed": 42,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2747,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n1_024",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2464,
+        "attempts": 16,
+        "R": 0.02040816326530612
+      },
+      {
+        "case_id": "n1_024",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2464,
+        "attempts": 16,
+        "R": 0.02040816326530612
+      },
+      {
+        "case_id": "n1_024",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2464,
+        "attempts": 16,
+        "R": 0.08163265306122448
+      },
+      {
+        "case_id": "n1_024",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2464,
+        "attempts": 16,
+        "R": 0.08163265306122448
+      },
+      {
+        "case_id": "n1_024",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2464,
+        "attempts": 16,
+        "R": 0.08163265306122448
+      },
+      {
+        "case_id": "n1_024",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2464,
+        "attempts": 16,
+        "R": 0.08163265306122448
+      },
+      {
+        "case_id": "n2_112",
+        "seed": 42,
+        "method": "unstratified",
+        "token_cap": 2665,
+        "attempts": 16,
+        "R": 0.125
+      },
+      {
+        "case_id": "n2_112",
+        "seed": 42,
+        "method": "edge_count",
+        "token_cap": 2665,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_112",
+        "seed": 42,
+        "method": "parent_set",
+        "token_cap": 2665,
+        "attempts": 16,
+        "R": 0.125
+      },
+      {
+        "case_id": "n2_112",
+        "seed": 42,
+        "method": "skeleton_complete",
+        "token_cap": 2665,
+        "attempts": 16,
+        "R": 0.125
+      },
+      {
+        "case_id": "n2_112",
+        "seed": 42,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2665,
+        "attempts": 16,
+        "R": 0.25
+      },
+      {
+        "case_id": "n2_112",
+        "seed": 42,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2665,
+        "attempts": 16,
+        "R": 0.125
+      },
+      {
+        "case_id": "n2_186",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2671,
+        "attempts": 16,
+        "R": 0.05555555555555555
+      },
+      {
+        "case_id": "n2_186",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2671,
+        "attempts": 16,
+        "R": 0.05555555555555555
+      },
+      {
+        "case_id": "n2_186",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2671,
+        "attempts": 16,
+        "R": 0.16666666666666666
+      },
+      {
+        "case_id": "n2_186",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2671,
+        "attempts": 16,
+        "R": 0.16666666666666666
+      },
+      {
+        "case_id": "n2_186",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2671,
+        "attempts": 16,
+        "R": 0.3333333333333333
+      },
+      {
+        "case_id": "n2_186",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2671,
+        "attempts": 16,
+        "R": 0.16666666666666666
+      },
+      {
+        "case_id": "n2_017",
+        "seed": 42,
+        "method": "unstratified",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_017",
+        "seed": 42,
+        "method": "edge_count",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.021739130434782608
+      },
+      {
+        "case_id": "n2_017",
+        "seed": 42,
+        "method": "parent_set",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.06521739130434782
+      },
+      {
+        "case_id": "n2_017",
+        "seed": 42,
+        "method": "skeleton_complete",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.043478260869565216
+      },
+      {
+        "case_id": "n2_017",
+        "seed": 42,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.043478260869565216
+      },
+      {
+        "case_id": "n2_017",
+        "seed": 42,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.043478260869565216
+      },
+      {
+        "case_id": "n2_069",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_069",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_069",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.14285714285714285
+      },
+      {
+        "case_id": "n2_069",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.2857142857142857
+      },
+      {
+        "case_id": "n2_069",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.2857142857142857
+      },
+      {
+        "case_id": "n2_069",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2624,
+        "attempts": 16,
+        "R": 0.2857142857142857
+      },
+      {
+        "case_id": "n2_098",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2844,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_098",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2844,
+        "attempts": 16,
+        "R": 0.09090909090909091
+      },
+      {
+        "case_id": "n2_098",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2844,
+        "attempts": 16,
+        "R": 0.0
+      },
+      {
+        "case_id": "n2_098",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2844,
+        "attempts": 16,
+        "R": 0.09090909090909091
+      },
+      {
+        "case_id": "n2_098",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2844,
+        "attempts": 16,
+        "R": 0.36363636363636365
+      },
+      {
+        "case_id": "n2_098",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2844,
+        "attempts": 16,
+        "R": 0.09090909090909091
+      },
+      {
+        "case_id": "n1_017",
+        "seed": 42,
+        "method": "unstratified",
+        "token_cap": 2430,
+        "attempts": 16,
+        "R": 0.006097560975609756
+      },
+      {
+        "case_id": "n1_017",
+        "seed": 42,
+        "method": "edge_count",
+        "token_cap": 2430,
+        "attempts": 16,
+        "R": 0.012195121951219513
+      },
+      {
+        "case_id": "n1_017",
+        "seed": 42,
+        "method": "parent_set",
+        "token_cap": 2430,
+        "attempts": 16,
+        "R": 0.04878048780487805
+      },
+      {
+        "case_id": "n1_017",
+        "seed": 42,
+        "method": "skeleton_complete",
+        "token_cap": 2430,
+        "attempts": 16,
+        "R": 0.054878048780487805
+      },
+      {
+        "case_id": "n1_017",
+        "seed": 42,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2430,
+        "attempts": 16,
+        "R": 0.054878048780487805
+      },
+      {
+        "case_id": "n1_017",
+        "seed": 42,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2430,
+        "attempts": 16,
+        "R": 0.054878048780487805
+      },
+      {
+        "case_id": "n2_049",
+        "seed": 17,
+        "method": "unstratified",
+        "token_cap": 2688,
+        "attempts": 16,
+        "R": 0.09090909090909091
+      },
+      {
+        "case_id": "n2_049",
+        "seed": 17,
+        "method": "edge_count",
+        "token_cap": 2688,
+        "attempts": 16,
+        "R": 0.09090909090909091
+      },
+      {
+        "case_id": "n2_049",
+        "seed": 17,
+        "method": "parent_set",
+        "token_cap": 2688,
+        "attempts": 16,
+        "R": 0.18181818181818182
+      },
+      {
+        "case_id": "n2_049",
+        "seed": 17,
+        "method": "skeleton_complete",
+        "token_cap": 2688,
+        "attempts": 16,
+        "R": 0.36363636363636365
+      },
+      {
+        "case_id": "n2_049",
+        "seed": 17,
+        "method": "skeleton_complete_forced",
+        "token_cap": 2688,
+        "attempts": 16,
+        "R": 0.36363636363636365
+      },
+      {
+        "case_id": "n2_049",
+        "seed": 17,
+        "method": "skeleton_complete_limit",
+        "token_cap": 2688,
+        "attempts": 16,
+        "R": 0.36363636363636365
       },
       {
         "case_id": "n2_054",
