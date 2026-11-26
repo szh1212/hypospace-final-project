@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "config": {
+      "protocol": "3d-ollama-v2",
+      "upstream_commit": "c69e9318577b34b5b896996571aefd4ba6053f58",
+      "grid_size": 3,
+      "max_height": 3,
+      "blocks": [
+        1,
+        2,
+        3
+      ],
+      "test_per_stratum": 5,
+      "dev_per_stratum": 2,
+      "split_seed": 33550336,
+      "repeat_seeds": [
+        17
+      ],
+      "query_multiplier": 1.0,
+      "temperature": 0.7,
+      "max_tokens": 512,
+      "max_retries": 1,
+      "provider": "ollama",
+      "model": "qwen2.5:3b-instruct-q4_K_M",
+      "quantization": "Q4_K_M",
+      "top_p": 0.9,
+      "top_k": 40,
+      "repeat_penalty": 1.0,
+      "num_ctx": 8192,
+      "num_thread": 4,
+      "num_gpu": 0,
+      "model_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "ollama_version": "0.40.18",
+      "system": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant."
+    },
+    "mode": "llm",
+    "model_fingerprint": {
+      "model": "qwen2.5:3b-instruct-q4_K_M",
+      "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "qwen2",
+        "families": [
+          "qwen2"
+        ],
+        "parameter_size": "3.1B",
+        "quantization_level": "Q4_K_M"
+      },
+      "ollama_version": "0.40.18",
+      "template_sha256": "eb4402837c7829a690fa845de4d7f3fd842c2adee476d5341da8a46ea9255175"
+    },
+    "smoke": true,
+    "split": "dev-smoke",
+    "method": "diagnostic_no_example:transform",
+    "method_source_sha256": "17a2ee646dad7f856951c5e5580c4aaea2da16029dc9be4ccade36d483f05fd5",
+    "dataset_sha256": "61cebef122826c7b3d92b7fb520f956e096bc7c28025d98668384ad582a9e06e"
+  },
+  "planned_calls": 9,
+  "completed_calls": 9,
+  "source_sha256": {
+    "hypospace_runner.py": "0f07104a41817a2bd5b09c5f8dcd057a11a4cfe18d3c3163ea61fec873c16f16",
+    "plot_results.py": "5ea69ed91eedd2366722a32bb20aedd36088f0322cabec29dd0bfe2871a7455a",
+    "ollama_client.py": "f28e49706619c826172ddf99e2f0e724185f32339ad5c8c0e67264e4bd823f92",
+    "experiment_api.py": "8cb64906cd6f73c53659225133f36d3a7d0f93b524c6ae72cfda26400a87efc4",
+    "compare_runs.py": "b1a4c7908ca0dcb6175e3a7cd98c25937830abd7c5bc36170ee87494aefb5761",
+    "export_run.py": "fc98e562eb67203d0d8fcb72ab6c806309bfc6b4b82c71a141d3e7e5e77fbd5e",
+    "diagnostic_no_example.py": "17a2ee646dad7f856951c5e5580c4aaea2da16029dc9be4ccade36d483f05fd5"
+  },
+  "runner_sha256": "0f07104a41817a2bd5b09c5f8dcd057a11a4cfe18d3c3163ea61fec873c16f16",
+  "python": "3.12.4",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cost_usd": 0.0,
+  "aggregate": {
+    "valid_rate": {
+      "mean": 0.0,
+      "std": 0.0
+    },
+    "novelty_rate": {
+      "mean": 0.6666666666666666,
+      "std": 0.33333333333333337
+    },
+    "recovery_rate": {
+      "mean": 0.0,
+      "std": 0.0
+    }
+  },
+  "by_blocks": {
+    "1": {
+      "valid_rate": {
+        "mean": 0.0,
+        "std": null
+      },
+      "novelty_rate": {
+        "mean": 0.3333333333333333,
+        "std": null
+      },
+      "recovery_rate": {
+        "mean": 0.0,
+        "std": null
+      }
+    },
+    "2": {
+      "valid_rate": {
+        "mean": 0.0,
+        "std": null
+      },
+      "novelty_rate": {
+        "mean": 0.6666666666666666,
+        "std": null
+      },
+      "recovery_rate": {
+        "mean": 0.0,
+        "std": null
+      }
+    },
+    "3": {
+      "valid_rate": {
+        "mean": 0.0,
+        "std": null
+      },
+      "novelty_rate": {
+        "mean": 1.0,
+        "std": null
+      },
+      "recovery_rate": {
+        "mean": 0.0,
+        "std": null
+      }
+    }
+  },
+  "curves": [
+    {
+      "seed": 17,
+      "observation_id": "g3_h3_b1_009",
+      "blocks": 1,
+      "k": 1,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.0,
+      "recovery_rate": 0.0
+    },
+    {
+      "seed": 17,
+      "observation_id": "g3_h3_b1_009",
+      "blocks": 1,
+      "k": 2,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.5,
+      "recovery_rate": 0.0
+    },
+    {
+      "seed": 17,
+      "observation_id": "g3_h3_b1_009",
+      "blocks": 1,
+      "k": 3,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.3333333333333333,
+      "recovery_rate": 0.0
+    },
+    {
+      "seed": 17,
+      "observation_id": "g3_h3_b2_013",
+      "blocks": 2,
+      "k": 1,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.0,
+      "recovery_rate": 0.0
+    },
+    {
+      "seed": 17,
+      "observation_id": "g3_h3_b2_013",
+      "blocks": 2,
+      "k": 2,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.5,
+      "recovery_rate": 0.0
+    },
+    {
+      "seed": 17,
+      "observation_id": "g3_h3_b2_013",
+      "blocks": 2,
+      "k": 3,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.6666666666666666,
+      "recovery_rate": 0.0
+    },
+    {
+      "seed": 17,
+      "observation_id": "g3_h3_b3_084",
+      "blocks": 3,
+      "k": 1,
+      "valid_rate": 0.0,
+      "novelty_rate": 1.0,
+      "recovery_rate": 0.0
+    },
+    {
+      "seed": 17,
+      "observation_id": "g3_h3_b3_084",
+      "blocks": 3,
+      "k": 2,
+      "valid_rate": 0.0,
+      "novelty_rate": 1.0,
+      "recovery_rate": 0.0
+    },
+    {
+      "seed": 17,
+      "observation_id": "g3_h3_b3_084",
+      "blocks": 3,
+      "k": 3,
+      "valid_rate": 0.0,
+      "novelty_rate": 1.0,
+      "recovery_rate": 0.0
+    }
+  ],
+  "resource_totals": {
+    "calls": 9,
+    "input_tokens": 4071,
+    "output_tokens": 2700,
+    "model_call_seconds": 359.9554256000047,
+    "truncated_outputs": 3
+  },
+  "results": [
+    {
+      "observation_set_id": "g3_h3_b1_009",
+      "n_observations": 1,
+      "n_ground_truths": 3,
+      "n_queries": 3,
+      "n_valid": 0,
+      "n_unique": 1,
+      "n_recovered_gts": 0,
+      "parse_success_count": 2,
+      "parse_success_rate": 0.6666666666666666,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.3333333333333333,
+      "recovery_rate": 0.0,
+      "token_usage": {
+        "prompt_tokens": 1310,
+        "completion_tokens": 852,
+        "total_tokens": 2162
+      },
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      },
+      "seed": 17,
+      "blocks": 1,
+      "truncated_count": 0,
+      "latency_s": 118.23451249999925,
+      "strict_valid_count": 0
+    },
+    {
+      "observation_set_id": "g3_h3_b2_013",
+      "n_observations": 1,
+      "n_ground_truths": 9,
+      "n_queries": 3,
+      "n_valid": 0,
+      "n_unique": 2,
+      "n_recovered_gts": 0,
+      "parse_success_count": 2,
+      "parse_success_rate": 0.6666666666666666,
+      "valid_rate": 0.0,
+      "novelty_rate": 0.6666666666666666,
+      "recovery_rate": 0.0,
+      "token_usage": {
+        "prompt_tokens": 1310,
+        "completion_tokens": 1095,
+        "total_tokens": 2405
+      },
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      },
+      "seed": 17,
+      "blocks": 2,
+      "truncated_count": 2,
+      "latency_s": 135.35059220000403,
+      "strict_valid_count": 0
+    },
+    {
+      "observation_set_id": "g3_h3_b3_084",
+      "n_observations": 1,
+      "n_ground_truths": 27,
+      "n_queries": 3,
+      "n_valid": 0,
+      "n_unique": 3,
+      "n_recovered_gts": 0,
+      "parse_success_count": 3,
+      "parse_success_rate": 1.0,
+      "valid_rate": 0.0,
+      "novelty_rate": 1.0,
+      "recovery_rate": 0.0,
+      "token_usage": {
+        "prompt_tokens": 1451,
+        "completion_tokens": 753,
+        "total_tokens": 2204
+      },
+      "errors": [],
+      "error_summary": {
+        "total_errors": 0,
+        "error_types": {}
+      },
+      "seed": 17,
+      "blocks": 3,
+      "truncated_count": 1,
+      "latency_s": 106.37032090000139,
+      "strict_valid_count": 0
+    }
+  ],
+  "failure_categories": {
+    "parse failure": 2,
+    "invalid structure": 7,
+    "valid duplicate": 0,
+    "new valid": 0
+  }
+}

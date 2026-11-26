@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "identity": {
+    "config": {
+      "protocol": "3d-v1",
+      "upstream_commit": "c69e9318577b34b5b896996571aefd4ba6053f58",
+      "grid_size": 3,
+      "max_height": 3,
+      "blocks": [
+        1,
+        2,
+        3
+      ],
+      "test_per_stratum": 5,
+      "dev_per_stratum": 2,
+      "split_seed": 33550336,
+      "repeat_seeds": [
+        17,
+        42,
+        2026
+      ],
+      "query_multiplier": 1.0,
+      "temperature": 0.7,
+      "max_tokens": 512,
+      "max_retries": 1,
+      "provider": "anthropic",
+      "model": "uniform-height-control"
+    },
+    "mode": "offline",
+    "split": "test",
+    "method": "official-history",
+    "method_source_sha256": null,
+    "dataset_sha256": "61cebef122826c7b3d92b7fb520f956e096bc7c28025d98668384ad582a9e06e"
+  },
+  "planned_calls": 585,
+  "completed_calls": 585,
+  "runner_sha256": "ffe56e41217ffba88c979fe0ddc44aa148557fd0442e5194a07b803aed616e5f",
+  "python": "3.12.4",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "cost_usd": null,
+  "aggregate": {
+    "valid_rate": {
+      "mean": 1.0,
+      "std": 0.0
+    },
+    "novelty_rate": {
+      "mean": 0.6510288065843621,
+      "std": 0.15075337451687779
+    },
+    "recovery_rate": {
+      "mean": 0.6510288065843621,
+      "std": 0.15075337451687779
+    }
+  },
+  "by_blocks": {
+    "1": {
+      "valid_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "novelty_rate": {
+        "mean": 0.6888888888888889,
+        "std": 0.23457718351633228
+      },
+      "recovery_rate": {
+        "mean": 0.6888888888888889,
+        "std": 0.23457718351633228
+      }
+    },
+    "2": {
+      "valid_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "novelty_rate": {
+        "mean": 0.6074074074074074,
+        "std": 0.09264548753697686
+      },
+      "recovery_rate": {
+        "mean": 0.6074074074074074,
+        "std": 0.09264548753697686
+      }
+    },
+    "3": {
+      "valid_rate": {
+        "mean": 1.0,
+        "std": 0.0
+      },
+      "novelty_rate": {
+        "mean": 0.6567901234567902,
+        "std": 0.06485889153858615
+      },
+      "recovery_rate": {
+        "mean": 0.6567901234567902,
+        "std": 0.06485889153858615
+      }
+    }
+  }
+}

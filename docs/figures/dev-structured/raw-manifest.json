@@ -1,0 +1,38 @@
+[
+  {
+    "file": "raw/17/g3_h3_b1_009/0000.json",
+    "sha256": "21d1137f8758fe06ab01a454f7b981236cf0c0db8026b0447ed136fdd05d570f"
+  },
+  {
+    "file": "raw/17/g3_h3_b1_009/0001.json",
+    "sha256": "3a1e0fb0534ca305833533c4b40bb8617ec693824f4d7e347c2e3342b96ece88"
+  },
+  {
+    "file": "raw/17/g3_h3_b1_009/0002.json",
+    "sha256": "22720103814bfaac91f45b65b7c283b1859c4ded0c9d5049a8dc68e64175ac66"
+  },
+  {
+    "file": "raw/17/g3_h3_b2_013/0000.json",
+    "sha256": "ff120e09020d1bacfea63b0e303686213101505fcc4b8dce6fc6737f0b380992"
+  },
+  {
+    "file": "raw/17/g3_h3_b2_013/0001.json",
+    "sha256": "c340000901509145cb904935732569329df2b6b26b532682a87d5642010f8de4"
+  },
+  {
+    "file": "raw/17/g3_h3_b2_013/0002.json",
+    "sha256": "d578922cb33e26cfea80bb4df22d4c398c781518af269769fb7426c8de3a3b00"
+  },
+  {
+    "file": "raw/17/g3_h3_b3_084/0000.json",
+    "sha256": "cd3f3f938ce66a0b37a8d27df9abb35434678927cac89ab8bab344857b5290e9"
+  },
+  {
+    "file": "raw/17/g3_h3_b3_084/0001.json",
+    "sha256": "3e1af69ff5f01908e7ed2c4f505f06a6f84df354003d34f863d3af837ae5d4f7"
+  },
+  {
+    "file": "raw/17/g3_h3_b3_084/0002.json",
+    "sha256": "64902f60250e449794b4af8f3ac1c7f033c081110b3739077df4e8fb9c1ee35c"
+  }
+]
