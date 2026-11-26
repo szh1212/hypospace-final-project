@@ -108,6 +108,10 @@ class Dataset:
             Path(__file__).resolve().parents[1] / ".cache" / COLLECTION)
         with contextlib.redirect_stdout(io.StringIO()):
             self.bench = self._benchmark_class(str(self.collection_path))
+        # The official prompt joins self.operators, which upstream stores as a
+        # set whose iteration order varies between processes. Pin it so the
+        # prompt text - and therefore every recorded call - is replayable.
+        self.bench.operators = sorted(self.bench.operators)
         self.cases = {}
         for rows in self.bench.complete_dataset["datasets_by_n_observations"].values():
             for row in rows:
