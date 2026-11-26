@@ -36,13 +36,14 @@ def cell_outputs(dataset, case, oid, seed, method, folder):
     """Recompute each method's evaluated outputs from the raw records."""
     public = {k: case[k] for k in ("observations", "variables", "operators", "max_depth")}
     outputs = []
+    raw = folder / "raw" / oid / str(seed) / method
     if method == "official":
         _, dataset_module = load_official(dataset._upstream)
         observations = [dataset_module.BooleanObservation(obs["inputs"], obs["output"])
                         for obs in case["observations"]]
         prior = []
         for index in range(BUDGET):
-            record = json.loads((folder / oid / str(seed) / method / f"{index:03}.json").read_text())
+            record = json.loads((raw / f"{index:03}.json").read_text())
             data = record["data"]
             check(digest(data) == record["data_sha256"], (oid, seed, method, index))
             prompt = dataset.bench.create_prompt(observations, prior)
@@ -60,7 +61,7 @@ def cell_outputs(dataset, case, oid, seed, method, folder):
         prompts = [skeleton_prompt(public, c) for c in conditions]
     kept = 0
     for index, (condition, prompt) in enumerate(zip(conditions, prompts, strict=True)):
-        record = json.loads((folder / oid / str(seed) / method / f"{index:03}.json").read_text())
+        record = json.loads((raw / f"{index:03}.json").read_text())
         data = record["data"]
         check(digest(data) == record["data_sha256"], (oid, seed, method, index))
         check(prompt == data["prompt"], (oid, seed, method, index, "prompt mismatch"))
@@ -97,9 +98,9 @@ def bootstrap_contrast(method_case, control_case, cases, metric):
                 per_case_delta={oid: float(v) for oid, v in zip(cases, values)})
 
 
-def summarize(folder):
+def summarize(folder, split="test"):
     protocol = json.loads((ROOT / "experiments/boolean-skeleton.json").read_text())
-    cases, seeds = protocol["test"], protocol["test_seeds"]
+    cases, seeds = protocol[split], protocol[split + "_seeds"]
     dataset = Dataset(ROOT / ".cache/hypospace", ROOT / ".cache" / COLLECTION)
     methods = (*CONTROLS, *METHODS)
     entries = {}
@@ -152,7 +153,7 @@ if __name__ == "__main__":
     parser.add_argument("--out", type=Path, default=None)
     args = parser.parse_args()
     folder = args.out or ROOT / "runs" / ("boolean-" + args.split)
-    report = summarize(folder)
+    report = summarize(folder, args.split)
     save_path = ROOT / ".cache" / f"boolean-{args.split}.json"
     from run_causal import save
     save(save_path, report)
