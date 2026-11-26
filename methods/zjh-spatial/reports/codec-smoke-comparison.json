@@ -1,0 +1,98 @@
+{
+  "text": {
+    "row_major": {
+      "method_hash": "889f51be63fa1ef3f90b59e5bdfcd896e003beafd589d2bb3c7150f8e7c61682",
+      "calls": 9,
+      "accepted_codes": 6,
+      "scores_by_occupied_cells": {
+        "1": {
+          "valid_rate": 0.0,
+          "novelty_rate": 0.0,
+          "recovery_rate": 0.0
+        },
+        "2": {
+          "valid_rate": 1.0,
+          "novelty_rate": 1.0,
+          "recovery_rate": 0.3333333333333333
+        },
+        "3": {
+          "valid_rate": 1.0,
+          "novelty_rate": 1.0,
+          "recovery_rate": 0.1111111111111111
+        }
+      },
+      "first_unrecognized_response": "Heights: 3 3 1"
+    },
+    "cyclic": {
+      "method_hash": "889f51be63fa1ef3f90b59e5bdfcd896e003beafd589d2bb3c7150f8e7c61682",
+      "calls": 9,
+      "accepted_codes": 6,
+      "scores_by_occupied_cells": {
+        "1": {
+          "valid_rate": 0.0,
+          "novelty_rate": 0.0,
+          "recovery_rate": 0.0
+        },
+        "2": {
+          "valid_rate": 1.0,
+          "novelty_rate": 1.0,
+          "recovery_rate": 0.3333333333333333
+        },
+        "3": {
+          "valid_rate": 1.0,
+          "novelty_rate": 1.0,
+          "recovery_rate": 0.1111111111111111
+        }
+      },
+      "first_unrecognized_response": "Heights: 3 3 1"
+    }
+  },
+  "schema": {
+    "row_major": {
+      "method_hash": "44bf9344081e868fd15212cc960492fa8010b5709719cec7e401edb143ed21cb",
+      "calls": 9,
+      "accepted_codes": 9,
+      "scores_by_occupied_cells": {
+        "1": {
+          "valid_rate": 1.0,
+          "novelty_rate": 1.0,
+          "recovery_rate": 1.0
+        },
+        "2": {
+          "valid_rate": 1.0,
+          "novelty_rate": 1.0,
+          "recovery_rate": 0.3333333333333333
+        },
+        "3": {
+          "valid_rate": 1.0,
+          "novelty_rate": 1.0,
+          "recovery_rate": 0.1111111111111111
+        }
+      },
+      "first_unrecognized_response": null
+    },
+    "cyclic": {
+      "method_hash": "44bf9344081e868fd15212cc960492fa8010b5709719cec7e401edb143ed21cb",
+      "calls": 9,
+      "accepted_codes": 9,
+      "scores_by_occupied_cells": {
+        "1": {
+          "valid_rate": 1.0,
+          "novelty_rate": 1.0,
+          "recovery_rate": 1.0
+        },
+        "2": {
+          "valid_rate": 1.0,
+          "novelty_rate": 1.0,
+          "recovery_rate": 0.3333333333333333
+        },
+        "3": {
+          "valid_rate": 1.0,
+          "novelty_rate": 1.0,
+          "recovery_rate": 0.1111111111111111
+        }
+      },
+      "first_unrecognized_response": null
+    }
+  }
+}

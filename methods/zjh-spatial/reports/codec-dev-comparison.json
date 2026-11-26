@@ -1,0 +1,162 @@
+{
+  "baseline": "adapted_baseline:transform",
+  "baseline_resources": {
+    "calls": 234,
+    "input_tokens": 70148,
+    "output_tokens": 11788,
+    "model_call_seconds": 1129.5093343000044,
+    "truncated_outputs": 0
+  },
+  "split": "dev",
+  "comparisons": {
+    "spatial_codec:row_major": {
+      "observations": 6,
+      "observation_seed_pairs": 18,
+      "overall": {
+        "valid_rate": {
+          "baseline": 1.0,
+          "method": 1.0,
+          "delta": 0.0,
+          "observation_bootstrap_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "novelty_rate": {
+          "baseline": 0.19958847736625512,
+          "method": 0.5555555555555556,
+          "delta": 0.3559670781893004,
+          "observation_bootstrap_95": [
+            0.2880658436213992,
+            0.42386831275720166
+          ]
+        },
+        "recovery_rate": {
+          "baseline": 0.19958847736625512,
+          "method": 0.5555555555555556,
+          "delta": 0.3559670781893004,
+          "observation_bootstrap_95": [
+            0.2880658436213992,
+            0.42386831275720166
+          ]
+        }
+      },
+      "delta_by_seed": {
+        "valid_rate": {
+          "17": 0.0,
+          "42": 0.0,
+          "2026": 0.0
+        },
+        "novelty_rate": {
+          "17": 0.32098765432098764,
+          "42": 0.29012345679012347,
+          "2026": 0.45679012345679015
+        },
+        "recovery_rate": {
+          "17": 0.32098765432098764,
+          "42": 0.29012345679012347,
+          "2026": 0.45679012345679015
+        }
+      },
+      "delta_by_level": {
+        "valid_rate": {
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "novelty_rate": {
+          "1": 0.4444444444444445,
+          "2": 0.3148148148148148,
+          "3": 0.30864197530864196
+        },
+        "recovery_rate": {
+          "1": 0.4444444444444445,
+          "2": 0.3148148148148148,
+          "3": 0.30864197530864196
+        }
+      },
+      "resources": {
+        "calls": 234,
+        "input_tokens": 56358,
+        "output_tokens": 3708,
+        "model_call_seconds": 398.4773768000596,
+        "truncated_outputs": 0
+      }
+    },
+    "spatial_codec:cyclic": {
+      "observations": 6,
+      "observation_seed_pairs": 18,
+      "overall": {
+        "valid_rate": {
+          "baseline": 1.0,
+          "method": 1.0,
+          "delta": 0.0,
+          "observation_bootstrap_95": [
+            0.0,
+            0.0
+          ]
+        },
+        "novelty_rate": {
+          "baseline": 0.19958847736625512,
+          "method": 0.6419753086419753,
+          "delta": 0.4423868312757202,
+          "observation_bootstrap_95": [
+            0.360082304526749,
+            0.5246913580246914
+          ]
+        },
+        "recovery_rate": {
+          "baseline": 0.19958847736625512,
+          "method": 0.6419753086419753,
+          "delta": 0.4423868312757202,
+          "observation_bootstrap_95": [
+            0.360082304526749,
+            0.5246913580246914
+          ]
+        }
+      },
+      "delta_by_seed": {
+        "valid_rate": {
+          "17": 0.0,
+          "42": 0.0,
+          "2026": 0.0
+        },
+        "novelty_rate": {
+          "17": 0.4012345679012346,
+          "42": 0.39506172839506176,
+          "2026": 0.5308641975308642
+        },
+        "recovery_rate": {
+          "17": 0.4012345679012346,
+          "42": 0.39506172839506176,
+          "2026": 0.5308641975308642
+        }
+      },
+      "delta_by_level": {
+        "valid_rate": {
+          "1": 0.0,
+          "2": 0.0,
+          "3": 0.0
+        },
+        "novelty_rate": {
+          "1": 0.4444444444444445,
+          "2": 0.462962962962963,
+          "3": 0.4197530864197531
+        },
+        "recovery_rate": {
+          "1": 0.4444444444444445,
+          "2": 0.462962962962963,
+          "3": 0.4197530864197531
+        }
+      },
+      "resources": {
+        "calls": 234,
+        "input_tokens": 59049,
+        "output_tokens": 3708,
+        "model_call_seconds": 460.90560129990627,
+        "truncated_outputs": 0
+      }
+    }
+  },
+  "selected": "spatial_codec:cyclic"
+}
