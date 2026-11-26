@@ -8,12 +8,12 @@
 
 参考正式论文 https://proceedings.mlr.press/v306/chen26bz.html ，PDF共15页。第3节定义V/U/R，第5.2节定义投影和支撑约束，第6.5节已包含复杂度分层解码。注意第3节的 independent samples 描述与第5.2节、官方实现的历史条件生成存在差别：本项目明确复现官方代码的 history-conditioned baseline，不称为独立同分布采样。
 
-官方代码固定 https://github.com/CTT-Pavilion/_HypoSpace 的 `c69e9318577b34b5b896996571aefd4ba6053f58`。不复制修改官方代码；通过 experiments/bootstrap.py 拉取到忽略目录 .cache/hypospace。
+官方代码固定 https://github.com/CTT-Pavilion/_HypoSpace 的 `c69e9318577b34b5b896996571aefd4ba6053f58`。不复制修改官方代码；通过 methods/szh-baseline-3d-task-b/experiments/bootstrap.py 拉取到忽略目录 .cache/hypospace。
 
 ## 模型与执行环境
 
 - Qwen2.5-3B-Instruct，Ollama tag `qwen2.5:3b-instruct-q4_K_M`，量化 Q4_K_M。
-- Ollama 0.40.18；模型 digest 和模板 SHA256 保存到 experiments/model-lock.json，启动时核验。仅 tag 相同不够。
+- Ollama 0.40.18；模型 digest 和模板 SHA256 保存到 methods/szh-baseline-3d-task-b/experiments/model-lock.json，启动时核验。仅 tag 相同不够。
 - 本机 http://localhost:11434，无 API Key，无商业 API、云端回退；运行费用0元（不含硬件、电力）。模型来自官方 Ollama registry。
 - 基线硬件：Intel i5-1155G7，4核8线程，16GB RAM，Intel Iris Xe共享内存集显，无独立GPU；本次使用CPU推理。C/D/E属于同一512GB NVMe SSD；H是USB盘。
 - 本机模型、Ollama二进制、虚拟环境和正式raw outputs均在 C:/Users/宋知恒/HypoSpaceLocal；仓库在H盘。其他队友自行选择本机SSD目录，不要照搬用户名或使用U盘环境。
@@ -21,7 +21,7 @@
 
 ## 数据与采样配置
 
-唯一配置源 experiments/protocol.json；固定数据与划分 experiments/manifest.json。正式协议已依据开发集冻结：Adapted Baseline为 adapted_baseline:transform，正式规模585次。冻结依据见baseline-freeze.json。
+唯一配置源 methods/szh-baseline-3d-task-b/experiments/protocol.json；固定数据与划分 methods/szh-baseline-3d-task-b/experiments/manifest.json。正式协议已依据开发集冻结：Adapted Baseline为 adapted_baseline:transform，正式规模585次。冻结依据见baseline-freeze.json。
 
 官方生成器穷举全部129个俯视观测。每层2个dev观测、5个test观测，分层随机打乱后确定ID；split seed=33550336。三层合计6个dev、15个test。dev用于设计和调参；test仅在方法冻结后评估。官方合法解仅提供给评测器，不能输入生成方法。
 
@@ -43,11 +43,11 @@ V=有效生成次数/请求次数；U=所有可解析结构的去重数量/请�
 
 ## 统一接口
 
-- 模型：src/ollama_client.py 的 OllamaClient(config).request(prompt,seed)、generate(request)，返回原文、input/output token、耗时和停止原因。禁止绕开接口隐藏额外模型调用。
-- 数据：src/experiment_api.py 的 load_dataset(split)，仅返回 observation_id/observation，不暴露解集。
+- 模型：methods/szh-baseline-3d-task-b/src/ollama_client.py 的 OllamaClient(config).request(prompt,seed)、generate(request)，返回原文、input/output token、耗时和停止原因。禁止绕开接口隐藏额外模型调用。
+- 数据：methods/szh-baseline-3d-task-b/src/experiment_api.py 的 load_dataset(split)，仅返回 observation_id/observation，不暴露解集。
 - 评价：evaluate_outputs(observation_id, outputs)，将所有原始候选交给官方评测器。
 - 策略：在src创建模块，定义 transform(prompt: str, context: dict) -> str；context只含observation、query_index、history。runner用 --method your_method:transform 加载。保持最终Layer输出格式一致，hook内部不进行模型调用或读取ground truth。
-- 对比：src/compare_runs.py，检查两次run的完整配置、模型指纹、split、逐题调用次数，输出配对V/U/R差值和调用、token、时间。
+- 对比：methods/szh-baseline-3d-task-b/src/compare_runs.py，检查两次run的完整配置、模型指纹、split、逐题调用次数，输出配对V/U/R差值和调用、token、时间。
 
 ## 等预算规则
 

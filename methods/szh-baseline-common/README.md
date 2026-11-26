@@ -1,17 +1,17 @@
 # Shared adapted baseline runner
 
-This framework reuses src/ollama_client.py unchanged and the pinned official parsers, validators, canonicalizers and evaluator. Prompts receive only metadata, observations and unique parsed prior responses. No solution references, filtering, repairs, enumeration, stratification or coverage feedback are used in generation. Reference enumeration occurs only in official data preparation and evaluation.
+This framework reuses methods/szh-baseline-3d-task-b/src/ollama_client.py unchanged and the pinned official parsers, validators, canonicalizers and evaluator. Prompts receive only metadata, observations and unique parsed prior responses. No solution references, filtering, repairs, enumeration, stratification or coverage feedback are used in generation. Reference enumeration occurs only in official data preparation and evaluation.
 
 Install the repository requirements and sympy==1.13.3. Place the clean official repository at ../upstream-hypospace, pinned to c69e9318577b34b5b896996571aefd4ba6053f58.
 
 ```powershell
 python methods/szh-baseline-common/prepare_data.py
-python methods/szh-baseline-common/run.py --prepare
-python methods/szh-baseline-common/run.py --domain causal --stage smoke
-python methods/szh-baseline-common/run.py --domain genetic --stage smoke
-python methods/szh-baseline-common/run.py --stage freeze
-python methods/szh-baseline-common/run.py --domain causal --stage test
-python methods/szh-baseline-common/run.py --domain genetic --stage test
+python experiments/run_domain.py --prepare
+python experiments/run_domain.py --domain causal --stage smoke
+python experiments/run_domain.py --domain genetic --stage smoke
+python experiments/run_domain.py --stage freeze
+python experiments/run_domain.py --domain causal --stage test
+python experiments/run_domain.py --domain genetic --stage test
 python experiments/audit_all_domains.py --domain causal
 python experiments/audit_all_domains.py --domain genetic
 ```
@@ -32,10 +32,12 @@ To restore a published new-task archive in a fresh checkout (after installing de
 
 After both formal audits, run `python experiments/finalize_all_domains.py` and `python experiments/diagnose_all_domains.py` for the reported-method comparison, seed statistics and diagnostic breakdown. Published 3D replay uses `python experiments/audit_all_domains_3d.py` with the original ignored 3D data prepared by the existing runner; it performs zero inference calls.
 
-The frozen runner retains its original in-memory summary comparison. Causal graph edges are tuples in memory and lists in JSON, so use experiments/audit_all_domains.py for final replay: it compares the complete summary in canonical JSON form with no metric tolerance or omitted fields. This wrapper leaves frozen generation/evaluation sources unchanged. After audits, run `python methods/szh-baseline-common/plot.py` and `python methods/szh-baseline-common/report.py` before the final comparison/diagnostic scripts.
+The frozen runner retains its original in-memory summary comparison. Causal graph edges are tuples in memory and lists in JSON, so use experiments/audit_all_domains.py for final replay: it compares the complete summary in canonical JSON form with no metric tolerance or omitted fields. This wrapper leaves frozen generation/evaluation sources unchanged. After audits, run `python experiments/run_frozen_utility.py plot` and `python experiments/run_frozen_utility.py report` before the final comparison/diagnostic scripts.
 
 Repeat seeds are 17/42/2026. Individual request seeds preserve the 3D runner's schedule: `(repeat_seed + int(SHA256(observation_id)[:8],16) + query_index) % 2147483647`. Every actual seed is included in the archived request.
 
 Generate the constant-cohort recovery figure with `python experiments/plot_all_domains_supplement.py`. It uses saved prefixes only, without new model calls.
 
 The repository attributes preserve exact bytes for the frozen common Python sources, preventing Git line-ending conversion from invalidating the pre-inference SHA256 hashes. Staged source bytes were independently checked against freeze.json before publication.
+
+Integration keeps the published frozen sources and identities byte-exact. experiments/integration_paths.py translates historical artifact locations at runtime; experiments/run_domain.py is the current inference entry. Frozen execute.py is retained as provenance; use the individually listed commands for current execution. Historical filenames within archived result JSON are provenance, not mutable runtime paths.

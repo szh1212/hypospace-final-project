@@ -7,13 +7,15 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'methods/szh-baseline-common'))
 import run
+from integration_paths import configure,RelocatedRoot
+configure(run)
 class JsonSummary(dict):
     def __eq__(self,other):
         return json.dumps(self,sort_keys=True,separators=(',',':'))==json.dumps(other,sort_keys=True,separators=(',',':'))
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--domain',choices=['causal','genetic'],required=True);a=p.parse_args()
-    target=(ROOT/f'methods/szh-baseline-{a.domain}/reports/test.json').resolve()
+    target=(RelocatedRoot()/f'methods/szh-baseline-{a.domain}/reports/test.json').resolve()
     original=run.read
     def read(path):
         value=original(path)

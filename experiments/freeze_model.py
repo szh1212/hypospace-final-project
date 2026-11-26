@@ -1,10 +1,5 @@
-"""Freeze exact local model digest before smoke and baseline runs."""
-import sys,json
+"""Compatibility entry; implementation lives in the method directory."""
 from pathlib import Path
-ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT/'src'))
-from ollama_client import OllamaClient
-p=ROOT/'experiments/protocol.json'; c=json.loads(p.read_text(encoding='utf-8'))
-f=OllamaClient(c).fingerprint();c['model_digest']=f['digest']
-p.write_text(json.dumps(c,indent=2)+'\n',encoding='utf-8')
-(ROOT/'experiments/model-lock.json').write_text(json.dumps(f,indent=2)+'\n',encoding='utf-8')
-print(json.dumps(f,indent=2));print('Run hypospace_runner.py --prepare to update the config checksum.')
+_target=Path(__file__).resolve().parents[1]/'methods/szh-baseline-3d-task-b/experiments/freeze_model.py'
+__file__=str(_target)
+exec(compile(_target.read_bytes(),str(_target),"exec"),globals())

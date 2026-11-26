@@ -3,3 +3,4 @@ methods/szh-baseline-common/*.py -text whitespace=blank-at-eol,blank-at-eof,spac
 # Machine-generated experiment records are reviewed through replay scripts and reports.
 methods/szh-baseline-causal/reports/*.json linguist-generated=true
 methods/szh-baseline-genetic/reports/*.json linguist-generated=true
+methods/szh-baseline-3d-task-b/src/*.py -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

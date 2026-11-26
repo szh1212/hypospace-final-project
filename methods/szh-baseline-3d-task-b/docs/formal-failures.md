@@ -12,4 +12,4 @@
 
 前四行互斥，最后一行是投影不符的子集。四角均被占用的投影不可能匹配本测试集的 1–3 个占用格；该计数描述输出中的图案，不能单独证明示例导致了错误。合法输出中的重复情况见两组 metrics.json 的 failure_categories。
 
-复现命令为 `python experiments/diagnose_archives.py`。脚本从仓库中两个 gzip 原始归档读取响应，仅做离线回放。
+复现命令为 `python methods/szh-baseline-3d-task-b/experiments/diagnose_archives.py`。脚本从仓库中两个 gzip 原始归档读取响应，仅做离线回放。
