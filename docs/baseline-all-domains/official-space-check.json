@@ -1,0 +1,54 @@
+{
+  "basic": {
+    "reference_structures": 10,
+    "distinct_formulas": 10,
+    "official_in_space_rejections": 0,
+    "rejected_formulas": []
+  },
+  "extended": {
+    "reference_structures": 34,
+    "distinct_formulas": 34,
+    "official_in_space_rejections": 1,
+    "rejected_formulas": [
+      "NOT (x  OR  y)"
+    ]
+  },
+  "full": {
+    "reference_structures": 65,
+    "distinct_formulas": 65,
+    "official_in_space_rejections": 31,
+    "rejected_formulas": [
+      "(x  AND  y)  OR  NOT (x  OR  y)",
+      "(x  OR  y)  AND  NOT (x  OR  y)",
+      "NOT ((x  AND  y)  OR  NOT (x  OR  y))",
+      "NOT (NOT (x  OR  y))",
+      "NOT (NOT x  OR  (x  AND  y))",
+      "NOT (NOT x  OR  NOT (x  OR  y))",
+      "NOT (NOT x  OR  NOT y)",
+      "NOT (NOT y  OR  (x  AND  y))",
+      "NOT (NOT y  OR  NOT (x  OR  y))",
+      "NOT (x  OR  (x  AND  y))",
+      "NOT (x  OR  NOT (x  OR  y))",
+      "NOT (x  OR  NOT x)",
+      "NOT (x  OR  NOT y)",
+      "NOT (x  OR  y  OR  (x  AND  y))",
+      "NOT (x  OR  y  OR  NOT (x  OR  y))",
+      "NOT (x  OR  y  OR  NOT x)",
+      "NOT (x  OR  y  OR  NOT y)",
+      "NOT (y  OR  (x  AND  y))",
+      "NOT (y  OR  NOT (x  OR  y))",
+      "NOT (y  OR  NOT x)",
+      "NOT (y  OR  NOT y)",
+      "NOT x  AND  NOT (x  OR  y)",
+      "NOT x  OR  NOT (x  OR  y)",
+      "NOT y  AND  NOT (x  OR  y)",
+      "NOT y  OR  NOT (x  OR  y)",
+      "x  AND  NOT (x  OR  y)",
+      "x  AND  y  AND  NOT (x  OR  y)",
+      "x  OR  NOT (x  OR  y)",
+      "x  OR  y  OR  NOT (x  OR  y)",
+      "y  AND  NOT (x  OR  y)",
+      "y  OR  NOT (x  OR  y)"
+    ]
+  }
+}

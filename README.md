@@ -108,3 +108,19 @@ The study covers one quantized model, one reconstruction task and 15 test observ
 | Jianghan Zhao | Spatial Representation Transformation |
 
 [Team handoff and submission instructions](docs/team-message.txt)
+
+## Baseline Results Across Three Domains
+
+| Domain | Model | Validity | Uniqueness | Recovery | LLM Calls |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Causal Graph Inference | Qwen2.5-3B | 5.05% | 24.66% | 0.37% | 654 |
+| 3D Voxel Reconstruction | Qwen2.5-3B | 78.52% | 21.65% | 17.45% | 585 |
+| Boolean Genetic Interaction | Qwen2.5-3B | 14.35% | 8.76% | 2.98% | 270 |
+
+These are within-domain diagnostic measurements, not a fair comparison of algorithm performance across domains. The unified baseline uses the frozen 3D sampling parameters, task-adapted prompts and official scoring. New runs use seeds 17/42/2026 and one call per compatible hypothesis on their frozen test subsets. The causal study uses four nodes and at most four edges; Boolean studies basic/extended/full operators at depth two. The 3D figures are preserved from the archived report; its published 585-call compressed raw archive has been independently replayed on this machine (see historical-3d-replay.json).
+
+The causal alignment protocol reuses a single batch on LWT's 13 final test cases at budgets 4/8/13/16. Total new causal calls including alignment are 2019. Macro means weight instances equally; micro pooling and across-seed sample standard deviations are reported separately. Different official budgets and solution-space sizes make cross-domain Recovery incomparable as an algorithm ranking.
+
+See [all-domain report](docs/baseline-all-domains/results.md), [shared reproduction commands](methods/szh-baseline-common/README.md), and task-specific tracked reports and raw SHA256 manifests.
+
+Causal table metrics and 654 calls describe the unified subset; 1,365 additional calls support the separate alignment cohort (2,019 new causal calls total). New formal inference and full replay are complete. The official Boolean reference/validator inconsistency and historical LWT replay limitation are disclosed in the all-domain audit.

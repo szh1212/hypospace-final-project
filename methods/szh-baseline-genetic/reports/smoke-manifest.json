@@ -1,0 +1,74 @@
+[
+  {
+    "file": "raw\\basic\\17\\n1_inputs_10_outputs_0\\0000.json",
+    "sha256": "a6c43a7d58956a9efa91d32d293fe5eabdf0f198ea21c1724e69959d8d7761f2"
+  },
+  {
+    "file": "raw\\basic\\17\\n1_inputs_10_outputs_0\\0001.json",
+    "sha256": "f9695c349c9b06095f35d7117f9f21f1c699a497acf602d1d8499ca1ef3ab6f4"
+  },
+  {
+    "file": "raw\\basic\\17\\n1_inputs_10_outputs_0\\0002.json",
+    "sha256": "f212f680998eb86648dc546a585503c6ffbdab4a12cfb9ccbee292093d0020b4"
+  },
+  {
+    "file": "raw\\basic\\17\\n3_inputs_01_10_11_outputs_011\\0000.json",
+    "sha256": "deccad560f4e73b416edc09c842e3feba7cd8911d5221f260ca4bb015fd2c53f"
+  },
+  {
+    "file": "raw\\basic\\17\\n3_inputs_01_10_11_outputs_011\\0001.json",
+    "sha256": "33f38f28d16ac6965f05704c2ae433403d476f1423fbfe8cd23bb7f62256afa7"
+  },
+  {
+    "file": "raw\\basic\\17\\n3_inputs_01_10_11_outputs_011\\0002.json",
+    "sha256": "90a1cdb82655002519994aed1350a2cbfd79571d11153349b8e2a0ead926d59f"
+  },
+  {
+    "file": "raw\\extended\\17\\n1_inputs_10_outputs_0\\0000.json",
+    "sha256": "47c9f0a668099dff84ba30e1a4b7e8a0e5100f3f3d5f61a20eb31a663aacb04c"
+  },
+  {
+    "file": "raw\\extended\\17\\n1_inputs_10_outputs_0\\0001.json",
+    "sha256": "46427913a3ede399336d575d3b149e8c1b18d043f3318c76bc2d8957dfffae2a"
+  },
+  {
+    "file": "raw\\extended\\17\\n1_inputs_10_outputs_0\\0002.json",
+    "sha256": "2034d9d79212fcbe664515d573349f913db7168a99247acb91b4014e8feb3270"
+  },
+  {
+    "file": "raw\\extended\\17\\n3_inputs_01_10_11_outputs_011\\0000.json",
+    "sha256": "6f957d2aeef7a5998ec92599af7d940b9f0d955048caa2a205567057f9347656"
+  },
+  {
+    "file": "raw\\extended\\17\\n3_inputs_01_10_11_outputs_011\\0001.json",
+    "sha256": "b77e238bbc010a9fcb9828baf2585e32d404b3d81dfa299a9bfc10861a53e51a"
+  },
+  {
+    "file": "raw\\extended\\17\\n3_inputs_01_10_11_outputs_011\\0002.json",
+    "sha256": "051079f8fd380869d046574e2f7c72f1ff2ca21efac9cc74e412869fe5ea9b23"
+  },
+  {
+    "file": "raw\\full\\17\\n1_inputs_10_outputs_0\\0000.json",
+    "sha256": "d2bbbf3e8e0a90efa1e49d5e7df42be7c5cf726f067af520c1a1f41489a11751"
+  },
+  {
+    "file": "raw\\full\\17\\n1_inputs_10_outputs_0\\0001.json",
+    "sha256": "1471924740a02c812ba2cd441a4531a93ea3cc9ca8497481e113efa4cd09d42c"
+  },
+  {
+    "file": "raw\\full\\17\\n1_inputs_10_outputs_0\\0002.json",
+    "sha256": "b728d572d63c30de3b905c7260c0cc34bf706e50e41532dc2b2efdce11403942"
+  },
+  {
+    "file": "raw\\full\\17\\n3_inputs_01_10_11_outputs_011\\0000.json",
+    "sha256": "420f8ce1b53f7a416986a6f8038ed585f3fab8b74bdf37f7c4e4fa92be0b6c15"
+  },
+  {
+    "file": "raw\\full\\17\\n3_inputs_01_10_11_outputs_011\\0001.json",
+    "sha256": "0d978554bd7ce05f31b87a051a87db4a3f032c71192f2b8563f63f8880b5bfe7"
+  },
+  {
+    "file": "raw\\full\\17\\n3_inputs_01_10_11_outputs_011\\0002.json",
+    "sha256": "ae5ead45c2c4021ef07bca0b3498ceb146869302095ba6c8627cdfa3d4f94f9e"
+  }
+]

@@ -1,0 +1,41 @@
+{
+  "source": "docs/figures/baseline/metrics.json",
+  "inference_calls": 0,
+  "formal_calls": 585,
+  "per_seed": {
+    "17": {
+      "valid_rate": 0.7777777777777778,
+      "novelty_rate": 0.22469135802469134,
+      "recovery_rate": 0.17530864197530863
+    },
+    "42": {
+      "valid_rate": 0.7777777777777778,
+      "novelty_rate": 0.22716049382716047,
+      "recovery_rate": 0.17777777777777776
+    },
+    "2026": {
+      "valid_rate": 0.8,
+      "novelty_rate": 0.19753086419753085,
+      "recovery_rate": 0.17037037037037037
+    }
+  },
+  "across_seeds": {
+    "valid_rate": {
+      "mean": 0.7851851851851852,
+      "std": 0.012830005981991702
+    },
+    "novelty_rate": {
+      "mean": 0.21646090534979423,
+      "std": 0.016440316341924423
+    },
+    "recovery_rate": {
+      "mean": 0.1744855967078189,
+      "std": 0.003771667238646773
+    }
+  },
+  "micro": {
+    "valid_rate": 0.7658119658119659,
+    "novelty_rate": 0.1111111111111111,
+    "recovery_rate": 0.08205128205128205
+  }
+}

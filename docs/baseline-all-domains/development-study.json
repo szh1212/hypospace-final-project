@@ -1,0 +1,658 @@
+[
+  {
+    "domain": "causal",
+    "stage": "smoke-v1",
+    "calls": 12,
+    "valid_outputs": 1,
+    "input_tokens": 2328,
+    "output_tokens": 140,
+    "seconds": 20.07659159998002,
+    "commercial_cost_usd": 0,
+    "identity": {
+      "identity": {
+        "config": {
+          "protocol": "all-domains-adapted-v1",
+          "upstream_commit": "c69e9318577b34b5b896996571aefd4ba6053f58",
+          "grid_size": 3,
+          "max_height": 3,
+          "blocks": [
+            1,
+            2,
+            3
+          ],
+          "test_per_stratum": 5,
+          "dev_per_stratum": 2,
+          "split_seed": 33550336,
+          "repeat_seeds": [
+            17,
+            42,
+            2026
+          ],
+          "query_multiplier": 1.0,
+          "temperature": 0.7,
+          "max_tokens": 512,
+          "max_retries": 1,
+          "provider": "ollama",
+          "model": "qwen2.5:3b-instruct-q4_K_M",
+          "quantization": "Q4_K_M",
+          "top_p": 0.9,
+          "top_k": 40,
+          "repeat_penalty": 1.0,
+          "num_ctx": 8192,
+          "num_thread": 4,
+          "num_gpu": 0,
+          "model_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+          "ollama_version": "0.40.18",
+          "system": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant.",
+          "baseline_method": "task-adapted-history",
+          "status": "DRAFT",
+          "causal": {
+            "splits": {
+              "dev": [
+                "n1_007",
+                "n1_004",
+                "n2_014",
+                "n2_120"
+              ],
+              "test": [
+                "n1_021",
+                "n1_023",
+                "n1_020",
+                "n1_016",
+                "n1_029",
+                "n2_184",
+                "n2_056",
+                "n2_063",
+                "n2_173",
+                "n2_039"
+              ]
+            },
+            "aligned_test": [
+              "n1_017",
+              "n1_024",
+              "n1_030",
+              "n2_017",
+              "n2_033",
+              "n2_049",
+              "n2_054",
+              "n2_069",
+              "n2_098",
+              "n2_112",
+              "n2_126",
+              "n2_140",
+              "n2_186"
+            ],
+            "aligned_budget": 16,
+            "budget": "one call per compatible graph; aligned prefixes reused"
+          },
+          "genetic": {
+            "levels": [
+              "basic",
+              "extended",
+              "full"
+            ],
+            "splits": {
+              "dev": [
+                "n1_inputs_10_outputs_0",
+                "n3_inputs_01_10_11_outputs_011"
+              ],
+              "test": [
+                "n3_inputs_00_01_10_outputs_001",
+                "n3_inputs_00_01_11_outputs_011",
+                "n3_inputs_01_10_11_outputs_111",
+                "n3_inputs_00_10_11_outputs_011",
+                "n3_inputs_01_10_11_outputs_101"
+              ]
+            },
+            "budget": "one call per compatible expression",
+            "max_depth": 2
+          },
+          "data_sha256": {
+            "boolean-basic.json": "84ad5ed3385303bfd0cdc5507fcba890bd06921c2594908ca9b839aebd389bab",
+            "boolean-extended.json": "97423d6ebe09c983ccf842d3274eb707f6c43779b185d0ee516fd2c3df81f4bf",
+            "boolean-full.json": "ce5b2ecd908e07729d6ea80c3a9aeca73138a3a92e2c497c1432b1362450b9e0",
+            "causal.json": "cd059649afd4f9485bf132ec13143797c42a56aa007c4e9d85364b71fb707fdd"
+          }
+        },
+        "sources": {
+          "prompts.py": "0d455f077884ca2d9c55bc9d497ef928ad3431d4277e28ba8e99669c0736260a",
+          "run.py": "1daa35f4842e35eec9a3cd86e5581afd93f6877adf3add04f54da1d384c860c7",
+          "prepare_data.py": "73717a024fc880b301dfa05c2f4a893fa8d3d40b8a8a6af936fe43255212a58b",
+          "plot.py": "17635f4191da051af747f0263f8680b9198e17430dccfbdb539c349a12200e4c",
+          "execute.py": "209ff11e1520cf4a5b9061c6b49c5c72130a89fce5c8bb8855a52c3751946195",
+          "report.py": "bed2fbad8c36bc8a1ce5eef1c91893795f171d37449550ab4cec9fcb620c9851"
+        },
+        "transport_sha256": "f28e49706619c826172ddf99e2f0e724185f32339ad5c8c0e67264e4bd823f92",
+        "official_sources": {
+          "3d\\generate_3d_dataset_complete.py": "49d7c1b14578a8134aede0c4559f7abd94a0d467940da43d8e41e97f363f8dff",
+          "3d\\modules\\llm_interface.py": "0ca5836d41ad661ba5c7f2916f3beedf73b7b06a8feda91c3926559de47f332f",
+          "3d\\modules\\models.py": "9264174d61ece6147133f7657796e86510366dc550ea40b323ce01e665244820",
+          "3d\\run_3d_benchmark.py": "bb2dd9dd07695d183b5861dd974575c738290e12c40e09a547f709de36d5ab94",
+          "boolean\\boolean_benchmark.py": "4168d4edfd62b3d1557dd3ecbbfd9efe7367c98b05694870f10bc48662f916e6",
+          "boolean\\boolean_dataset.py": "0c98e9293d968d341b237b56a635dd86f83829890fe39522ff0bd365430e4937",
+          "boolean\\modules\\llm_interface.py": "0ca5836d41ad661ba5c7f2916f3beedf73b7b06a8feda91c3926559de47f332f",
+          "boolean\\modules\\models.py": "9264174d61ece6147133f7657796e86510366dc550ea40b323ce01e665244820",
+          "causal\\generate_causal_dataset.py": "7cd9a42ceb41b9c76ae5eda41eac53bd96542d06ee27808823133571ce38d817",
+          "causal\\generate_causal_dataset_for_large.py": "cbd94fe7d5b8828aff0c3b668f1fcdd330f3ec67fa6c74530a77d4e21b801379",
+          "causal\\modules\\llm_interface.py": "0ca5836d41ad661ba5c7f2916f3beedf73b7b06a8feda91c3926559de47f332f",
+          "causal\\modules\\models.py": "9264174d61ece6147133f7657796e86510366dc550ea40b323ce01e665244820",
+          "causal\\run_causal_benchmark.py": "65bc7d0bdb377b295c9992cf20fc55b1357214b5e6717c3852c110be4bdb6625"
+        },
+        "data": {
+          "boolean-basic.json": "84ad5ed3385303bfd0cdc5507fcba890bd06921c2594908ca9b839aebd389bab",
+          "boolean-extended.json": "97423d6ebe09c983ccf842d3274eb707f6c43779b185d0ee516fd2c3df81f4bf",
+          "boolean-full.json": "ce5b2ecd908e07729d6ea80c3a9aeca73138a3a92e2c497c1432b1362450b9e0",
+          "causal.json": "cd059649afd4f9485bf132ec13143797c42a56aa007c4e9d85364b71fb707fdd"
+        }
+      },
+      "fingerprint": {
+        "model": "qwen2.5:3b-instruct-q4_K_M",
+        "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M"
+        },
+        "ollama_version": "0.40.18",
+        "template_sha256": "eb4402837c7829a690fa845de4d7f3fd842c2adee476d5341da8a46ea9255175"
+      }
+    }
+  },
+  {
+    "domain": "causal",
+    "stage": "smoke",
+    "calls": 12,
+    "valid_outputs": 1,
+    "input_tokens": 2328,
+    "output_tokens": 140,
+    "seconds": 17.446350400015945,
+    "commercial_cost_usd": 0,
+    "identity": {
+      "identity": {
+        "config": {
+          "protocol": "all-domains-adapted-v1",
+          "upstream_commit": "c69e9318577b34b5b896996571aefd4ba6053f58",
+          "grid_size": 3,
+          "max_height": 3,
+          "blocks": [
+            1,
+            2,
+            3
+          ],
+          "test_per_stratum": 5,
+          "dev_per_stratum": 2,
+          "split_seed": 33550336,
+          "repeat_seeds": [
+            17,
+            42,
+            2026
+          ],
+          "query_multiplier": 1.0,
+          "temperature": 0.7,
+          "max_tokens": 512,
+          "max_retries": 1,
+          "provider": "ollama",
+          "model": "qwen2.5:3b-instruct-q4_K_M",
+          "quantization": "Q4_K_M",
+          "top_p": 0.9,
+          "top_k": 40,
+          "repeat_penalty": 1.0,
+          "num_ctx": 8192,
+          "num_thread": 4,
+          "num_gpu": 0,
+          "model_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+          "ollama_version": "0.40.18",
+          "system": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant.",
+          "baseline_method": "task-adapted-history",
+          "status": "DRAFT",
+          "causal": {
+            "splits": {
+              "dev": [
+                "n1_007",
+                "n1_004",
+                "n2_014",
+                "n2_120"
+              ],
+              "test": [
+                "n1_021",
+                "n1_023",
+                "n1_020",
+                "n1_016",
+                "n1_029",
+                "n2_184",
+                "n2_056",
+                "n2_063",
+                "n2_173",
+                "n2_039"
+              ]
+            },
+            "aligned_test": [
+              "n1_017",
+              "n1_024",
+              "n1_030",
+              "n2_017",
+              "n2_033",
+              "n2_049",
+              "n2_054",
+              "n2_069",
+              "n2_098",
+              "n2_112",
+              "n2_126",
+              "n2_140",
+              "n2_186"
+            ],
+            "aligned_budget": 16,
+            "budget": "one call per compatible graph; aligned prefixes reused"
+          },
+          "genetic": {
+            "levels": [
+              "basic",
+              "extended",
+              "full"
+            ],
+            "splits": {
+              "dev": [
+                "n1_inputs_10_outputs_0",
+                "n3_inputs_01_10_11_outputs_011"
+              ],
+              "test": [
+                "n3_inputs_00_01_10_outputs_001",
+                "n3_inputs_00_01_11_outputs_011",
+                "n3_inputs_01_10_11_outputs_111",
+                "n3_inputs_00_10_11_outputs_011",
+                "n3_inputs_01_10_11_outputs_101"
+              ]
+            },
+            "budget": "one call per compatible expression",
+            "max_depth": 2
+          },
+          "data_sha256": {
+            "boolean-basic.json": "84ad5ed3385303bfd0cdc5507fcba890bd06921c2594908ca9b839aebd389bab",
+            "boolean-extended.json": "97423d6ebe09c983ccf842d3274eb707f6c43779b185d0ee516fd2c3df81f4bf",
+            "boolean-full.json": "ce5b2ecd908e07729d6ea80c3a9aeca73138a3a92e2c497c1432b1362450b9e0",
+            "causal.json": "cd059649afd4f9485bf132ec13143797c42a56aa007c4e9d85364b71fb707fdd"
+          }
+        },
+        "sources": {
+          "prompts.py": "e0e8022101bd90461208d0bb9b03c50e43f5bb3ed72d6598e7b2c1f2e0a77769",
+          "run.py": "669bc95bf2e15bbd75b0cd5632984ebc57493c9f94c91cbd8c9d6326229bf02b",
+          "prepare_data.py": "73717a024fc880b301dfa05c2f4a893fa8d3d40b8a8a6af936fe43255212a58b",
+          "plot.py": "17635f4191da051af747f0263f8680b9198e17430dccfbdb539c349a12200e4c",
+          "execute.py": "209ff11e1520cf4a5b9061c6b49c5c72130a89fce5c8bb8855a52c3751946195",
+          "report.py": "bed2fbad8c36bc8a1ce5eef1c91893795f171d37449550ab4cec9fcb620c9851"
+        },
+        "transport_sha256": "f28e49706619c826172ddf99e2f0e724185f32339ad5c8c0e67264e4bd823f92",
+        "official_sources": {
+          "3d\\generate_3d_dataset_complete.py": "49d7c1b14578a8134aede0c4559f7abd94a0d467940da43d8e41e97f363f8dff",
+          "3d\\modules\\llm_interface.py": "0ca5836d41ad661ba5c7f2916f3beedf73b7b06a8feda91c3926559de47f332f",
+          "3d\\modules\\models.py": "9264174d61ece6147133f7657796e86510366dc550ea40b323ce01e665244820",
+          "3d\\run_3d_benchmark.py": "bb2dd9dd07695d183b5861dd974575c738290e12c40e09a547f709de36d5ab94",
+          "boolean\\boolean_benchmark.py": "4168d4edfd62b3d1557dd3ecbbfd9efe7367c98b05694870f10bc48662f916e6",
+          "boolean\\boolean_dataset.py": "0c98e9293d968d341b237b56a635dd86f83829890fe39522ff0bd365430e4937",
+          "boolean\\modules\\llm_interface.py": "0ca5836d41ad661ba5c7f2916f3beedf73b7b06a8feda91c3926559de47f332f",
+          "boolean\\modules\\models.py": "9264174d61ece6147133f7657796e86510366dc550ea40b323ce01e665244820",
+          "causal\\generate_causal_dataset.py": "7cd9a42ceb41b9c76ae5eda41eac53bd96542d06ee27808823133571ce38d817",
+          "causal\\generate_causal_dataset_for_large.py": "cbd94fe7d5b8828aff0c3b668f1fcdd330f3ec67fa6c74530a77d4e21b801379",
+          "causal\\modules\\llm_interface.py": "0ca5836d41ad661ba5c7f2916f3beedf73b7b06a8feda91c3926559de47f332f",
+          "causal\\modules\\models.py": "9264174d61ece6147133f7657796e86510366dc550ea40b323ce01e665244820",
+          "causal\\run_causal_benchmark.py": "65bc7d0bdb377b295c9992cf20fc55b1357214b5e6717c3852c110be4bdb6625"
+        },
+        "data": {
+          "boolean-basic.json": "84ad5ed3385303bfd0cdc5507fcba890bd06921c2594908ca9b839aebd389bab",
+          "boolean-extended.json": "97423d6ebe09c983ccf842d3274eb707f6c43779b185d0ee516fd2c3df81f4bf",
+          "boolean-full.json": "ce5b2ecd908e07729d6ea80c3a9aeca73138a3a92e2c497c1432b1362450b9e0",
+          "causal.json": "cd059649afd4f9485bf132ec13143797c42a56aa007c4e9d85364b71fb707fdd"
+        }
+      },
+      "fingerprint": {
+        "model": "qwen2.5:3b-instruct-q4_K_M",
+        "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M"
+        },
+        "ollama_version": "0.40.18",
+        "template_sha256": "eb4402837c7829a690fa845de4d7f3fd842c2adee476d5341da8a46ea9255175"
+      }
+    }
+  },
+  {
+    "domain": "genetic",
+    "stage": "smoke-v1",
+    "calls": 18,
+    "valid_outputs": 0,
+    "input_tokens": 3935,
+    "output_tokens": 181,
+    "seconds": 24.635674899982405,
+    "commercial_cost_usd": 0,
+    "identity": {
+      "identity": {
+        "config": {
+          "protocol": "all-domains-adapted-v1",
+          "upstream_commit": "c69e9318577b34b5b896996571aefd4ba6053f58",
+          "grid_size": 3,
+          "max_height": 3,
+          "blocks": [
+            1,
+            2,
+            3
+          ],
+          "test_per_stratum": 5,
+          "dev_per_stratum": 2,
+          "split_seed": 33550336,
+          "repeat_seeds": [
+            17,
+            42,
+            2026
+          ],
+          "query_multiplier": 1.0,
+          "temperature": 0.7,
+          "max_tokens": 512,
+          "max_retries": 1,
+          "provider": "ollama",
+          "model": "qwen2.5:3b-instruct-q4_K_M",
+          "quantization": "Q4_K_M",
+          "top_p": 0.9,
+          "top_k": 40,
+          "repeat_penalty": 1.0,
+          "num_ctx": 8192,
+          "num_thread": 4,
+          "num_gpu": 0,
+          "model_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+          "ollama_version": "0.40.18",
+          "system": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant.",
+          "baseline_method": "task-adapted-history",
+          "status": "DRAFT",
+          "causal": {
+            "splits": {
+              "dev": [
+                "n1_007",
+                "n1_004",
+                "n2_014",
+                "n2_120"
+              ],
+              "test": [
+                "n1_021",
+                "n1_023",
+                "n1_020",
+                "n1_016",
+                "n1_029",
+                "n2_184",
+                "n2_056",
+                "n2_063",
+                "n2_173",
+                "n2_039"
+              ]
+            },
+            "aligned_test": [
+              "n1_017",
+              "n1_024",
+              "n1_030",
+              "n2_017",
+              "n2_033",
+              "n2_049",
+              "n2_054",
+              "n2_069",
+              "n2_098",
+              "n2_112",
+              "n2_126",
+              "n2_140",
+              "n2_186"
+            ],
+            "aligned_budget": 16,
+            "budget": "one call per compatible graph; aligned prefixes reused"
+          },
+          "genetic": {
+            "levels": [
+              "basic",
+              "extended",
+              "full"
+            ],
+            "splits": {
+              "dev": [
+                "n1_inputs_10_outputs_0",
+                "n3_inputs_01_10_11_outputs_011"
+              ],
+              "test": [
+                "n3_inputs_00_01_10_outputs_001",
+                "n3_inputs_00_01_11_outputs_011",
+                "n3_inputs_01_10_11_outputs_111",
+                "n3_inputs_00_10_11_outputs_011",
+                "n3_inputs_01_10_11_outputs_101"
+              ]
+            },
+            "budget": "one call per compatible expression",
+            "max_depth": 2
+          },
+          "data_sha256": {
+            "boolean-basic.json": "84ad5ed3385303bfd0cdc5507fcba890bd06921c2594908ca9b839aebd389bab",
+            "boolean-extended.json": "97423d6ebe09c983ccf842d3274eb707f6c43779b185d0ee516fd2c3df81f4bf",
+            "boolean-full.json": "ce5b2ecd908e07729d6ea80c3a9aeca73138a3a92e2c497c1432b1362450b9e0",
+            "causal.json": "cd059649afd4f9485bf132ec13143797c42a56aa007c4e9d85364b71fb707fdd"
+          }
+        },
+        "sources": {
+          "prompts.py": "0d455f077884ca2d9c55bc9d497ef928ad3431d4277e28ba8e99669c0736260a",
+          "run.py": "610bd4c5736b9fbacd51632fdbf3b4f4622ba02d971b268d306b65121d5ecc59",
+          "prepare_data.py": "73717a024fc880b301dfa05c2f4a893fa8d3d40b8a8a6af936fe43255212a58b",
+          "plot.py": "17635f4191da051af747f0263f8680b9198e17430dccfbdb539c349a12200e4c",
+          "execute.py": "209ff11e1520cf4a5b9061c6b49c5c72130a89fce5c8bb8855a52c3751946195",
+          "report.py": "bed2fbad8c36bc8a1ce5eef1c91893795f171d37449550ab4cec9fcb620c9851"
+        },
+        "transport_sha256": "f28e49706619c826172ddf99e2f0e724185f32339ad5c8c0e67264e4bd823f92",
+        "official_sources": {
+          "3d\\generate_3d_dataset_complete.py": "49d7c1b14578a8134aede0c4559f7abd94a0d467940da43d8e41e97f363f8dff",
+          "3d\\modules\\llm_interface.py": "0ca5836d41ad661ba5c7f2916f3beedf73b7b06a8feda91c3926559de47f332f",
+          "3d\\modules\\models.py": "9264174d61ece6147133f7657796e86510366dc550ea40b323ce01e665244820",
+          "3d\\run_3d_benchmark.py": "bb2dd9dd07695d183b5861dd974575c738290e12c40e09a547f709de36d5ab94",
+          "boolean\\boolean_benchmark.py": "4168d4edfd62b3d1557dd3ecbbfd9efe7367c98b05694870f10bc48662f916e6",
+          "boolean\\boolean_dataset.py": "0c98e9293d968d341b237b56a635dd86f83829890fe39522ff0bd365430e4937",
+          "boolean\\modules\\llm_interface.py": "0ca5836d41ad661ba5c7f2916f3beedf73b7b06a8feda91c3926559de47f332f",
+          "boolean\\modules\\models.py": "9264174d61ece6147133f7657796e86510366dc550ea40b323ce01e665244820",
+          "causal\\generate_causal_dataset.py": "7cd9a42ceb41b9c76ae5eda41eac53bd96542d06ee27808823133571ce38d817",
+          "causal\\generate_causal_dataset_for_large.py": "cbd94fe7d5b8828aff0c3b668f1fcdd330f3ec67fa6c74530a77d4e21b801379",
+          "causal\\modules\\llm_interface.py": "0ca5836d41ad661ba5c7f2916f3beedf73b7b06a8feda91c3926559de47f332f",
+          "causal\\modules\\models.py": "9264174d61ece6147133f7657796e86510366dc550ea40b323ce01e665244820",
+          "causal\\run_causal_benchmark.py": "65bc7d0bdb377b295c9992cf20fc55b1357214b5e6717c3852c110be4bdb6625"
+        },
+        "data": {
+          "boolean-basic.json": "84ad5ed3385303bfd0cdc5507fcba890bd06921c2594908ca9b839aebd389bab",
+          "boolean-extended.json": "97423d6ebe09c983ccf842d3274eb707f6c43779b185d0ee516fd2c3df81f4bf",
+          "boolean-full.json": "ce5b2ecd908e07729d6ea80c3a9aeca73138a3a92e2c497c1432b1362450b9e0",
+          "causal.json": "cd059649afd4f9485bf132ec13143797c42a56aa007c4e9d85364b71fb707fdd"
+        }
+      },
+      "fingerprint": {
+        "model": "qwen2.5:3b-instruct-q4_K_M",
+        "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M"
+        },
+        "ollama_version": "0.40.18",
+        "template_sha256": "eb4402837c7829a690fa845de4d7f3fd842c2adee476d5341da8a46ea9255175"
+      }
+    }
+  },
+  {
+    "domain": "genetic",
+    "stage": "smoke",
+    "calls": 18,
+    "valid_outputs": 12,
+    "input_tokens": 4582,
+    "output_tokens": 158,
+    "seconds": 23.81065579999995,
+    "commercial_cost_usd": 0,
+    "identity": {
+      "identity": {
+        "config": {
+          "protocol": "all-domains-adapted-v1",
+          "upstream_commit": "c69e9318577b34b5b896996571aefd4ba6053f58",
+          "grid_size": 3,
+          "max_height": 3,
+          "blocks": [
+            1,
+            2,
+            3
+          ],
+          "test_per_stratum": 5,
+          "dev_per_stratum": 2,
+          "split_seed": 33550336,
+          "repeat_seeds": [
+            17,
+            42,
+            2026
+          ],
+          "query_multiplier": 1.0,
+          "temperature": 0.7,
+          "max_tokens": 512,
+          "max_retries": 1,
+          "provider": "ollama",
+          "model": "qwen2.5:3b-instruct-q4_K_M",
+          "quantization": "Q4_K_M",
+          "top_p": 0.9,
+          "top_k": 40,
+          "repeat_penalty": 1.0,
+          "num_ctx": 8192,
+          "num_thread": 4,
+          "num_gpu": 0,
+          "model_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+          "ollama_version": "0.40.18",
+          "system": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant.",
+          "baseline_method": "task-adapted-history",
+          "status": "DRAFT",
+          "causal": {
+            "splits": {
+              "dev": [
+                "n1_007",
+                "n1_004",
+                "n2_014",
+                "n2_120"
+              ],
+              "test": [
+                "n1_021",
+                "n1_023",
+                "n1_020",
+                "n1_016",
+                "n1_029",
+                "n2_184",
+                "n2_056",
+                "n2_063",
+                "n2_173",
+                "n2_039"
+              ]
+            },
+            "aligned_test": [
+              "n1_017",
+              "n1_024",
+              "n1_030",
+              "n2_017",
+              "n2_033",
+              "n2_049",
+              "n2_054",
+              "n2_069",
+              "n2_098",
+              "n2_112",
+              "n2_126",
+              "n2_140",
+              "n2_186"
+            ],
+            "aligned_budget": 16,
+            "budget": "one call per compatible graph; aligned prefixes reused"
+          },
+          "genetic": {
+            "levels": [
+              "basic",
+              "extended",
+              "full"
+            ],
+            "splits": {
+              "dev": [
+                "n1_inputs_10_outputs_0",
+                "n3_inputs_01_10_11_outputs_011"
+              ],
+              "test": [
+                "n3_inputs_00_01_10_outputs_001",
+                "n3_inputs_00_01_11_outputs_011",
+                "n3_inputs_01_10_11_outputs_111",
+                "n3_inputs_00_10_11_outputs_011",
+                "n3_inputs_01_10_11_outputs_101"
+              ]
+            },
+            "budget": "one call per compatible expression",
+            "max_depth": 2
+          },
+          "data_sha256": {
+            "boolean-basic.json": "84ad5ed3385303bfd0cdc5507fcba890bd06921c2594908ca9b839aebd389bab",
+            "boolean-extended.json": "97423d6ebe09c983ccf842d3274eb707f6c43779b185d0ee516fd2c3df81f4bf",
+            "boolean-full.json": "ce5b2ecd908e07729d6ea80c3a9aeca73138a3a92e2c497c1432b1362450b9e0",
+            "causal.json": "cd059649afd4f9485bf132ec13143797c42a56aa007c4e9d85364b71fb707fdd"
+          }
+        },
+        "sources": {
+          "prompts.py": "e0e8022101bd90461208d0bb9b03c50e43f5bb3ed72d6598e7b2c1f2e0a77769",
+          "run.py": "669bc95bf2e15bbd75b0cd5632984ebc57493c9f94c91cbd8c9d6326229bf02b",
+          "prepare_data.py": "73717a024fc880b301dfa05c2f4a893fa8d3d40b8a8a6af936fe43255212a58b",
+          "plot.py": "17635f4191da051af747f0263f8680b9198e17430dccfbdb539c349a12200e4c",
+          "execute.py": "209ff11e1520cf4a5b9061c6b49c5c72130a89fce5c8bb8855a52c3751946195",
+          "report.py": "bed2fbad8c36bc8a1ce5eef1c91893795f171d37449550ab4cec9fcb620c9851"
+        },
+        "transport_sha256": "f28e49706619c826172ddf99e2f0e724185f32339ad5c8c0e67264e4bd823f92",
+        "official_sources": {
+          "3d\\generate_3d_dataset_complete.py": "49d7c1b14578a8134aede0c4559f7abd94a0d467940da43d8e41e97f363f8dff",
+          "3d\\modules\\llm_interface.py": "0ca5836d41ad661ba5c7f2916f3beedf73b7b06a8feda91c3926559de47f332f",
+          "3d\\modules\\models.py": "9264174d61ece6147133f7657796e86510366dc550ea40b323ce01e665244820",
+          "3d\\run_3d_benchmark.py": "bb2dd9dd07695d183b5861dd974575c738290e12c40e09a547f709de36d5ab94",
+          "boolean\\boolean_benchmark.py": "4168d4edfd62b3d1557dd3ecbbfd9efe7367c98b05694870f10bc48662f916e6",
+          "boolean\\boolean_dataset.py": "0c98e9293d968d341b237b56a635dd86f83829890fe39522ff0bd365430e4937",
+          "boolean\\modules\\llm_interface.py": "0ca5836d41ad661ba5c7f2916f3beedf73b7b06a8feda91c3926559de47f332f",
+          "boolean\\modules\\models.py": "9264174d61ece6147133f7657796e86510366dc550ea40b323ce01e665244820",
+          "causal\\generate_causal_dataset.py": "7cd9a42ceb41b9c76ae5eda41eac53bd96542d06ee27808823133571ce38d817",
+          "causal\\generate_causal_dataset_for_large.py": "cbd94fe7d5b8828aff0c3b668f1fcdd330f3ec67fa6c74530a77d4e21b801379",
+          "causal\\modules\\llm_interface.py": "0ca5836d41ad661ba5c7f2916f3beedf73b7b06a8feda91c3926559de47f332f",
+          "causal\\modules\\models.py": "9264174d61ece6147133f7657796e86510366dc550ea40b323ce01e665244820",
+          "causal\\run_causal_benchmark.py": "65bc7d0bdb377b295c9992cf20fc55b1357214b5e6717c3852c110be4bdb6625"
+        },
+        "data": {
+          "boolean-basic.json": "84ad5ed3385303bfd0cdc5507fcba890bd06921c2594908ca9b839aebd389bab",
+          "boolean-extended.json": "97423d6ebe09c983ccf842d3274eb707f6c43779b185d0ee516fd2c3df81f4bf",
+          "boolean-full.json": "ce5b2ecd908e07729d6ea80c3a9aeca73138a3a92e2c497c1432b1362450b9e0",
+          "causal.json": "cd059649afd4f9485bf132ec13143797c42a56aa007c4e9d85364b71fb707fdd"
+        }
+      },
+      "fingerprint": {
+        "model": "qwen2.5:3b-instruct-q4_K_M",
+        "digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "3.1B",
+          "quantization_level": "Q4_K_M"
+        },
+        "ollama_version": "0.40.18",
+        "template_sha256": "eb4402837c7829a690fa845de4d7f3fd842c2adee476d5341da8a46ea9255175"
+      }
+    }
+  }
+]

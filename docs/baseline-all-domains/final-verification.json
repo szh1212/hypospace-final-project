@@ -1,0 +1,15 @@
+{
+  "formal_calls": 2289,
+  "development_calls": 60,
+  "formal_input_tokens": 481586,
+  "formal_output_tokens": 29121,
+  "formal_model_seconds": 2841.6432279005967,
+  "development_input_tokens": 13173,
+  "development_output_tokens": 619,
+  "development_model_seconds": 85.96927269997832,
+  "tests_passed": 12,
+  "new_records_replayed": 2289,
+  "published_3d_records_replayed": 585,
+  "commercial_api_cost_usd": 0,
+  "frozen_sources_unchanged": true
+}
