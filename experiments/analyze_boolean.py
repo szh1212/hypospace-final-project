@@ -19,7 +19,7 @@ from boolean_benchmark import COLLECTION, Dataset, load_official
 from boolean_prompts import completion_prompt, skeleton_prompt
 from boolean_space import assemble, completion_plan, skeleton_plan
 
-CONTROLS = ("official", "completion")
+CONTROLS = ("official", "completion", "skeleton")
 METHODS = ("skeleton", "skeleton_valid")
 BUDGET = 16
 PREFIXES = ("4", "8", "13", "16")
@@ -125,6 +125,8 @@ def summarize(folder, split="test"):
     comparisons = {}
     for method in METHODS:
         for control in CONTROLS:
+            if method == control:
+                continue
             for k in ("13", "16"):
                 for metric in ("V", "U", "R"):
                     m = {oid: mean(next(r for (o, s, r) in entries[method] if o == oid and s == seed)[k][metric]
