@@ -1,176 +1,205 @@
-# HypoSpace: Generating 3D Hypotheses with Qwen2.5-3B
+# HypoSpace — Exploring Sets of Scientific Hypotheses
 
-A top view tells us which cells contain cubes, but leaves their heights unknown. This project studies how many different, physically valid stacks a local language model can recover from that single view. We evaluate two prompts on the 3D reconstruction task from [HypoSpace](https://proceedings.mlr.press/v306/chen26bz.html).
+HypoSpace asks whether a model can discover **many distinct, valid explanations** when observations admit more than one answer. Our EEC 4300 project builds local small-model baselines and evaluates coverage-guided generation, spatial representations, and hierarchical generation across all three domains. Read the [original paper](https://proceedings.mlr.press/v306/chen26bz.html), then explore [Task A: causal graphs](methods/task-a/README.md), [Task B: 3D reconstruction](methods/task-b/README.md), or [Task C: Boolean interactions](methods/task-c/README.md).
 
-Both baselines completed **585 generations** on the same 15 test observations. The official prompt recovered no valid stacks. Making the projection and support rules explicit raised mean Recovery to **17.45%**, but the model still repeated many of its valid answers. The **Adapted Baseline** is the frozen reference for all three follow-up methods.
+## Results at a Glance
 
-## Research Motivation
+**Within-task comparisons, not a ranking across domains.** All numbers below are our group's local Qwen2.5-3B-Instruct experiments—not the paper's published model scores. “Official prompt” means our local execution of the upstream prompt.
 
-Finding one valid stack and exploring the full set of compatible stacks are different problems. At Level 3 the adapted prompt achieved **80.00% Validity** but recovered only **4.20%** of the compatible structures on average. Our next experiments target higher **Recovery and Uniqueness** while maintaining or improving **Validity**, with the same model, evaluator, test observations and 585-call budget. Planning and repair calls count toward that budget.
+| Task / headline setting | Main method | Matched baseline R | Method R | Δ Recovery | Details |
+| --- | --- | ---: | ---: | ---: | --- |
+| A · 13 cases, seeds 17/42, 16 calls per case-seed | Two-level stratification + validity filter | Official prompt: 1.11% | **56.66%** | **+55.55 pp** | [Causal report](methods/task-a/kevin-causal-graph/experiment-results.md) |
+| B · 15 views, seeds 17/42/2026, 3/9/27 calls per view-seed | Two-level stratification + validity repair | Adapted baseline: 17.45% | **95.97%** | **+78.52 pp** | [3D report](methods/task-b/kevin-twolevel-stratification/docs/experiment-results-3d.md) |
+| C · 12 cases, seeds 17/42, 16 calls per case-seed | One-hole skeleton + validity rescue | Official prompt: 5.60% | **53.69%** | **+48.09 pp** | [Boolean report](methods/task-c/kevin-boolean/experiment-results.md) |
 
-## Overall Baseline Results
+![Three within-task baseline-versus-final comparisons, with V/U/R and call budgets](docs/figures/results-overview.png)
 
-| Metric | Original | Adapted | Change (percentage points) |
+[Vector version](docs/figures/results-overview.svg). Each panel uses its own matched baseline and test protocol. A/C comparisons are transcribed from their formal reports; B is also checked against committed per-instance JSON. Gains are percentage points, not relative percentages. A/C gains use the displayed two-decimal means; the reports round their paired deltas to one decimal (+55.6 / +48.1 pp). Final methods include deterministic assembly/filtering/repair, so these are **end-to-end procedure scores**, not unprocessed LLM-output scores.
+
+## Task A — Causal Graph Inference
+
+**Task:** infer labeled DAGs consistent with observed intervention effects, including both positive and zero effects. **Method:** Kevin's final hierarchy fixes feasible parent sets for two nodes, preserves mandatory edges, and greedily filters model-added edges to maintain graph constraints.
+
+### Main matched study
+
+Four nodes, at most four edges; **13 test cases × 2 seeds (17/42) × 16 calls = 416 calls per method**. V and U below are at 16 calls; Recovery prefixes reuse the same generated sequence.
+
+| Method / control | Validity | Uniqueness | R@4 | R@8 | R@16 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Official prompt | 23.08% | 6.49% | 1.11% | 1.11% | 1.11% |
+| Unstratified, same wording | 61.30% | 10.34% | 14.26% | 14.74% | 14.74% |
+| Edge-count strata | 39.90% | 16.11% | 12.21% | 12.21% | 12.66% |
+| Parent-set strata | 50.24% | 27.40% | 15.44% | 16.27% | 19.07% |
+| Skeleton completion | 50.00% | 32.45% | 16.69% | 18.83% | 19.78% |
+| Forced backbone | 68.99% | 32.93% | 28.63% | 30.87% | 31.53% |
+| Validity filter only (ablation) | 85.10% | 29.81% | 29.44% | 31.60% | 32.36% |
+| **Two-level joint + validity filter** | **91.35%** | **59.38%** | **36.34%** | **47.34%** | **56.66%** |
+
+The final procedure improves Recovery by **55.55 pp** over the official prompt and **41.92 pp** over the same-wording unstratified control, on the report-matched @16 protocol.
+
+<details>
+<summary>Other reported settings, development studies, and the independent SZH baseline</summary>
+
+**Same 13 cases, three seeds (17/42/2026), 13-call prefixes:** 507 prefix calls per method.
+
+| Method | Validity | Uniqueness | R@13 |
 | --- | ---: | ---: | ---: |
-| Validity (V) | 0.00% | 78.52% | +78.52 |
-| Uniqueness (U) | 55.56% | 21.65% | −33.91 |
-| Recovery (R) | 0.00% | 17.45% | +17.45 |
+| Forced backbone | 71.79% | 41.03% | 32.08% |
+| Validity filter | 86.00% | 36.29% | 33.07% |
+| Two-level joint + validity filter | 91.12% | 65.09% | 53.43% |
 
-**Validity** is the fraction of all proposals accepted by the official validator. **Uniqueness** is the number of distinct parsed structures divided by all proposals, including failed attempts in the denominator. **Recovery** is the fraction of enumerated ground-truth structures found at least once. Each score is computed separately for one observation and seed. Overall scores give all 45 observation–seed pairs equal weight. Changes use the unrounded means. [Paired results](methods/task-b/szh-baseline-3d/docs/paired-results.md) · [Scoring audit](methods/task-b/szh-baseline-3d/docs/baseline-audit.md)
+**Independent SZH adapted baseline:** same model family, but 512-token CPU inference rather than the hierarchy study's 256-token GPU setting. No Δ against the hierarchy is claimed for these rows.
 
-## Results by Difficulty
+| Setting | Validity | Uniqueness | Recovery | Calls represented |
+| --- | ---: | ---: | ---: | ---: |
+| Unified subset: 10 cases, 3 seeds, budget = compatible graphs | 5.05% | 24.66% | 0.37% | 654 |
+| Aligned 13 cases, seeds 17/42, prefix 16 | 26.92% | 12.74% | 3.75% | 416 |
+| Aligned 13 cases, 3 seeds, prefix 13 | 27.81% | 16.17% | 3.89% | 507 |
 
-Level counts occupied cells in the observed 3 × 3 grid. Each occupied cell can have height 1, 2 or 3, giving 3, 9 or 27 compatible structures. Each level contains five test observations evaluated with three seeds. Calls are per baseline.
+The SZH rows are subsets/prefixes of one **2,019-call** causal batch; do not sum them as separate runs. The unified subset differs from the hierarchy study's test cohort.
 
-| Level | Calls per observation and seed | Total calls | Original V | Original U | Original R | Adapted V | Adapted U | Adapted R |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 | 3 | 45 | 0.00% | 77.78% | 0.00% | 95.56% | 42.22% | 37.78% |
-| 2 | 9 | 135 | 0.00% | 51.11% | 0.00% | 60.00% | 17.04% | 10.37% |
-| 3 | 27 | 405 | 0.00% | 37.78% | 0.00% | 80.00% | 5.68% | 4.20% |
+**Development progression:** parent-set strata R@16 13.36%; skeleton completion 18.34%; forced backbone 21.91%; final joint method V/U/R 71.88% / 65.62% / 59.30%. V/U for the first three development entries are N/A in the archived causal report. These are not test results.
 
-![Validity, Uniqueness and Recovery for both baselines at each level and overall](methods/task-b/szh-baseline-3d/reports/comparison/metrics.png)
+**Earlier eight-case study (separate protocol, contextual only):** reported R is 0.13% for official prompting, 21.51% for fixed structural rotation, 21.52% for adaptive scheduling, 46.84% for a legal-edit menu, and 59.49% for random choice with backtracking. V/U and full protocol artifacts are N/A in the archived summary; these rows are excluded from the headline comparison.
 
-### Coverage over successive proposals
+</details>
 
-Recovery@k measures the fraction of each observation's ground-truth set found in its first *k* proposals. Each line averages the 15 observation–seed pairs at that level. Histories reset between seeds.
+**Sources and evidence:** [formal hierarchy report and per-case tables](methods/task-a/kevin-causal-graph/experiment-results.md); [available model/sampling definitions](src/causal_benchmark.py); [SZH protocol](methods/common/szh-baseline-common/protocol.json), [SZH scores](methods/task-a/szh-baseline-causal/reports/test.json), [SZH raw archive](methods/task-a/szh-baseline-causal/reports/raw.jsonl.gz), and [SZH audit](methods/task-a/szh-baseline-causal/reports/audit.json). The hierarchy report names its final protocol and audit scripts on the originating branch, but the **final 13-case protocol JSON, final hierarchy launcher, and machine-readable final results are not archived on main**; its scores and reported audits are not independently replayed here. Cases were reused across hierarchy generations; the report discloses a post-test acyclicity repair and regeneration of 138 affected records.
 
-![Mean Recovery at each proposal budget for Original and Adapted across three difficulty levels](methods/task-b/szh-baseline-3d/reports/comparison/coverage.png)
+## Task B — 3D Voxel Reconstruction
 
-**Original Baseline.** The official prompt produced distinct parseable structures at every level, while Validity and Recovery stayed at zero throughout.
+**Task:** reconstruct gravity-supported cube stacks from a top-view footprint on a 3 × 3 grid, with maximum height three. **Methods:** JCJ appends coverage feedback; ZJH uses occupied-column representations and a cyclic height codec; Kevin's final method stratifies layer sizes, enforces anchors, and repairs/falls back to a legal in-stratum structure.
 
-![Original Baseline curves for Validity, Uniqueness and Recovery against the number of proposals](methods/task-b/szh-baseline-3d/original/reports/curves.png)
+### Formal test results
 
-**Adapted Baseline.** The gap between Validity and Recovery shows how often valid proposals revisit previously found structures.
+All rows below use the frozen **15 top views × 3 seeds (17/42/2026)** with **3, 9, or 27 proposals per view-seed**, according to occupied-cell count: **585 proposals per method**. The offline control uses 585 symbolic samples, not LLM calls.
 
-![Adapted Baseline curves for Validity, Uniqueness and Recovery against the number of proposals](methods/task-b/szh-baseline-3d/adapted/reports/curves.png)
+| Method / control | Validity | Uniqueness | Recovery | ΔR vs Adapted |
+| --- | ---: | ---: | ---: | ---: |
+| SZH Original: official prompt | 0.00% | 55.56% | 0.00% | −17.45 pp |
+| SZH Adapted baseline | 78.52% | 21.65% | 17.45% | — |
+| JCJ coverage-guided | 77.86% | 25.27% | 21.89% | +4.44 pp |
+| ZJH column planning, model-rendered layers | 44.69% | 32.84% | 17.70% | +0.25 pp |
+| ZJH cyclic height codec | 100.00% | 61.73% | 61.73% | +44.28 pp |
+| Kevin official-prompt rerun | 0.00% | 57.12% | 0.00% | −17.45 pp |
+| Kevin uniform random control (offline) | 100.00% | 65.10% | 65.10% | N/A: non-LLM control |
+| **Kevin two-level strata + validity repair** | **100.00%** | **95.97%** | **95.97%** | **+78.52 pp** |
 
-## Computational Cost
+The headline final method improves Recovery by **78.52 pp** over the matched Adapted baseline; ZJH's final codec gains **44.28 pp**, while JCJ's **4.44 pp** gain falls below its preregistered +5 pp target.
 
-| Baseline | Model calls | Input tokens | Output tokens | Summed request time (s) | Truncated outputs | Commercial API fees |
+<details>
+<summary>Reported prefix controls and development-only ablations</summary>
+
+The Kevin report uses R@k capped at each case's available budget (cases have 3/9/27 proposals); R@27 is the aggregate final-budget score, not 27 calls on every case.
+
+| Method | R@1 | R@3 | R@9 | R@27 |
+| --- | ---: | ---: | ---: | ---: |
+| SZH Adapted | 14.32% | 16.30% | 17.37% | 17.45% |
+| Kevin official-prompt rerun | 0.00% | 0.00% | 0.00% | 0.00% |
+| Uniform random control | 16.05% | 36.21% | 53.00% | 65.10% |
+| Kevin final | 16.05% | 48.15% | 77.12% | 95.97% |
+
+**Kevin development ablations (3 views, seed 17, dev-smoke; not formal test):**
+
+| Generation | Validity | Uniqueness | Recovery |
+| --- | ---: | ---: | ---: |
+| Verbal layer-size strata | 83.95% | 28.40% | 17.28% |
+| Forced ground layer + repair | 100.00% | 30.86% | 30.86% |
+| Single-level strata + repair | 100.00% | 38.27% | 38.27% |
+| Joint strata + repair | 100.00% | 97.53% | 97.53% |
+
+The final method's full-development V/U/R are 100.00% / 95.27% / 95.27%.
+
+**ZJH matched full-development ablation (6 views, three seeds, 234 calls per arm):**
+
+| Method | Validity | Uniqueness | Recovery |
+| --- | ---: | ---: | ---: |
+| Adapted | 100.00% | 19.96% | 19.96% |
+| Fixed row-major height codec | 100.00% | 55.56% | 55.56% |
+| Cyclic height codec | 100.00% | 64.20% | 64.20% |
+
+**ZJH first development screen (6 views, seed 17, three calls each; 18 calls per arm):**
+
+| Method | Validity | Uniqueness | Recovery |
+| --- | ---: | ---: | ---: |
+| Adapted | 100.00% | 38.89% | 17.90% |
+| Column planning, grid history | 72.22% | 55.56% | 24.69% |
+| Column planning, compact history | 66.67% | 55.56% | 20.99% |
+
+JCJ's statistics-only and cell-only hooks exist, but their development ablations were not run; scores are **N/A**, not zero. Finer difficulty/seed tables and paired intervals remain in the linked reports.
+
+</details>
+
+**Sources:** [SZH paired report](methods/task-b/szh-baseline-3d/docs/paired-results.md), [Original metrics](methods/task-b/szh-baseline-3d/original/reports/metrics.json), [Adapted metrics](methods/task-b/szh-baseline-3d/adapted/reports/metrics.json); [JCJ report](methods/task-b/jcj-coverage-guided/docs/cg-report.md) and [metrics](methods/task-b/jcj-coverage-guided/reports/metrics.json); [ZJH report](methods/task-b/zjh-spatial/README.md), [layer results](methods/task-b/zjh-spatial/reports/layer-test/metrics.json), [codec results](methods/task-b/zjh-spatial/reports/codec-test/metrics.json); [Kevin report](methods/task-b/kevin-twolevel-stratification/docs/experiment-results-3d.md), [per-instance summary](methods/task-b/kevin-twolevel-stratification/reports/joint-test-summary.json), [comparison JSON](methods/task-b/kevin-twolevel-stratification/reports/metrics.json), and [protocol](methods/task-b/kevin-twolevel-stratification/experiments/protocol-3d.json). Shared [configuration](methods/task-b/szh-baseline-3d/experiments/protocol.json), [split](methods/task-b/szh-baseline-3d/experiments/manifest.json), and [model lock](methods/task-b/szh-baseline-3d/experiments/model-lock.json) document the matched 3D conditions.
+
+The two official-prompt rows are separate local runs: their U differs (55.56% vs 57.12%), while both V/R are measured zeros. Kevin's committed summary confirms five views at each difficulty; its report's “b1 (3 cases)” caption is inconsistent with that configuration. The ZJH codec includes schema-constrained output and inverse decoding; Kevin includes deterministic repair/fallback. Timings across different CPU machines are not efficiency rankings. SZH raw archives are committed; other methods' raw responses are generally local-only, with submitted manifests/audit reports retained.
+
+## Task C — Boolean Genetic Interactions
+
+**Task:** infer Boolean expressions consistent with partial observations of two variables, using the official mechanistic notion of structural distinctness. **Method:** Kevin fixes a one-hole skeleton within truth-table-completion strata and deterministically rescues invalid leaf choices; 100% Validity includes this assembly/rescue, rather than raw model output alone.
+
+### Main matched study
+
+Full operators (AND/OR/NOT/NOR), maximum depth two; **12 test cases** (six with two observations, six with three), **seeds 17/42**, and **16 calls per case-seed = 384 calls per method**. V/U are at 16 calls; prefixes reuse the same records.
+
+| Method / control | Validity | Uniqueness | R@4 | R@8 | R@13 | R@16 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Original | 585 | 561,221 | 64,641 | 11,028.3 | 8 | $0 |
-| Adapted | 585 | 178,307 | 28,776 | 3,275.1 | 0 | $0 |
+| Official prompt | 8.59% | 12.76% | 4.41% | 5.60% | 5.60% | 5.60% |
+| Completion strata | 5.21% | 5.21% | 0.70% | 1.34% | 1.66% | 1.66% |
+| One-hole skeleton | 32.03% | 18.23% | 12.04% | 21.34% | 26.85% | 28.89% |
+| **Skeleton + validity rescue** | **100.00%** | **35.94%** | **32.89%** | **44.63%** | **51.99%** | **53.69%** |
 
-Time is the sum of recorded local model-request durations on the baseline CPU machine. Truncated outputs remain in the evaluation. Commercial fees exclude hardware and electricity. [Original measurements](methods/task-b/szh-baseline-3d/original/reports/metrics.json) · [Adapted measurements](methods/task-b/szh-baseline-3d/adapted/reports/metrics.json)
+The final procedure improves Recovery by **48.09 pp** over its report-matched official-prompt baseline at 16 calls, with the deterministic rescue contribution included.
 
-## Failure Analysis
+<details>
+<summary>Independent SZH baseline and development-only pilot</summary>
 
-**Original.** All 585 responses parsed, but every structure projected to a different top view from the input. In 313 cases the projection matched the four-corner pattern in the official prompt's example. That pattern occupies four cells, whereas the test inputs occupy one to three. The pattern is consistent with copying the example, although the paired experiment cannot isolate its causal effect. Original's higher U measures diversity among incorrect structures. None contributed to Recovery.
+The SZH adapted baseline reports **V=14.35%, U=8.76%, R=2.98%**, using five shared test observations in each of the basic/extended/full operator regimes, three seeds (17/42/2026), and budget = compatible expressions (**270 calls**). It uses a different observation collection, operator-regime mix, 512-token CPU configuration, and per-case budgets; **Δ against Kevin's final method is N/A**.
 
-**Adapted.** Of 585 proposals, 448 passed validation, 136 had an incorrect projection and one failed to parse. Among the valid proposals, **400 repeated a structure already seen within the same observation and seed**. The remaining 48 were first discoveries within their respective runs. These are pooled counts; the percentages above are macro averages. [Failure analysis and counting rules](methods/task-b/szh-baseline-3d/docs/formal-failures.md)
+**Kevin development pilot (4 cases, seed 17, 16 calls; 64 calls per method):**
 
-### Generation Outcome Distribution
+| Method | Validity | Uniqueness | R@16 |
+| --- | ---: | ---: | ---: |
+| Official prompt | 1.56% | 9.38% | 2.27% |
+| Completion strata | 0.00% | 6.25% | 0.00% |
+| Skeleton | 20.31% | 17.19% | 24.32% |
+| Skeleton + validity rescue | 100.00% | 37.50% | 51.36% |
 
-![Stacked counts of invalid structures, valid duplicates, newly found valid structures and parse failures for each baseline](methods/task-b/szh-baseline-3d/reports/comparison/outcome-distribution.png)
+</details>
 
-## Experimental Protocol
+**Sources:** [formal comparison](methods/task-c/kevin-boolean/experiment-results.md), [detailed method/disclosures](docs/boolean-experiment-results.md), [12-case protocol](experiments/boolean-skeleton.json), [runner](experiments/run_boolean_skeleton.py), [analysis script](experiments/analyze_boolean.py), [available model settings](src/causal_benchmark.py); [SZH protocol](methods/common/szh-baseline-common/protocol.json), [scores](methods/task-c/szh-baseline-genetic/reports/test.json), [raw archive](methods/task-c/szh-baseline-genetic/reports/raw.jsonl.gz), and [audit](methods/task-c/szh-baseline-genetic/reports/audit.json).
 
-- **Original** uses the pinned upstream user prompt and its history of previously generated structures. **Adapted** spells out row and column order, explains why the bottom layer must equal the top view, and requires each upper layer to be supported by the layer below. It replaces the worked four-corner example with a layer-format template and changes how the generated history is displayed. The generator sees the observation and its own earlier outputs. Only the evaluator uses the enumerated ground truths.
-- **Model and decoding.** Qwen2.5-3B-Instruct, Q4_K_M, served by Ollama 0.40.18 on localhost. Temperature 0.7, top-p 0.9, top-k 40, output limit 512 tokens, context length 8,192 and repeat penalty 1.0. Both methods use repeat seeds 17, 42 and 2026.
-- **Data and budget.** The pinned generator enumerates 129 top views. A fixed stratified split selects two development and five test observations per level. Each observation–seed pair receives as many calls as it has compatible structures. Both methods use one attempt per proposal and share the parser, normalization, validator and hash-based scoring.
+Kevin's report cites `.cache/boolean-test.json` and local `runs/` as its numeric/raw sources; these files are **not committed on main**, so its table and reported audits are report-level evidence here. The official Boolean generator/validator also disagrees on some reference expressions; scores retain the official denominator. The reported ≈57.6% ceiling has not been independently rederived here, and 53.69% is below that ceiling—we do not attribute the entire remaining gap to unreachable reference keys.
 
-[Protocol](methods/task-b/szh-baseline-3d/docs/baseline-protocol.md) · [Prompt and evaluator audit](methods/task-b/szh-baseline-3d/docs/baseline-audit.md) · [Frozen configuration](methods/task-b/szh-baseline-3d/experiments/protocol.json) · [Split manifest](methods/task-b/szh-baseline-3d/experiments/manifest.json) · [Model lock](methods/task-b/szh-baseline-3d/experiments/model-lock.json)
+## Evaluation and Reproduction
 
-## Reproducibility and Data
+We **follow HypoSpace's task definitions, legality constraints, and evaluation framework**, pinned to upstream `c69e9318577b34b5b896996571aefd4ba6053f58`. All showcased local studies use **Qwen2.5-3B-Instruct Q4_K_M with Ollama 0.40.18**, temperature 0.7, top-p 0.9, top-k 40, repeat penalty 1.0 and context 8,192. Prompt adaptation, history, output representation, assembly, and budgets are task/method-specific.
 
-The published measurements can be inspected without running inference. Each compressed archive contains the recorded requests, responses, token counts and timings. SHA-256 manifests identify the original records.
+| Study | Output limit | Device request | Test units and budget |
+| --- | ---: | --- | --- |
+| SZH A/C adapted baselines | 512 tokens | CPU (`num_gpu=0`, 4 threads) | A: 10 cases × 3 seeds, compatible-graph budget; C: 15 operator-case settings × 3 seeds, compatible-expression budget |
+| Kevin A/C matched studies | 256 tokens | GPU requested (`num_gpu=99`, 4 CPU threads) | A: 13 × 2 × 16; C: 12 × 2 × 16 |
+| Task B matched studies | 512 tokens | CPU (`num_gpu=0`, 4 threads) | 15 views × 3 seeds; 3/9/27 calls by occupied-cell count |
 
-| Baseline | Measurements and per-call curves | Raw records | Checksums |
-| --- | --- | --- | --- |
-| Original | [Metrics](methods/task-b/szh-baseline-3d/original/reports/metrics.json) | [JSONL archive](methods/task-b/szh-baseline-3d/original/reports/raw.jsonl.gz) | [SHA-256 manifest](methods/task-b/szh-baseline-3d/original/reports/raw-manifest.json) |
-| Adapted | [Metrics](methods/task-b/szh-baseline-3d/adapted/reports/metrics.json) | [JSONL archive](methods/task-b/szh-baseline-3d/adapted/reports/raw.jsonl.gz) | [SHA-256 manifest](methods/task-b/szh-baseline-3d/adapted/reports/raw-manifest.json) |
+**V** measures valid attempts; **U** measures distinct parsed/in-space proposals under each official task evaluator; **R** measures recovered reference hypotheses using task-specific canonicalization. All attempts, including failures and duplicates, consume budget. Tables report macro means; micro pooling, sample/seed logs, source freezes and bootstrap intervals remain in detailed artifacts. Model-assembly methods score assembled/repaired outputs. The test sets in several iterative studies are not strictly unseen; consult each report's disclosure. Neither cross-domain deltas nor raw-output-versus-repaired-output equivalence is claimed.
 
-For an independent reproduction, install Git, Python 3.12 and the pinned Ollama version. Keep the Python environment and model on a local SSD. Run the following from the repository root using the activated environment and a running local Ollama service. The PowerShell example stores new runs under the user profile. [Local setup and model verification](methods/task-b/szh-baseline-3d/docs/local-setup.md)
+Use the [shared setup and current entry points](methods/common/szh-baseline-common/README.md) and [3D setup](methods/task-b/szh-baseline-3d/docs/local-setup.md). Commands below are existing, checked interfaces; install dependencies and prepare the pinned official dataset first. No commercial API is required.
 
 ```powershell
-python -m pip install -r requirements.txt
-ollama pull qwen2.5:3b-instruct-q4_K_M
-python methods/task-b/szh-baseline-3d/experiments/bootstrap.py
-python methods/task-b/szh-baseline-3d/src/hypospace_runner.py --prepare
-$runs = Join-Path $env:USERPROFILE 'HypoSpaceLocal/runs'
-python methods/task-b/szh-baseline-3d/src/hypospace_runner.py --out "$runs/original-formal-v4"
-python methods/task-b/szh-baseline-3d/src/hypospace_runner.py --method adapted_baseline:transform --out "$runs/adapted-formal-v4"
+# Replay the two committed 585-call 3D archives; no inference.
+python experiments/audit_integration.py
+
+# Restore committed SZH A/C archives, then audit; no inference.
+python experiments/restore_all_domains_archive.py --domain causal
+python experiments/audit_all_domains.py --domain causal
+python experiments/restore_all_domains_archive.py --domain genetic
+python experiments/audit_all_domains.py --domain genetic
+
+# Inspect the final Boolean runner (replay requires the author's local raw runs).
+python experiments/run_boolean_skeleton.py --help
+
+# Inspect the final 3D hierarchical runner.
+python methods/task-b/kevin-twolevel-stratification/src/hypospace_runner_3d.py --help
 ```
 
-To regenerate the paired score and coverage figures from the published metrics alone, run `python methods/task-b/szh-baseline-3d/experiments/paired_baselines.py`. After preparing the dataset, run `python methods/task-b/szh-baseline-3d/experiments/diagnose_archives.py` to reproduce the failure counts from the archives.
-
-## Limitations
-
-The study covers one quantized model, one reconstruction task and 15 test observations. The three seed repeats share those observations. History-conditioned proposals also depend on earlier outputs. A history-handling defect was diagnosed using partial test outputs from an aborted run. The fix was checked again on development data before the complete 585-call Adapted run. Sampling parameters were frozen, but the test set had been partially inspected during the repair. [Development analysis](methods/task-b/szh-baseline-3d/docs/dev-analysis.md) · [Freeze record](methods/task-b/szh-baseline-3d/docs/baseline-freeze.json)
-
-## Team Contributions
-
-| Team member | Project responsibility |
-| --- | --- |
-| Zhiheng Song | Original and Adapted Baselines |
-| Wentao Lin | Hierarchical Generation |
-| Chenjun Jiang | Adaptive Coverage-guided Generation |
-| Jianghan Zhao | Spatial Representation Transformation |
-
-[Team handoff and submission instructions](docs/team-message.txt)
-
-## Baseline Results Across Three Domains
-
-| Domain | Model | Validity | Uniqueness | Recovery | LLM Calls |
-| --- | --- | ---: | ---: | ---: | ---: |
-| Causal Graph Inference | Qwen2.5-3B | 5.05% | 24.66% | 0.37% | 654 |
-| 3D Voxel Reconstruction | Qwen2.5-3B | 78.52% | 21.65% | 17.45% | 585 |
-| Boolean Genetic Interaction | Qwen2.5-3B | 14.35% | 8.76% | 2.98% | 270 |
-
-These are within-domain diagnostic measurements, not a fair comparison of algorithm performance across domains. The unified baseline uses the frozen 3D sampling parameters, task-adapted prompts and official scoring. New runs use seeds 17/42/2026 and one call per compatible hypothesis on their frozen test subsets. The causal study uses four nodes and at most four edges; Boolean studies basic/extended/full operators at depth two. The 3D figures are preserved from the archived report; its published 585-call compressed raw archive has been independently replayed on this machine (see historical-3d-replay.json).
-
-The causal alignment protocol reuses a single batch on LWT's 13 final test cases at budgets 4/8/13/16. Total new causal calls including alignment are 2019. Macro means weight instances equally; micro pooling and across-seed sample standard deviations are reported separately. Different official budgets and solution-space sizes make cross-domain Recovery incomparable as an algorithm ranking.
-
-See [all-domain report](docs/baseline-all-domains/results.md), [shared reproduction commands](methods/common/szh-baseline-common/README.md), and task-specific tracked reports and raw SHA256 manifests.
-
-Causal table metrics and 654 calls describe the unified subset; 1,365 additional calls support the separate alignment cohort (2,019 new causal calls total). New formal inference and full replay are complete. The official Boolean reference/validator inconsistency and historical LWT replay limitation are disclosed in the all-domain audit.
-
-## Method directories (integration)
-
-```text
-methods/
-├── task-a/
-│   └── szh-baseline-causal/
-├── task-b/
-│   ├── szh-baseline-3d/
-│   │   ├── original/
-│   │   └── adapted/
-│   ├── jcj-coverage-guided/
-│   └── zjh-spatial/
-├── task-c/
-│   └── szh-baseline-genetic/
-└── common/
-    └── szh-baseline-common/
-```
-
-Task A: Causal Graph Inference; Task B: 3D Voxel Reconstruction; Task C: Boolean Genetic Interaction; Common: Shared Utilities.
-
-[3D baselines](methods/task-b/szh-baseline-3d/README.md) · [JCJ method](methods/task-b/jcj-coverage-guided/README.md) · [ZJH method](methods/task-b/zjh-spatial/README.md) · [Task A](methods/task-a/szh-baseline-causal/README.md) · [Task C](methods/task-c/szh-baseline-genetic/README.md)
-
-JCJ submitted formal results (585 calls): valid_rate=77.86%, novelty_rate=25.27%, recovery_rate=21.89%. Its raw responses are not included; the submitted SHA256 inventory and reports are preserved. Historical per-call replay was not independently verified.
-## Task C method — Boolean hierarchical route (分支 `kevin/boolean`)
-
-Kevin 的布尔基因互动（Task C）方法沿用因果域已验证的分层生成路线：**补全分层
-`completion`（第 1 代）→ 单孔骨架 `skeleton`（第 2 代）→ 单孔骨架 + 有效性救援
-`skeleton_valid`（最终方法）**。只用公开观测与空间定义先验分层，不读参考答案、不做覆盖
-反馈、不改表示；救援只对模型自己骨架上的槽位叶子做确定性最小修正（模型自填通过率
-45.05%）。官方提示基线保持上游完整流程、未做任何修改。
-
-配对协议（12 题 × 种子 [17, 42] × 每题 16 次调用，四方法同题同种子同预算同模型同评测器）：
-
-| 方法 | V | U | R@16 |
-| --- | ---: | ---: | ---: |
-| 官方提示（基线） | 8.59% | 12.76% | 5.60% |
-| **单孔骨架 + 有效性救援（最终）** | **100.00%** | **35.94%** | **53.69%** |
-
-最终方法对官方基线的配对差（bootstrap 按 12 题重抽样 10,000 次，三项区间全部高于零）：
-ΔV **+91.4pp** [+85.2, +96.9]、ΔU **+23.2pp** [+13.8, +32.0]、ΔR **+48.1pp** [+39.6, +55.9]；
-R=53.69% 达到官方语义可恢复上限的 93.2%。完整结果、逐题数据、上限分析与可验证性记录见
-结果与基线对比总览 [docs/experiment-results.md](docs/experiment-results.md)；完整方法、逐题数据与可验证性 [docs/boolean-experiment-results.md](docs/boolean-experiment-results.md)；
-方法核心 [src/boolean_space.py](src/boolean_space.py)、冻结协议
-[experiments/boolean-skeleton.json](experiments/boolean-skeleton.json)、运行/审计脚本
-[experiments/run_boolean_skeleton.py](experiments/run_boolean_skeleton.py) 与
-[experiments/analyze_boolean.py](experiments/analyze_boolean.py)。布尔运行器复用的本地模型
-传输与重放工具（`src/causal_benchmark.py`、`src/causal_prompts.py`、
-`experiments/run_causal.py`）随本分支一并提交，保证代码可运行可重放；原始调用归档按
-.gitignore 约定保留本地 `runs/`，不入库。
+The final causal hierarchy's complete replay entry/configuration is N/A on main; do not substitute the older eight-case `run_causal.py` as if it reproduced the 13-case final study. See [task-organized methods](methods/) for code, configurations, reports, figures, and the explicitly documented limits of available historical raw records.
