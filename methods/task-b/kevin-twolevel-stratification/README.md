@@ -27,6 +27,7 @@ CI95 [+69.79, +78.52]（45/45 单元全胜）；ΔR **+78.52pp** CI95 [+74.16, +
 （45/45 单元全胜）。三项指标的配对置信区间均高于零。
 
 完整报告、逐题表与四代演进见 [docs/experiment-results-3d.md](docs/experiment-results-3d.md)；
+与基线的对比数据速览见 [docs/experiment-results.md](docs/experiment-results.md)；
 汇总数据见 [reports/metrics.json](reports/metrics.json)。
 
 ## 复现
