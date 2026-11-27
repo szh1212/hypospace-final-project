@@ -51,7 +51,7 @@ Q4_K_M（Ollama 0.40.18，温度 0.7）对官方 HypoSpace 布尔基准（上游
 | 模型 / 采样 | 本地 Ollama `qwen2.5:3b-instruct-q4_K_M`（digest `357c53fb…`，Ollama 0.40.18），温度 0.7，采样参数与因果域一致 |
 | 评测 | 官方 `boolean_benchmark.py` 的解析与 V/U/R 口径，逐调用重放 |
 | 基线 | **官方提示**（上游 `create_prompt` + 历史假设累积，完整官方流程，无任何后处理）；补全分层 `completion` 与单孔骨架 `skeleton` 作为路线内对照 |
-| 冻结 | 协议 `experiments/boolean-skeleton.json` 与全部代码在推断前提交（`3895c4a` / `d8dfd97`），运行身份记录在 `runs/boolean-test/identity.json`（源码 SHA + 模型指纹 + 上游提交） |
+| 冻结 | 协议 `experiments/boolean-skeleton.json` 与全部代码在推断前提交（`391795c` / `c7c15f1`），运行身份记录在 `runs/boolean-test/identity.json`（源码 SHA + 模型指纹 + 上游提交） |
 
 四个方法之间的**唯一差别是生成过程**（提示面与确定性装配）；题、种子、预算、模型、
 采样、评测器完全相同。
