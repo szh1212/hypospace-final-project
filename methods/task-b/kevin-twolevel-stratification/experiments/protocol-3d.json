@@ -1,0 +1,76 @@
+{
+  "protocol": "3d-two-level-stratification-v1",
+  "note": "All experimental conditions (dataset, splits, cases, seeds, budget, model, sampling, evaluation) are identical to the SZH 3D baseline protocol; only the method (prompt + system-side stratification/repair) differs.",
+  "upstream_commit": "c69e9318577b34b5b896996571aefd4ba6053f58",
+  "grid_size": 3,
+  "max_height": 3,
+  "blocks": [
+    1,
+    2,
+    3
+  ],
+  "test_per_stratum": 5,
+  "dev_per_stratum": 2,
+  "split_seed": 33550336,
+  "splits": {
+    "dev": [
+      "g3_h3_b1_009",
+      "g3_h3_b1_008",
+      "g3_h3_b2_013",
+      "g3_h3_b2_010",
+      "g3_h3_b3_084",
+      "g3_h3_b3_053"
+    ],
+    "test": [
+      "g3_h3_b1_005",
+      "g3_h3_b1_003",
+      "g3_h3_b1_001",
+      "g3_h3_b1_002",
+      "g3_h3_b1_006",
+      "g3_h3_b2_023",
+      "g3_h3_b2_002",
+      "g3_h3_b2_035",
+      "g3_h3_b2_025",
+      "g3_h3_b2_012",
+      "g3_h3_b3_056",
+      "g3_h3_b3_077",
+      "g3_h3_b3_029",
+      "g3_h3_b3_063",
+      "g3_h3_b3_030"
+    ]
+  },
+  "repeat_seeds": [
+    17,
+    42,
+    2026
+  ],
+  "query_multiplier": 1.0,
+  "temperature": 0.7,
+  "max_tokens": 512,
+  "max_retries": 1,
+  "provider": "ollama",
+  "model": "qwen2.5:3b-instruct-q4_K_M",
+  "quantization": "Q4_K_M",
+  "top_p": 0.9,
+  "top_k": 40,
+  "repeat_penalty": 1.0,
+  "num_ctx": 8192,
+  "num_thread": 4,
+  "num_gpu": 0,
+  "model_digest": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+  "ollama_version": "0.40.18",
+  "system": "You are Qwen, created by Alibaba Cloud. You are a helpful assistant.",
+  "method": {
+    "name": "two-level stratification + forced ground layer + validity repair (3D)",
+    "generations": {
+      "1_verbal": "verbal (k2,k3) stratification lines in prompt, no system filter",
+      "2_free": "no stratification lines + system validity repair (forced Layer 1, subset repair)",
+      "3_k2": "k2-only stratum + system repair pinning |S2|=k2",
+      "4_joint": "two-level (k2,k3) stratum + rotating anchor + system repair + reading-order-minimal fallback on parse failure"
+    },
+    "allocation": "one query per admissible structure per stratum (stratum size = C(b,k2)*C(k2,k3)); remainder round-robin by decreasing stratum size",
+    "anchor": "feasible (column, in/out of Layer 2, in/out of Layer 3) triples rotate across queries of the same stratum; the anchor is system-enforced by the repair (level-2), with a per-query rotated completion order",
+    "fallback": "parse failure repairs to the reading-order-minimal structure of the assigned stratum",
+    "a_priori": "stratification is fully a-priori; no recovered solution is ever read back, no search, no representation change"
+  }
+}
