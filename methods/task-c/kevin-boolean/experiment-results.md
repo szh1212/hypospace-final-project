@@ -1,53 +1,59 @@
-# 布尔基因互动域 — 实验结果与基线对比
+# Boolean Gene-Interaction Domain — Experiment Results and Baseline Comparison
 
-本文档是 `kevin/boolean` 分支的实验结果总览，核心是**新方法与基线实验的对比数据**。
-方法定义、逐条披露与可验证性记录见 [docs/boolean-experiment-results.md](boolean-experiment-results.md)；
-全部数字来自 `.cache/boolean-test.json`（配对分析脚本 `experiments/analyze_boolean.py` 输出），
-可从本地 `runs/` 原始调用归档逐条重放核对。
+This document is the results overview of the `kevin/boolean` branch, centered on the
+**comparison between the new method and the baseline experiments**. Method definitions,
+disclosures, and the verification record live in
+[docs/boolean-experiment-results.md](boolean-experiment-results.md); every number comes
+from `.cache/boolean-test.json` (output of the paired-analysis script
+`experiments/analyze_boolean.py`) and can be replayed call-by-call from the local `runs/`
+raw archives.
 
-## 1. 配对协议（基线条件一致）
+## 1. Paired protocol (baseline conditions matched)
 
-四个方法共享同一批 **12 道测试题**（6 题 2 观测 + 6 题 3 观测，官方集合固定种子抽样、
-无结果性筛选）、重复种子 **[17, 42]**、每题 **16 次调用**预算、同一本地模型与采样
-（Qwen2.5-3B-Instruct Q4_K_M，Ollama 0.40.18，温度 0.7）、同一官方评测器与 V/U/R 口径。
-方法之间唯一差别是生成过程（提示面与确定性装配）；官方提示基线为上游完整流程
-（含历史累积），未做任何修改。
+All four methods share the same **12 frozen test cases** (6 with two observations and
+6 with three observations, sampled from the official collection with fixed seeds and no
+result-based filtering), repeat seeds **[17, 42]**, a **16-call budget per case**, the same
+local model and sampling (Qwen2.5-3B-Instruct Q4_K_M, Ollama 0.40.18, temperature 0.7), and
+the same official evaluator with the official V/U/R definitions. The only difference between
+methods is the generation procedure (prompt face and deterministic assembly); the official
+baseline runs the upstream prompt loop with accumulated hypothesis history, unmodified.
 
-| 方法 | 说明 |
+| Method | Description |
 | --- | --- |
-| 官方提示（基线） | 上游 `create_prompt` + 历史假设累积 |
-| 补全分层（第 1 代基线） | 口头要求模型遵守真值表行补全层 |
-| 单孔骨架（第 2 代基线） | 每层固定一个只带槽位 [?] 的表达式骨架，模型填槽 |
-| **单孔骨架 + 有效性救援（最终方法）** | 骨架 + 槽位不满足当层补全时按固定公开顺序做确定性叶子修正 |
+| Official prompt (baseline) | Upstream `create_prompt` with accumulated hypothesis history |
+| Completion strata (1st generation) | Verbal requirement to honor truth-table row completions |
+| Skeleton (2nd generation) | One-hole expression skeleton fixed per stratum, filled by the model |
+| **Skeleton + validity rescue (final method)** | Skeleton plus a deterministic leaf repair, in a fixed public order, when the model's fill misses the stratum completion |
 
-## 2. 测试主表（12 题 × 2 种子 × 16 次调用，宏观均值）
+## 2. Main test table (12 cases × 2 seeds × 16 calls, macro means)
 
-| 方法 | V | U | R@4 | R@8 | R@13 | R@16 |
+| Method | V | U | R@4 | R@8 | R@13 | R@16 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 官方提示（基线） | 8.59% | 12.76% | 4.41% | 5.60% | 5.60% | 5.60% |
-| 补全分层（第 1 代） | 5.21% | 5.21% | 0.70% | 1.34% | 1.66% | 1.66% |
-| 单孔骨架（第 2 代） | 32.03% | 18.23% | 12.04% | 21.34% | 26.85% | 28.89% |
-| **单孔骨架 + 有效性救援（最终）** | **100.00%** | **35.94%** | **32.89%** | **44.63%** | **51.99%** | **53.69%** |
+| Official prompt (baseline) | 8.59% | 12.76% | 4.41% | 5.60% | 5.60% | 5.60% |
+| Completion strata (1st generation) | 5.21% | 5.21% | 0.70% | 1.34% | 1.66% | 1.66% |
+| Skeleton (2nd generation) | 32.03% | 18.23% | 12.04% | 21.34% | 26.85% | 28.89% |
+| **Skeleton + validity rescue (final)** | **100.00%** | **35.94%** | **32.89%** | **44.63%** | **51.99%** | **53.69%** |
 
-## 3. 最终方法对基线的配对差（bootstrap 按 12 题重抽样 10,000 次）
+## 3. Paired differences of the final method versus each baseline (bootstrap, 10,000 resamples over the 12 cases)
 
-| 对照 | 指标 | Δ@16 | 95% 区间 | 胜/平/负 | Δ@13 | 95% 区间 | 胜/平/负 |
+| Control | Metric | Δ@16 | 95% CI | W/T/L | Δ@13 | 95% CI | W/T/L |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| 官方提示 | V | **+91.4pp** | [+85.2, +96.9] | 12/0/0 | +89.7pp | [+82.4, +96.2] | 12/0/0 |
-| 官方提示 | U | **+23.2pp** | [+13.8, +32.0] | 11/0/1 | +26.9pp | [+16.0, +37.2] | 11/0/1 |
-| 官方提示 | R | **+48.1pp** | [+39.6, +55.9] | 12/0/0 | +46.4pp | [+38.3, +54.1] | 12/0/0 |
-| 补全分层 | V | +94.8pp | [+87.5, +99.7] | 12/0/0 | +94.9pp | [+88.1, +99.7] | 12/0/0 |
-| 补全分层 | U | +30.7pp | [+24.2, +37.5] | 12/0/0 | +36.2pp | [+28.9, +43.9] | 12/0/0 |
-| 补全分层 | R | +52.0pp | [+45.3, +59.2] | 12/0/0 | +50.3pp | [+44.1, +56.9] | 12/0/0 |
-| 单孔骨架 | V | +68.0pp | [+61.5, +74.5] | 12/0/0 | +68.0pp | [+61.5, +74.4] | 12/0/0 |
-| 单孔骨架 | U | +17.7pp | [+12.0, +24.0] | 11/1/0 | +22.1pp | [+15.1, +29.5] | 11/1/0 |
-| 单孔骨架 | R | +24.8pp | [+18.0, +31.8] | 11/1/0 | +25.1pp | [+18.5, +32.0] | 11/1/0 |
+| Official prompt | V | **+91.4pp** | [+85.2, +96.9] | 12/0/0 | +89.7pp | [+82.4, +96.2] | 12/0/0 |
+| Official prompt | U | **+23.2pp** | [+13.8, +32.0] | 11/0/1 | +26.9pp | [+16.0, +37.2] | 11/0/1 |
+| Official prompt | R | **+48.1pp** | [+39.6, +55.9] | 12/0/0 | +46.4pp | [+38.3, +54.1] | 12/0/0 |
+| Completion strata | V | +94.8pp | [+87.5, +99.7] | 12/0/0 | +94.9pp | [+88.1, +99.7] | 12/0/0 |
+| Completion strata | U | +30.7pp | [+24.2, +37.5] | 12/0/0 | +36.2pp | [+28.9, +43.9] | 12/0/0 |
+| Completion strata | R | +52.0pp | [+45.3, +59.2] | 12/0/0 | +50.3pp | [+44.1, +56.9] | 12/0/0 |
+| Skeleton | V | +68.0pp | [+61.5, +74.5] | 12/0/0 | +68.0pp | [+61.5, +74.4] | 12/0/0 |
+| Skeleton | U | +17.7pp | [+12.0, +24.0] | 11/1/0 | +22.1pp | [+15.1, +29.5] | 11/1/0 |
+| Skeleton | R | +24.8pp | [+18.0, +31.8] | 11/1/0 | +25.1pp | [+18.5, +32.0] | 11/1/0 |
 
-**对官方基线的三项指标（V/U/R）配对 95% 区间全部高于零**——相对基线均显著提升。
+**Against the official baseline, the paired 95% intervals of all three metrics (V/U/R) are
+entirely above zero** — all three are significantly improved over the baseline.
 
-## 4. 逐题对比（@16，两种子平均）
+## 4. Per-case comparison (@16, averaged over the two seeds)
 
-| 题 | 基线 V/U/R | 最终方法 V/U/R | 真值键（可恢复） |
+| Case | Baseline V/U/R | Final method V/U/R | Ground-truth keys (recoverable) |
 | --- | ---: | ---: | ---: |
 | n2_inputs_10_11_outputs_11 | 3.1% / 9.4% / 0.0% | 100% / 59.4% / 59.4% | 16 (12) |
 | n2_inputs_10_11_outputs_10 | 3.1% / 6.2% / 4.5% | 100% / 31.2% / 45.5% | 11 (5) |
@@ -62,23 +68,27 @@
 | n3_inputs_00_01_10_outputs_001 | 0.0% / 12.5% / 0.0% | 100% / 37.5% / 60.0% | 10 (6) |
 | n3_inputs_00_01_10_outputs_110 | 0.0% / 6.2% / 0.0% | 100% / 18.8% / 50.0% | 6 (3) |
 
-## 5. R 的上限与达成度
+## 5. Recovery ceiling and attainment
 
-官方空间枚举含 31 个超过深度上限的「幽灵」机制键（官方评测器必拒，但仍计入地面真值
-分母），12 题合计可恢复真值键 75/128，宏观 R 上限 ≈ **57.6%**。最终方法 R=53.69%，
-即达到官方语义下可恢复上限的 **93.2%**；剩余缺口全部来自幽灵键，任何方法都无法恢复。
+The official space enumeration contains 31 "ghost" mechanistic keys whose expressions exceed
+the depth limit (the official validator always rejects them, yet their keys count in the
+ground-truth denominator). Across the 12 test cases, 75 of 128 ground-truth keys are
+recoverable, giving a macro R ceiling of ≈ **57.6%**. The final method reaches R = 53.69%,
+i.e. **93.2% of the ceiling permitted by the official semantics**; the remaining gap consists
+entirely of ghost keys, which no method can recover.
 
-## 6. 开发集 pilot（4 题 × 1 种子 × 16 次调用）
+## 6. Development pilot (4 cases × 1 seed × 16 calls)
 
-| 方法 | V | U | R@16 |
+| Method | V | U | R@16 |
 | --- | ---: | ---: | ---: |
-| 官方提示（基线） | 1.56% | 9.38% | 2.27% |
-| 补全分层（第 1 代） | 0.00% | 6.25% | 0.00% |
-| 单孔骨架（第 2 代） | 20.31% | 17.19% | 24.32% |
-| **单孔骨架 + 有效性救援（最终）** | **100.00%** | **37.50%** | **51.36%** |
+| Official prompt (baseline) | 1.56% | 9.38% | 2.27% |
+| Completion strata (1st generation) | 0.00% | 6.25% | 0.00% |
+| Skeleton (2nd generation) | 20.31% | 17.19% | 24.32% |
+| **Skeleton + validity rescue (final)** | **100.00%** | **37.50%** | **51.36%** |
 
-## 结论
+## Conclusion
 
-在完全配对的条件下，最终方法对官方提示基线：**V 100.00% vs 8.59%（+91.4pp）、
-U 35.94% vs 12.76%（+23.2pp）、R 53.69% vs 5.60%（+48.1pp）**，三项指标的配对
-bootstrap 95% 区间全部高于零；对补全分层与单孔骨架两个路线内基线同样全部显著提升。
+Under fully paired conditions, the final method versus the official-prompt baseline:
+**V 100.00% vs 8.59% (+91.4pp), U 35.94% vs 12.76% (+23.2pp), R 53.69% vs 5.60% (+48.1pp)** —
+the paired bootstrap 95% intervals of all three metrics are entirely above zero; the method
+also improves significantly over both in-route baselines (completion strata and skeleton).
