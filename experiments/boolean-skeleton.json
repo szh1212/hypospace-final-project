@@ -1,0 +1,45 @@
+{
+  "dev": [
+    "n2_inputs_01_11_outputs_10",
+    "n2_inputs_00_11_outputs_01",
+    "n3_inputs_01_10_11_outputs_100",
+    "n3_inputs_00_01_10_outputs_010"
+  ],
+  "dev_seeds": [
+    17
+  ],
+  "test": [
+    "n2_inputs_10_11_outputs_11",
+    "n2_inputs_10_11_outputs_10",
+    "n2_inputs_00_11_outputs_10",
+    "n2_inputs_00_01_outputs_01",
+    "n2_inputs_01_10_outputs_10",
+    "n2_inputs_00_01_outputs_11",
+    "n3_inputs_00_01_10_outputs_111",
+    "n3_inputs_01_10_11_outputs_010",
+    "n3_inputs_00_01_10_outputs_100",
+    "n3_inputs_00_10_11_outputs_011",
+    "n3_inputs_00_01_10_outputs_001",
+    "n3_inputs_00_01_10_outputs_110"
+  ],
+  "test_seeds": [
+    17,
+    42
+  ],
+  "budget": 16,
+  "methods": [
+    "official",
+    "completion",
+    "skeleton",
+    "skeleton_valid"
+  ],
+  "dataset": "boolean-datasets-full-d2-s2026.json",
+  "primary_metric": "Macro mean V/U/R over the 12 test cases after averaging seeds; paired bootstrap on all three metrics versus the official baseline at prefixes 4/8/13/16.",
+  "primary_control": "official",
+  "secondary_controls": [
+    "completion",
+    "skeleton"
+  ],
+  "paired_conditions": "Every method runs on the same 12 cases, same repeat seeds [17, 42], same 16-call budget per case-seed, same local model and sampling (qwen2.5:3b-instruct-q4_K_M, temperature 0.7), and is scored by the same official evaluator. The only difference between methods is the generation procedure (prompt face and deterministic assembly); no method sees ground truths at generation time, and the official baseline is the upstream prompt loop with history, unmodified.",
+  "selection": "Cases sampled deterministically (seeds 31415 dev / 27182 test, dev excluded) and stratified across n_observations 2 and 3 from the official collection generated at seed 2026 (full operators, depth 2); no result-based filtering."
+}
