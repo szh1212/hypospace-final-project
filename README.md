@@ -148,3 +148,29 @@ Task A: Causal Graph Inference; Task B: 3D Voxel Reconstruction; Task C: Boolean
 [3D baselines](methods/task-b/szh-baseline-3d/README.md) · [JCJ method](methods/task-b/jcj-coverage-guided/README.md) · [ZJH method](methods/task-b/zjh-spatial/README.md) · [Task A](methods/task-a/szh-baseline-causal/README.md) · [Task C](methods/task-c/szh-baseline-genetic/README.md)
 
 JCJ submitted formal results (585 calls): valid_rate=77.86%, novelty_rate=25.27%, recovery_rate=21.89%. Its raw responses are not included; the submitted SHA256 inventory and reports are preserved. Historical per-call replay was not independently verified.
+## Task C method — Boolean hierarchical route (分支 `kevin/boolean`)
+
+Kevin 的布尔基因互动（Task C）方法沿用因果域已验证的分层生成路线：**补全分层
+`completion`（第 1 代）→ 单孔骨架 `skeleton`（第 2 代）→ 单孔骨架 + 有效性救援
+`skeleton_valid`（最终方法）**。只用公开观测与空间定义先验分层，不读参考答案、不做覆盖
+反馈、不改表示；救援只对模型自己骨架上的槽位叶子做确定性最小修正（模型自填通过率
+45.05%）。官方提示基线保持上游完整流程、未做任何修改。
+
+配对协议（12 题 × 种子 [17, 42] × 每题 16 次调用，四方法同题同种子同预算同模型同评测器）：
+
+| 方法 | V | U | R@16 |
+| --- | ---: | ---: | ---: |
+| 官方提示（基线） | 8.59% | 12.76% | 5.60% |
+| **单孔骨架 + 有效性救援（最终）** | **100.00%** | **35.94%** | **53.69%** |
+
+最终方法对官方基线的配对差（bootstrap 按 12 题重抽样 10,000 次，三项区间全部高于零）：
+ΔV **+91.4pp** [+85.2, +96.9]、ΔU **+23.2pp** [+13.8, +32.0]、ΔR **+48.1pp** [+39.6, +55.9]；
+R=53.69% 达到官方语义可恢复上限的 93.2%。完整结果、逐题数据、上限分析与可验证性记录见
+[docs/boolean-experiment-results.md](docs/boolean-experiment-results.md)；
+方法核心 [src/boolean_space.py](src/boolean_space.py)、冻结协议
+[experiments/boolean-skeleton.json](experiments/boolean-skeleton.json)、运行/审计脚本
+[experiments/run_boolean_skeleton.py](experiments/run_boolean_skeleton.py) 与
+[experiments/analyze_boolean.py](experiments/analyze_boolean.py)。布尔运行器复用的本地模型
+传输与重放工具（`src/causal_benchmark.py`、`src/causal_prompts.py`、
+`experiments/run_causal.py`）随本分支一并提交，保证代码可运行可重放；原始调用归档按
+.gitignore 约定保留本地 `runs/`，不入库。
