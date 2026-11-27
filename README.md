@@ -166,7 +166,7 @@ Kevin 的布尔基因互动（Task C）方法沿用因果域已验证的分层�
 最终方法对官方基线的配对差（bootstrap 按 12 题重抽样 10,000 次，三项区间全部高于零）：
 ΔV **+91.4pp** [+85.2, +96.9]、ΔU **+23.2pp** [+13.8, +32.0]、ΔR **+48.1pp** [+39.6, +55.9]；
 R=53.69% 达到官方语义可恢复上限的 93.2%。完整结果、逐题数据、上限分析与可验证性记录见
-[docs/boolean-experiment-results.md](docs/boolean-experiment-results.md)；
+结果与基线对比总览 [docs/experiment-results.md](docs/experiment-results.md)；完整方法、逐题数据与可验证性 [docs/boolean-experiment-results.md](docs/boolean-experiment-results.md)；
 方法核心 [src/boolean_space.py](src/boolean_space.py)、冻结协议
 [experiments/boolean-skeleton.json](experiments/boolean-skeleton.json)、运行/审计脚本
 [experiments/run_boolean_skeleton.py](experiments/run_boolean_skeleton.py) 与
