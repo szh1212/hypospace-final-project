@@ -2,6 +2,12 @@
 
 HypoSpace asks whether a model can discover **many distinct, valid explanations** when observations admit more than one answer. Our EEC 4300 project builds local small-model baselines and evaluates coverage-guided generation, spatial representations, and hierarchical generation across all three domains. Read the [original paper](https://proceedings.mlr.press/v306/chen26bz.html), then explore [Task A: causal graphs](methods/task-a/README.md), [Task B: 3D reconstruction](methods/task-b/README.md), or [Task C: Boolean interactions](methods/task-c/README.md).
 
+## Demo
+
+![HypoSpace team demo — 宋知恒、林文韬、蒋晨钧、赵疆涵](docs/demo/hypospace-demo.gif)
+
+The full presentation is shown above as a silent looping animation (9 min 39 sec). [Watch or download the original MP4 with audio](https://github.com/szh1212/hypospace-final-project/raw/refs/heads/main/docs/demo/%E5%AE%8B%E7%9F%A5%E6%81%92_%E6%9E%97%E6%96%87%E9%9F%AC_%E8%92%8B%E6%99%A8%E9%92%A7_%E8%B5%B5%E7%96%86%E6%B6%B5.mp4).
+
 ## Results at a Glance
 
 **Within-task comparisons, not a ranking across domains.** All numbers below are our group's local Qwen2.5-3B-Instruct experiments—not the paper's published model scores. “Official prompt” means our local execution of the upstream prompt.
